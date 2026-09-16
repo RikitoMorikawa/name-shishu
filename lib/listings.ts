@@ -72,3 +72,25 @@ export function cityId(city: string) {
   return 'c' + [...city].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) % 99991, 7).toString(36)
 }
 
+/**
+ * **列は「埋まっている項目」で決める。**
+ * 取材前に「確認中」を4列並べても比較にならないので、1件でも値がある項目だけ出す。
+ * 種別と所在地は常に出す（いま確実にある情報で選べるようにするため）。
+ */
+export type Col = 'kind' | 'mochikomi' | 'minLot' | 'lead' | 'priceFrom'
+
+export const COL_LABEL: Record<Col, string> = {
+  kind: '種別', mochikomi: '持ち込み',
+  minLot: '最小枚数', lead: '納期', priceFrom: '料金の目安',
+}
+
+export function activeCols(items: Listing[]): Col[] {
+  const has = (f: (l: Listing) => unknown) => items.some((l) => f(l) !== null && f(l) !== undefined)
+  const cols: Col[] = ['kind']
+  if (has((l) => l.mochikomi)) cols.push('mochikomi')
+  if (has((l) => l.minLot)) cols.push('minLot')
+  if (has((l) => l.lead)) cols.push('lead')
+  if (has((l) => l.priceFrom)) cols.push('priceFrom')
+  return cols
+}
+

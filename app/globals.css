@@ -120,9 +120,16 @@ p { margin: 12px 0; }
 
 /* ── 比較行。**この媒体の本体。** 横に並べて比べる ─────────── */
 .rows { display: flex; flex-direction: column; gap: 8px; margin: 14px 0; }
+.rows[data-cols='1'] { --cols: 1; }
+.rows[data-cols='1'] .row, .rows[data-cols='2'] .row { grid-template-columns: minmax(0, 3.4fr) repeat(var(--cols), minmax(0, 1fr)) auto; }
+.rows[data-cols='2'] { --cols: 2; }
+.rows[data-cols='3'] { --cols: 3; }
+.rows[data-cols='4'] { --cols: 4; }
+.rows[data-cols='5'] { --cols: 5; }
+.rows[data-cols='6'] { --cols: 6; }
 .row {
   display: grid; gap: 4px 16px; align-items: center;
-  grid-template-columns: minmax(0, 2.2fr) repeat(4, minmax(0, 1fr)) auto;
+  grid-template-columns: minmax(0, 2.2fr) repeat(var(--cols, 4), minmax(0, 1fr)) auto;
   background: var(--surface); border-radius: var(--radius); padding: 14px 18px;
   text-decoration: none; color: inherit; box-shadow: var(--shadow);
   transition: transform .14s ease, box-shadow .14s ease;

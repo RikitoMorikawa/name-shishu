@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { ShopRow } from '../../ShopRow'
-import { findListing, KIND_LABEL, listings, nearby, updatedAt } from '@/lib/listings'
+import { Rows } from '../../ShopRow'
+import { activeCols, findListing, KIND_LABEL, listings, nearby, updatedAt } from '@/lib/listings'
 
 export function generateStaticParams() {
   return listings.map((l) => ({ slug: l.slug }))
@@ -123,11 +123,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
       {near.length ? (
         <>
           <h2>近くの店</h2>
-          <div className="rows">
-            {near.map((n) => (
-              <ShopRow key={n.slug} l={n} showWhere />
-            ))}
-          </div>
+          <Rows items={near} cols={activeCols(near)} sub="pref" />
         </>
       ) : null}
 

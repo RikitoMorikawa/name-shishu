@@ -1,14 +1,22 @@
-import type { Listing } from '@/lib/listings'
+import { COL_LABEL, KIND_LABEL, type Col, type Listing } from '@/lib/listings'
 
-/** 比較行。**持ち込み・最小枚数・納期・料金を横に並べる**のがこの媒体の本体。
+/** 比較行。**列は呼ぶ側が決める**（activeCols で「埋まっている項目」だけ渡す）。
  *  data-* は Filter が DOM を直接絞り込むために使う（行は作り直さない）。 */
-export function ShopRow({ l, showWhere = true }: { l: Listing; showWhere?: boolean }) {
-  const cell = (label: string, v: string | null) => (
-    <div className="cell">
-      <i>{label}</i>
-      {v ?? <span className="unknown">確認中</span>}
-    </div>
-  )
+export function ShopRow({ l, cols, sub }: { l: Listing; cols: Col[]; sub?: 'pref' | 'address' }) {
+  const value = (c: Col) => {
+    switch (c) {
+      case 'kind':
+        return <span className={l.kind === 'kakou' ? 'pill pill-kakou' : 'pill pill-shop'}>
+          {l.kind === 'kakou' ? '加工屋' : '作業服の店'}
+        </span>
+      case 'mochikomi':
+        return l.mochikomi === true ? <span className="pill pill-ok">可</span>
+          : l.mochikomi === false ? '不可'
+          : <span className="unknown">確認中</span>
+      default:
+        return l[c] ?? <span className="unknown">確認中</span>
+    }
+  }
   return (
     <a
       className="row"
@@ -20,26 +28,36 @@ export function ShopRow({ l, showWhere = true }: { l: Listing; showWhere?: boole
     >
       <div className="name">
         {l.name}
-        {showWhere ? <span className="where">{[l.pref, l.city].filter(Boolean).join(' ')}</span> : null}
+        {sub ? (
+          <span className="where">
+            {sub === 'pref'
+              ? [l.pref, l.city].filter(Boolean).join(' ')
+              : l.address ?? '住所は確認中'}
+          </span>
+        ) : null}
       </div>
-      <div className="cell">
-        <i>持ち込み</i>
-        {l.mochikomi === true ? <span className="pill pill-ok">可</span>
-          : l.mochikomi === false ? '不可'
-          : <span className="unknown">確認中</span>}
-      </div>
-      {cell('最小枚数', l.minLot)}
-      {cell('納期', l.lead)}
-      {cell('料金', l.priceFrom)}
+      {cols.map((c) => (
+        <div className="cell" key={c}>
+          <i>{COL_LABEL[c]}</i>
+          {value(c)}
+        </div>
+      ))}
       <div className="go" aria-hidden>→</div>
     </a>
   )
 }
 
-export function RowsHead() {
+export function Rows({ items, cols, sub }: { items: Listing[]; cols: Col[]; sub?: 'pref' | 'address' }) {
   return (
-    <div className="row head">
-      <div>店</div><div>持ち込み</div><div>最小枚数</div><div>納期</div><div>料金の目安</div><div />
+    <div className="rows" data-cols={cols.length}>
+      <div className="row head">
+        <div>店</div>
+        {cols.map((c) => <div key={c}>{COL_LABEL[c]}</div>)}
+        <div />
+      </div>
+      {items.map((l) => <ShopRow key={l.slug} l={l} cols={cols} sub={sub} />)}
     </div>
   )
 }
+
+export { KIND_LABEL }

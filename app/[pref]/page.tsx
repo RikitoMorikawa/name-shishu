@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Filter } from '../Filter'
-import { RowsHead, ShopRow } from '../ShopRow'
-import { byCity, byPref, cityId, findPref, updatedAt } from '@/lib/listings'
+import { Rows } from '../ShopRow'
+import { activeCols, byCity, byPref, cityId, findPref, updatedAt } from '@/lib/listings'
 
 export function generateStaticParams() {
   return byPref().map((p) => ({ pref: p.prefSlug }))
@@ -25,6 +25,7 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
   if (!p) notFound()
 
   const cities = byCity(p.items)
+  const cols = activeCols(p.items)
   const kakou = p.items.filter((l) => l.kind === 'kakou').length
 
   const jsonLd = [
@@ -79,12 +80,7 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
       {cities.map(([city, items]) => (
         <section key={city} data-group="">
           <h2 id={cityId(city)}>{city}<span className="muted">　{items.length}件</span></h2>
-          <div className="rows">
-            <RowsHead />
-            {items.map((l) => (
-              <ShopRow key={l.slug} l={l} showWhere={false} />
-            ))}
-          </div>
+          <Rows items={items} cols={cols} sub="address" />
         </section>
       ))}
 
