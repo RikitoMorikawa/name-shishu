@@ -1,4 +1,7 @@
 import type { MetadataRoute } from 'next'
+
+// output:'export' では明示が要る（無いとビルドが落ちる）
+export const dynamic = 'force-static'
 import { byPref, listings, updatedAt } from '@/lib/listings'
 
 const BASE = 'https://name-shishu.com'
