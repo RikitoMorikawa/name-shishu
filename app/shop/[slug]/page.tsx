@@ -10,10 +10,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const l = findListing(slug)
   if (!l) return {}
+  // 地域が取れない行は括弧を出さない（「（）」になる。2026-09-16）
   const where = [l.pref, l.city].filter(Boolean).join('')
   return {
-    title: `${l.name}（${where}）の持ち込み刺繍・名入れ`,
-    description: `${where}の${KIND_LABEL[l.kind]}「${l.name}」。持ち込みの可否・最小枚数・納期・料金の目安をまとめています。`,
+    title: where ? `${l.name}（${where}）の持ち込み刺繍・名入れ` : `${l.name}の持ち込み刺繍・名入れ`,
+    description: `${where ? where + 'の' : ''}${KIND_LABEL[l.kind]}「${l.name}」。持ち込みの可否・最小枚数・納期・料金の目安をまとめています。`,
   }
 }
 
