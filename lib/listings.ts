@@ -94,3 +94,12 @@ export function activeCols(items: Listing[]): Col[] {
   return cols
 }
 
+/** 全国一覧の並び。**件数の多い都道府県から**（県コード順だと兵庫始まりで不自然）。 */
+export function listingsByPrefSize() {
+  const order = new Map(byPref().map((p, i) => [p.prefSlug, i]))
+  return [...listings].sort((a, b) => {
+    const d = (order.get(a.prefSlug ?? '') ?? 99) - (order.get(b.prefSlug ?? '') ?? 99)
+    return d !== 0 ? d : a.name.localeCompare(b.name, 'ja')
+  })
+}
+

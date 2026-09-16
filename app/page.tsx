@@ -1,6 +1,6 @@
 import { Filter } from './Filter'
 import { Rows } from './ShopRow'
-import { activeCols, byPref, listings, updatedAt } from '@/lib/listings'
+import { activeCols, byPref, listings, listingsByPrefSize, updatedAt } from '@/lib/listings'
 
 export default function Home() {
   const prefs = byPref()
@@ -84,7 +84,7 @@ export default function Home() {
 
       <h2>全国の一覧から探す</h2>
       <Filter total={listings.length} />
-      <Rows items={listings} cols={activeCols(listings)} sub="pref" />
+      <Rows items={listingsByPrefSize()} cols={activeCols(listings)} sub="pref" />
 
       <h2>この媒体について</h2>
       <p>
