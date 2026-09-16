@@ -1,6 +1,6 @@
 import { Filter } from './Filter'
-import { Rows } from './ShopRow'
-import { activeCols, byPref, listings, listingsByPrefSize, updatedAt } from '@/lib/listings'
+import { Cards } from './ShopCard'
+import { byPref, listings, listingsByPrefSize, updatedAt } from '@/lib/listings'
 
 export default function Home() {
   const prefs = byPref()
@@ -83,8 +83,31 @@ export default function Home() {
       </div>
 
       <h2>全国の一覧から探す</h2>
-      <Filter total={listings.length} />
-      <Rows items={listingsByPrefSize()} cols={activeCols(listings)} sub="pref" />
+      <div className="layout">
+        <Filter
+          total={listings.length}
+          groups={[
+            {
+              key: 'kind', label: '種別',
+              options: [
+                { value: 'kakou', label: '刺繍・名入れの加工屋', count: kakou },
+                { value: 'shop', label: '作業服・ユニフォームの店', count: shop },
+              ],
+            },
+            {
+              key: 'mochikomi', label: '持ち込み',
+              options: [{ value: 'yes', label: '受けている店だけ', count: listings.filter((l) => l.mochikomi === true).length }],
+            },
+            {
+              key: 'pref', label: '地域',
+              options: prefs.map((p) => ({ value: p.prefSlug, label: p.pref, count: p.items.length })),
+            },
+          ]}
+        />
+        <div>
+          <Cards items={listingsByPrefSize()} sub="pref" />
+        </div>
+      </div>
 
       <h2>この媒体について</h2>
       <p>

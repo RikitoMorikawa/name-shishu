@@ -10,6 +10,9 @@ export type Listing = {
   address: string | null
   url: string
   tel: string | null
+  /** 掲載先から提供してもらった写真だけ。各社サイトからの転載は著作権上できない。 */
+  photo: string | null
+  photoCredit: string | null
   // 取材で埋める。**ここが他所に無い情報で、この媒体の中身そのもの。**
   mochikomi: boolean | null
   minLot: string | null

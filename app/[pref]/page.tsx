@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Filter } from '../Filter'
-import { Rows } from '../ShopRow'
-import { activeCols, byCity, byPref, cityId, findPref, updatedAt } from '@/lib/listings'
+import { Cards } from '../ShopCard'
+import { byCity, byPref, cityId, findPref, updatedAt } from '@/lib/listings'
 
 export function generateStaticParams() {
   return byPref().map((p) => ({ pref: p.prefSlug }))
@@ -25,7 +25,6 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
   if (!p) notFound()
 
   const cities = byCity(p.items)
-  const cols = activeCols(p.items)
   const kakou = p.items.filter((l) => l.kind === 'kakou').length
 
   const jsonLd = [
@@ -75,14 +74,32 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
         ))}
       </div>
 
-      <Filter total={p.items.length} />
-
-      {cities.map(([city, items]) => (
-        <section key={city} data-group="">
-          <h2 id={cityId(city)}>{city}<span className="muted">　{items.length}件</span></h2>
-          <Rows items={items} cols={cols} sub="address" />
-        </section>
-      ))}
+      <div className="layout">
+        <Filter
+          total={p.items.length}
+          groups={[
+            {
+              key: 'kind', label: '種別',
+              options: [
+                { value: 'kakou', label: '刺繍・名入れの加工屋', count: kakou },
+                { value: 'shop', label: '作業服・ユニフォームの店', count: p.items.length - kakou },
+              ],
+            },
+            {
+              key: 'mochikomi', label: '持ち込み',
+              options: [{ value: 'yes', label: '受けている店だけ', count: p.items.filter((l) => l.mochikomi === true).length }],
+            },
+          ]}
+        />
+        <div>
+          {cities.map(([city, items]) => (
+            <section key={city} data-group="">
+              <h2 id={cityId(city)}>{city}<span className="muted">　{items.length}件</span></h2>
+              <Cards items={items} sub="address" />
+            </section>
+          ))}
+        </div>
+      </div>
 
       <div className="callout">
         <b>{p.pref}で載っていない店をご存じですか。</b>
