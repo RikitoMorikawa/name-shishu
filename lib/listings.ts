@@ -58,3 +58,17 @@ export const KIND_LABEL: Record<Listing['kind'], string> = {
   kakou: '刺繍・名入れの加工屋',
   shop: '作業服・ユニフォームの店',
 }
+
+/** 同じ市区、無ければ同じ県から近い先を拾う。回遊のため。 */
+export function nearby(l: Listing, n = 4) {
+  const same = listings.filter((x) => x.slug !== l.slug)
+  const inCity = l.city ? same.filter((x) => x.pref === l.pref && x.city === l.city) : []
+  const inPref = same.filter((x) => x.pref === l.pref && !inCity.includes(x))
+  return [...inCity, ...inPref].slice(0, n)
+}
+
+/** 市区名から見出しの id を作る（目次のアンカー用）。 */
+export function cityId(city: string) {
+  return 'c' + [...city].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) % 99991, 7).toString(36)
+}
+

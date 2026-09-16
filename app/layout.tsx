@@ -8,8 +8,9 @@ export const metadata: Metadata = {
     template: '%s｜ネーム刺繍ナビ',
   },
   description:
-    '作業着やユニフォームに社名・ロゴを入れたいとき、持ち込みで受けてくれる刺繍の加工屋と、名入れごと頼める作業服店を地域ごとに載せています。最小枚数・納期・料金の目安を横に並べて比べられます。',
+    '作業着やユニフォームに社名・ロゴを入れたいとき、持ち込みで受けてくれる刺繍の加工屋と、名入れごと頼める作業服店を地域ごとに掲載。持ち込みの可否・最小枚数・納期・料金の目安を横に並べて比べられます。',
   openGraph: { type: 'website', locale: 'ja_JP', siteName: 'ネーム刺繍ナビ' },
+  alternates: { canonical: '/' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -18,16 +19,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <header className="site-head">
           <div className="wrap">
-            <strong><a href="/">ネーム刺繍ナビ</a></strong>
-            <span>持ち込みの刺繍・名入れを地域で探す</span>
+            <a className="brand" href="/">
+              <span className="mark">ネーム刺繍<em>ナビ</em></span>
+              <span className="tag-line">持ち込みの刺繍・名入れを地域で探す</span>
+            </a>
           </div>
         </header>
+
         <main className="wrap">{children}</main>
+
         <footer className="site-foot">
           <div className="wrap">
             <p>
-              ネーム刺繍ナビは、作業着・ユニフォームへの名入れを頼める先を地域ごとに集めた媒体です。
-              運営は森川力人（元・作業服／ユニフォーム商社の営業）。掲載は無料で、掲載先から料金はいただいていません。
+              <b>ネーム刺繍ナビ</b>は、作業着・ユニフォームへの名入れを頼める先を地域ごとに集めた媒体です。
+              運営は森川力人（元・作業服／ユニフォーム商社の営業）。
+              <b>掲載は無料で、掲載先から料金はいただいていません。</b>
+            </p>
+            <p>
+              載っているのは各社の公開情報と、こちらで確認が取れた内容だけです。
+              <b>分からない項目は「確認中」と出し、推測では書きません。</b>
             </p>
             <p>
               掲載内容の訂正・掲載のご依頼は <a href="mailto:contact@umidas.info">contact@umidas.info</a> まで。
