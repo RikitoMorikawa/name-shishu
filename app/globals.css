@@ -1,0 +1,75 @@
+/* 色は糸と生成りから。**企業色ではないので彩度は低く、面と余白で区切る。** */
+:root {
+  --ground: #f7f6f3;
+  --surface: #ffffff;
+  --ink: #17181a;
+  --ink-2: #53565c;
+  --ink-3: #8b8f96;
+  --rule: #e3e1dc;
+  --accent: #1f4d6b;
+  --accent-soft: #eaf0f4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --ground: #101113;
+    --surface: #1a1c1f;
+    --ink: #ecebe8;
+    --ink-2: #a9adb4;
+    --ink-3: #7b7f86;
+    --rule: #2b2d31;
+    --accent: #8cb6d0;
+    --accent-soft: #16262f;
+  }
+}
+:root[data-theme='dark'] {
+  --ground: #101113; --surface: #1a1c1f; --ink: #ecebe8; --ink-2: #a9adb4;
+  --ink-3: #7b7f86; --rule: #2b2d31; --accent: #8cb6d0; --accent-soft: #16262f;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: 'Hiragino Sans', 'Noto Sans JP', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.85;
+}
+a { color: var(--accent); }
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+
+/* ヘッダは全幅で、内側だけ止める */
+.site-head { background: var(--surface); border-bottom: 1px solid var(--rule); }
+.site-head .wrap { display: flex; align-items: baseline; gap: 16px; padding-top: 18px; padding-bottom: 18px; }
+.site-head strong { font-size: 19px; letter-spacing: .02em; }
+.site-head a { text-decoration: none; color: inherit; }
+.site-head span { color: var(--ink-3); font-size: 13px; }
+
+h1 { font-size: clamp(26px, 4.5vw, 38px); line-height: 1.35; margin: 40px 0 14px; }
+h2 { font-size: 22px; margin: 44px 0 12px; line-height: 1.45; }
+h3 { font-size: 17px; margin: 26px 0 8px; }
+p { margin: 12px 0; }
+.lead { color: var(--ink-2); max-width: 62ch; }
+
+.card-list { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); margin: 18px 0 8px; }
+.card {
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 10px;
+  padding: 16px 18px; text-decoration: none; color: inherit; display: block;
+}
+.card b { display: block; font-size: 17px; margin-bottom: 4px; }
+.card small { color: var(--ink-3); font-size: 13px; }
+.card .meta { color: var(--ink-2); font-size: 14px; margin-top: 6px; }
+
+.tag { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent); margin-right: 6px; }
+.unknown { color: var(--ink-3); }
+
+.facts { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 16px; }
+.facts th, .facts td { text-align: left; padding: 11px 6px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.facts th { width: 8.5em; color: var(--ink-3); font-weight: 600; font-size: 14px; }
+
+.site-foot { margin-top: 72px; border-top: 1px solid var(--rule); background: var(--surface); }
+.site-foot .wrap { padding-top: 26px; padding-bottom: 46px; color: var(--ink-2); font-size: 14px; }
+.crumb { font-size: 14px; color: var(--ink-3); margin-top: 20px; }
+.crumb a { color: var(--ink-2); }
