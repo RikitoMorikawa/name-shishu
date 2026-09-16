@@ -154,6 +154,8 @@ main { padding-bottom: 8px; }
   padding: 5px 4px; border-radius: 7px; color: var(--ink-2);
 }
 .facet-list label:hover { background: var(--surface-2); color: var(--ink); }
+.facet-list label.is-empty { opacity: .38; cursor: default; }
+.facet-list label.is-empty:hover { background: none; color: var(--ink-2); }
 .facet-list input { accent-color: var(--accent); width: 15px; height: 15px; flex: none; margin: 0; }
 .facet-list span { flex: 1; min-width: 0; }
 .facet-list em { font-style: normal; color: var(--ink-3); font-size: 12.5px; }
@@ -201,8 +203,8 @@ main { padding-bottom: 8px; }
 .thumb-kakou { background: linear-gradient(145deg, var(--accent-soft), color-mix(in srgb, var(--accent-soft) 52%, var(--ground))); }
 .thumb-kakou .thumb-initial { color: color-mix(in srgb, var(--accent) 48%, transparent); }
 .badge {
-  position: absolute; left: 0; bottom: 0; font-size: 12px; font-weight: 600;
-  padding: 4px 12px; border-radius: 0 9px 0 0; background: var(--ink); color: var(--ground);
+  position: absolute; left: 10px; bottom: 10px; font-size: 11.5px; font-weight: 600;
+  padding: 3px 10px; border-radius: 999px; background: var(--ink); color: var(--ground);
 }
 .badge-kakou { background: var(--accent); color: #fff; }
 

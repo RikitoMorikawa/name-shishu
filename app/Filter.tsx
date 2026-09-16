@@ -74,9 +74,11 @@ export function Filter({ total, groups }: { total: number; groups: FacetGroup[] 
             <ul className="facet-list">
               {g.options.map((o) => (
                 <li key={o.value}>
-                  <label>
+                  {/* 0件の条件は押しても空になるだけなので無効にする */}
+                  <label className={o.count === 0 ? 'is-empty' : undefined}>
                     <input
                       type="checkbox"
+                      disabled={o.count === 0}
                       checked={sel[g.key]?.has(o.value) ?? false}
                       onChange={() => toggle(g.key, o.value)}
                     />
