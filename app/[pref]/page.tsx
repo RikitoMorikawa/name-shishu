@@ -57,16 +57,9 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
       <p className="crumb"><a href="/">ネーム刺繍ナビ</a> ／ {p.pref}</p>
       <h1>{p.pref}で刺繍・名入れを頼める店</h1>
       <p className="lead">
-        持っている作業着に加工を頼める<b>刺繍の加工屋</b>と、服ごと名入れで買える
-        <b>作業服・ユニフォームの店</b>を、市区町村ごとに並べています。
+        {p.pref}に{p.items.length}件（加工屋{kakou}・店{p.items.length - kakou}）。
+        市区町村ごとに並べています。
       </p>
-
-      <div className="stats">
-        <div className="stat"><b>{p.items.length}</b><span>{p.pref}の掲載</span></div>
-        <div className="stat"><b>{kakou}</b><span>加工屋</span></div>
-        <div className="stat"><b>{p.items.length - kakou}</b><span>作業服の店</span></div>
-        <div className="stat"><b>{cities.length}</b><span>市区町村</span></div>
-      </div>
 
       <div className="toc">
         {cities.map(([city, items]) => (

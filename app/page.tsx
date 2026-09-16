@@ -48,41 +48,10 @@ export default function Home() {
 
       <h1>作業着に社名を入れたい。どこに頼めばいいか</h1>
       <p className="lead">
-        方法は2つあります。<b>いま持っている服に加工を頼む</b>か、<b>服ごと名入れで買う</b>か。
-        前者は刺繍の加工屋、後者は作業服・ユニフォームの店です。
+        <b>いま持っている服に加工を頼む</b>なら刺繍の加工屋、<b>服ごと名入れで買う</b>なら作業服・ユニフォームの店。
+        全国{listings.length}件（加工屋{kakou}・店{shop}）を地域から探せます。
       </p>
 
-      <div className="stats">
-        <div className="stat"><b>{listings.length}</b><span>掲載している先</span></div>
-        <div className="stat"><b>{kakou}</b><span>刺繍・名入れの加工屋</span></div>
-        <div className="stat"><b>{shop}</b><span>作業服・ユニフォームの店</span></div>
-        <div className="stat"><b>{prefs.length}</b><span>都道府県</span></div>
-      </div>
-
-      <h2>地域から探す</h2>
-      <div className="pref-grid">
-        {prefs.map((p) => (
-          <a className="pref-tile" key={p.prefSlug} href={`/${p.prefSlug}/`}>
-            <b>{p.pref}</b>
-            <span>{p.items.length}</span>
-          </a>
-        ))}
-      </div>
-
-      <h2>持ち込みは受けてもらえるのか</h2>
-      <p>
-        受ける店と受けない店があります。断られる理由はたいてい
-        <b>「生地が刺繍に向かない」</b>か<b>「1枚だけだと段取りのほうが高くつく」</b>のどちらかです。
-        つまり <b>持ち込みの可否・最小枚数・納期</b> は店ごとに違い、
-        それが横に並んでいないので探しにくい。ここを並べるために作りました。
-      </p>
-      <div className="callout">
-        <b>確認できているのは {known} / {listings.length} 件です。</b>
-        残りは各社に問い合わせて順に埋めています。
-        <b>推測では書きません。</b>分からない項目は「確認中」と出しています。
-      </div>
-
-      <h2>全国の一覧から探す</h2>
       <div className="layout">
         <Filter
           total={listings.length}
@@ -107,6 +76,29 @@ export default function Home() {
         <div>
           <Cards items={listingsByPrefSize()} sub="pref" />
         </div>
+      </div>
+
+      <h2>持ち込みは受けてもらえるのか</h2>
+      <p>
+        受ける店と受けない店があります。断られる理由はたいてい
+        <b>「生地が刺繍に向かない」</b>か<b>「1枚だけだと段取りのほうが高くつく」</b>のどちらかです。
+        つまり <b>持ち込みの可否・最小枚数・納期</b> は店ごとに違い、
+        それが横に並んでいないので探しにくい。ここを並べるために作りました。
+      </p>
+      <div className="callout">
+        <b>確認できているのは {known} / {listings.length} 件です。</b>
+        残りは各社に問い合わせて順に埋めています。
+        <b>推測では書きません。</b>分からない項目は「確認中」と出しています。
+      </div>
+
+      <h2>都道府県から探す</h2>
+      <div className="pref-grid">
+        {prefs.map((p) => (
+          <a className="pref-tile" key={p.prefSlug} href={`/${p.prefSlug}/`}>
+            <b>{p.pref}</b>
+            <span>{p.items.length}</span>
+          </a>
+        ))}
       </div>
 
       <h2>この媒体について</h2>
