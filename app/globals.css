@@ -690,3 +690,15 @@ main { padding-bottom: 8px; }
   border: var(--edge); box-shadow: var(--shadow); background: var(--surface-2);
 }
 .guide-hero img { width: 100%; height: auto; display: block; }
+
+/* ── もっと見る。**Filter が portal で #more-slot に描く** ───────────── */
+.more-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; margin: 18px 0 8px; padding: 15px 24px; cursor: pointer;
+  font: inherit; font-size: 15.5px; font-weight: 700; color: var(--accent-ink);
+  background: var(--surface); border: var(--edge); border-radius: 999px;
+  box-shadow: var(--shadow); transition: background .14s ease, border-color .14s ease;
+}
+.more-btn:hover { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 55%, var(--rule)); }
+.more-btn em { font-style: normal; font-size: 13px; font-weight: 600; color: var(--ink-3); }
+.facet-result .facet-shown { display: block; font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }

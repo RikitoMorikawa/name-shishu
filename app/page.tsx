@@ -197,6 +197,9 @@ export default function Home() {
           />
           <div>
             <Cards items={listingsByPrefSize()} />
+            {/* 「もっと見る」の置き場。**中身は Filter が portal で描く**（状態を1か所に持つため）。
+                静的HTMLでは空のまま ― JS を実行しないクローラーには全件がそのまま見える */}
+            <div id="more-slot" />
           </div>
         </div>
 

@@ -89,6 +89,8 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
               <Cards items={items} />
             </section>
           ))}
+          {/* 「もっと見る」の置き場。中身は Filter が portal で描く */}
+          <div id="more-slot" />
         </div>
       </div>
 
