@@ -858,12 +858,17 @@ main > .wrap:last-child, main > .prose:last-child { padding-bottom: 64px; }
 
 /* **読み物のページだけ地を淡くして、記事そのものを1枚の紙にする。**
    節ごとに枠を分けると紙が何枚も重なって見え、どこまでが記事か分からなくなる（2026-09-17） */
-body:has(.guide) main { background: var(--surface-2); }
+/* **余白は padding で取る。** margin にすると main を突き抜けて（マージンの相殺）、
+   地の色が違うぶん body の白が上に出る（2026-09-17） */
+body:has(.guide) main { background: var(--surface-2); padding-top: 22px; }
 .guide {
   background: var(--surface); border: var(--edge); border-radius: 18px;
-  box-shadow: var(--shadow); padding: 36px 48px 44px; margin: 22px auto 0;
+  box-shadow: var(--shadow); padding: 36px 48px 44px; margin: 0 auto;
 }
-@media (max-width: 760px) { .guide { padding: 24px 20px 30px; border-radius: 14px; margin: 14px auto 0; } }
+@media (max-width: 760px) {
+  body:has(.guide) main { padding-top: 14px; }
+  .guide { padding: 24px 20px 30px; border-radius: 14px; margin: 0 auto; }
+}
 
 /* 節。**枠は付けず、見出しの余白と細い罫で切る** */
 .guide-sec { margin: 0; }
