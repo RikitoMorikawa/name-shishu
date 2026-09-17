@@ -826,3 +826,100 @@ main { padding-bottom: 8px; }
 .contact-done span { display: block; margin-top: 3px; font-size: 13px; color: var(--ink-2); line-height: 1.8; }
 .contact-foot .muted { margin: 0; font-size: 12.5px; line-height: 1.75; }
 .contact-foot .muted b { color: var(--ink-2); }
+
+/* ============================================================
+   読み物。**節ごとに区切りを付けて、地の色で役割を分ける。**
+   長い文章は、どこまでが1つの話かが見えないと読み進められない。
+   ============================================================ */
+.guide { max-width: 78ch; padding-bottom: 8px; }
+.guide h1 { font-size: clamp(24px, 3vw, 34px); line-height: 1.45; margin: 12px 0 14px; }
+.guide .lead {
+  font-size: 17px; line-height: 1.95; color: var(--ink-2);
+  padding-left: 16px; border-left: 4px solid var(--accent); border-radius: 2px;
+}
+.guide-meta { margin: 12px 0 0; font-size: 12.5px; color: var(--ink-3); }
+.guide p { font-size: 16.5px; line-height: 2.0; }
+.guide ul { padding-left: 0; list-style: none; margin: 16px 0; }
+/* 箇条書きは**行ごとに面で区切る**。記号を並べるより、どこで切れるかが分かる */
+.guide li {
+  position: relative; margin: 7px 0; padding: 11px 16px 11px 38px;
+  background: var(--surface-2); border-radius: 10px; font-size: 15.5px; line-height: 1.85;
+}
+.guide li::before {
+  content: ''; position: absolute; left: 16px; top: 1.15em;
+  width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+}
+
+/* 節の見出し。**上に余白と細い罫を置いて、話の切れ目をはっきりさせる** */
+.guide h2 {
+  margin: 48px 0 12px; padding-top: 22px; font-size: clamp(19px, 2.2vw, 23px);
+  border-top: 1px solid var(--rule); scroll-margin-top: 92px;
+}
+.guide h2::before { display: none; }
+
+/* 目次 */
+.guide-toc {
+  margin: 26px 0 8px; padding: 18px 22px;
+  background: var(--accent-soft); border-radius: 14px;
+}
+.guide-toc b { display: block; font-size: 13px; color: var(--accent-ink); letter-spacing: .02em; }
+.guide-toc ol { margin: 10px 0 0; padding-left: 1.3em; }
+.guide-toc li { margin: 6px 0; padding: 0; background: none; font-size: 14.5px; line-height: 1.7; }
+.guide-toc li::before { display: none; }
+.guide-toc a { color: var(--ink-2); text-decoration: none; }
+.guide-toc a:hover { color: var(--accent-ink); text-decoration: underline; }
+
+/* 比較表。**横に溢れたら枠ごとスクロール**（スマホで列が潰れないように） */
+.table-wrap { overflow-x: auto; margin: 18px 0; -webkit-overflow-scrolling: touch; }
+.guide-table {
+  width: 100%; min-width: 560px; border-collapse: collapse;
+  background: var(--surface); border: var(--edge); border-radius: 12px; overflow: hidden;
+  font-size: 14.5px;
+}
+.guide-table th, .guide-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--rule); }
+.guide-table thead th { background: var(--surface-2); font-size: 13px; color: var(--ink-2); white-space: nowrap; }
+.guide-table tbody th { background: var(--surface-2); font-weight: 700; font-size: 13.5px; white-space: nowrap; }
+.guide-table tr:last-child th, .guide-table tr:last-child td { border-bottom: 0; }
+
+/* 掲載データから数えた事実。**この媒体にしかない情報なので面で見せる** */
+.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+@media (max-width: 560px) { .stat-row { grid-template-columns: 1fr; } }
+.stat {
+  padding: 16px; border-radius: 12px; text-align: center;
+  background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.stat b { display: block; font-size: 24px; line-height: 1.3; color: var(--accent-ink); letter-spacing: -.01em; }
+.stat span { display: block; margin-top: 4px; font-size: 12.5px; color: var(--ink-2); line-height: 1.6; }
+
+/* 節のまとめ。**1行で言い切るところだけ太い線で挟む** */
+.guide .point {
+  margin: 18px 0; padding: 14px 18px; font-size: 16px; font-weight: 700; line-height: 1.8;
+  background: var(--surface); border: 1.5px solid var(--accent);
+  border-radius: 12px; color: var(--accent-ink);
+}
+.guide .callout { font-size: 14.5px; line-height: 1.9; border-left: 4px solid var(--rule); border-radius: 0 12px 12px 0; }
+
+/* よくある質問。**details で畳む** ― 全部開いていると本文が終わらない */
+.faq { margin-top: 44px; }
+.faq h2 { margin-top: 0; }
+.faq details {
+  background: var(--surface); border: var(--edge); border-radius: 12px;
+  margin: 8px 0; box-shadow: var(--shadow);
+}
+.faq summary {
+  padding: 15px 44px 15px 18px; cursor: pointer; font-weight: 700; font-size: 15.5px;
+  line-height: 1.7; position: relative; list-style: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ''; position: absolute; right: 18px; top: 50%; width: 9px; height: 9px;
+  border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent);
+  transform: translateY(-70%) rotate(45deg); transition: transform .16s ease;
+}
+.faq details[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
+.faq details p { margin: 0; padding: 0 18px 17px; font-size: 15px; line-height: 1.95; color: var(--ink-2); }
+
+/* 記事の終わりの導線 */
+.guide-foot { display: flex; flex-wrap: wrap; gap: 10px; margin: 40px 0 8px; }
+.guide-next { margin-top: 44px; }
+.guide-next h2 { margin-bottom: 16px; }

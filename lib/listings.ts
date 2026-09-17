@@ -198,3 +198,38 @@ export function prefOptions() {
   }))
 }
 
+
+/**
+ * 読み物に載せる数字。**掲載データから毎回数え直す。**
+ * 記事に書き置くと、掲載が増えたときに古い数字が残る（誰も気づかない）。
+ * ここに無い事実は記事に書かない ― この媒体が確かめた範囲を超えないため。
+ */
+export function guideStats() {
+  const n = (f: (l: Listing) => boolean) => listings.filter(f).length
+  // 「1枚から」「1個から」「1点から」はどれも1点から受けるという意味
+  const fromOne = (l: Listing) => !!l.minLot && /^1[枚個点]/.test(l.minLot)
+  const counts = itemCounts(listings)
+  return {
+    total: listings.length,
+    prefs: byPref().length,
+    mochikomiYes: n((l) => l.mochikomi === true),
+    mochikomiNo: n((l) => l.mochikomi === false),
+    mochikomiUnknown: n((l) => l.mochikomi === null || l.mochikomi === undefined),
+    minLotKnown: n((l) => !!l.minLot),
+    minLotOne: n(fromOne),
+    leadKnown: n((l) => !!l.lead),
+    priceKnown: n((l) => !!l.priceFrom),
+    itemWear: counts.wear,
+    itemCap: counts.cap,
+    itemTowel: counts.towel,
+    itemBag: counts.bag,
+    itemWappen: counts.wappen,
+    itemFlag: counts.flag,
+  }
+}
+
+/** 記事の本文に書いた `{{total}}` のような印を、いまの数字に置き換える */
+export function fillStats(text: string) {
+  const s = guideStats() as Record<string, number>
+  return text.replace(/\{\{(\w+)\}\}/g, (m, k) => (k in s ? String(s[k]) : m))
+}
