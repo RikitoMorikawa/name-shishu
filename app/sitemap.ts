@@ -10,6 +10,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date(updatedAt)
   return [
     { url: `${BASE}/`, lastModified, priority: 1 },
+    { url: `${BASE}/about/`, lastModified, priority: 0.4 },
+    { url: `${BASE}/terms/`, lastModified, priority: 0.2 },
+    { url: `${BASE}/privacy/`, lastModified, priority: 0.2 },
     ...byPref().map((p) => ({ url: `${BASE}/${p.prefSlug}/`, lastModified, priority: 0.8 })),
     ...listings.map((l) => ({ url: `${BASE}/shop/${l.slug}/`, lastModified, priority: 0.6 })),
   ]

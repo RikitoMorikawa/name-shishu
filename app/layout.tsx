@@ -30,17 +30,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <footer className="site-foot">
           <div className="wrap">
-            <p>
-              <b>ネーム刺繍ナビ</b>は、作業着・ユニフォームへの名入れを頼める先を地域ごとに集めた媒体です。
-              運営は森川力人（元・作業服／ユニフォーム商社の営業）。
-              <b>掲載は無料で、掲載先から料金はいただいていません。</b>
-            </p>
-            <p>
-              載っているのは各社の公開情報と、こちらで確認が取れた内容だけです。
-              <b>分からない項目は「確認中」と出し、推測では書きません。</b>
-            </p>
-            <p>
-              掲載内容の訂正・掲載のご依頼は <a href="mailto:contact@umidas.info">contact@umidas.info</a> まで。
+            <nav className="foot-links">
+              <a href="/about/">この媒体について</a>
+              <a href="/terms/">利用規約</a>
+              <a href="/privacy/">プライバシーポリシー</a>
+              <a href="mailto:contact@umidas.info">掲載・訂正のご依頼</a>
+            </nav>
+            <p className="foot-meta">
+              掲載は無料です。掲載先から料金はいただいていません。<br />
+              運営：UMIDAS　<a href="mailto:contact@umidas.info">contact@umidas.info</a>
             </p>
           </div>
         </footer>
