@@ -119,8 +119,8 @@ npm run dev     # http://localhost:3000
 
 | ファイル | 元の作品 | 色 |
 |---|---|---|
-| `public/illust/worry-1.svg` | https://soco-st.com/16586 （エプロン姿で考えている女性） | `#FCDC4A`（既定の黄） |
-| `public/illust/worry-2.svg` | https://soco-st.com/25578 （困った表情の作業着の男性） | `#FCDC4A`（既定の黄） |
+| `public/illust/worry-1.svg` | https://soco-st.com/16600 （腕を組んで困っている女性） | `#FCDC4A`（既定の黄） |
+| `public/illust/worry-2.svg` | https://soco-st.com/13217 （腕を組んで困っている男性） | `#FCDC4A`（既定の黄） |
 | `public/illust/worry-3.svg` | https://soco-st.com/17029 （パソコンの前で悩んでいる男性） | `#FCDC4A`（既定の黄） |
 
 **3点とも同じ色で通す。** 1点だけ別の色にすると、並べたときにそこだけ浮く。
