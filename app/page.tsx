@@ -215,6 +215,24 @@ export default function Home() {
         </div>
       </div>
 
+      {/* ── ABOUT ────────────────────────────────────── */}
+      <section className="about-band" id="about">
+        <div className="wrap">
+          <div className="about-photo">
+            <Photo src="/photos/about.jpg" alt="" label="ネーム刺繍" />
+          </div>
+          <div className="about-text">
+            <p className="eyebrow">ABOUT</p>
+            <h2>持ち込みの刺繍・名入れで<br />もっと身近に、もっと自由に。</h2>
+            {/* **改行で語の間に空きが入る。** 1文は1行で書く */}
+            <p>ネーム刺繍ナビは、作業着やユニフォーム、Tシャツ、バッグなどお持ち込みの製品に刺繍・名入れを対応してくれるお店を、地域から探せる情報サイトです。</p>
+            <p>あなたの「この一着に、名前を入れたい」という想いに、ぴったりのお店がきっと見つかります。</p>
+            <a className="btn" href="#contact">お問い合わせ<IconArrow size={18} /></a>
+          </div>
+          <p className="script about-script" aria-hidden>Good Work<br />Better Tomorrow</p>
+        </div>
+      </section>
+
       {/* ── 読み物 ────────────────────────────────────── */}
       <section className="guides" id="guides">
         <div className="wrap">
@@ -239,24 +257,6 @@ export default function Home() {
               </a>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── ABOUT ────────────────────────────────────── */}
-      <section className="about-band" id="about">
-        <div className="wrap">
-          <div className="about-photo">
-            <Photo src="/photos/about.jpg" alt="" label="ネーム刺繍" />
-          </div>
-          <div className="about-text">
-            <p className="eyebrow">ABOUT</p>
-            <h2>持ち込みの刺繍・名入れで<br />もっと身近に、もっと自由に。</h2>
-            {/* **改行で語の間に空きが入る。** 1文は1行で書く */}
-            <p>ネーム刺繍ナビは、作業着やユニフォーム、Tシャツ、バッグなどお持ち込みの製品に刺繍・名入れを対応してくれるお店を、地域から探せる情報サイトです。</p>
-            <p>あなたの「この一着に、名前を入れたい」という想いに、ぴったりのお店がきっと見つかります。</p>
-            <a className="btn" href="#contact">お問い合わせ<IconArrow size={18} /></a>
-          </div>
-          <p className="script about-script" aria-hidden>Good Work<br />Better Tomorrow</p>
         </div>
       </section>
 
