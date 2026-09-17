@@ -52,6 +52,28 @@ node scripts/export-listings.mjs --out ../../name-shishu/data/listings.json
 **status / reason / angle / memo / email / contact_form / sns は出さない。**
 列を足すときは `scripts/export-listings.mjs` の注意書きを読むこと。
 
+## 手元で見る
+
+```bash
+npm run dev     # http://localhost:3000
+```
+
+**dev が動いている間に `npm run build` を流さない。** どちらも `.next` を使うので、
+本番ビルドが dev の中間ファイルを上書きして 500 になる（2026-09-17 に踏んだ）。
+壊れたら `pkill -f "next dev" && rm -rf .next` で入れ直す。
+確認は dev で足り、デプロイは push すれば Vercel 側でビルドされる。
+
+**直したものが出ないときは数秒待つ。** ホットリロードが追いつく前に見ると前の版が返る。
+
+## 写真の入れ方
+
+**掲載先から提供してもらったものだけ。** 各社サイトと Places からの転載は不可。
+
+1. `public/photos/<slug>.jpg` に置く
+2. `data/photos.json` に `"<slug>": { "src": "/photos/<slug>.jpg", "credit": "提供：〇〇" }`
+
+**`listings.json` に直接書かない。** あれは DB から毎回作り直されるので上書きで消える。
+
 ## デプロイ
 
 Vercel（Pro）。ドメインは **Value Domain で取得**し、Vercel へ向ける。
