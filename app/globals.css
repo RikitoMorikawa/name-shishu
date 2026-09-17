@@ -301,21 +301,44 @@ p { margin: 12px 0; }
   background: var(--surface); padding: 6px 13px; border-radius: 999px; box-shadow: var(--shadow);
 }
 .toc a:hover { color: var(--accent-ink); }
-.site-foot { margin-top: 88px; background: var(--surface); border-top: 1px solid var(--rule); }
+/* ── フッター。**問い合わせもここに置く** ― どのページからも戻らずに連絡できるように ── */
+.site-foot { margin-top: 72px; background: var(--surface-2); border-top: 1px solid var(--rule); }
 /* **帯で終わるページは余白を作らない。** 全幅の写真とフッターの間に白い帯が残る（2026-09-17）。
    :has() が効かないブラウザでは今までどおり余白が出るだけで、壊れはしない */
 main:has(.band) { padding-bottom: 0; }
 main:has(.band) + .site-foot { margin-top: 0; }
-.site-foot .wrap { padding-top: 24px; padding-bottom: 34px; color: var(--ink-3); text-align: center; }
-.foot-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; }
-.foot-links a { font-size: 13px; }
-.foot-meta { margin: 0; color: var(--ink-3); font-size: 12px; line-height: 1.95; }
+
+.foot-grid {
+  display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 40px;
+  padding-top: 44px; padding-bottom: 36px; align-items: start;
+}
+@media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr; gap: 30px; } }
+
+.foot-brand .brand { display: flex; align-items: center; gap: 9px; text-decoration: none; color: inherit; }
+.foot-brand .mark { font-size: 17px; font-weight: 700; }
+.foot-brand .mark em { font-style: normal; color: var(--accent); }
+.foot-lead { margin: 12px 0 16px; font-size: 13px; line-height: 1.9; color: var(--ink-2); }
+.foot-links { display: flex; flex-direction: column; gap: 9px; }
+.foot-links a { font-size: 13.5px; color: var(--ink-2); text-decoration: none; width: fit-content; }
+.foot-links a:hover { color: var(--accent-ink); text-decoration: underline; }
+@media (max-width: 900px) { .foot-links { flex-direction: row; flex-wrap: wrap; gap: 8px 20px; } }
+
+.foot-contact h2 { margin: 0; padding-left: 0; font-size: 19px; }
+.foot-contact h2::before { display: none; }
+.foot-contact-lead { margin: 6px 0 0; font-size: 13.5px; color: var(--ink-2); }
+.foot-contact-lead b { color: var(--ink); font-weight: 600; }
+
+.foot-bottom {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 20px;
+  padding-top: 16px; padding-bottom: 26px; border-top: 1px solid var(--rule);
+  color: var(--ink-3); font-size: 12px;
+}
+.foot-bottom p { margin: 0; }
 /* 規約・ポリシーの読み物ページ。本文の幅を絞る */
 .prose { max-width: 72ch; }
 .prose h2 { font-size: 19px; margin: 40px 0 10px; }
 .prose ul { padding-left: 20px; }
 .prose li { margin: 6px 0; }
-.site-foot a { color: var(--accent-ink); }
 main { padding-bottom: 8px; }
 /* **main は .wrap を持たない。** 各ページと各セクションが自分で内側を止める */
 
@@ -731,41 +754,37 @@ main { padding-bottom: 8px; }
 .more-btn em { font-style: normal; font-size: 13px; font-weight: 600; color: var(--ink-3); }
 .facet-result .facet-shown { display: block; font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
 
-/* ── 問い合わせ ───────────────────────────────────── */
-.contact .wrap { padding-top: 42px; padding-bottom: 44px; }
+/* ── 問い合わせの箱（フッターの中） ───────────────────── */
 .contact-box {
-  max-width: 780px; margin: 22px auto 0; padding: 20px;
-  background: var(--surface); border: var(--edge); border-radius: 18px; box-shadow: var(--shadow);
+  margin: 12px 0 0; padding: 16px;
+  background: var(--surface); border: var(--edge); border-radius: 16px; box-shadow: var(--shadow);
 }
-/* 種別。**ラジオは隠してラベル全体を押せるようにする**（当たり判定を広く取る） */
-.contact-kind { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border: 0; margin: 0; padding: 0; }
-@media (max-width: 560px) { .contact-kind { grid-template-columns: 1fr; } }
+/* 種別。**ラジオは隠してラベル全体を押せるようにする**（当たり判定を広く取る）。
+   カードで並べると縦を食うので、1行に収まるピルにしてある */
+.contact-kind { display: flex; flex-wrap: wrap; gap: 8px; border: 0; margin: 0; padding: 0; }
 .kind-btn {
-  display: flex; align-items: center; gap: 10px; padding: 11px 14px; cursor: pointer;
-  border: var(--edge); border-radius: 12px; background: var(--surface); color: var(--ink-2);
+  display: flex; align-items: center; gap: 7px; padding: 8px 15px; cursor: pointer;
+  border: var(--edge); border-radius: 999px; background: var(--surface); color: var(--ink-2);
   transition: border-color .14s ease, background .14s ease;
 }
 /* **大きさは 0 にしない。** 0x0 の入力欄は支援技術から「無い」と扱われることがある */
 .kind-btn input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
 .kind-btn svg { color: var(--ink-3); flex: none; }
-.kind-btn span { display: flex; flex-direction: column; min-width: 0; }
-.kind-btn b { font-size: 14.5px; color: var(--ink); }
-.kind-btn em { font-style: normal; font-size: 12px; color: var(--ink-3); }
+.kind-btn b { font-size: 13.5px; font-weight: 700; color: var(--ink); }
 .kind-btn:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--rule)); }
 .kind-btn.is-on { border-color: var(--accent); background: var(--accent-soft); }
 .kind-btn.is-on svg, .kind-btn.is-on b { color: var(--accent-ink); }
 /* キーボードで辿れることを見せる。**input を隠しただけだと焦点が分からない** */
 .kind-btn:has(input:focus-visible) { box-shadow: 0 0 0 3px var(--accent-soft); border-color: var(--accent); }
 
-.contact-hint { margin: 11px 2px 0; font-size: 13px; color: var(--ink-2); }
+.contact-hint { margin: 10px 2px 0; font-size: 12.5px; line-height: 1.7; color: var(--ink-2); }
 
 /* **短い入力欄は3つ横に並べる。** 縦積みにすると枠だけで画面1つぶんの高さになる */
-.contact-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 12px; margin-top: 13px; }
-@media (max-width: 860px) { .contact-fields { grid-template-columns: 1fr 1fr; } }
+.contact-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 12px; margin-top: 11px; }
 @media (max-width: 560px) { .contact-fields { grid-template-columns: 1fr; } }
 .field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
 .field-wide { grid-column: 1 / -1; }
-.field > span { font-size: 12.5px; font-weight: 700; color: var(--ink-2); }
+.field > span { font-size: 12px; font-weight: 700; color: var(--ink-2); }
 .field input, .field textarea {
   font: inherit; font-size: 15px; padding: 10px 12px; border-radius: 10px;
   border: 1px solid var(--rule); background: var(--ground); color: var(--ink); width: 100%;
@@ -776,6 +795,6 @@ main { padding-bottom: 8px; }
 }
 .field input::placeholder, .field textarea::placeholder { color: color-mix(in srgb, var(--ink-3) 70%, transparent); }
 
-.contact-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 16px; }
+.contact-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 14px; }
 .contact-foot .muted { margin: 0; font-size: 12.5px; line-height: 1.75; }
 .contact-foot .muted b { color: var(--ink-2); }

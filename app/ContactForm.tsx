@@ -16,21 +16,19 @@ const KINDS = [
   {
     key: 'listing',
     label: '掲載・訂正のご依頼',
-    who: '掲載店の方、掲載を希望される方',
     icon: IconShop,
     subject: '【掲載・訂正のご依頼】',
     fields: true,
-    hint: '掲載は無料です。内容の訂正・削除もこちらから承ります。',
+    hint: '掲載店の方・掲載を希望される方へ。掲載は無料で、内容の訂正・削除も承ります。',
     placeholder: '例）持ち込みは1枚から受けています。納期の記載を「3営業日」に直してください。',
   },
   {
     key: 'feedback',
     label: 'ご意見・情報提供',
-    who: '店を探している方',
     icon: IconGuide,
     subject: '【ご意見・情報提供】',
     fields: false,
-    hint: 'この地域に店が無い、情報が古い、などお知らせください。個別の見積もりには対応できません。',
+    hint: '店を探している方へ。この地域に店が無い・情報が古いなどお知らせください。個別の見積もりには対応できません。',
     placeholder: '例）◯◯市に刺繍屋があります。／掲載の電話番号が変わっているようです。',
   },
 ] as const
@@ -39,15 +37,12 @@ export function ContactForm() {
   const [kind, setKind] = useState<(typeof KINDS)[number]['key']>('listing')
   const [shop, setShop] = useState('')
   const [url, setUrl] = useState('')
-  const [name, setName] = useState('')
   const [body, setBody] = useState('')
   const k = KINDS.find((x) => x.key === kind)!
 
   // **ボタンではなくリンクにする。** 右クリックでコピーでき、押す前に宛先が分かる
   const lines = [
-    ...(k.fields ? [`店名：${shop || '（未記入）'}`, `サイト：${url || '（未記入）'}`] : []),
-    `お名前：${name || '（未記入）'}`,
-    '',
+    ...(k.fields ? [`店名：${shop || '（未記入）'}`, `サイト：${url || '（未記入）'}`, ''] : []),
     body,
     '',
     '---',
@@ -69,11 +64,8 @@ export function ContactForm() {
               checked={kind === x.key}
               onChange={() => setKind(x.key)}
             />
-            <x.icon size={22} />
-            <span>
-              <b>{x.label}</b>
-              <em>{x.who}</em>
-            </span>
+            <x.icon size={18} />
+            <b>{x.label}</b>
           </label>
         ))}
       </fieldset>
@@ -93,13 +85,9 @@ export function ContactForm() {
             </label>
           </>
         ) : null}
-        <label className="field">
-          <span>お名前</span>
-          <input value={name} onChange={(e) => setName(e.target.value)} placeholder="森川" />
-        </label>
         <label className="field field-wide">
           <span>ご用件</span>
-          <textarea value={body} onChange={(e) => setBody(e.target.value)} rows={3} placeholder={k.placeholder} />
+          <textarea value={body} onChange={(e) => setBody(e.target.value)} rows={2} placeholder={k.placeholder} />
         </label>
       </div>
 
@@ -109,9 +97,8 @@ export function ContactForm() {
         </a>
         {/* **ここで送信は起きない。** 誤解されると「送ったのに返事が来ない」になる */}
         <p className="muted">
-          押すとお使いのメールアプリが開きます。<b>この画面からは送信されません。</b>
-          <br />
-          開かないときは <a href={`mailto:${TO}`}>{TO}</a> へ直接お送りください。
+          押すとメールアプリが開きます（<b>この画面からは送信されません</b>）。
+          開かないときは <a href={`mailto:${TO}`}>{TO}</a> へ。
         </p>
       </div>
     </div>

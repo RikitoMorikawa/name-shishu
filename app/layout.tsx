@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { Caveat, Klee_One } from 'next/font/google'
+import { ContactForm } from './ContactForm'
 import { HeaderNav } from './HeaderNav'
 import { Logo } from './Logo'
+import { listings, updatedAt } from '@/lib/listings'
 import './globals.css'
 
 /**
@@ -49,14 +51,41 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <main>{children}</main>
 
-        <footer className="site-foot">
-          <div className="wrap">
-            <nav className="foot-links">
-              <a href="/about/">この媒体について</a>
-              <a href="/terms/">利用規約</a>
-              <a href="/privacy/">プライバシーポリシー</a>
-              <a href="mailto:contact@umidas.info">掲載・訂正のご依頼</a>
-            </nav>
+        {/* **フッターは全ページ共通。** 問い合わせもここに置く ―
+            読み物や各社ページから戻らずに連絡できるようにするため */}
+        <footer className="site-foot" id="contact">
+          <div className="wrap foot-grid">
+            <div className="foot-brand">
+              <a className="brand" href="/">
+                <Logo size={26} />
+                <span className="mark">ネーム刺繍<em>ナビ</em></span>
+              </a>
+              <p className="foot-lead">
+                持ち込みで刺繍・名入れを頼める店を、地域から探せる媒体です。
+                現在{listings.length}件を掲載しています。
+              </p>
+              <nav className="foot-links">
+                <a href="/about/">この媒体について</a>
+                <a href="/terms/">利用規約</a>
+                <a href="/privacy/">プライバシーポリシー</a>
+                <a href="/#list">掲載店を探す</a>
+                <a href="/favorites/">お気に入り</a>
+              </nav>
+            </div>
+
+            <div className="foot-contact">
+              <h2>お問い合わせ</h2>
+              <p className="foot-contact-lead">
+                掲載のご依頼・内容の訂正、サイトへのご意見はこちらから。
+                <b>掲載料はいただいていません。</b>
+              </p>
+              <ContactForm />
+            </div>
+          </div>
+
+          <div className="wrap foot-bottom">
+            <p>最終更新 {updatedAt}</p>
+            <p>運営 UMIDAS</p>
           </div>
         </footer>
       </body>
