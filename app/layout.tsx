@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <p className="hand band-copy">その一着に、名前を込めて。</p>
           </section>
 
-          <div className="wrap foot-top">
+          <div className="wrap foot-grid">
             <div className="foot-brand">
               <a className="brand" href="/">
                 <Logo size={26} />
@@ -78,19 +78,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 持ち込みで刺繍・名入れを頼める店を、地域から探せる媒体です。
                 現在{listings.length}件を掲載しています。
               </p>
+              <nav className="foot-links">
+                <a href="/about/">この媒体について</a>
+                <a href="/terms/">利用規約</a>
+                <a href="/privacy/">プライバシーポリシー</a>
+                <a href="/#list">掲載店を探す</a>
+                <a href="/favorites/">お気に入り</a>
+              </nav>
             </div>
-            <nav className="foot-links">
-              <a href="/about/">この媒体について</a>
-              <a href="/terms/">利用規約</a>
-              <a href="/privacy/">プライバシーポリシー</a>
-              <a href="/#list">掲載店を探す</a>
-              <a href="/favorites/">お気に入り</a>
-            </nav>
-          </div>
 
-          <div className="wrap foot-contact">
-            <h2>お問い合わせ</h2>
-            <ContactForm />
+            <div className="foot-contact">
+              <h2>お問い合わせ</h2>
+              <ContactForm />
+            </div>
           </div>
 
           <div className="wrap foot-bottom">

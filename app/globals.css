@@ -306,23 +306,23 @@ p { margin: 12px 0; }
 /* 帯はフッターの中にある。**区切りは帯そのものが付ける**ので罫線は要らない */
 .site-foot .band { margin-top: 0; }
 
-/* 帯のすぐ下。**名乗りもリンクも左に揃える** ― リンクだけ右端に飛ぶと、
-   どこへ続くのかが読み取りにくい（2026-09-17） */
-.foot-top { padding-top: 34px; padding-bottom: 26px; }
-.foot-brand { max-width: 520px; }
+/* 帯のすぐ下。**左に名乗りとリンク、右に問い合わせ** */
+.foot-grid {
+  display: grid; grid-template-columns: minmax(0, 280px) minmax(0, 1fr); gap: 40px;
+  padding-top: 36px; padding-bottom: 30px; align-items: start;
+}
+@media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr; gap: 26px; } }
 
 .foot-brand .brand { display: flex; align-items: center; gap: 9px; text-decoration: none; color: inherit; }
 .foot-brand .mark { font-size: 17px; font-weight: 700; }
 .foot-brand .mark em { font-style: normal; color: var(--accent); }
 .foot-lead { margin: 10px 0 0; font-size: 13px; line-height: 1.9; color: var(--ink-2); }
-.foot-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 14px; }
+/* **縦に1列**。横に流すと、どこまでがリンクなのか読み取りにくい */
+.foot-links { display: flex; flex-direction: column; gap: 9px; margin-top: 16px; }
 .foot-links a { font-size: 13.5px; color: var(--ink-2); text-decoration: none; width: fit-content; }
 .foot-links a:hover { color: var(--accent-ink); text-decoration: underline; }
 
-/* 問い合わせ。**帯とリンクの下**に置く。
-   **箱ごと中央に寄せる** ― 子に margin:auto を掛けると、独自の margin を持つ
-   .contact-box だけ左に残り、見出しだけが中央へ動く（2026-09-17） */
-.foot-contact { max-width: 808px; padding-bottom: 28px; }
+/* 問い合わせ。**右のカラム** */
 .foot-contact h2 { margin: 0; padding-left: 0; font-size: 19px; }
 .foot-contact h2::before { display: none; }
 
