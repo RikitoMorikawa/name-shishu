@@ -119,9 +119,11 @@ npm run dev     # http://localhost:3000
 
 | ファイル | 元の作品 | 色 |
 |---|---|---|
-| `public/illust/worry-1.svg` | https://soco-st.com/25578 （困った表情の作業着の男性） | 作業着を `#0F7A4A` に変更 |
-| `public/illust/worry-2.svg` | https://soco-st.com/18614 （？マークで考えている女性） | 既定のまま |
-| `public/illust/worry-3.svg` | https://soco-st.com/17029 （パソコンの前で悩んでいる男性） | 既定のまま |
+| `public/illust/worry-1.svg` | https://soco-st.com/16586 （エプロン姿で考えている女性） | `#FCDC4A`（既定の黄） |
+| `public/illust/worry-2.svg` | https://soco-st.com/25578 （困った表情の作業着の男性） | `#FCDC4A`（既定の黄） |
+| `public/illust/worry-3.svg` | https://soco-st.com/17029 （パソコンの前で悩んでいる男性） | `#FCDC4A`（既定の黄） |
+
+**3点とも同じ色で通す。** 1点だけ別の色にすると、並べたときにそこだけ浮く。
 
 **規約で画像への直リンクが禁止されている。** 必ずダウンロードして `public/` に置く。
 **トリミングはしない。** ソコストから落としたファイルをそのまま置き、枠の高さだけ CSS で

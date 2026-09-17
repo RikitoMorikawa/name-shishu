@@ -31,9 +31,10 @@ const ITEM_LEAD: Record<ItemKey, string> = {
  * 色変更とトリミング可。**直リンクは規約で禁止**なので public/illust/ に落としてある。
  */
 const WORRIES = [
+  // **素材ごとに人物の占有率が違う。** 枠(104x92)に max- でフィットさせるため、横長素材は
+  // 幅基準で1点だけ大きく見える。その場合だけ scale で見た目の大きさを揃える
   { q: '手持ちの作業着に社名を入れたい', a: '持ち込みを受けている店だけに絞れます', href: '#list', img: '/illust/worry-1.svg', scale: 1 },
-  // **素材ごとに人物の占有率が違う。** 18614 は余白が少なく、そのままだと1点だけ大きく見える
-  { q: '1枚からでも対応してくれる店を探したい', a: '最小枚数が分かっている店は条件を出しています', href: '#list', img: '/illust/worry-2.svg', scale: .85 },
+  { q: '1枚からでも対応してくれる店を探したい', a: '最小枚数が分かっている店は条件を出しています', href: '#list', img: '/illust/worry-2.svg', scale: 1 },
   { q: '近くの刺繍屋さんをすぐに見つけたい', a: '都道府県・市区町村から辿れます', href: '#area', img: '/illust/worry-3.svg', scale: 1 },
 ]
 
@@ -253,7 +254,7 @@ export default function Home() {
             {/* **改行で語の間に空きが入る。** 1文は1行で書く */}
             <p>ネーム刺繍ナビは、作業着やユニフォーム、Tシャツ、バッグなどお持ち込みの製品に刺繍・名入れを対応してくれるお店を、地域から探せる情報サイトです。</p>
             <p>あなたの「この一着に、名前を入れたい」という想いに、ぴったりのお店がきっと見つかります。</p>
-            <a className="btn" href="/about/">この媒体について<IconArrow size={18} /></a>
+            <a className="btn" href="#contact">お問い合わせ<IconArrow size={18} /></a>
           </div>
           <p className="script about-script" aria-hidden>Good Work<br />Better Tomorrow</p>
         </div>
