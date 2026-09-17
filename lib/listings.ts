@@ -58,6 +58,17 @@ export function prefLabel(pref: string) {
   return pref + '県'
 }
 
+/**
+ * 都道府県の並び。**東京を先頭に、あとは掲載件数の多い順。**
+ * 件数だけで並べると大阪が先に来るが、刺繍・名入れを探す人がいちばん多いのは東京。
+ * ヒーローの選択肢・エリアのタイル・一覧の並びが、すべてこの順に従う。
+ */
+const PREF_HEAD = ['tokyo']
+const prefRank = (slug: string) => {
+  const i = PREF_HEAD.indexOf(slug)
+  return i < 0 ? PREF_HEAD.length : i
+}
+
 /** 都道府県ごと。pref が無い行は地域ページに出せないので除く。 */
 export function byPref() {
   const map = new Map<string, { pref: string; prefSlug: string; items: Listing[] }>()
@@ -67,7 +78,9 @@ export function byPref() {
     cur.items.push(l)
     map.set(l.prefSlug, cur)
   }
-  return [...map.values()].sort((a, b) => b.items.length - a.items.length)
+  return [...map.values()].sort(
+    (a, b) => prefRank(a.prefSlug) - prefRank(b.prefSlug) || b.items.length - a.items.length,
+  )
 }
 
 export function findPref(prefSlug: string) {
@@ -85,7 +98,10 @@ export function byCity(items: Listing[]) {
     const key = l.city ?? '市区を確認中'
     map.set(key, [...(map.get(key) ?? []), l])
   }
-  return [...map.entries()].sort((a, b) => b[1].length - a[1].length)
+  // 市区の中も「写真 > 地図 > 頭文字」で揃える（byRichness は下で定義している）
+  return [...map.entries()]
+    .map(([city, xs]) => [city, byRichness(xs)] as [string, Listing[]])
+    .sort((a, b) => b[1].length - a[1].length)
 }
 
 /** 刺繍を入れる対象。刺繍屋は服だけでなく帽子・タオル・カバンまで扱う ― そこが軸になる */
@@ -144,12 +160,24 @@ export function activeCols(items: Listing[]): Col[] {
   return cols
 }
 
-/** 全国一覧の並び。**件数の多い都道府県から**（県コード順だと兵庫始まりで不自然）。 */
+/**
+ * 行の見え方の順位。**写真 > 地図が出る > 頭文字だけ。**
+ * 空っぽの枠が先頭に並ぶと、一覧全体が用意できていないように見える。
+ * 地図は住所が取れている行にだけ出る（ShopCard の判定と揃えてある）。
+ */
+const richness = (l: Listing) => (l.photo ? 2 : l.address ? 1 : 0)
+
+/** 同じ見え方どうしは社名順。**並びが日によって変わらないようにする** */
+export function byRichness(items: Listing[]) {
+  return [...items].sort((a, b) => richness(b) - richness(a) || a.name.localeCompare(b.name, 'ja'))
+}
+
+/** 全国一覧の並び。**都道府県の順を保ったまま、県の中で見え方の順に並べる。** */
 export function listingsByPrefSize() {
   const order = new Map(byPref().map((p, i) => [p.prefSlug, i]))
   return [...listings].sort((a, b) => {
     const d = (order.get(a.prefSlug ?? '') ?? 99) - (order.get(b.prefSlug ?? '') ?? 99)
-    return d !== 0 ? d : a.name.localeCompare(b.name, 'ja')
+    return d !== 0 ? d : richness(b) - richness(a) || a.name.localeCompare(b.name, 'ja')
   })
 }
 
