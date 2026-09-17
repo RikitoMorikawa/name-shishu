@@ -54,8 +54,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* **フッターは全ページ共通。** 問い合わせもここに置く ―
             読み物や各社ページから戻らずに連絡できるようにするため */}
+        {/* **フッターは全ページ共通。** 順番は リンク → 帯 → 問い合わせ → 運営表記。
+            問い合わせを最後に近づけて、読み終えた流れのまま連絡できるようにする */}
+        {/* **フッターは全ページ共通。** 帯で本文を締め、その下にフッターの中身を並べる。
+            順番は 帯 → 媒体の名乗りとリンク → 問い合わせ → 運営表記 */}
         <footer className="site-foot" id="contact">
-          <div className="wrap foot-grid">
+          <section className="band">
+            <div className="band-strip">
+              {[1, 2, 3, 4].map((i) => (
+                <Photo key={i} src={`/photos/band-${i}.jpg`} alt="" />
+              ))}
+            </div>
+            <p className="hand band-copy">その一着に、名前を込めて。</p>
+          </section>
+
+          <div className="wrap foot-top">
             <div className="foot-brand">
               <a className="brand" href="/">
                 <Logo size={26} />
@@ -65,31 +78,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 持ち込みで刺繍・名入れを頼める店を、地域から探せる媒体です。
                 現在{listings.length}件を掲載しています。
               </p>
-              <nav className="foot-links">
-                <a href="/about/">この媒体について</a>
-                <a href="/terms/">利用規約</a>
-                <a href="/privacy/">プライバシーポリシー</a>
-                <a href="/#list">掲載店を探す</a>
-                <a href="/favorites/">お気に入り</a>
-              </nav>
             </div>
-
-            <div className="foot-contact">
-              <h2>お問い合わせ</h2>
-              <ContactForm />
-            </div>
+            <nav className="foot-links">
+              <a href="/about/">この媒体について</a>
+              <a href="/terms/">利用規約</a>
+              <a href="/privacy/">プライバシーポリシー</a>
+              <a href="/#list">掲載店を探す</a>
+              <a href="/favorites/">お気に入り</a>
+            </nav>
           </div>
 
-          {/* ── 締めの帯。**フッターの中、いちばん下の表記の上に置く** ―
-              ページの最後を写真で締めつつ、運営表記は帯より下に残す ────── */}
-          <section className="band">
-            <div className="band-strip">
-              {[1, 2, 3, 4].map((i) => (
-                <Photo key={i} src={`/photos/band-${i}.jpg`} alt="" />
-              ))}
-            </div>
-            <p className="hand band-copy">その一着に、名前を込めて。</p>
-          </section>
+          <div className="wrap foot-contact">
+            <h2>お問い合わせ</h2>
+            <ContactForm />
+          </div>
 
           <div className="wrap foot-bottom">
             <p>最終更新 {updatedAt}</p>
