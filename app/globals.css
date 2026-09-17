@@ -968,3 +968,70 @@ body:has(.guide) main { background: var(--surface-2); padding-top: 22px; }
 .guide-foot { display: flex; flex-wrap: wrap; gap: 10px; margin: 40px 0 8px; }
 .guide-next { margin-top: 44px; }
 .guide-next h2 { margin-bottom: 16px; }
+
+/* ============================================================
+   スマホの文字。**PC の寸法をそのまま持ち込むと大きすぎる。**
+   画面が狭いぶん1行に入る字数が減り、同じ 17px でも「詰まって大きい」に見える。
+   **ここだけで面倒を見る** ― 各所の指定に手を入れると、PC 側が巻き添えになる。
+   押す対象（ボタン・リンク・入力欄）は小さくしない。指の当たり判定が先。
+   ============================================================ */
+@media (max-width: 560px) {
+  body { font-size: 15.5px; line-height: 1.8; }
+
+  /* ヒーロー */
+  .hero h1 { font-size: 21.5px; line-height: 1.5; }
+  .hero-sub { font-size: 13.5px; line-height: 1.85; }
+  .hs-popular-label, .hs-chip { font-size: 12.5px; }
+
+  /* 見出しと導入文 */
+  .mid-title { font-size: 19px; }
+  .mid-lead, .lead { font-size: 13.5px; line-height: 1.85; }
+  h2 { font-size: 17.5px; }
+  h3 { font-size: 15.5px; }
+
+  /* 品目の帯・悩み・エリア */
+  .item-cell b { font-size: 13px; }
+  .item-cell em { font-size: 11px; }
+  .worry-body b { font-size: 13px; }
+  .worry-body span { font-size: 11px; }
+  .worry-hand, .band-copy { font-size: 18px; }
+  .area-name b { font-size: 13.5px; }
+  .area-more .more-face b { font-size: 26px; }
+
+  /* 一覧 */
+  .shop-row-name { font-size: 16px; }
+  .terms dd { font-size: 13px; }
+  .terms-empty, .meta { font-size: 12.5px; }
+  .facet-list label, .search { font-size: 14px; }
+  .facet-result { font-size: 13px; }
+  .pref-tile b { font-size: 15px; }
+
+  /* 読み物 */
+  .guide h1 { font-size: 21px; line-height: 1.5; }
+  .guide .lead { font-size: 14.5px; }
+  .guide p { font-size: 14.5px; line-height: 1.9; }
+  .guide li { font-size: 13.5px; padding: 9px 13px 9px 32px; }
+  .guide li::before { left: 13px; }
+  .guide h2 { font-size: 17.5px; }
+  .guide-toc li { font-size: 13px; }
+  .guide-table { font-size: 13px; }
+  .stat b { font-size: 21px; }
+  .guide .point { font-size: 14.5px; }
+  .guide .callout { font-size: 13.5px; }
+  .faq summary { font-size: 14.5px; }
+  .faq details p { font-size: 13.5px; }
+  .guide-card-body b { font-size: 14px; }
+  .guide-card-body span { font-size: 12px; }
+
+  /* フッター */
+  .foot-lead { font-size: 12.5px; }
+  .foot-links a { font-size: 13px; }
+  .foot-contact h2 { font-size: 17px; }
+  .contact-hint { font-size: 12px; }
+  .kind-btn b { font-size: 13px; }
+
+  /* **押すところは詰めない。** 44px の当たり判定を保つ */
+  .btn { font-size: 14.5px; padding: 12px 20px; }
+  .hs-go { font-size: 15px; padding: 13px 22px; }
+  .field input, .field textarea { font-size: 16px; } /* iOS の自動ズームを避ける */
+}
