@@ -753,8 +753,10 @@ main > .wrap:last-child, main > .prose:last-child { padding-bottom: 64px; }
 .drawer-panel a:hover { color: var(--accent-ink); }
 
 /* ── 帯のあいだの余白。**セクションが自分で持つ** ──────────── */
+/* 読み物。**トップの最後に来るので、帯との間に余白を持たせる**
+   （main 側の padding は main 直下の .wrap にしか当たらない） */
 .guides { margin-top: 10px; }
-.guides .wrap { padding-bottom: 8px; }
+.guides .wrap { padding-top: 26px; padding-bottom: 64px; }
 #list { padding-top: 8px; }
 /* ── 読み物のサムネイル ───────────────────────────── */
 /* トップのカード。**写真がある記事だけ写真になる**（無ければ .guide-card-top の色面） */
