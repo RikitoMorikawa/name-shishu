@@ -114,7 +114,16 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
           <tbody>
             <tr><th>サイト</th><td><a href={l.url} rel="nofollow noopener" target="_blank">{l.url}</a></td></tr>
             <tr><th>電話</th><td>{l.tel ? <a href={`tel:${l.tel.replace(/[^0-9+]/g, '')}`}>{l.tel}</a> : <span className="unknown">確認中</span>}</td></tr>
-            <tr><th>所在地</th><td>{orUnknown(l.address)}</td></tr>
+            <tr>
+              <th>所在地</th>
+              <td>
+                {l.address ?? (
+                  <span className="unknown">
+                    確認中 ― <a href={l.url} rel="nofollow noopener" target="_blank">公式サイト</a>でご確認ください
+                  </span>
+                )}
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

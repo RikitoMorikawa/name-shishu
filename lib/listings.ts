@@ -7,7 +7,9 @@ export type Listing = {
   pref: string | null
   prefSlug: string | null
   city: string | null
+  /** **公式サイトで取れた住所だけ。** Places 由来の住所は載せない（規約にキャッシュの例外が無い） */
   address: string | null
+  addrState: 'verified' | 'city-only' | 'unverified' | null
   url: string
   tel: string | null
   /** 掲載先から提供してもらった写真だけ。各社サイトからの転載は著作権上できない。 */
@@ -51,7 +53,7 @@ export function findListing(slug: string) {
 export function byCity(items: Listing[]) {
   const map = new Map<string, Listing[]>()
   for (const l of items) {
-    const key = l.city ?? 'その他'
+    const key = l.city ?? '市区を確認中'
     map.set(key, [...(map.get(key) ?? []), l])
   }
   return [...map.entries()].sort((a, b) => b[1].length - a[1].length)
