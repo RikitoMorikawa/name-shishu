@@ -134,11 +134,14 @@ h1 {
 /* 手書きの添え書き。写真の上、右上に置く */
 /* 見本に合わせる。**写真の明るいところに、大きく、右上がりで階段状に。**
    小さく水平に置くと写真に埋もれる（2026-09-17 に差し戻された） */
-.hero-hand {
-  position: absolute; right: 27%; top: 34px; margin: 0;
+.hand.hero-hand {
+  position: absolute; right: 36%; top: 34px; margin: 0;
   font-family: var(--hand); font-size: clamp(20px, 2.3vw, 31px); line-height: 1.6;
-  color: var(--ink); text-align: left; transform: rotate(-7deg); pointer-events: none;
-  text-shadow: 0 1px 12px rgba(255,255,255,.95), 0 0 24px rgba(255,255,255,.8);
+  /* **手書きはテーマ色の緑で揃える**（2026-09-17）。濃紺だと見本と違って見えた。
+     写真の上に乗るので、地の緑（--accent）より一段濃い --accent-ink を使う */
+  color: var(--accent-ink); text-align: left; transform: rotate(-7deg); pointer-events: none;
+  /* **帽子の明るいベージュに乗ると緑が沈む。** 白い光を広めに敷いて浮かせる */
+  text-shadow: 0 0 10px rgba(255,255,255,.98), 0 0 22px rgba(255,255,255,.9), 0 0 40px rgba(255,255,255,.75);
 }
 .hero-hand span { display: block; }
 .hero-hand span + span { margin-left: 1.15em; }
