@@ -304,7 +304,10 @@ p { margin: 12px 0; }
 }
 .toc a:hover { color: var(--accent-ink); }
 /* ── フッター。**問い合わせもここに置く** ― どのページからも戻らずに連絡できるように ── */
-.site-foot { margin-top: 72px; background: var(--surface-2); border-top: 1px solid var(--rule); }
+/* **margin は持たせない。** フッターの上の余白を margin で作ると、
+   地の色が違うページ（読み物）でそこだけ白い帯として出る（2026-09-17）。
+   余白は main 側の padding で取る */
+.site-foot { background: var(--surface-2); border-top: 1px solid var(--rule); }
 /* 背景の写真。**地色は残す** ― 画像が出ないときも読める。
    帯の下（リンクと問い合わせ）にだけ敷きたいので、.site-foot ではなくここに掛ける */
 .foot-bg {
@@ -358,7 +361,10 @@ p { margin: 12px 0; }
 .prose h2 { font-size: 19px; margin: 40px 0 10px; }
 .prose ul { padding-left: 20px; }
 .prose li { margin: 6px 0; }
-main { padding-bottom: 8px; }
+/* **main 自身は余白を持たない。** 持たせると、全幅の帯（トップの ABOUT）で
+   終わるページでその下に白い帯が出る。余白は最後の要素の側で取る */
+main { padding-bottom: 0; }
+main > .wrap:last-child, main > .prose:last-child { padding-bottom: 64px; }
 /* **main は .wrap を持たない。** 各ページと各セクションが自分で内側を止める */
 
 /* ── 2カラム。**左に絞り込み、右にカード。** ───────────────── */
@@ -852,12 +858,12 @@ main { padding-bottom: 8px; }
 
 /* **読み物のページだけ地を淡くして、記事そのものを1枚の紙にする。**
    節ごとに枠を分けると紙が何枚も重なって見え、どこまでが記事か分からなくなる（2026-09-17） */
-body:has(.guide) main { background: var(--surface-2); padding-bottom: 0; }
+body:has(.guide) main { background: var(--surface-2); }
 .guide {
   background: var(--surface); border: var(--edge); border-radius: 18px;
-  box-shadow: var(--shadow); padding: 36px 48px 44px; margin: 22px auto 56px;
+  box-shadow: var(--shadow); padding: 36px 48px 44px; margin: 22px auto 0;
 }
-@media (max-width: 760px) { .guide { padding: 24px 20px 30px; border-radius: 14px; margin: 14px auto 34px; } }
+@media (max-width: 760px) { .guide { padding: 24px 20px 30px; border-radius: 14px; margin: 14px auto 0; } }
 
 /* 節。**枠は付けず、見出しの余白と細い罫で切る** */
 .guide-sec { margin: 0; }
