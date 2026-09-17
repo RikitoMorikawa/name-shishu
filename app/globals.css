@@ -554,24 +554,10 @@ main { padding-bottom: 8px; }
 @media (max-width: 980px) { .area-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 560px) { .area-grid { grid-template-columns: repeat(2, 1fr); } }
 
-/* ── 条件がそろっている店 ───────────────────────────── */
-.pick .wrap { padding-top: 52px; padding-bottom: 8px; }
-.pick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 30px; }
-@media (max-width: 1000px) { .pick-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .pick-grid { grid-template-columns: 1fr; } }
-.pick-card {
-  border: var(--edge); border-radius: var(--radius); overflow: hidden; background: var(--surface);
-  box-shadow: var(--shadow); display: flex; flex-direction: column;
-  transition: transform .16s ease, box-shadow .16s ease;
-}
-.pick-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
-.pick-photo { display: block; }
-.pick-photo .photo { aspect-ratio: 3 / 2; }
-.pick-body { padding: 13px 15px 16px; display: flex; flex-direction: column; gap: 7px; }
-.pick-head { display: flex; align-items: flex-start; gap: 8px; }
-.pick-head h3 { margin: 0; font-size: 15.5px; line-height: 1.5; flex: 1; min-width: 0; }
-.pick-head h3 a { color: inherit; text-decoration: none; }
-.pick-head h3 a:hover { color: var(--accent-ink); text-decoration: underline; }
+/* ── お気に入りの行で使う印 ───────────────────────────
+   「条件がそろっている店」の枠は 2026-09-17 に外した（写真が入らないうちは
+   空の枠が4つ並ぶだけで、同じ4件は下の一覧にも出る）。
+   .pick-area / .pick-tags / .tag は /favorites/ が使っているので残す。 */
 .pick-area { display: flex; align-items: center; gap: 5px; margin: 0; font-size: 12.5px; color: var(--ink-3); }
 .pick-area svg { color: var(--accent); flex: none; }
 .pick-tags { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -580,7 +566,6 @@ main { padding-bottom: 8px; }
   font-size: 11px; line-height: 1.8; padding: 1px 9px; border-radius: 999px;
   background: var(--surface-2); color: var(--ink-2); font-weight: 600;
 }
-.tag-ok { background: var(--accent-soft); color: var(--accent-ink); }
 
 /* ── お気に入りのハート ───────────────────────────── */
 .fav {

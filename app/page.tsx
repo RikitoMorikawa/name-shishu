@@ -2,15 +2,14 @@ import { Filter } from './Filter'
 import { Cards } from './ShopCard'
 import { guides } from '@/data/guides'
 import { HeroSearch } from './HeroSearch'
-import { FavButton } from './Fav'
 import { Photo, hasPhoto } from './Photo'
 import {
-  IconArrow, IconBag, IconCap, IconCheck, IconFlag, IconGuide,
-  IconMap, IconPin, IconTee, IconTowel, IconWappen,
+  IconArrow, IconBag, IconCap, IconFlag, IconGuide,
+  IconMap, IconTee, IconTowel, IconWappen,
 } from './Icons'
 import {
   ITEM_LABEL, ITEM_ORDER, byPref, itemCounts, listings, listingsByPrefSize,
-  prefLabel, prefOptions, updatedAt, type ItemKey, type Listing,
+  prefLabel, prefOptions, updatedAt, type ItemKey,
 } from '@/lib/listings'
 
 /** 品目の帯。**データの軸そのもの** ― 押すと下の一覧がその品目に絞られる */
@@ -38,36 +37,10 @@ const WORRIES = [
   { q: '近くの刺繍屋さんをすぐに見つけたい', a: '都道府県・市区町村から辿れます', href: '#area', img: '/illust/worry-3.svg', scale: 1 },
 ]
 
-/**
- * おすすめの店舗。**恣意的に選ばない。**
- * 「持ち込みを受けていて、条件がいちばん埋まっている店」を県が重ならないように拾う。
- * 掲載料は取っていないので、順位に金銭は一切関わらない（/about/ に書いてある通り）。
- */
-function picks(n = 4): Listing[] {
-  const score = (l: Listing) =>
-    (l.mochikomi === true ? 4 : 0) + (l.minLot ? 2 : 0) + (l.lead ? 2 : 0) +
-    (l.priceFrom ? 2 : 0) + (l.address ? 1 : 0) + Math.min(l.items.length, 3)
-  const sorted = [...listings]
-    .filter((l) => l.pref && l.mochikomi === true)
-    .sort((a, b) => score(b) - score(a) || a.name.localeCompare(b.name, 'ja'))
-  const out: Listing[] = []
-  for (const pass of [1, 2]) {
-    for (const l of sorted) {
-      if (out.length >= n) break
-      if (out.includes(l)) continue
-      // 1周目は県が重ならないように拾い、埋まらなければ2周目で詰める
-      if (pass === 1 && out.some((x) => x.prefSlug === l.prefSlug)) continue
-      out.push(l)
-    }
-  }
-  return out
-}
-
 export default function Home() {
   const prefs = byPref()
   const counts = itemCounts(listings)
   const top = prefs.slice(0, 5)
-  const recommended = picks()
 
   const jsonLd = [
     {
@@ -193,41 +166,6 @@ export default function Home() {
               その他のエリア
               <IconArrow size={20} />
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ── おすすめの店舗 ───────────────────────────────── */}
-      <section className="pick">
-        <div className="wrap">
-          <h2 className="mid-title">条件がそろっている店</h2>
-          <p className="mid-lead">
-            持ち込みの可否・最小枚数・納期まで確認できた店を挙げています。
-            <b>掲載料はいただいていないので、順番に金銭は関わっていません。</b>
-          </p>
-          <div className="pick-grid">
-            {recommended.map((l) => (
-              <article className="pick-card" key={l.slug}>
-                <a className="pick-photo" href={`/shop/${l.slug}/`}>
-                  <Photo src={`/photos/shop-${l.slug}.jpg`} alt="" />
-                </a>
-                <div className="pick-body">
-                  <div className="pick-head">
-                    <h3><a href={`/shop/${l.slug}/`}>{l.name}</a></h3>
-                    <FavButton slug={l.slug} name={l.name} />
-                  </div>
-                  <p className="pick-area"><IconPin size={14} />{[l.pref ? prefLabel(l.pref) : null, l.city].filter(Boolean).join(' ')}</p>
-                  <div className="pick-tags">
-                    <span className="tag tag-ok"><IconCheck size={12} />持ち込みOK</span>
-                    {l.minLot ? <span className="tag">{l.minLot}</span> : null}
-                    {l.lead ? <span className="tag">納期{l.lead}</span> : null}
-                    {ITEM_ORDER.filter((k) => l.items.includes(k)).slice(0, 3).map((k) => (
-                      <span className="tag" key={k}>{ITEM_LABEL[k]}</span>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            ))}
           </div>
         </div>
       </section>
