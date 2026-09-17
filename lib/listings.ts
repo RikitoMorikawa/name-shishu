@@ -118,3 +118,10 @@ export function listingsByPrefSize() {
   })
 }
 
+/**
+ * 写真の枠を出すか。**1枚も提供されていない間は枠ごと出さない。**
+ * 頭文字だけの枠は面積を食うわりに情報がなく、1画面に入る件数が半分になる。
+ * 掲載先から1枚でも届けば自動で枠が戻る（無い社は頭文字で埋まる）。
+ */
+export const hasAnyPhoto = listings.some((l) => !!l.photo)
+

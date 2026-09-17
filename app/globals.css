@@ -175,7 +175,9 @@ main { padding-bottom: 8px; }
 
 /* ── 業者カード。**写真は掲載先から提供してもらったものだけ。** ─────────
    届くまでは社名の頭文字を置く（灰色の空枠を並べない）。 */
-.card-grid { display: grid; gap: 14px; margin: 4px 0 8px; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); }
+.card-grid { display: grid; gap: 12px; margin: 4px 0 8px; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); }
+/* 写真が無い版。行の高さが揃うように、本文だけで組む */
+.shop-card-body > .pill { align-self: flex-start; }
 .shop-card {
   background: var(--surface); border-radius: var(--radius); overflow: hidden;
   text-decoration: none; color: inherit; box-shadow: var(--shadow);
@@ -189,6 +191,8 @@ main { padding-bottom: 8px; }
   background: linear-gradient(145deg, var(--surface-2), color-mix(in srgb, var(--surface-2) 68%, var(--ground)));
 }
 .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* カードの地図。**クリックはカード全体のリンクに通す**（iframe が操作を奪わないように） */
+.thumb-map { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
 .thumb-initial { font-size: 46px; font-weight: 700; line-height: 1; letter-spacing: -.03em; user-select: none;
   color: color-mix(in srgb, var(--ink-3) 62%, transparent); }
 .thumb-kakou { background: linear-gradient(145deg, var(--accent-soft), color-mix(in srgb, var(--accent-soft) 52%, var(--ground))); }

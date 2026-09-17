@@ -13,6 +13,12 @@ function initial(name: string) {
   return /[A-Za-z]/.test(c) ? s.slice(0, 2).toUpperCase() : c
 }
 
+const MAP_KEY = process.env.NEXT_PUBLIC_MAPS_EMBED_KEY
+
+/** 番地まで書かれている住所か。町名までだと地図が町の中心を指す */
+const hasBanchi = (l: Listing) =>
+  !!l.address && /\d+\s*[-−ー―]\s*\d+|\d+番/.test(l.address)
+
 const Icon = ({ d }: { d: string }) => (
   <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden focusable="false">
     <path d={d} fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -40,9 +46,24 @@ export function ShopCard({ l, sub }: { l: Listing; sub?: 'pref' | 'address' }) {
       data-mochikomi={l.mochikomi === true ? '1' : '0'}
       data-search={[l.name, l.pref, l.city, l.address].filter(Boolean).join(' ')}
     >
+      {/* **写真 → 地図 → 頭文字**の順に落とす。
+          写真は掲載先から提供されたものだけ。地図は番地まで分かっている先だけ
+          （町名までだと町の中心を指してしまう）。Maps Embed API は無料。 */}
       <div className={`thumb thumb-${l.kind}`}>
         {l.photo ? (
           <img src={l.photo} alt={`${l.name}の外観`} loading="lazy" />
+        ) : MAP_KEY && hasBanchi(l) ? (
+          <iframe
+            className="thumb-map"
+            title=""
+            aria-hidden
+            tabIndex={-1}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            src={`https://www.google.com/maps/embed/v1/place?key=${MAP_KEY}&q=${encodeURIComponent(
+              l.address as string,
+            )}&language=ja&region=JP&zoom=16`}
+          />
         ) : (
           <span className="thumb-initial" aria-hidden>{initial(l.name)}</span>
         )}
@@ -50,6 +71,7 @@ export function ShopCard({ l, sub }: { l: Listing; sub?: 'pref' | 'address' }) {
       </div>
 
       <div className="shop-card-body">
+
         {chips.length ? (
           <div className="chips">
             {chips.map((c) => <span className="chip-tag" key={c}>{c}</span>)}
