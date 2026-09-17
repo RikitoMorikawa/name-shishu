@@ -128,10 +128,10 @@ p { margin: 12px 0; }
 }
 .toc a:hover { color: var(--accent-ink); }
 .site-foot { margin-top: 88px; background: var(--surface); border-top: 1px solid var(--rule); }
-.site-foot .wrap { padding-top: 26px; padding-bottom: 44px; color: var(--ink-2); font-size: 14.5px; }
-.foot-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 14px; }
-.foot-links a { font-size: 14.5px; }
-.foot-meta { margin: 0; color: var(--ink-3); font-size: 13.5px; line-height: 1.9; }
+.site-foot .wrap { padding-top: 26px; padding-bottom: 40px; color: var(--ink-3); text-align: center; }
+.foot-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; margin-bottom: 10px; }
+.foot-links a { font-size: 13px; }
+.foot-meta { margin: 0; color: var(--ink-3); font-size: 12px; line-height: 1.95; }
 /* 規約・ポリシーの読み物ページ。本文の幅を絞る */
 .prose { max-width: 72ch; }
 .prose h2 { font-size: 19px; margin: 40px 0 10px; }

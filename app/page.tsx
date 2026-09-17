@@ -79,13 +79,6 @@ export default function Home() {
         ))}
       </div>
 
-      <h2>この媒体について</h2>
-      <p>
-        掲載は無料で、掲載先から料金はいただいていません。
-        運営は森川力人（元・作業服／ユニフォーム商社の営業）。
-        誤りがあれば直しますので <a href="mailto:contact@umidas.info">contact@umidas.info</a> までお知らせください。
-      </p>
-      <p className="muted">最終更新 {updatedAt}</p>
     </>
   )
 }
