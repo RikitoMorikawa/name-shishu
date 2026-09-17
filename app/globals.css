@@ -274,6 +274,10 @@ p { margin: 12px 0; }
 }
 .toc a:hover { color: var(--accent-ink); }
 .site-foot { margin-top: 88px; background: var(--surface); border-top: 1px solid var(--rule); }
+/* **帯で終わるページは余白を作らない。** 全幅の写真とフッターの間に白い帯が残る（2026-09-17）。
+   :has() が効かないブラウザでは今までどおり余白が出るだけで、壊れはしない */
+main:has(.band) { padding-bottom: 0; }
+main:has(.band) + .site-foot { margin-top: 0; }
 .site-foot .wrap { padding-top: 24px; padding-bottom: 34px; color: var(--ink-3); text-align: center; }
 .foot-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; }
 .foot-links a { font-size: 13px; }
