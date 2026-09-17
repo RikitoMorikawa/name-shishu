@@ -22,6 +22,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 const orUnknown = (v: string | null) => v ?? <span className="unknown">確認中</span>
 
+// Maps Embed API は無料。**iframe で都度読むので Places のキャッシュ制限には当たらない。**
+// キーが無ければ地図を出さない（ビルドが落ちないように）。
+const MAP_KEY = process.env.NEXT_PUBLIC_MAPS_EMBED_KEY
+
 export default async function ShopPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const l = findListing(slug)
@@ -128,6 +132,26 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
         </table>
       </div>
       {l.note ? <p>{l.note}</p> : null}
+
+      {MAP_KEY && l.address ? (
+        <>
+          <h2>場所</h2>
+          <div className="map-wrap">
+            <iframe
+              title={`${l.name}の地図`}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+              src={`https://www.google.com/maps/embed/v1/place?key=${MAP_KEY}&q=${encodeURIComponent(
+                `${l.name} ${l.address}`,
+              )}&language=ja&region=JP&zoom=16`}
+            />
+          </div>
+          <p className="muted">
+            外観を見たいときは地図の中でストリートビューに切り替えられます。
+          </p>
+        </>
+      ) : null}
 
       {near.length ? (
         <>
