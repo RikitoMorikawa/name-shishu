@@ -850,12 +850,26 @@ main { padding-bottom: 8px; }
   width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
 }
 
-/* 節の見出し。**上に余白と細い罫を置いて、話の切れ目をはっきりさせる** */
+/* **読み物のページだけ地を淡くする。** 節の白い枠を浮かせるため */
+body:has(.guide) main { background: var(--surface-2); }
+
+/* 節の枠。**1つの話を1枚の紙に載せる** */
+.guide-sec {
+  background: var(--surface); border: var(--edge); border-radius: 16px;
+  padding: 6px 26px 22px; margin: 16px 0; box-shadow: var(--shadow);
+}
+/* 最初の h2 より前（導入）は枠を出さない ― リード文と続けて読ませる */
+.guide-sec.is-intro { background: none; border: 0; box-shadow: none; padding: 0; margin: 20px 0 0; }
+@media (max-width: 560px) { .guide-sec { padding: 4px 16px 18px; border-radius: 14px; } }
+
+/* 節の見出し。**枠が区切りになるので罫は要らない** */
 .guide h2 {
-  margin: 48px 0 12px; padding-top: 22px; font-size: clamp(19px, 2.2vw, 23px);
-  border-top: 1px solid var(--rule); scroll-margin-top: 92px;
+  margin: 22px 0 12px; font-size: clamp(19px, 2.2vw, 23px);
+  scroll-margin-top: 92px;
 }
 .guide h2::before { display: none; }
+/* 枠の中の最初と最後は、枠の余白に任せて詰める */
+.guide-sec > div:last-child > *:last-child { margin-bottom: 0; }
 
 /* 目次 */
 .guide-toc {
@@ -900,8 +914,8 @@ main { padding-bottom: 8px; }
 .guide .callout { font-size: 14.5px; line-height: 1.9; border-left: 4px solid var(--rule); border-radius: 0 12px 12px 0; }
 
 /* よくある質問。**details で畳む** ― 全部開いていると本文が終わらない */
-.faq { margin-top: 44px; }
-.faq h2 { margin-top: 0; }
+.faq { margin-top: 30px; }
+.faq h2 { margin-top: 22px; }
 .faq details {
   background: var(--surface); border: var(--edge); border-radius: 12px;
   margin: 8px 0; box-shadow: var(--shadow);

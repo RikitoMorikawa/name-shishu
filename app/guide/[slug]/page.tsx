@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { findGuide, guides } from '@/data/guides'
+import { findGuide, guides, type Block } from '@/data/guides'
 import { fillStats } from '@/lib/listings'
 import { hasPhoto } from '../../Photo'
 
@@ -35,11 +35,26 @@ const headId = (h: string) => 'h' + [...h].reduce((a, c) => (a * 31 + c.charCode
 /** 印（{{total}} など）をいまの数字に置き換える */
 const fill = (t: string) => fillStats(t)
 
+/**
+ * h2 が来るたびに区切って、節ごとに枠で囲えるようにする。
+ * **最初の h2 より前は導入**として、見出しの無い節にまとめる。
+ */
+function toSections(body: Block[]) {
+  const out: { h?: string; blocks: Block[] }[] = []
+  for (const b of body) {
+    if (b.h) out.push({ h: b.h, blocks: [{ ...b, h: undefined }] })
+    else if (!out.length) out.push({ blocks: [b] })
+    else out[out.length - 1].blocks.push(b)
+  }
+  return out
+}
+
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const g = findGuide(slug)
   if (!g) notFound()
 
+  const sections = toSections(g.body)
   const heads = g.body.filter((b) => b.h).map((b) => b.h!)
   const others = guides.filter((x) => x.slug !== g.slug)
   const thumb = `/photos/guide-${g.slug}.jpg`
@@ -112,9 +127,12 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           </nav>
         ) : null}
 
-        {g.body.map((b, i) => (
+        {/* **節ごとに枠で囲う。** 長い文章は、どこまでが1つの話かが見えないと読み進められない */}
+        {sections.map((sec, si) => (
+        <section className={`guide-sec${sec.h ? '' : ' is-intro'}`} key={si}>
+        {sec.h ? <h2 id={headId(sec.h)}>{sec.h}</h2> : null}
+        {sec.blocks.map((b, i) => (
           <div key={i}>
-            {b.h ? <h2 id={headId(b.h)}>{b.h}</h2> : null}
             {b.p ? <p dangerouslySetInnerHTML={{ __html: fill(b.p) }} /> : null}
             {b.ul ? (
               <ul>
@@ -156,6 +174,8 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             {b.point ? <p className="point" dangerouslySetInnerHTML={{ __html: fill(b.point) }} /> : null}
             {b.note ? <div className="callout" dangerouslySetInnerHTML={{ __html: fill(b.note) }} /> : null}
           </div>
+        ))}
+        </section>
         ))}
 
         {g.faq?.length ? (
