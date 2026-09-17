@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Analytics } from '@vercel/analytics/next'
 import { Caveat, Klee_One } from 'next/font/google'
 import { ContactForm } from './ContactForm'
 import { Photo } from './Photo'
@@ -100,6 +101,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <p>運営 UMIDAS</p>
           </div>
         </footer>
+
+        {/* 閲覧数の計測（Vercel Web Analytics）。**Cookie を使わず、個人を追わない。**
+            だから「Cookie も使用していません」は書いたままでよい。
+            プライバシーポリシーの第1節に、何を計測しているかを書いてある */}
+        <Analytics />
       </body>
     </html>
   )
