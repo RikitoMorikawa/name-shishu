@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { FavCount } from './Fav'
-import { IconClose, IconHeart, IconMenu, IconPin } from './Icons'
+import { IconClose, IconGuide, IconHeart, IconMap, IconMenu, IconPin } from './Icons'
 
 const LINKS = [
   { href: '/#list', label: '掲載店を条件で探す' },
@@ -30,6 +30,16 @@ export function HeaderNav() {
         <a href="/#list">
           <IconPin size={18} />
           <span>店を探す</span>
+        </a>
+        {/* **広い画面ではドロワーを開かせない。** 行き先が少ないので、
+            畳むより並べたほうが早い。狭い画面ではハンバーガーに寄せる */}
+        <a href="/#area" className="pc-only">
+          <IconMap size={18} />
+          <span>地域から探す</span>
+        </a>
+        <a href="/#guides" className="pc-only">
+          <IconGuide size={18} />
+          <span>読み物</span>
         </a>
         <a href="/favorites/" className="head-fav">
           <IconHeart size={18} />

@@ -731,6 +731,9 @@ main > .wrap:last-child, main > .prose:last-child { padding-bottom: 64px; }
   display: grid; place-items: center; width: 40px; height: 40px; padding: 0;
   border: 0; border-radius: 10px; background: none; color: var(--ink); cursor: pointer;
 }
+/* **広い画面ではハンバーガーを出さない。** 行き先が少ないので並べたほうが早い */
+@media (min-width: 981px) { .head-menu { display: none; } }
+@media (max-width: 980px) { .head-nav .pc-only { display: none; } }
 .head-menu:hover { background: var(--surface-2); }
 .drawer { position: fixed; inset: 0; z-index: 60; background: rgba(21,40,60,.42); }
 .drawer-panel {
