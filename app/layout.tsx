@@ -36,10 +36,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <a href="/privacy/">プライバシーポリシー</a>
               <a href="mailto:contact@umidas.info">掲載・訂正のご依頼</a>
             </nav>
-            <p className="foot-meta">
-              掲載は無料です。掲載先から料金はいただいていません。<br />
-              運営：UMIDAS　<a href="mailto:contact@umidas.info">contact@umidas.info</a>
-            </p>
           </div>
         </footer>
       </body>
