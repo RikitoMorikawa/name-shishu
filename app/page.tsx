@@ -42,6 +42,9 @@ export default function Home() {
   const prefs = byPref()
   const counts = itemCounts(listings)
   const top = prefs.slice(0, 5)
+  // タイルに出していない残りの地域。件数も足して「その他」の中身を示す
+  const rest = prefs.slice(5)
+  const restCount = rest.reduce((n, p) => n + p.items.length, 0)
 
   const jsonLd = [
     {
@@ -163,9 +166,16 @@ export default function Home() {
                 </span>
               </a>
             ))}
+            {/* **残りが何県あるかを見せる。**「その他」だけだと自分の地域があるか分からない */}
             <a className="area-tile area-more" href="#all-pref">
-              その他のエリア
-              <IconArrow size={20} />
+              <span className="more-face">
+                <b>+{rest.length}</b>
+                <em>地域</em>
+              </span>
+              <span className="area-name">
+                <b>その他のエリア</b>
+                <em>{restCount}件</em>
+              </span>
             </a>
           </div>
         </div>
