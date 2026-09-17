@@ -294,7 +294,7 @@ export default function Home() {
       </section>
 
       {/* ── ABOUT ────────────────────────────────────── */}
-      <section className="about-band">
+      <section className="about-band" id="about">
         <div className="wrap">
           <div className="about-photo">
             <Photo src="/photos/about.jpg" alt="" label="ネーム刺繍" />

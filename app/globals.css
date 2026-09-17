@@ -57,6 +57,8 @@
    .shop-card の display:flex に負けて消えない（件数だけ減って表示が変わらなかった。2026-09-17） */
 [hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 88px; }
+/* 動きを減らす設定の人には滑らかスクロールを切る */
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
   margin: 0; background: var(--ground); color: var(--ink);
   font-family: 'Hiragino Sans', 'Noto Sans JP', system-ui, -apple-system, sans-serif;
@@ -639,17 +641,22 @@ main { padding-bottom: 8px; }
 .band-strip .photo { height: clamp(230px, 24vw, 330px); }
 .band-strip .photo[data-empty] { background: linear-gradient(160deg, var(--accent-deep), var(--accent)); }
 .band-strip .photo-holder { color: rgba(255,255,255,.34); }
+/* **暗幕（.band::after）より上に出す。** ソース順では ::after が後に来るので、
+   z-index を付けないとコピーが幕の下に潜って、暗くしても読めるようにならない */
 .band-copy {
-  position: absolute; left: 0; right: 0; bottom: 34px; margin: 0; text-align: center;
-  font-size: clamp(19px, 2.4vw, 30px); color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.55);
+  position: absolute; z-index: 2; left: 0; right: 0; bottom: 34px; margin: 0; text-align: center;
+  font-size: clamp(19px, 2.4vw, 30px); color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,.85), 0 0 34px rgba(0,0,0,.6);
 }
 .band-copy::after {
   content: ''; display: block; width: 190px; max-width: 60%; height: 8px; margin: 2px auto 0;
   border-bottom: 2px solid rgba(255,255,255,.8); border-radius: 50%;
 }
+/* **下半分を暗くしてコピーを浮かせる。** 写真が入ると明るい面（トートの生成り・
+   帽子のつば）にコピーが乗って読めなくなる（2026-09-17） */
 .band::after {
-  content: ''; position: absolute; inset: 40% 0 0; pointer-events: none;
-  background: linear-gradient(0deg, rgba(0,0,0,.5), transparent);
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(0deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.52) 24%, rgba(0,0,0,.16) 55%, transparent 80%);
 }
 @media (max-width: 680px) { .band-strip { grid-template-columns: repeat(2, 1fr); } }
 
