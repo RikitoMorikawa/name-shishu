@@ -1,4 +1,5 @@
 import raw from '@/data/listings.json'
+import photosRaw from '@/data/photos.json'
 
 export type Listing = {
   slug: string
@@ -26,8 +27,17 @@ export type Listing = {
 
 const data = raw as { updatedAt: string; listings: Listing[] }
 
+// 写真は listings.json とは別に持つ。あちらは DB から毎回作り直されるので、
+// 手で足した写真が消えてしまう（2026-09-17）。掲載先から提供されたものだけを載せる。
+const photos = photosRaw as Record<string, { src: string; credit: string } | unknown>
+
 export const updatedAt = data.updatedAt
-export const listings = data.listings
+export const listings: Listing[] = data.listings.map((l) => {
+  const p = photos[l.slug]
+  return p && typeof p === 'object' && 'src' in p
+    ? { ...l, photo: (p as { src: string }).src, photoCredit: (p as { credit?: string }).credit ?? null }
+    : l
+})
 
 /** 都道府県ごと。pref が無い行は地域ページに出せないので除く。 */
 export function byPref() {

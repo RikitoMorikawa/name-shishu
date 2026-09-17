@@ -1,0 +1,8 @@
+{
+  "_readme": [
+    "掲載先から提供してもらった写真だけをここに書く。各社サイトや Places からの転載は不可。",
+    "listings.json は hp/001 の export-listings.mjs が毎回作り直すので、写真はこちらに分けて持つ。",
+    "手順: public/photos/<slug>.jpg に置く → 下に1行足す（credit は提供者の名乗り）。",
+    "例: \"tokyo-9270\": { \"src\": \"/photos/tokyo-9270.jpg\", \"credit\": \"提供：CAP ORIGINAL\" }"
+  ]
+}
