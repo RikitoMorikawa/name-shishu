@@ -1034,4 +1034,7 @@ body:has(.guide) main { background: var(--surface-2); padding-top: 22px; }
   .btn { font-size: 14.5px; padding: 12px 20px; }
   .hs-go { font-size: 15px; padding: 13px 22px; }
   .field input, .field textarea { font-size: 16px; } /* iOS の自動ズームを避ける */
+  /* **例文だけ小さくする。** 入力欄そのものは 16px を保つ必要があるが、
+     プレースホルダは読めれば足りるので、枠の中で折り返さない大きさに落とす */
+  .field input::placeholder, .field textarea::placeholder, .search::placeholder { font-size: 13px; }
 }
