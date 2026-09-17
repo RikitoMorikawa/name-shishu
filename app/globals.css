@@ -306,18 +306,16 @@ p { margin: 12px 0; }
 /* 帯はフッターの中にある。**区切りは帯そのものが付ける**ので罫線は要らない */
 .site-foot .band { margin-top: 0; }
 
-/* 帯のすぐ下。**名乗りを左、リンクを右**に置いて1行に収める */
-.foot-top {
-  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 24px 40px;
-  padding-top: 34px; padding-bottom: 28px;
-}
-.foot-brand { max-width: 380px; }
+/* 帯のすぐ下。**名乗りもリンクも左に揃える** ― リンクだけ右端に飛ぶと、
+   どこへ続くのかが読み取りにくい（2026-09-17） */
+.foot-top { padding-top: 34px; padding-bottom: 26px; }
+.foot-brand { max-width: 520px; }
 
 .foot-brand .brand { display: flex; align-items: center; gap: 9px; text-decoration: none; color: inherit; }
 .foot-brand .mark { font-size: 17px; font-weight: 700; }
 .foot-brand .mark em { font-style: normal; color: var(--accent); }
 .foot-lead { margin: 10px 0 0; font-size: 13px; line-height: 1.9; color: var(--ink-2); }
-.foot-links { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 14px; }
 .foot-links a { font-size: 13.5px; color: var(--ink-2); text-decoration: none; width: fit-content; }
 .foot-links a:hover { color: var(--accent-ink); text-decoration: underline; }
 
