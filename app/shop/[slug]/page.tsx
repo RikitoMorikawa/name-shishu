@@ -149,7 +149,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
               allowFullScreen
               // 社名を混ぜると表記の記号（「|」など）でノイズになる。住所だけで引く
               src={`https://www.google.com/maps/embed/v1/place?key=${MAP_KEY}&q=${encodeURIComponent(
-                l.address,
+                l.address as string,
               )}&language=ja&region=JP&zoom=17`}
             />
           </div>
