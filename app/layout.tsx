@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Caveat, Klee_One } from 'next/font/google'
 import { ContactForm } from './ContactForm'
+import { Photo } from './Photo'
 import { HeaderNav } from './HeaderNav'
 import { Logo } from './Logo'
 import { listings, updatedAt } from '@/lib/listings'
@@ -84,6 +85,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <p>運営 UMIDAS</p>
           </div>
         </footer>
+
+        {/* ── 締めの帯。**フッターより下に置く** ― ページの最後を写真で締める。
+            main の外にあるので全ページ共通になる ────────────────── */}
+        <section className="band">
+          <div className="band-strip">
+            {[1, 2, 3, 4].map((i) => (
+              <Photo key={i} src={`/photos/band-${i}.jpg`} alt="" />
+            ))}
+          </div>
+          <p className="hand band-copy">その一着に、名前を込めて。</p>
+        </section>
       </body>
     </html>
   )

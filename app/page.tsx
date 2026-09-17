@@ -259,15 +259,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 締めの帯 ───────────────────────────────────── */}
-      <section className="band">
-        <div className="band-strip">
-          {[1, 2, 3, 4].map((i) => (
-            <Photo key={i} src={`/photos/band-${i}.jpg`} alt="" />
-          ))}
-        </div>
-        <p className="hand band-copy">その一着に、名前を込めて。</p>
-      </section>
     </>
   )
 }
