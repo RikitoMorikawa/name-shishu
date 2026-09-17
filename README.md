@@ -107,6 +107,7 @@ npm run dev     # http://localhost:3000
 | `public/photos/area-<県slug>.jpg` | 「エリアから探す」のタイル（例 `area-tokyo.jpg`） | 600×450 |
 | `public/photos/shop-<slug>.jpg` | 「条件がそろっている店」のカード | 640×430 |
 | `public/photos/band-1.jpg` 〜 `band-4.jpg` | 最下部の帯 | 500×660 |
+| `public/photos/guide-<slug>.jpg` | 読み物のサムネイル（カード・記事の見出し・OGP・構造化データ） | 1200×800 |
 
 ## イラストの出どころ
 
