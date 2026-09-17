@@ -1,27 +1,19 @@
 'use client'
 
 import { useState } from 'react'
-import { IconArrow, IconGuide, IconShop } from './Icons'
+import { IconArrow, IconCheck, IconGuide, IconShop } from './Icons'
 
 const TO = 'contact@umidas.info'
-
 /**
- * 問い合わせ。**送信先はメール1本**（この媒体はサーバーを持たない静的サイト）。
- * 入力した内容はどこへも送信されず、ブラウザが作るメールの下書きに入るだけ。
- * だから外部のフォームサービスを挟まずに済み、プライバシーポリシーの前提も変わらない。
+ * **この媒体はサーバーを持たない**（静的書き出し）。画面から送信するには外部の
+ * 受け口が要るので FormSubmit を使う。登録不要で、入力内容は同社を経由して TO へ届く。
+ * **プライバシーポリシーの第5節に、経由することを書いてある。**
  *
- * **メールアプリが開かない人のために、宛先は文字でも出しておく。**
+ * 落ちたときは mailto: のリンクを出す ― 外部サービスが止まっても連絡手段を絶やさない。
  */
+const ENDPOINT = `https://formsubmit.co/ajax/${TO}`
+
 const KINDS = [
-  {
-    key: 'listing',
-    label: '掲載・訂正のご依頼',
-    icon: IconShop,
-    subject: '【掲載・訂正のご依頼】',
-    fields: true,
-    hint: '掲載店の方・掲載を希望される方へ。掲載は無料で、内容の訂正・削除も承ります。',
-    placeholder: '例）持ち込みは1枚から受けています。納期の記載を「3営業日」に直してください。',
-  },
   {
     key: 'feedback',
     label: 'ご意見・情報提供',
@@ -31,28 +23,66 @@ const KINDS = [
     hint: '店を探している方へ。この地域に店が無い・情報が古いなどお知らせください。個別の見積もりには対応できません。',
     placeholder: '例）◯◯市に刺繍屋があります。／掲載の電話番号が変わっているようです。',
   },
+  {
+    key: 'listing',
+    label: '掲載・訂正のご依頼',
+    icon: IconShop,
+    subject: '【掲載・訂正のご依頼】',
+    fields: true,
+    hint: '掲載店の方・掲載を希望される方へ。掲載は無料で、内容の訂正・削除も承ります。',
+    placeholder: '例）持ち込みは1枚から受けています。納期の記載を「3営業日」に直してください。',
+  },
 ] as const
 
 export function ContactForm() {
-  const [kind, setKind] = useState<(typeof KINDS)[number]['key']>('listing')
+  // **初期は「ご意見・情報提供」。** 来訪者の大半は店を探している人で、
+  // 掲載店より数が多い。店名の欄も出ないぶん、最初の見た目が軽くなる
+  const [kind, setKind] = useState<(typeof KINDS)[number]['key']>('feedback')
   const [shop, setShop] = useState('')
   const [url, setUrl] = useState('')
+  const [reply, setReply] = useState('')
   const [body, setBody] = useState('')
+  const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
   const k = KINDS.find((x) => x.key === kind)!
 
-  // **ボタンではなくリンクにする。** 右クリックでコピーでき、押す前に宛先が分かる
-  const lines = [
-    ...(k.fields ? [`店名：${shop || '（未記入）'}`, `サイト：${url || '（未記入）'}`, ''] : []),
-    body,
-    '',
-    '---',
-    'ネーム刺繍ナビ（https://name-shishu.com/）の問い合わせフォームから',
-  ]
-  const subject = k.subject + (k.fields && shop ? ` ${shop}` : '')
-  const mailto = `mailto:${TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setState('sending')
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: k.subject + (k.fields && shop ? ` ${shop}` : ''),
+          _template: 'table',
+          _captcha: 'false',
+          種別: k.label,
+          ...(k.fields ? { 店名: shop, サイト: url } : {}),
+          返信先: reply,
+          ご用件: body,
+        }),
+      })
+      const json = await res.json()
+      setState(String(json?.success) === 'true' ? 'done' : 'error')
+    } catch {
+      setState('error')
+    }
+  }
+
+  if (state === 'done') {
+    return (
+      <div className="contact-box contact-done">
+        <IconCheck size={26} />
+        <div>
+          <b>送信しました。</b>
+          <span>ありがとうございます。内容を確認のうえ、いただいた返信先へご連絡します。</span>
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <div className="contact-box">
+    <form className="contact-box" onSubmit={submit}>
       <fieldset className="contact-kind">
         <legend className="sr-only">お問い合わせの種類</legend>
         {KINDS.map((x) => (
@@ -85,22 +115,35 @@ export function ContactForm() {
             </label>
           </>
         ) : null}
+        {/* **返信先は要る。** 無いと「直したい」と言われても確認の連絡ができない */}
+        <label className="field field-wide">
+          <span>返信先のメールアドレス</span>
+          <input
+            type="email"
+            required
+            value={reply}
+            onChange={(e) => setReply(e.target.value)}
+            placeholder="you@example.com"
+            inputMode="email"
+          />
+        </label>
         <label className="field field-wide">
           <span>ご用件</span>
-          <textarea value={body} onChange={(e) => setBody(e.target.value)} rows={2} placeholder={k.placeholder} />
+          <textarea required value={body} onChange={(e) => setBody(e.target.value)} rows={2} placeholder={k.placeholder} />
         </label>
       </div>
 
       <div className="contact-foot">
-        <a className="btn" href={mailto}>
-          メールを作成する<IconArrow size={18} />
-        </a>
-        {/* **ここで送信は起きない。** 誤解されると「送ったのに返事が来ない」になる */}
-        <p className="muted">
-          押すとメールアプリが開きます（<b>この画面からは送信されません</b>）。
-          開かないときは <a href={`mailto:${TO}`}>{TO}</a> へ。
-        </p>
+        <button type="submit" className="btn" disabled={state === 'sending'}>
+          {state === 'sending' ? '送信しています…' : '送信する'}
+          <IconArrow size={18} />
+        </button>
+        {state === 'error' ? (
+          <p className="contact-error">
+            送信できませんでした。お手数ですが <a href={`mailto:${TO}`}>{TO}</a> へ直接お送りください。
+          </p>
+        ) : null}
       </div>
-    </div>
+    </form>
   )
 }

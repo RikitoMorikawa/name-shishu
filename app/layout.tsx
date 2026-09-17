@@ -75,10 +75,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             <div className="foot-contact">
               <h2>お問い合わせ</h2>
-              <p className="foot-contact-lead">
-                掲載のご依頼・内容の訂正、サイトへのご意見はこちらから。
-                <b>掲載料はいただいていません。</b>
-              </p>
               <ContactForm />
             </div>
           </div>
