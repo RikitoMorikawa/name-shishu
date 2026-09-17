@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { FavCount } from './Fav'
 import { IconClose, IconGuide, IconHeart, IconMap, IconMenu, IconPin } from './Icons'
 
@@ -57,7 +58,10 @@ export function HeaderNav() {
         </button>
       </nav>
 
-      {open ? (
+      {/* **ドロワーは body へ出す。** ヘッダーには backdrop-filter が掛かっていて、
+          その中だと position:fixed の基準がヘッダーになり、高さが 84px に潰れる（2026-09-17） */}
+      {open
+        ? createPortal(
         <div className="drawer" role="dialog" aria-label="メニュー" onClick={() => setOpen(false)}>
           <div className="drawer-panel" onClick={(e) => e.stopPropagation()}>
             <button type="button" className="drawer-close" aria-label="閉じる" onClick={() => setOpen(false)}>
@@ -71,8 +75,10 @@ export function HeaderNav() {
               ))}
             </ul>
           </div>
-        </div>
-      ) : null}
+        </div>,
+            document.body,
+          )
+        : null}
     </>
   )
 }
