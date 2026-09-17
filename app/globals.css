@@ -18,6 +18,10 @@
   --accent-deep: #08492c;
   --ok: #0f7a4a;
   --ok-soft: #e9f4ee;
+  /* 電話だけ色を変える。緑の中で1つだけ黄にすると「押す先」が一目で決まる。白地で 5.2:1 */
+  --call: #8a5a00;
+  --call-line: #d79a12;
+  --call-soft: #fff8e6;
   /* 読み物カードの地。**写真が無いので、色面で見分ける** */
   --tone-a: #e9f4ee;
   --tone-b: #eef3f0;
@@ -38,6 +42,7 @@
     --ground: #101714; --surface: #18201c; --surface-2: #212a25;
     --ink: #eef3f0; --ink-2: #b4c0b8; --ink-3: #8d9a92; --rule: #2f3a34;
     --accent: #5fbf8e; --accent-ink: #7fd0a5; --accent-soft: #15291f; --accent-deep: #bfe8d3;
+    --call: #f0d67a; --call-line: #c9a227; --call-soft: #2a2317;
     --ok: #7fbd9c; --ok-soft: #15291f;
     --tone-a: #15291f; --tone-b: #1a241e; --tone-c: #1c2529;
     --tone-a-ink: #5fbf8e; --tone-b-ink: #9dbaa9; --tone-c-ink: #9db2bd;
@@ -49,6 +54,7 @@
   --ground: #101714; --surface: #18201c; --surface-2: #212a25;
   --ink: #eef3f0; --ink-2: #b4c0b8; --ink-3: #8d9a92; --rule: #2f3a34;
   --accent: #5fbf8e; --accent-ink: #7fd0a5; --accent-soft: #15291f; --accent-deep: #bfe8d3;
+    --call: #f0d67a; --call-line: #c9a227; --call-soft: #2a2317;
   --ok: #7fbd9c; --ok-soft: #15291f;
 }
 
@@ -283,11 +289,16 @@ p { margin: 12px 0; }
   display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
   font-size: 15.5px; font-weight: 600; padding: 12px 20px; border-radius: 999px;
   background: var(--accent); color: #fff; box-shadow: var(--shadow);
-  transition: transform .14s ease, box-shadow .14s ease;
+  border: 1.5px solid transparent;
+  transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease;
 }
 .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-lift); }
-.btn-ghost { background: var(--surface); color: var(--ink); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .btn { color: #1a1714; } }
+/* 枠を出さないと「押せる」と分からない ― 主ボタンと並ぶと面が白いだけに見える */
+.btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--rule); }
+.btn-ghost:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--rule)); color: var(--accent-ink); }
+.btn-call { background: var(--call-soft); color: var(--call); border-color: var(--call-line); }
+.btn-call:hover { background: color-mix(in srgb, var(--call-line) 14%, var(--call-soft)); border-color: var(--call); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .btn:not(.btn-ghost):not(.btn-call) { color: #1a1714; } }
 .callout {
   background: var(--surface-2); border-radius: var(--radius); padding: 16px 20px;
   margin: 22px 0; color: var(--ink-2); font-size: 15.5px;

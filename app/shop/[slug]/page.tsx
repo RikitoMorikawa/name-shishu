@@ -89,7 +89,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
 
       <div className="actions">
         <a className="btn" href={l.url} rel="nofollow noopener" target="_blank">公式サイトを見る</a>
-        {l.tel ? <a className="btn btn-ghost" href={`tel:${l.tel.replace(/[^0-9+]/g, '')}`}>{l.tel} に電話</a> : null}
+        {l.tel ? <a className="btn btn-call" href={`tel:${l.tel.replace(/[^0-9+]/g, '')}`}>{l.tel} に電話</a> : null}
         {l.address ? (
           <a className="btn btn-ghost" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`} rel="noopener" target="_blank">
             地図で見る
@@ -112,7 +112,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
             <tr><th>最小枚数</th><td>{orUnknown(l.minLot)}</td></tr>
             <tr><th>納期</th><td>{orUnknown(l.lead)}</td></tr>
             <tr><th>料金の目安</th><td>{orUnknown(l.priceFrom)}</td></tr>
-            <tr><th>対応品目</th><td>{l.items.length ? l.items.join('／') : <span className="unknown">確認中</span>}</td></tr>
+            <tr><th>対応品目</th><td>{l.items.length ? l.items.map((k) => ITEM_LABEL[k]).join('／') : <span className="unknown">確認中</span>}</td></tr>
           </tbody>
         </table>
       </div>
