@@ -88,7 +88,7 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
           {cities.map(([city, items]) => (
             <section key={city} data-group="">
               <h2 id={cityId(city)}>{city}<span className="muted">　{items.length}件</span></h2>
-              <Cards items={items} sub="address" />
+              <Cards items={items} />
             </section>
           ))}
         </div>

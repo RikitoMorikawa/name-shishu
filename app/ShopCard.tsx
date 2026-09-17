@@ -1,15 +1,12 @@
 import type { Listing } from '@/lib/listings'
 
-/** 写真が無い間のプレースホルダ。社名の頭文字を大きく置く。
- *  灰色の空枠を並べるより、**それ自体が意匠として成立する**ようにする。 */
+/** 写真が無い間のプレースホルダ。社名の頭文字を大きく置く。 */
 function initial(name: string) {
-  // **法人格を先に落とす。** 括弧だけ消すと「（有）オオクボ縫製」が「有」になり、
-  // 一覧が「有」だらけになる（2026-09-17）。短縮形と㈱㈲も同じ扱い。
+  // **法人格を先に落とす。** 括弧だけ消すと「（有）オオクボ縫製」が「有」になる（2026-09-17）
   const s = name
     .replace(/[（(]\s*[株有合資名]\s*[)）]|㈱|㈲|株式会社|有限会社|合同会社|合資会社|合名会社/g, '')
     .replace(/[（(）)【】\[\]「」｜|\s　・]/g, '')
   const c = [...s][0] ?? '刺'
-  // 英字は2文字だと見分けやすい（「C」が並ぶより「CA」「CU」）
   return /[A-Za-z]/.test(c) ? s.slice(0, 2).toUpperCase() : c
 }
 
@@ -25,30 +22,26 @@ const Icon = ({ d }: { d: string }) => (
   </svg>
 )
 const PIN = 'M8 14.5S13 10.4 13 6.6A5 5 0 0 0 3 6.6C3 10.4 8 14.5 8 14.5Z M8 8.2a1.7 1.7 0 1 0 0-3.4 1.7 1.7 0 0 0 0 3.4Z'
-const CLOCK = 'M8 14.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13Z M8 4.5V8l2.3 1.4'
-const YEN = 'M4 3l4 5 4-5 M8 8v5 M5.2 9.6h5.6 M5.2 11.6h5.6'
+const TEL = 'M5.6 2.5 7 5.2 5.7 6.6a8 8 0 0 0 3.7 3.7l1.4-1.3 2.7 1.4v2.2c0 .6-.5 1-1.1 1C7.6 13.2 2.8 8.4 2.5 2.6c0-.6.4-1.1 1-1.1h2.1Z'
 
-export function ShopCard({ l, sub }: { l: Listing; sub?: 'pref' | 'address' }) {
-  const chips: string[] = []
-  if (l.mochikomi === true) chips.push('持ち込み可')
-  if (l.minLot) chips.push(l.minLot)
-  if (l.lead) chips.push(l.lead)
-
-  const where = sub === 'address' ? l.address : [l.pref, l.city].filter(Boolean).join(' ')
+export function ShopCard({ l }: { l: Listing }) {
+  // **確認できた条件だけ並べる。**「確認中」を4つ並べても比較にならない
+  const terms = [
+    l.mochikomi === true ? { k: '持ち込み', v: '可' } : l.mochikomi === false ? { k: '持ち込み', v: '不可' } : null,
+    l.minLot ? { k: '最小', v: l.minLot } : null,
+    l.lead ? { k: '納期', v: l.lead } : null,
+    l.priceFrom ? { k: '料金', v: l.priceFrom } : null,
+  ].filter(Boolean) as { k: string; v: string }[]
 
   return (
-    <a
-      className="shop-card"
-      href={`/shop/${l.slug}/`}
+    <article
+      className="shop-row"
       data-row=""
       data-kind={l.kind}
       data-pref={l.prefSlug ?? ''}
       data-mochikomi={l.mochikomi === true ? '1' : '0'}
       data-search={[l.name, l.pref, l.city, l.address].filter(Boolean).join(' ')}
     >
-      {/* **写真 → 地図 → 頭文字**の順に落とす。
-          写真は掲載先から提供されたものだけ。地図は番地まで分かっている先だけ
-          （町名までだと町の中心を指してしまう）。Maps Embed API は無料。 */}
       <div className={`thumb thumb-${l.kind}`}>
         {l.photo ? (
           <img src={l.photo} alt={`${l.name}の外観`} loading="lazy" />
@@ -67,33 +60,53 @@ export function ShopCard({ l, sub }: { l: Listing; sub?: 'pref' | 'address' }) {
         ) : (
           <span className="thumb-initial" aria-hidden>{initial(l.name)}</span>
         )}
-        <span className={`badge badge-${l.kind}`}>{l.kind === 'kakou' ? '加工屋' : '作業服の店'}</span>
       </div>
 
-      <div className="shop-card-body">
+      <div className="shop-row-body">
+        <div className="shop-row-head">
+          <span className={l.kind === 'kakou' ? 'pill pill-kakou' : 'pill pill-shop'}>
+            {l.kind === 'kakou' ? '刺繍・名入れの加工屋' : '作業服・ユニフォームの店'}
+          </span>
+          <span className="pill pill-area">{[l.pref, l.city].filter(Boolean).join('・') || '地域を確認中'}</span>
+        </div>
 
-        {chips.length ? (
-          <div className="chips">
-            {chips.map((c) => <span className="chip-tag" key={c}>{c}</span>)}
-          </div>
-        ) : null}
+        <h3 className="shop-row-name">
+          <a href={`/shop/${l.slug}/`}>{l.name}</a>
+        </h3>
 
-        <b className="shop-card-name">{l.name}</b>
+        {terms.length ? (
+          <dl className="terms">
+            {terms.map((t) => (
+              <div key={t.k}>
+                <dt>{t.k}</dt>
+                <dd>{t.v}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : (
+          <p className="terms-empty">持ち込みの条件は確認中です</p>
+        )}
 
-        <div className="metas">
-          <span className="meta"><Icon d={PIN} />{where || <span className="unknown">住所は確認中</span>}</span>
-          {l.lead ? <span className="meta"><Icon d={CLOCK} />{l.lead}</span> : null}
-          {l.priceFrom ? <span className="meta"><Icon d={YEN} />{l.priceFrom}</span> : null}
+        <div className="shop-row-contact">
+          <span className="meta"><Icon d={PIN} />{l.address ?? <span className="unknown">住所は確認中</span>}</span>
+          {l.tel ? (
+            <span className="meta"><Icon d={TEL} /><a href={`tel:${l.tel.replace(/[^0-9+]/g, '')}`}>{l.tel}</a></span>
+          ) : null}
+        </div>
+
+        <div className="shop-row-actions">
+          <a className="btn btn-sm" href={`/shop/${l.slug}/`}>この店の詳細</a>
+          <a className="btn btn-sm btn-ghost" href={l.url} rel="nofollow noopener" target="_blank">公式サイト</a>
         </div>
       </div>
-    </a>
+    </article>
   )
 }
 
-export function Cards({ items, sub }: { items: Listing[]; sub?: 'pref' | 'address' }) {
+export function Cards({ items }: { items: Listing[] }) {
   return (
-    <div className="card-grid">
-      {items.map((l) => <ShopCard key={l.slug} l={l} sub={sub} />)}
+    <div className="shop-rows">
+      {items.map((l) => <ShopCard key={l.slug} l={l} />)}
     </div>
   )
 }

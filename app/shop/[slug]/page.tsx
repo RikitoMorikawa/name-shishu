@@ -162,7 +162,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
       {near.length ? (
         <>
           <h2>近くの店</h2>
-          <Cards items={near} sub="pref" />
+          <Cards items={near} />
         </>
       ) : null}
 
