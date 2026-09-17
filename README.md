@@ -111,6 +111,7 @@ npm run dev     # http://localhost:3000
 | `public/photos/shop-<slug>.jpg` | 「条件がそろっている店」のカード | 640×430 |
 | `public/photos/band-1.jpg` 〜 `band-4.jpg` | 最下部の帯 | 500×660 |
 | `public/photos/guide-<slug>.jpg` | 読み物のサムネイル（カード・記事の見出し・OGP・構造化データ） | 1200×800 |
+| `public/photos/foot-bg.jpg` | フッターの背景（**CSS から直に参照**。差し替えは同じ名前で） | 1920×770 |
 
 ## イラストの出どころ
 

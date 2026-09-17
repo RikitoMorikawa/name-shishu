@@ -68,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <p className="hand band-copy">その一着に、名前を込めて。</p>
           </section>
 
+          <div className="foot-bg">
           <div className="wrap foot-grid">
             <div className="foot-brand">
               <a className="brand" href="/">
@@ -91,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <h2>お問い合わせ</h2>
               <ContactForm />
             </div>
+          </div>
           </div>
 
           <div className="wrap foot-bottom">

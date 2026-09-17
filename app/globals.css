@@ -303,6 +303,22 @@ p { margin: 12px 0; }
 .toc a:hover { color: var(--accent-ink); }
 /* ── フッター。**問い合わせもここに置く** ― どのページからも戻らずに連絡できるように ── */
 .site-foot { margin-top: 72px; background: var(--surface-2); border-top: 1px solid var(--rule); }
+/* 背景の写真。**地色は残す** ― 画像が出ないときも読める。
+   帯の下（リンクと問い合わせ）にだけ敷きたいので、.site-foot ではなくここに掛ける */
+.foot-bg {
+  position: relative;
+  background-image: url('/photos/foot-bg.jpg');
+  background-size: cover; background-position: right bottom; background-repeat: no-repeat;
+}
+.foot-bg > * { position: relative; z-index: 1; }
+/* **狭い画面では写真が寄って、葉の濃いところに文字が重なる。**
+   地色のベールを敷いて読めるようにする（1440px では左半分が明るいので要らない） */
+@media (max-width: 900px) {
+  .foot-bg::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: color-mix(in srgb, var(--surface-2) 86%, transparent);
+  }
+}
 /* 帯はフッターの中にある。**区切りは帯そのものが付ける**ので罫線は要らない */
 .site-foot .band { margin-top: 0; }
 
@@ -322,7 +338,9 @@ p { margin: 12px 0; }
 .foot-links a { font-size: 13.5px; color: var(--ink-2); text-decoration: none; width: fit-content; }
 .foot-links a:hover { color: var(--accent-ink); text-decoration: underline; }
 
-/* 問い合わせ。**右のカラム** */
+/* 問い合わせ。**右のカラム。** 背景の写真（糸巻きと畳んだ服）が右端にあるので、
+   箱で覆い切らないよう幅を止める */
+.foot-contact { max-width: 700px; }
 .foot-contact h2 { margin: 0; padding-left: 0; font-size: 19px; }
 .foot-contact h2::before { display: none; }
 
@@ -755,7 +773,9 @@ main { padding-bottom: 8px; }
 /* ── 問い合わせの箱（フッターの中） ───────────────────── */
 .contact-box {
   margin: 12px 0 0; padding: 16px;
-  background: var(--surface); border: var(--edge); border-radius: 16px; box-shadow: var(--shadow);
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  backdrop-filter: blur(6px);
+  border: var(--edge); border-radius: 16px; box-shadow: var(--shadow);
 }
 /* 種別。**ラジオは隠してラベル全体を押せるようにする**（当たり判定を広く取る）。
    カードで並べると縦を食うので、1行に収まるピルにしてある */
