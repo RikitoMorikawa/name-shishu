@@ -53,7 +53,8 @@ export function Select({
   }, [open, active])
 
   const openWith = (i: number) => {
-    if (disabled) return
+    // **空のリストは開かない。** 枠だけ出ると「壊れている」ように見える
+    if (disabled || options.length === 0) return
     setActive(i)
     setOpen(true)
   }

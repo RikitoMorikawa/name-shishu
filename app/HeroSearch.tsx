@@ -32,11 +32,13 @@ export function HeroSearch({ prefs, popular }: { prefs: PrefOption[]; popular: s
           options={prefs.map((p) => ({ value: p.slug, label: p.label, count: p.count }))}
         />
 
+        {/* **市区が1件も取れていない県がある**（住所を公式サイトで裏取りできていない）。
+            そこで空のリストを開かせると壊れて見えるので、選べないことを文で出す */}
         <Select
           label="市区町村を選ぶ"
-          placeholder={pref ? '市区町村を選ぶ（任意）' : '先に都道府県を選ぶ'}
+          placeholder={!pref ? '先に都道府県を選ぶ' : cities.length ? '市区町村を選ぶ（任意）' : '市区の情報は確認中'}
           icon={<IconMap size={19} />}
-          disabled={!pref}
+          disabled={!pref || cities.length === 0}
           value={city}
           onChange={setCity}
           options={cities.map((c) => ({ value: c, label: c }))}
