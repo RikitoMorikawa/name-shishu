@@ -32,9 +32,18 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
   if (!l) notFound()
 
   const where = [l.pref, l.city].filter(Boolean).join('・')
+  // 地図のクエリ。**社名＋住所で引く。** 住所が町名までの先でも、社名があれば店舗を特定できる。
+  // 記号（「|」「【】」など）はノイズになるので落とす（2026-09-17）
+  const cleanName = l.name
+    // **法人格を先に落とす。**「(有)さくら刺繍」の括弧だけ消すと「有 さくら刺繍」になる
+    .replace(/[（(]\s*[株有合資名]\s*[)）]|㈱|㈲|株式会社|有限会社|合同会社|合資会社|合名会社/g, ' ')
+    .replace(/[｜|【】\[\]（）()]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+  const mapQuery = [cleanName, l.address].filter(Boolean).join(' ')
   const hasBanchi = !!l.address && /\d+\s*[-−ー―]\s*\d+|\d+番/.test(l.address)
   const near = nearby(l)
-  const mapQ = encodeURIComponent([l.name, l.address].filter(Boolean).join(' '))
+
 
   // LocalBusiness。**確認できていない項目は書かない**（推測を構造化データに載せない）
   const biz: Record<string, unknown> = {
@@ -79,7 +88,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
         <a className="btn" href={l.url} rel="nofollow noopener" target="_blank">公式サイトを見る</a>
         {l.tel ? <a className="btn btn-ghost" href={`tel:${l.tel.replace(/[^0-9+]/g, '')}`}>{l.tel} に電話</a> : null}
         {l.address ? (
-          <a className="btn btn-ghost" href={`https://www.google.com/maps/search/?api=1&query=${mapQ}`} rel="noopener" target="_blank">
+          <a className="btn btn-ghost" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`} rel="noopener" target="_blank">
             地図で見る
           </a>
         ) : null}
@@ -134,11 +143,9 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
       </div>
       {l.note ? <p>{l.note}</p> : null}
 
-      {/* **番地まで書かれている住所のときだけ。** 町名までの住所で地図を出すと、
-          町の中心にピンが立って別の場所を指してしまう。
-          addrState は「Places の番地と一致したか」でしかなく、city-only でも
-          サイト側の住所は番地まで揃っていることが多い（2026-09-17） */}
-      {MAP_KEY && hasBanchi ? (
+      {/* 「地図で見る」ボタンと条件を揃える。住所があれば出す。
+          番地まであれば寄る（zoom 17）、町名までなら引く（zoom 15） */}
+      {MAP_KEY && l.address ? (
         <>
           <h2>場所</h2>
           <div className="map-wrap">
@@ -147,10 +154,9 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
-              // 社名を混ぜると表記の記号（「|」など）でノイズになる。住所だけで引く
               src={`https://www.google.com/maps/embed/v1/place?key=${MAP_KEY}&q=${encodeURIComponent(
-                l.address as string,
-              )}&language=ja&region=JP&zoom=17`}
+                mapQuery,
+              )}&language=ja&region=JP&zoom=${hasBanchi ? 17 : 15}`}
             />
           </div>
           <p className="muted">

@@ -12,9 +12,21 @@ function initial(name: string) {
 
 const MAP_KEY = process.env.NEXT_PUBLIC_MAPS_EMBED_KEY
 
-/** 番地まで書かれている住所か。町名までだと地図が町の中心を指す */
+/** 番地まで書かれている住所か。寄り具合（zoom）を変えるのに使う */
 const hasBanchi = (l: Listing) =>
   !!l.address && /\d+\s*[-−ー―]\s*\d+|\d+番/.test(l.address)
+
+/** 地図のクエリ。**社名＋住所。** 住所が町名までの先でも社名で店舗を特定できる。
+ *  記号（「|」「【】」）はノイズになるので落とす */
+const mapQuery = (l: Listing) =>
+  [l.name
+    // **法人格を先に落とす。**「(有)さくら刺繍」の括弧だけ消すと「有 さくら刺繍」になる
+    .replace(/[（(]\s*[株有合資名]\s*[)）]|㈱|㈲|株式会社|有限会社|合同会社|合資会社|合名会社/g, ' ')
+    .replace(/[｜|【】\[\]（）()]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim(), l.address]
+    .filter(Boolean)
+    .join(' ')
 
 const Icon = ({ d }: { d: string }) => (
   <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden focusable="false">
@@ -45,7 +57,7 @@ export function ShopCard({ l }: { l: Listing }) {
       <div className={`thumb thumb-${l.kind}`}>
         {l.photo ? (
           <img src={l.photo} alt={`${l.name}の外観`} loading="lazy" />
-        ) : MAP_KEY && hasBanchi(l) ? (
+        ) : MAP_KEY && l.address ? (
           <iframe
             className="thumb-map"
             title=""
@@ -54,8 +66,8 @@ export function ShopCard({ l }: { l: Listing }) {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             src={`https://www.google.com/maps/embed/v1/place?key=${MAP_KEY}&q=${encodeURIComponent(
-              l.address as string,
-            )}&language=ja&region=JP&zoom=16`}
+              mapQuery(l),
+            )}&language=ja&region=JP&zoom=${hasBanchi(l) ? 16 : 14}`}
           />
         ) : (
           <span className="thumb-initial" aria-hidden>{initial(l.name)}</span>
