@@ -10,7 +10,7 @@ const LINKS = [
   { href: '/#guides', label: 'どこに頼むか迷ったら' },
   { href: '/favorites/', label: 'お気に入り' },
   { href: '/about/', label: 'この媒体について' },
-  { href: 'mailto:contact@umidas.info', label: '掲載・訂正のご依頼' },
+  { href: '/#contact', label: 'お問い合わせ' },
 ]
 
 export function HeaderNav() {

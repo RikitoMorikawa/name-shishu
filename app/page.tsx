@@ -2,6 +2,7 @@ import { Filter } from './Filter'
 import { Cards } from './ShopCard'
 import { guides } from '@/data/guides'
 import { HeroSearch } from './HeroSearch'
+import { ContactForm } from './ContactForm'
 import { Photo, hasPhoto } from './Photo'
 import {
   IconArrow, IconBag, IconCap, IconFlag, IconGuide,
@@ -256,6 +257,18 @@ export default function Home() {
             <a className="btn" href="/about/">この媒体について<IconArrow size={18} /></a>
           </div>
           <p className="script about-script" aria-hidden>Good Work<br />Better Tomorrow</p>
+        </div>
+      </section>
+
+      {/* ── 問い合わせ。**送信先はメール1本**（サーバーを持たないため） ────── */}
+      <section className="contact" id="contact">
+        <div className="wrap">
+          <h2 className="mid-title">お問い合わせ</h2>
+          <p className="mid-lead">
+            掲載のご依頼・内容の訂正、サイトへのご意見はこちらから。
+            <b>掲載料はいただいていません。</b>
+          </p>
+          <ContactForm />
         </div>
       </section>
 

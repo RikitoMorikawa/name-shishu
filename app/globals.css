@@ -730,3 +730,50 @@ main { padding-bottom: 8px; }
 .more-btn:hover { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 55%, var(--rule)); }
 .more-btn em { font-style: normal; font-size: 13px; font-weight: 600; color: var(--ink-3); }
 .facet-result .facet-shown { display: block; font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
+
+/* ── 問い合わせ ───────────────────────────────────── */
+.contact .wrap { padding-top: 52px; padding-bottom: 56px; }
+.contact-box {
+  max-width: 760px; margin: 30px auto 0; padding: 26px;
+  background: var(--surface); border: var(--edge); border-radius: 18px; box-shadow: var(--shadow);
+}
+/* 種別。**ラジオは隠してラベル全体を押せるようにする**（当たり判定を広く取る） */
+.contact-kind { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border: 0; margin: 0; padding: 0; }
+@media (max-width: 560px) { .contact-kind { grid-template-columns: 1fr; } }
+.kind-btn {
+  display: flex; align-items: center; gap: 11px; padding: 14px 16px; cursor: pointer;
+  border: var(--edge); border-radius: 12px; background: var(--surface); color: var(--ink-2);
+  transition: border-color .14s ease, background .14s ease;
+}
+/* **大きさは 0 にしない。** 0x0 の入力欄は支援技術から「無い」と扱われることがある */
+.kind-btn input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.kind-btn svg { color: var(--ink-3); flex: none; }
+.kind-btn span { display: flex; flex-direction: column; min-width: 0; }
+.kind-btn b { font-size: 14.5px; color: var(--ink); }
+.kind-btn em { font-style: normal; font-size: 12px; color: var(--ink-3); }
+.kind-btn:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--rule)); }
+.kind-btn.is-on { border-color: var(--accent); background: var(--accent-soft); }
+.kind-btn.is-on svg, .kind-btn.is-on b { color: var(--accent-ink); }
+/* キーボードで辿れることを見せる。**input を隠しただけだと焦点が分からない** */
+.kind-btn:has(input:focus-visible) { box-shadow: 0 0 0 3px var(--accent-soft); border-color: var(--accent); }
+
+.contact-hint { margin: 14px 2px 0; font-size: 13.5px; color: var(--ink-2); }
+
+.contact-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+@media (max-width: 560px) { .contact-fields { grid-template-columns: 1fr; } }
+.field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.field-wide { grid-column: 1 / -1; }
+.field > span { font-size: 12.5px; font-weight: 700; color: var(--ink-2); }
+.field input, .field textarea {
+  font: inherit; font-size: 15px; padding: 11px 13px; border-radius: 10px;
+  border: 1px solid var(--rule); background: var(--ground); color: var(--ink); width: 100%;
+  resize: vertical;
+}
+.field input:focus, .field textarea:focus {
+  outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.field input::placeholder, .field textarea::placeholder { color: color-mix(in srgb, var(--ink-3) 70%, transparent); }
+
+.contact-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-top: 20px; }
+.contact-foot .muted { margin: 0; font-size: 12.5px; line-height: 1.75; }
+.contact-foot .muted b { color: var(--ink-2); }
