@@ -96,7 +96,7 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
 
       <div className="callout">
         <b>{name}で載っていない店をご存じですか。</b>
-        掲載は無料です。<a href="mailto:contact@umidas.info">contact@umidas.info</a> までお知らせください。
+        <a href="mailto:contact@umidas.info">contact@umidas.info</a> までお知らせください。
       </div>
 
       <p className="crumb"><a href="/">← 全国の一覧へ</a></p>
