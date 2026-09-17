@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Cards } from '../../ShopCard'
-import { findListing, KIND_LABEL, listings, nearby, updatedAt } from '@/lib/listings'
+import { ITEM_LABEL, ITEM_ORDER, findListing, listings, nearby, updatedAt, prefLabel } from '@/lib/listings'
 
 export function generateStaticParams() {
   return listings.map((l) => ({ slug: l.slug }))
@@ -12,10 +12,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const l = findListing(slug)
   if (!l) return {}
   // 地域が取れない行は括弧を出さない（「（）」になる。2026-09-16）
-  const where = [l.pref, l.city].filter(Boolean).join('・')
+  const where = [l.pref ? prefLabel(l.pref) : null, l.city].filter(Boolean).join('・')
   return {
     title: where ? `${l.name}（${where}）の持ち込み刺繍・名入れ` : `${l.name}の持ち込み刺繍・名入れ`,
-    description: `${where ? where + 'の' : ''}${KIND_LABEL[l.kind]}「${l.name}」。持ち込みの可否・最小枚数・納期・料金の目安をまとめています。`,
+    description: `${where ? where + 'の' : ''}刺繍・名入れの加工屋「${l.name}」。持ち込みの可否・最小枚数・納期・料金の目安をまとめています。`,
     alternates: { canonical: `/shop/${l.slug}/` },
   }
 }
@@ -31,7 +31,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
   const l = findListing(slug)
   if (!l) notFound()
 
-  const where = [l.pref, l.city].filter(Boolean).join('・')
+  const where = [l.pref ? prefLabel(l.pref) : null, l.city].filter(Boolean).join('・')
   // 地図のクエリ。**社名＋住所で引く。** 住所が町名までの先でも、社名があれば店舗を特定できる。
   // 記号（「|」「【】」など）はノイズになるので落とす（2026-09-17）
   const cleanName = l.name
@@ -62,25 +62,28 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'ネーム刺繍ナビ', item: 'https://name-shishu.com/' },
       ...(l.prefSlug && l.pref
-        ? [{ '@type': 'ListItem', position: 2, name: l.pref, item: `https://name-shishu.com/${l.prefSlug}/` }]
+        ? [{ '@type': 'ListItem', position: 2, name: prefLabel(l.pref), item: `https://name-shishu.com/${l.prefSlug}/` }]
         : []),
       { '@type': 'ListItem', position: l.prefSlug ? 3 : 2, name: l.name, item: `https://name-shishu.com/shop/${l.slug}/` },
     ],
   }
 
   return (
-    <>
+    <div className="wrap">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([biz, crumb]) }} />
 
       <p className="crumb">
         <a href="/">ネーム刺繍ナビ</a>
-        {l.prefSlug ? <> ／ <a href={`/${l.prefSlug}/`}>{l.pref}</a></> : null}
+        {l.prefSlug ? <> ／ <a href={`/${l.prefSlug}/`}>{l.pref ? prefLabel(l.pref) : ''}</a></> : null}
         {l.city ? ` ／ ${l.city}` : ''}
       </p>
 
       <h1>{l.name}</h1>
       <p className="lead">
-        <span className={l.kind === 'kakou' ? 'pill pill-kakou' : 'pill pill-shop'}>{KIND_LABEL[l.kind]}</span>
+        <span className="pill pill-kakou">刺繍・名入れの加工屋</span>
+        {ITEM_ORDER.filter((k) => l.items.includes(k)).map((k) => (
+          <span className="pill pill-item" key={k}>{ITEM_LABEL[k]}</span>
+        ))}
         {where ? <>　{where}</> : null}
       </p>
 
@@ -173,10 +176,10 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
       ) : null}
 
       <p className="crumb">
-        {l.prefSlug ? <><a href={`/${l.prefSlug}/`}>← {l.pref}の一覧へ</a>　</> : null}
+        {l.prefSlug ? <><a href={`/${l.prefSlug}/`}>← {l.pref ? prefLabel(l.pref) : ''}の一覧へ</a>　</> : null}
         <a href="/">全国の一覧へ</a>
       </p>
       <p className="muted">最終更新 {updatedAt}</p>
-    </>
+    </div>
   )
 }

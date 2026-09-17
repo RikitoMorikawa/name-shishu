@@ -111,3 +111,105 @@ export const IconMap = ({ size = 24, className }: P) => (
     <path d="M9 4.5v13M15 7v13" />
   </svg>
 )
+
+/** 帽子。キャップ */
+export const IconCap = ({ size = 24, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M4.5 15a7.5 7.5 0 0 1 15 0" />
+    <path d="M3 15h18a1 1 0 0 1 0 3H3a1 1 0 0 1 0-3Z" />
+    <path d="M12 7.5V15" />
+  </svg>
+)
+
+
+/** お気に入り。**塗りは filled で切り替える**（線画のままだと押した実感が出ない） */
+export const IconHeart = ({ size = 24, className, filled = false }: P & { filled?: boolean }) => (
+  <svg {...base(size, className)} fill={filled ? 'currentColor' : 'none'}>
+    <path d="M12 20s-7.5-4.7-7.5-10a4.2 4.2 0 0 1 7.5-2.6A4.2 4.2 0 0 1 19.5 10c0 5.3-7.5 10-7.5 10Z" />
+  </svg>
+)
+
+/** メニュー */
+export const IconMenu = ({ size = 24, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M4 7h16M4 12h16M4 17h16" />
+  </svg>
+)
+
+/** 閉じる */
+export const IconClose = ({ size = 24, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="m6 6 12 12M18 6 6 18" />
+  </svg>
+)
+
+/** 服。Tシャツ ― 品目の軸の先頭 */
+export const IconTee = ({ size = 24, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M9 4 4 6.5l1.6 4L8 9.8V20h8V9.8l2.4.7 1.6-4L15 4a3 3 0 0 1-6 0Z" />
+  </svg>
+)
+
+/** タオル。畳んだ布の重なり */
+export const IconTowel = ({ size = 24, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M5 5.5h11a3 3 0 0 1 3 3v10H8a3 3 0 0 1-3-3v-10Z" />
+    <path d="M16 5.5a3 3 0 0 0-3 3v10" />
+  </svg>
+)
+
+/** バッグ・小物。トートバッグ */
+export const IconBag = ({ size = 24, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M5.5 8h13l-1 11.5h-11L5.5 8Z" />
+    <path d="M9 8V6.2a3 3 0 0 1 6 0V8" />
+  </svg>
+)
+
+/** ワッペン。縁のある盾形 */
+export const IconWappen = ({ size = 24, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M12 3.5 19 6v6.5c0 4-3 6.6-7 8-4-1.4-7-4-7-8V6l7-2.5Z" />
+    <path d="M9.5 11.8 11.3 14l3.4-3.8" />
+  </svg>
+)
+
+/** のれん・旗 */
+export const IconFlag = ({ size = 24, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M6 21V4" />
+    <path d="M6 5h12l-2.4 3.7L18 12.5H6" />
+  </svg>
+)
+
+/** 悩みの吹き出し。相談者の枠に添える */
+export const IconAsk = ({ size = 24, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M4.5 6.5h15v9h-8.5L7 19v-3.5H4.5v-9Z" />
+    <path d="M9.9 9.6a2.1 2.1 0 1 1 2.6 2.1v1" />
+    <path d="M12.5 14.2v.01" />
+  </svg>
+)
+
+/** 針と糸。**この媒体の印。** 写真が入るまでの枠に置く */
+export const IconThread = ({ size = 24, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M17.5 3.5 9 12l-1.2 4.2L12 15l8.5-8.5-3-3Z" />
+    <path d="M6.5 16.5c-3 1.6-3.4 4-1.5 4 1.6 0 1.6-2.3 0-2.6-2-.4-3 1-3 2.6" />
+  </svg>
+)
+
+/** 進む */
+export const IconArrow = ({ size = 24, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M5 12h13" />
+    <path d="m13 6.5 5.5 5.5L13 17.5" />
+  </svg>
+)
+
+/** 確認済み */
+export const IconCheck = ({ size = 24, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="m5 12.5 4.5 4.5L19 7" />
+  </svg>
+)

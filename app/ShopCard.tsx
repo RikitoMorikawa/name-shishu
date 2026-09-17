@@ -1,4 +1,5 @@
-import type { Listing } from '@/lib/listings'
+import { FavButton } from './Fav'
+import { ITEM_LABEL, ITEM_ORDER, prefLabel, type Listing } from '@/lib/listings'
 
 /** 写真が無い間のプレースホルダ。社名の頭文字を大きく置く。 */
 function initial(name: string) {
@@ -49,12 +50,12 @@ export function ShopCard({ l }: { l: Listing }) {
     <article
       className="shop-row"
       data-row=""
-      data-kind={l.kind}
+      data-items={l.items.join(' ')}
       data-pref={l.prefSlug ?? ''}
       data-mochikomi={l.mochikomi === true ? '1' : '0'}
       data-search={[l.name, l.pref, l.city, l.address].filter(Boolean).join(' ')}
     >
-      <div className={`thumb thumb-${l.kind}`}>
+      <div className="thumb thumb-kakou">
         {l.photo ? (
           <img src={l.photo} alt={`${l.name}の外観`} loading="lazy" />
         ) : MAP_KEY && l.address ? (
@@ -76,14 +77,16 @@ export function ShopCard({ l }: { l: Listing }) {
 
       <div className="shop-row-body">
         <div className="shop-row-head">
-          <span className={l.kind === 'kakou' ? 'pill pill-kakou' : 'pill pill-shop'}>
-            {l.kind === 'kakou' ? '刺繍・名入れの加工屋' : '作業服・ユニフォームの店'}
-          </span>
-          <span className="pill pill-area">{[l.pref, l.city].filter(Boolean).join('・') || '地域を確認中'}</span>
+          <span className="pill pill-area">{[l.pref ? prefLabel(l.pref) : null, l.city].filter(Boolean).join('・') || '地域を確認中'}</span>
+          {/* **刺繍を入れる対象。** 服だけでなく帽子・タオル・カバンまで扱うのが刺繍屋の幅 */}
+          {ITEM_ORDER.filter((k) => l.items.includes(k)).map((k) => (
+            <span className="pill pill-item" key={k}>{ITEM_LABEL[k]}</span>
+          ))}
         </div>
 
         <h3 className="shop-row-name">
           <a href={`/shop/${l.slug}/`}>{l.name}</a>
+          <FavButton slug={l.slug} name={l.name} />
         </h3>
 
         {terms.length ? (

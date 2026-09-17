@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
-  <rect width="1200" height="630" fill="#faf8f4"/>
-  <circle cx="1090" cy="80" r="220" fill="#fbeee9"/>
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <circle cx="1090" cy="80" r="220" fill="#e9f4ee"/>
   <g transform="translate(88,150)">
-    <rect width="72" height="72" rx="16" fill="#b0432b"/>
+    <rect width="72" height="72" rx="16" fill="#0f7a4a"/>
     <path d="M52 16 27 41" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-    <circle cx="53.5" cy="17.5" r="3.4" fill="#b0432b"/>
+    <circle cx="53.5" cy="17.5" r="3.4" fill="#0f7a4a"/>
     <path d="M17 56c5.5 0 5.5-6.5 11-6.5s5.5 6.5 11 6.5 5.5-6.5 11-6.5"
           fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".72"/>
   </g>
-  <text x="180" y="200" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="40" font-weight="700" fill="#1a1714">ネーム刺繍<tspan fill="#b0432b">ナビ</tspan></text>
-  <text x="88" y="330" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="58" font-weight="700" fill="#1a1714" letter-spacing="-1.5">持ち込みで刺繍・名入れを</text>
-  <text x="88" y="408" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="58" font-weight="700" fill="#1a1714" letter-spacing="-1.5">頼める店を、地域から探す</text>
-  <text x="88" y="486" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="27" fill="#57514a">服・帽子・タオル・カバン・ワッペン　／　持ち込みの可否・最小枚数・納期</text>
-  <rect x="88" y="530" width="132" height="4" rx="2" fill="#b0432b"/>
+  <text x="180" y="200" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="40" font-weight="700" fill="#15283c">ネーム刺繍<tspan fill="#0f7a4a">ナビ</tspan></text>
+  <text x="88" y="330" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="58" font-weight="700" fill="#15283c" letter-spacing="-1.5">持ち込みで刺繍・名入れを</text>
+  <text x="88" y="408" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="58" font-weight="700" fill="#15283c" letter-spacing="-1.5">頼める店を、地域から探す</text>
+  <text x="88" y="486" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="27" fill="#495a6c">服・帽子・タオル・カバン・ワッペン　／　持ち込みの可否・最小枚数・納期</text>
+  <rect x="88" y="530" width="132" height="4" rx="2" fill="#0f7a4a"/>
 </svg>

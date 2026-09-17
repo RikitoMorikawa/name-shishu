@@ -33,6 +33,12 @@ export function Filter({ total, groups }: { total: number; groups: FacetGroup[] 
       if (ok) {
         for (const [g, vals] of Object.entries(sel)) {
           if (!vals.size) continue
+          if (g === 'items') {
+            // 品目は**どれかに当てはまれば通す**（服と帽子の両方を選んだら「服または帽子」）
+            const has = (el.dataset.items ?? '').split(' ')
+            if (![...vals].some((v) => has.includes(v))) { ok = false; break }
+            continue
+          }
           const v = g === 'mochikomi' ? (el.dataset.mochikomi === '1' ? 'yes' : 'no') : (el.dataset[g] ?? '')
           if (!vals.has(v)) { ok = false; break }
         }
@@ -46,6 +52,20 @@ export function Filter({ total, groups }: { total: number; groups: FacetGroup[] 
     })
     setShown(n)
   }, [q, stamp, sel])
+
+  // 品目の帯（トップ上部）から飛んできたら、その品目だけに絞る。
+  // **帯とサイドバーで同じ状態を持たない** ― 絞り込みの正はここ1つ
+  useEffect(() => {
+    const on = (e: MouseEvent) => {
+      const el = (e.target as HTMLElement | null)?.closest?.('[data-jump-item]')
+      const v = el?.getAttribute('data-jump-item')
+      if (!v) return
+      setQ('')
+      setSel({ items: new Set([v]) })
+    }
+    document.addEventListener('click', on)
+    return () => document.removeEventListener('click', on)
+  }, [])
 
   const clear = () => { setQ(''); setSel({}) }
   const active = Object.values(sel).reduce((a, s) => a + s.size, 0) + (q ? 1 : 0)

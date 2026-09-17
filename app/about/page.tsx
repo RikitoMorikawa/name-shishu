@@ -9,17 +9,17 @@ export const metadata: Metadata = {
 }
 
 export default function About() {
-  const kakou = listings.filter((l) => l.kind === 'kakou').length
   return (
+    <div className="wrap">
     <article className="prose">
       <p className="crumb"><a href="/">ネーム刺繍ナビ</a> ／ この媒体について</p>
       <h1>この媒体について</h1>
 
       <h2>何を集めているか</h2>
       <p>
-        作業着やユニフォームに社名・ロゴを入れたいときに頼める先を、地域ごとに集めています。
-        <b>いま持っている服に加工を頼む</b>なら刺繍の加工屋、<b>服ごと名入れで買う</b>なら作業服・ユニフォームの店。
-        現在 {listings.length}件（加工屋{kakou}・店{listings.length - kakou}）を掲載しています。
+        持ち込んだ品に刺繍や名入れを入れてくれる<b>加工屋</b>を、地域ごとに集めています。
+        対象は作業着やユニフォームだけでなく、<b>帽子・タオル・カバン・ワッペン</b>など。
+        現在 {listings.length}件を掲載しています。
       </p>
 
       <h2>なぜ作ったか</h2>
@@ -58,5 +58,6 @@ export default function About() {
 
       <p className="muted">最終更新 {updatedAt}</p>
     </article>
+    </div>
   )
 }

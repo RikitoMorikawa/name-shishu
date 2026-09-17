@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Filter } from '../Filter'
 import { Cards } from '../ShopCard'
-import { byCity, byPref, cityId, findPref, updatedAt } from '@/lib/listings'
+import { ITEM_LABEL, ITEM_ORDER, byCity, byPref, cityId, findPref, itemCounts, prefLabel, updatedAt } from '@/lib/listings'
 
 export function generateStaticParams() {
   return byPref().map((p) => ({ pref: p.prefSlug }))
@@ -12,9 +12,10 @@ export async function generateMetadata({ params }: { params: Promise<{ pref: str
   const { pref } = await params
   const p = findPref(pref)
   if (!p) return {}
+  const name = prefLabel(p.pref)
   return {
-    title: `${p.pref}で刺繍・名入れを持ち込みで頼める店${p.items.length}件`,
-    description: `${p.pref}の刺繍加工屋と作業服・ユニフォーム店を市区町村ごとに掲載。持ち込みの可否・最小枚数・納期・料金の目安を横に並べて比べられます。`,
+    title: `${name}で刺繍・名入れを持ち込みで頼める店${p.items.length}件`,
+    description: `${name}の刺繍加工屋と作業服・ユニフォーム店を市区町村ごとに掲載。持ち込みの可否・最小枚数・納期・料金の目安を横に並べて比べられます。`,
     alternates: { canonical: `/${p.prefSlug}/` },
   }
 }
@@ -23,15 +24,16 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
   const { pref } = await params
   const p = findPref(pref)
   if (!p) notFound()
+  const name = prefLabel(p.pref)
 
   const cities = byCity(p.items)
-  const kakou = p.items.filter((l) => l.kind === 'kakou').length
+  const counts = itemCounts(p.items)
 
   const jsonLd = [
     {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
-      name: `${p.pref}の刺繍・名入れ加工店`,
+      name: `${name}の刺繍・名入れ加工店`,
       numberOfItems: p.items.length,
       itemListElement: p.items.map((l, i) => ({
         '@type': 'ListItem',
@@ -45,20 +47,19 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'ネーム刺繍ナビ', item: 'https://name-shishu.com/' },
-        { '@type': 'ListItem', position: 2, name: p.pref, item: `https://name-shishu.com/${p.prefSlug}/` },
+        { '@type': 'ListItem', position: 2, name, item: `https://name-shishu.com/${p.prefSlug}/` },
       ],
     },
   ]
 
   return (
-    <>
+    <div className="wrap">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <p className="crumb"><a href="/">ネーム刺繍ナビ</a> ／ {p.pref}</p>
-      <h1>{p.pref}で刺繍・名入れを頼める店</h1>
+      <p className="crumb"><a href="/">ネーム刺繍ナビ</a> ／ {name}</p>
+      <h1>{name}で刺繍・名入れを頼める店</h1>
       <p className="lead">
-        {p.pref}に{p.items.length}件（加工屋{kakou}・店{p.items.length - kakou}）。
-        市区町村ごとに並べています。
+        {name}に{p.items.length}件。市区町村ごとに並べています。
       </p>
 
       <div className="toc">
@@ -72,11 +73,8 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
           total={p.items.length}
           groups={[
             {
-              key: 'kind', label: '種別',
-              options: [
-                { value: 'kakou', label: '刺繍・名入れの加工屋', count: kakou },
-                { value: 'shop', label: '作業服・ユニフォームの店', count: p.items.length - kakou },
-              ],
+              key: 'items', label: '刺繍を入れる対象',
+              options: ITEM_ORDER.map((k) => ({ value: k, label: ITEM_LABEL[k], count: counts[k] })),
             },
             {
               key: 'mochikomi', label: '持ち込み',
@@ -95,12 +93,12 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
       </div>
 
       <div className="callout">
-        <b>{p.pref}で載っていない店をご存じですか。</b>
+        <b>{name}で載っていない店をご存じですか。</b>
         掲載は無料です。<a href="mailto:contact@umidas.info">contact@umidas.info</a> までお知らせください。
       </div>
 
       <p className="crumb"><a href="/">← 全国の一覧へ</a></p>
       <p className="muted">最終更新 {updatedAt}</p>
-    </>
+    </div>
   )
 }

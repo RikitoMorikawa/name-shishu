@@ -1,13 +1,73 @@
 import { Filter } from './Filter'
 import { Cards } from './ShopCard'
 import { guides } from '@/data/guides'
-import { IconGuide, IconMap } from './Icons'
-import { byPref, listings, listingsByPrefSize, updatedAt } from '@/lib/listings'
+import { HeroSearch } from './HeroSearch'
+import { FavButton } from './Fav'
+import { Photo } from './Photo'
+import {
+  IconArrow, IconBag, IconCap, IconCheck, IconFlag, IconGuide,
+  IconMap, IconPin, IconTee, IconTowel, IconWappen,
+} from './Icons'
+import {
+  ITEM_LABEL, ITEM_ORDER, byPref, itemCounts, listings, listingsByPrefSize,
+  prefLabel, prefOptions, updatedAt, type ItemKey, type Listing,
+} from '@/lib/listings'
+
+/** 品目の帯。**データの軸そのもの** ― 押すと下の一覧がその品目に絞られる */
+const ITEM_ICON: Record<ItemKey, (p: { size?: number }) => React.ReactElement> = {
+  wear: IconTee, cap: IconCap, towel: IconTowel, bag: IconBag, wappen: IconWappen, flag: IconFlag,
+}
+const ITEM_LEAD: Record<ItemKey, string> = {
+  wear: '作業着・ユニフォーム・Tシャツ',
+  cap: 'キャップ・ニット帽',
+  towel: 'タオル・ハンカチ',
+  bag: 'トート・エコバッグ',
+  wappen: 'ワッペン・エンブレム',
+  flag: 'のれん・旗・幕',
+}
+
+/** よくある入口。**媒体の言葉ではなく、探している人の言葉で書く** */
+/**
+ * 人物イラストは**ソコスト**（https://soco-st.com/）。商用可・クレジット不要・
+ * 色変更とトリミング可。**直リンクは規約で禁止**なので public/illust/ に落としてある。
+ */
+const WORRIES = [
+  { q: '手持ちの作業着に社名を入れたい', a: '持ち込みを受けている店だけに絞れます', href: '#list', img: '/illust/worry-1.svg', scale: 1 },
+  // **素材ごとに人物の占有率が違う。** 18614 は余白が少なく、そのままだと1点だけ大きく見える
+  { q: '1枚からでも対応してくれる店を探したい', a: '最小枚数が分かっている店は条件を出しています', href: '#list', img: '/illust/worry-2.svg', scale: .85 },
+  { q: '近くの刺繍屋さんをすぐに見つけたい', a: '都道府県・市区町村から辿れます', href: '#area', img: '/illust/worry-3.svg', scale: 1 },
+]
+
+/**
+ * おすすめの店舗。**恣意的に選ばない。**
+ * 「持ち込みを受けていて、条件がいちばん埋まっている店」を県が重ならないように拾う。
+ * 掲載料は取っていないので、順位に金銭は一切関わらない（/about/ に書いてある通り）。
+ */
+function picks(n = 4): Listing[] {
+  const score = (l: Listing) =>
+    (l.mochikomi === true ? 4 : 0) + (l.minLot ? 2 : 0) + (l.lead ? 2 : 0) +
+    (l.priceFrom ? 2 : 0) + (l.address ? 1 : 0) + Math.min(l.items.length, 3)
+  const sorted = [...listings]
+    .filter((l) => l.pref && l.mochikomi === true)
+    .sort((a, b) => score(b) - score(a) || a.name.localeCompare(b.name, 'ja'))
+  const out: Listing[] = []
+  for (const pass of [1, 2]) {
+    for (const l of sorted) {
+      if (out.length >= n) break
+      if (out.includes(l)) continue
+      // 1周目は県が重ならないように拾い、埋まらなければ2周目で詰める
+      if (pass === 1 && out.some((x) => x.prefSlug === l.prefSlug)) continue
+      out.push(l)
+    }
+  }
+  return out
+}
 
 export default function Home() {
   const prefs = byPref()
-  const kakou = listings.filter((l) => l.kind === 'kakou').length
-  const shop = listings.length - kakou
+  const counts = itemCounts(listings)
+  const top = prefs.slice(0, 5)
+  const recommended = picks()
 
   const jsonLd = [
     {
@@ -31,6 +91,14 @@ export default function Home() {
             text: '刺繍・名入れの加工屋が受けています。対象は作業着やユニフォームだけでなく、帽子・タオル・カバン・ワッペンなど幅広く、店によって扱える品目と生地が異なります。持ち込みの可否・最小枚数・納期は店ごとに違います。',
           },
         },
+        {
+          '@type': 'Question',
+          name: '1枚だけでも刺繍を入れてもらえますか',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: '店によります。最小枚数を公表している店は、ネーム刺繍ナビの一覧に「最小」として条件を出しています。公表していない店は「確認中」と表示し、推測では書いていません。',
+          },
+        },
       ],
     },
   ]
@@ -39,61 +107,219 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <h1 className="page-title">持ち込みで刺繍・名入れを頼める店を、地域から探す</h1>
-
-      <section className="guides">
-        <h2 className="sec-title"><IconGuide size={20} />どこに頼むか迷ったら</h2>
-        <div className="guide-grid">
-          {guides.map((g) => (
-            <a className={`guide-card tone-${g.tone}`} key={g.slug} href={`/guide/${g.slug}/`}>
-              <div className="guide-card-top">
-                <IconGuide size={30} />
-              </div>
-              <div className="guide-card-body">
-                <b>{g.title}</b>
-                <span>{g.excerpt}</span>
-              </div>
-            </a>
-          ))}
+      {/* ── ヒーロー。**全幅の写真の上に、見出しと検索** ─────────────── */}
+      <section className="hero">
+        <div className="hero-photo">
+          <Photo src="/photos/hero.jpg" alt="刺繍を入れた帽子とトートバッグ、作業着と刺繍糸" />
+        </div>
+        <div className="wrap hero-inner">
+          <div className="hero-main">
+            <h1>
+              持ち込みで<br />
+              刺繍・名入れを頼める店を、<br />
+              <em>地域</em>から探す
+            </h1>
+            {/* **件数の言い方に気をつける。** {listings.length}件すべてが持ち込み可では
+                ないので、「持ち込みOKの◯件」とは書かない（確認できたのは一部） */}
+            <p className="hero-sub">
+              作業着・ユニフォーム・Tシャツ・バッグなど、<br />
+              刺繍・名入れの加工店{listings.length}件を都道府県・市区町村から。<br />
+              持ち込みの可否は、確認できた店から順に出しています。
+            </p>
+          </div>
+          <HeroSearch prefs={prefOptions()} popular={top.map((p) => p.prefSlug)} />
+          <p className="hand hero-hand" aria-hidden>
+            <span>いつもの一着が、</span>
+            <span>もっと特別に。</span>
+          </p>
         </div>
       </section>
 
-      <div className="layout" id="list">
-        <Filter
-          total={listings.length}
-          groups={[
-            {
-              key: 'kind', label: '種別',
-              options: [
-                { value: 'kakou', label: '刺繍・名入れの加工屋', count: kakou },
-                { value: 'shop', label: '作業服・ユニフォームの店', count: shop },
-              ],
-            },
-            {
-              key: 'mochikomi', label: '持ち込み',
-              options: [{ value: 'yes', label: '受けている店だけ', count: listings.filter((l) => l.mochikomi === true).length }],
-            },
-            {
-              key: 'pref', label: '地域',
-              options: prefs.map((p) => ({ value: p.prefSlug, label: p.pref, count: p.items.length })),
-            },
-          ]}
-        />
-        <div>
-          <Cards items={listingsByPrefSize()} />
+      {/* ── 品目の帯。押すと下の一覧が絞られる ───────────────────── */}
+      <nav className="items-bar" aria-label="刺繍を入れる対象から探す">
+        <div className="wrap">
+          {ITEM_ORDER.map((k) => {
+            const Icon = ITEM_ICON[k]
+            return (
+              <a className="item-cell" key={k} href="#list" data-jump-item={k}>
+                <Icon size={34} />
+                <b>{ITEM_LABEL[k]}に</b>
+                <span>{ITEM_LEAD[k]}</span>
+                <em>{counts[k]}件</em>
+              </a>
+            )
+          })}
+        </div>
+      </nav>
+
+      {/* ── 悩み ──────────────────────────────────────── */}
+      <section className="worry">
+        <div className="wrap">
+          <h2 className="mid-title">こんなお悩みはありませんか？</h2>
+          <div className="worry-grid">
+            {WORRIES.map((w) => (
+              <a className="worry-card" key={w.q} href={w.href}>
+                <span className="worry-face" aria-hidden>
+                  <img src={w.img} alt="" loading="lazy" style={w.scale === 1 ? undefined : { transform: `scale(${w.scale})` }} />
+                </span>
+                <span className="worry-body">
+                  <b>{w.q}</b>
+                  <span>{w.a}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+          <p className="hand worry-hand">その想い、<br />ネーム刺繍ナビが<br />お手伝いします。</p>
+        </div>
+      </section>
+
+      {/* ── エリアから探す ───────────────────────────────── */}
+      <section className="area" id="area">
+        <div className="wrap">
+          <h2 className="mid-title">エリアから探す</h2>
+          <p className="mid-lead">お住まいの地域から、持ち込み対応の刺繍・名入れ店を探せます。</p>
+          <p className="script area-script" aria-hidden>Find Your Local Partner</p>
+          <div className="area-grid">
+            {top.map((p) => (
+              <a className="area-tile" key={p.prefSlug} href={`/${p.prefSlug}/`}>
+                <Photo src={`/photos/area-${p.prefSlug}.jpg`} alt="" />
+                <span className="area-name">
+                  <b>{prefLabel(p.pref)}</b>
+                  <em>{p.items.length}件</em>
+                </span>
+              </a>
+            ))}
+            <a className="area-tile area-more" href="#all-pref">
+              その他のエリア
+              <IconArrow size={20} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── おすすめの店舗 ───────────────────────────────── */}
+      <section className="pick">
+        <div className="wrap">
+          <h2 className="mid-title">条件がそろっている店</h2>
+          <p className="mid-lead">
+            持ち込みの可否・最小枚数・納期まで確認できた店を挙げています。
+            <b>掲載料はいただいていないので、順番に金銭は関わっていません。</b>
+          </p>
+          <div className="pick-grid">
+            {recommended.map((l) => (
+              <article className="pick-card" key={l.slug}>
+                <a className="pick-photo" href={`/shop/${l.slug}/`}>
+                  <Photo src={`/photos/shop-${l.slug}.jpg`} alt="" />
+                </a>
+                <div className="pick-body">
+                  <div className="pick-head">
+                    <h3><a href={`/shop/${l.slug}/`}>{l.name}</a></h3>
+                    <FavButton slug={l.slug} name={l.name} />
+                  </div>
+                  <p className="pick-area"><IconPin size={14} />{[l.pref ? prefLabel(l.pref) : null, l.city].filter(Boolean).join(' ')}</p>
+                  <div className="pick-tags">
+                    <span className="tag tag-ok"><IconCheck size={12} />持ち込みOK</span>
+                    {l.minLot ? <span className="tag">{l.minLot}</span> : null}
+                    {l.lead ? <span className="tag">納期{l.lead}</span> : null}
+                    {ITEM_ORDER.filter((k) => l.items.includes(k)).slice(0, 3).map((k) => (
+                      <span className="tag" key={k}>{ITEM_LABEL[k]}</span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 全件。**この媒体の中身そのもの。** 絞り込みは DOM を隠すだけ ────── */}
+      <div className="wrap" id="list">
+        <h2 className="sec-title"><IconGuide size={20} />掲載店を条件で比べる</h2>
+        <p className="lead">
+          持ち込み・最小枚数・納期・料金の目安を横に並べています。
+          <b>確認できていない項目は「確認中」と出し、推測では書きません。</b>
+        </p>
+        <div className="layout">
+          <Filter
+            total={listings.length}
+            groups={[
+              {
+                key: 'items', label: '刺繍を入れる対象',
+                options: ITEM_ORDER.map((k) => ({ value: k, label: ITEM_LABEL[k], count: counts[k] })),
+              },
+              {
+                key: 'mochikomi', label: '持ち込み',
+                options: [{ value: 'yes', label: '受けている店だけ', count: listings.filter((l) => l.mochikomi === true).length }],
+              },
+              {
+                key: 'pref', label: '地域',
+                options: prefs.map((p) => ({ value: p.prefSlug, label: p.pref, count: p.items.length })),
+              },
+            ]}
+          />
+          <div>
+            <Cards items={listingsByPrefSize()} />
+          </div>
+        </div>
+
+        <h2 className="sec-title" id="all-pref"><IconMap size={20} />都道府県から探す</h2>
+        <div className="pref-grid">
+          {prefs.map((p) => (
+            <a className="pref-tile" key={p.prefSlug} href={`/${p.prefSlug}/`}>
+              <b>{prefLabel(p.pref)}</b>
+              <span>{p.items.length}</span>
+            </a>
+          ))}
         </div>
       </div>
 
-      <h2 className="sec-title"><IconMap size={20} />都道府県から探す</h2>
-      <div className="pref-grid">
-        {prefs.map((p) => (
-          <a className="pref-tile" key={p.prefSlug} href={`/${p.prefSlug}/`}>
-            <b>{p.pref}</b>
-            <span>{p.items.length}</span>
-          </a>
-        ))}
-      </div>
+      {/* ── 読み物 ────────────────────────────────────── */}
+      <section className="guides" id="guides">
+        <div className="wrap">
+          <h2 className="sec-title"><IconGuide size={20} />どこに頼むか迷ったら</h2>
+          <div className="guide-grid">
+            {guides.map((g) => (
+              <a className={`guide-card tone-${g.tone}`} key={g.slug} href={`/guide/${g.slug}/`}>
+                <div className="guide-card-top">
+                  <IconGuide size={30} />
+                </div>
+                <div className="guide-card-body">
+                  <b>{g.title}</b>
+                  <span>{g.excerpt}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
 
+      {/* ── ABOUT ────────────────────────────────────── */}
+      <section className="about-band">
+        <div className="wrap">
+          <div className="about-photo">
+            <Photo src="/photos/about.jpg" alt="" label="ネーム刺繍" />
+          </div>
+          <div className="about-text">
+            <p className="eyebrow">ABOUT</p>
+            <h2>持ち込みの刺繍・名入れで<br />もっと身近に、もっと自由に。</h2>
+            {/* **改行で語の間に空きが入る。** 1文は1行で書く */}
+            <p>ネーム刺繍ナビは、作業着やユニフォーム、Tシャツ、バッグなどお持ち込みの製品に刺繍・名入れを対応してくれるお店を、地域から探せる情報サイトです。</p>
+            <p>あなたの「この一着に、名前を入れたい」という想いに、ぴったりのお店がきっと見つかります。</p>
+            <a className="btn" href="/about/">この媒体について<IconArrow size={18} /></a>
+          </div>
+          <p className="script about-script" aria-hidden>Good Work<br />Better Tomorrow</p>
+        </div>
+      </section>
+
+      {/* ── 締めの帯 ───────────────────────────────────── */}
+      <section className="band">
+        <div className="band-strip">
+          {[1, 2, 3, 4].map((i) => (
+            <Photo key={i} src={`/photos/band-${i}.jpg`} alt="" />
+          ))}
+        </div>
+        <p className="hand band-copy">その一着に、名前を込めて。</p>
+      </section>
     </>
   )
 }

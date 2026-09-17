@@ -1,6 +1,16 @@
 import type { Metadata } from 'next'
+import { Caveat, Klee_One } from 'next/font/google'
+import { HeaderNav } from './HeaderNav'
 import { Logo } from './Logo'
 import './globals.css'
+
+/**
+ * 手書きの一言に使う2書体。**本文には使わない**（読みにくくなる）。
+ * 日本語の Klee One は容量が大きいので preload しない ― 遅れて差し替わっても、
+ * 出るのは添え書きだけなので読みに影響しない。
+ */
+const klee = Klee_One({ weight: '600', preload: false, display: 'swap', variable: '--font-hand' })
+const caveat = Caveat({ subsets: ['latin'], weight: '600', display: 'swap', variable: '--font-script' })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://name-shishu.com'),
@@ -22,22 +32,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja">
+    <html lang="ja" className={`${klee.variable} ${caveat.variable}`}>
       <body>
         <header className="site-head">
           <div className="wrap">
             <a className="brand" href="/">
               <Logo />
-              <span className="mark">ネーム刺繍<em>ナビ</em></span>
-              <span className="tag-line">持ち込みの刺繍・名入れを地域で探す</span>
+              <span className="brand-text">
+                <span className="mark">ネーム刺繍<em>ナビ</em></span>
+                <span className="tag-line">持ち込みの刺繍・名入れを地域から探す</span>
+              </span>
             </a>
-            <nav className="head-nav">
-              <a href="/#list">店を探す</a>
-            </nav>
+            <HeaderNav />
           </div>
         </header>
 
-        <main className="wrap">{children}</main>
+        <main>{children}</main>
 
         <footer className="site-foot">
           <div className="wrap">

@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 
 export default function Terms() {
   return (
+    <div className="wrap">
     <article className="prose">
       <p className="crumb"><a href="/">ネーム刺繍ナビ</a> ／ 利用規約</p>
       <h1>利用規約</h1>
@@ -66,5 +67,6 @@ export default function Terms() {
 
       <p className="muted">最終更新 {updatedAt}</p>
     </article>
+    </div>
   )
 }

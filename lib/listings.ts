@@ -3,7 +3,6 @@ import photosRaw from '@/data/photos.json'
 
 export type Listing = {
   slug: string
-  kind: 'kakou' | 'shop'   // 加工屋 / 作業服・ユニフォーム店
   name: string
   pref: string | null
   prefSlug: string | null
@@ -21,7 +20,8 @@ export type Listing = {
   minLot: string | null
   lead: string | null
   priceFrom: string | null
-  items: string[]
+  /** 刺繍を入れる対象。**一覧の絞り込み軸。** サイトに2回以上出た品目だけ拾っている */
+  items: ItemKey[]
   note: string | null
 }
 
@@ -32,12 +32,31 @@ const data = raw as { updatedAt: string; listings: Listing[] }
 const photos = photosRaw as Record<string, { src: string; credit: string } | unknown>
 
 export const updatedAt = data.updatedAt
+/**
+ * 市区名の頭に県コードが残っている行がある（「11さいたま市」）。**正は hp/001 側の
+ * export-listings.mjs** だが、書き出し直すまで画面に出てしまうのでここでも落とす。
+ */
+const cleanCity = (city: string | null) => (city ? city.replace(/^\d{1,2}(?=[^\d])/, '') : city)
+
 export const listings: Listing[] = data.listings.map((l) => {
   const p = photos[l.slug]
+  const base = { ...l, city: cleanCity(l.city) }
   return p && typeof p === 'object' && 'src' in p
-    ? { ...l, photo: (p as { src: string }).src, photoCredit: (p as { credit?: string }).credit ?? null }
-    : l
+    ? { ...base, photo: (p as { src: string }).src, photoCredit: (p as { credit?: string }).credit ?? null }
+    : base
 })
+
+/**
+ * 表示用の都道府県名。**データは「東京」までしか持っていない**（正は hp/001 の
+ * export-listings.mjs 側）。検索は「東京都 刺繍」の形で来るので、画面には正式名で出す。
+ * **slug は変えない** ― 配布済みの URL が変わる。
+ */
+export function prefLabel(pref: string) {
+  if (pref === '北海道') return pref
+  if (pref === '東京') return '東京都'
+  if (pref === '大阪' || pref === '京都') return pref + '府'
+  return pref + '県'
+}
 
 /** 都道府県ごと。pref が無い行は地域ページに出せないので除く。 */
 export function byPref() {
@@ -69,9 +88,25 @@ export function byCity(items: Listing[]) {
   return [...map.entries()].sort((a, b) => b[1].length - a[1].length)
 }
 
-export const KIND_LABEL: Record<Listing['kind'], string> = {
-  kakou: '刺繍・名入れの加工屋',
-  shop: '作業服・ユニフォームの店',
+/** 刺繍を入れる対象。刺繍屋は服だけでなく帽子・タオル・カバンまで扱う ― そこが軸になる */
+export type ItemKey = 'wear' | 'cap' | 'towel' | 'bag' | 'wappen' | 'flag'
+
+export const ITEM_LABEL: Record<ItemKey, string> = {
+  wear: '服',
+  cap: '帽子',
+  towel: 'タオル',
+  bag: 'バッグ',
+  wappen: 'ワッペン',
+  flag: 'のれん・旗',
+}
+export const ITEM_ORDER: ItemKey[] = ['wear', 'cap', 'towel', 'bag', 'wappen', 'flag']
+
+/** 品目ごとの件数 */
+export function itemCounts(items: Listing[]) {
+  const n = {} as Record<ItemKey, number>
+  for (const k of ITEM_ORDER) n[k] = 0
+  for (const l of items) for (const k of l.items) if (k in n) n[k]++
+  return n
 }
 
 /** 同じ市区、無ければ同じ県から近い先を拾う。回遊のため。 */
@@ -124,4 +159,14 @@ export function listingsByPrefSize() {
  * 掲載先から1枚でも届けば自動で枠が戻る（無い社は頭文字で埋まる）。
  */
 export const hasAnyPhoto = listings.some((l) => !!l.photo)
+
+/** ヒーローの検索に渡す、県ごとの市区一覧（件数の多い順） */
+export function prefOptions() {
+  return byPref().map((p) => ({
+    slug: p.prefSlug,
+    label: prefLabel(p.pref),
+    count: p.items.length,
+    cities: byCity(p.items).map(([c]) => c).filter((c) => c !== '市区を確認中'),
+  }))
+}
 

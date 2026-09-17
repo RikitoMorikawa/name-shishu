@@ -30,7 +30,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   }
 
   return (
-    <>
+    <div className="wrap">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <article className="prose">
         <p className="crumb"><a href="/">ネーム刺繍ナビ</a> ／ 読み物</p>
@@ -55,6 +55,6 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         </div>
         <p className="muted">最終更新 {g.updated}</p>
       </article>
-    </>
+    </div>
   )
 }
