@@ -105,7 +105,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* 閲覧数の計測（Vercel Web Analytics）。**Cookie を使わず、個人を追わない。**
             だから「Cookie も使用していません」は書いたままでよい。
             プライバシーポリシーの第1節に、何を計測しているかを書いてある */}
-        <Analytics />
+        {/* **mode を明示する。** output:'export' だと環境を自動で見分けられず、
+            開発扱いになって計測のスクリプトが読み込まれない（2026-09-17） */}
+        <Analytics mode="production" />
       </body>
     </html>
   )
