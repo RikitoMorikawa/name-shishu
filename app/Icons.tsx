@@ -213,3 +213,10 @@ export const IconCheck = ({ size = 24, className }: P) => (
     <path d="m5 12.5 4.5 4.5L19 7" />
   </svg>
 )
+
+/** 開閉のしるし。**ドロップダウンの「⌄」の代わり** ― 文字だと書体で位置がずれる */
+export const IconChevron = ({ size = 24, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="m7 10 5 5 5-5" />
+  </svg>
+)

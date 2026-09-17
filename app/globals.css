@@ -103,7 +103,10 @@ h1 {
 
 /* ── ヒーロー。**全幅の写真の上に、見出しと検索。** 内側だけ .wrap で止める ──── */
 .hero {
-  position: relative; isolation: isolate; overflow: hidden;
+  /* **overflow は掛けない。** 掛けるとドロップダウンのリストが枠で切られる（2026-09-17）。
+     写真は .hero-photo が absolute inset:0、その中の .photo が overflow:hidden なので、
+     ここで止めなくてもはみ出さない */
+  position: relative; isolation: isolate;
   background: linear-gradient(100deg, var(--surface) 34%, var(--accent-soft));
   border-bottom: 1px solid var(--rule);
 }
@@ -173,18 +176,43 @@ h1 {
 }
 .hs-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; }
 @media (max-width: 760px) { .hs-row { grid-template-columns: 1fr; } }
-.hs-field {
-  display: flex; align-items: center; gap: 9px; padding: 0 13px;
-  border: var(--edge); border-radius: 11px; background: var(--surface); min-width: 0;
+/* ── ドロップダウン（app/Select.tsx）。**ネイティブの select は使わない** ──────
+   OS ごとに見た目が変わり、件数を横に添えられないため。
+   フォーカスはボタンに残す作りなので、輪郭はボタン側に付ける。 */
+.sel { position: relative; min-width: 0; }
+.sel-btn {
+  display: flex; align-items: center; gap: 9px; width: 100%; padding: 13px;
+  font: inherit; font-size: 15px; text-align: left; cursor: pointer;
+  border: var(--edge); border-radius: 11px; background: var(--surface); color: var(--ink);
+  transition: border-color .14s ease, box-shadow .14s ease;
 }
-.hs-field svg { color: var(--accent); flex: none; }
-.hs-field:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-.hs-field select {
-  flex: 1; min-width: 0; font: inherit; font-size: 15px; padding: 13px 0; border: 0; background: none;
-  color: var(--ink); appearance: none; cursor: pointer;
+.sel-btn > svg:first-child { color: var(--accent); flex: none; }
+.sel-btn:hover:not(:disabled) { border-color: color-mix(in srgb, var(--accent) 45%, var(--rule)); }
+.sel-btn:focus-visible, .sel-btn[aria-expanded='true'] {
+  outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft);
 }
-.hs-field select:disabled { color: var(--ink-3); cursor: default; }
-.hs-field::after { content: '⌄'; color: var(--ink-3); font-size: 15px; margin-left: 4px; line-height: 0; }
+.sel-btn:disabled { cursor: default; background: var(--surface-2); }
+.sel-value { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sel-value.is-placeholder { color: var(--ink-3); }
+.sel-caret { color: var(--ink-3); flex: none; transition: transform .16s ease; }
+.sel-caret.is-open { transform: rotate(180deg); }
+
+.sel-list {
+  position: absolute; z-index: 40; left: 0; right: 0; top: calc(100% + 6px);
+  margin: 0; padding: 6px; list-style: none; max-height: 320px; overflow: auto;
+  background: var(--surface); border: var(--edge); border-radius: 12px;
+  box-shadow: var(--shadow-lift);
+}
+.sel-opt {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  padding: 10px 12px; border-radius: 8px; cursor: pointer; font-size: 15px; color: var(--ink);
+}
+.sel-opt em { font-style: normal; font-size: 12.5px; color: var(--ink-3); flex: none; }
+/* **指しているだけの行と、選んである行は別の見せ方にする** */
+.sel-opt.is-active { background: var(--surface-2); }
+.sel-opt[aria-selected='true'] { color: var(--accent-ink); font-weight: 700; }
+.sel-opt[aria-selected='true'] em { color: var(--accent-ink); }
+.sel-opt[aria-selected='true'].is-active { background: var(--accent-soft); }
 .hs-go {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   font: inherit; font-size: 15.5px; font-weight: 700; padding: 13px 26px; cursor: pointer;

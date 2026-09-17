@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { IconMap, IconPin, IconSearch } from './Icons'
+import { Select } from './Select'
 
 export type PrefOption = { slug: string; label: string; count: number; cities: string[] }
 
@@ -22,23 +23,24 @@ export function HeroSearch({ prefs, popular }: { prefs: PrefOption[]; popular: s
   return (
     <div className="hero-search">
       <div className="hs-row">
-        <label className="hs-field">
-          <IconPin size={19} />
-          <select value={pref} onChange={(e) => { setPref(e.target.value); setCity('') }} aria-label="都道府県を選ぶ">
-            <option value="">都道府県を選ぶ</option>
-            {prefs.map((p) => (
-              <option key={p.slug} value={p.slug}>{p.label}（{p.count}）</option>
-            ))}
-          </select>
-        </label>
+        <Select
+          label="都道府県を選ぶ"
+          placeholder="都道府県を選ぶ"
+          icon={<IconPin size={19} />}
+          value={pref}
+          onChange={(v) => { setPref(v); setCity('') }}
+          options={prefs.map((p) => ({ value: p.slug, label: p.label, count: p.count }))}
+        />
 
-        <label className="hs-field">
-          <IconMap size={19} />
-          <select value={city} onChange={(e) => setCity(e.target.value)} disabled={!pref} aria-label="市区町村を選ぶ">
-            <option value="">{pref ? '市区町村を選ぶ（任意）' : '先に都道府県を選ぶ'}</option>
-            {cities.map((c) => <option key={c} value={c}>{c}</option>)}
-          </select>
-        </label>
+        <Select
+          label="市区町村を選ぶ"
+          placeholder={pref ? '市区町村を選ぶ（任意）' : '先に都道府県を選ぶ'}
+          icon={<IconMap size={19} />}
+          disabled={!pref}
+          value={city}
+          onChange={setCity}
+          options={cities.map((c) => ({ value: c, label: c }))}
+        />
 
         <button className="hs-go" onClick={go} disabled={!pref}>
           <IconSearch size={19} />店を探す
