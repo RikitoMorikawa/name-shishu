@@ -99,7 +99,7 @@ export function ContactForm() {
         </label>
         <label className="field field-wide">
           <span>ご用件</span>
-          <textarea value={body} onChange={(e) => setBody(e.target.value)} rows={5} placeholder={k.placeholder} />
+          <textarea value={body} onChange={(e) => setBody(e.target.value)} rows={3} placeholder={k.placeholder} />
         </label>
       </div>
 
