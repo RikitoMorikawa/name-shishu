@@ -831,7 +831,7 @@ main { padding-bottom: 8px; }
    読み物。**節ごとに区切りを付けて、地の色で役割を分ける。**
    長い文章は、どこまでが1つの話かが見えないと読み進められない。
    ============================================================ */
-.guide { max-width: 78ch; padding-bottom: 8px; }
+.guide { max-width: 860px; }
 .guide h1 { font-size: clamp(24px, 3vw, 34px); line-height: 1.45; margin: 12px 0 14px; }
 .guide .lead {
   font-size: 17px; line-height: 1.95; color: var(--ink-2);
@@ -850,26 +850,25 @@ main { padding-bottom: 8px; }
   width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
 }
 
-/* **読み物のページだけ地を淡くする。** 節の白い枠を浮かせるため */
-body:has(.guide) main { background: var(--surface-2); }
-
-/* 節の枠。**1つの話を1枚の紙に載せる** */
-.guide-sec {
-  background: var(--surface); border: var(--edge); border-radius: 16px;
-  padding: 6px 26px 22px; margin: 16px 0; box-shadow: var(--shadow);
+/* **読み物のページだけ地を淡くして、記事そのものを1枚の紙にする。**
+   節ごとに枠を分けると紙が何枚も重なって見え、どこまでが記事か分からなくなる（2026-09-17） */
+body:has(.guide) main { background: var(--surface-2); padding-bottom: 0; }
+.guide {
+  background: var(--surface); border: var(--edge); border-radius: 18px;
+  box-shadow: var(--shadow); padding: 36px 48px 44px; margin: 22px auto 56px;
 }
-/* 最初の h2 より前（導入）は枠を出さない ― リード文と続けて読ませる */
-.guide-sec.is-intro { background: none; border: 0; box-shadow: none; padding: 0; margin: 20px 0 0; }
-@media (max-width: 560px) { .guide-sec { padding: 4px 16px 18px; border-radius: 14px; } }
+@media (max-width: 760px) { .guide { padding: 24px 20px 30px; border-radius: 14px; margin: 14px auto 34px; } }
 
-/* 節の見出し。**枠が区切りになるので罫は要らない** */
+/* 節。**枠は付けず、見出しの余白と細い罫で切る** */
+.guide-sec { margin: 0; }
+.guide-sec + .guide-sec { border-top: 1px solid var(--rule); padding-top: 8px; margin-top: 34px; }
+.guide-sec.is-intro { margin-top: 20px; }
+
 .guide h2 {
-  margin: 22px 0 12px; font-size: clamp(19px, 2.2vw, 23px);
+  margin: 30px 0 12px; font-size: clamp(19px, 2.2vw, 23px);
   scroll-margin-top: 92px;
 }
 .guide h2::before { display: none; }
-/* 枠の中の最初と最後は、枠の余白に任せて詰める */
-.guide-sec > div:last-child > *:last-child { margin-bottom: 0; }
 
 /* 目次 */
 .guide-toc {
