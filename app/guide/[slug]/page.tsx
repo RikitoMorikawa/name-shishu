@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { findGuide, guides } from '@/data/guides'
+import { hasPhoto } from '../../Photo'
 
 export function generateStaticParams() {
   return guides.map((g) => ({ slug: g.slug }))
@@ -10,7 +11,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const g = findGuide(slug)
   if (!g) return {}
-  return { title: g.title, description: g.excerpt, alternates: { canonical: `/guide/${g.slug}/` } }
+  // **サムネイルがあれば OGP に使う。** 無ければ既定のサイト画像のまま
+  const thumb = `/photos/guide-${g.slug}.jpg`
+  return {
+    title: g.title,
+    description: g.excerpt,
+    alternates: { canonical: `/guide/${g.slug}/` },
+    ...(hasPhoto(thumb)
+      ? {
+          openGraph: { type: 'article', images: [{ url: thumb, width: 1200, height: 800 }] },
+          twitter: { card: 'summary_large_image', images: [thumb] },
+        }
+      : {}),
+  }
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -25,6 +38,9 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
     description: g.excerpt,
     inLanguage: 'ja',
     dateModified: g.updated,
+    ...(hasPhoto(`/photos/guide-${g.slug}.jpg`)
+      ? { image: [`https://name-shishu.com/photos/guide-${g.slug}.jpg`] }
+      : {}),
     author: { '@type': 'Organization', name: 'UMIDAS' },
     publisher: { '@type': 'Organization', name: 'ネーム刺繍ナビ' },
   }
@@ -36,6 +52,12 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         <p className="crumb"><a href="/">ネーム刺繍ナビ</a> ／ 読み物</p>
         <h1>{g.title}</h1>
         <p className="lead">{g.lead}</p>
+        {/* 見出し画像。**無い記事は枠ごと出さない** ― 空の枠は本文より先に目に入る */}
+        {hasPhoto(`/photos/guide-${g.slug}.jpg`) ? (
+          <div className="guide-hero">
+            <img src={`/photos/guide-${g.slug}.jpg`} alt="" />
+          </div>
+        ) : null}
 
         {g.body.map((b, i) => (
           <div key={i}>

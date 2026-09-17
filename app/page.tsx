@@ -3,7 +3,7 @@ import { Cards } from './ShopCard'
 import { guides } from '@/data/guides'
 import { HeroSearch } from './HeroSearch'
 import { FavButton } from './Fav'
-import { Photo } from './Photo'
+import { Photo, hasPhoto } from './Photo'
 import {
   IconArrow, IconBag, IconCap, IconCheck, IconFlag, IconGuide,
   IconMap, IconPin, IconTee, IconTowel, IconWappen,
@@ -280,9 +280,16 @@ export default function Home() {
           <div className="guide-grid">
             {guides.map((g) => (
               <a className={`guide-card tone-${g.tone}`} key={g.slug} href={`/guide/${g.slug}/`}>
-                <div className="guide-card-top">
-                  <IconGuide size={30} />
-                </div>
+                {/* サムネイルがあれば写真、無ければ今までどおり色面にアイコン */}
+                {hasPhoto(`/photos/guide-${g.slug}.jpg`) ? (
+                  <div className="guide-card-photo">
+                    <img src={`/photos/guide-${g.slug}.jpg`} alt="" loading="lazy" />
+                  </div>
+                ) : (
+                  <div className="guide-card-top">
+                    <IconGuide size={30} />
+                  </div>
+                )}
                 <div className="guide-card-body">
                   <b>{g.title}</b>
                   <span>{g.excerpt}</span>
