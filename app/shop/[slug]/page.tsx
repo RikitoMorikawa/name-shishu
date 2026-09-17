@@ -32,6 +32,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
   if (!l) notFound()
 
   const where = [l.pref, l.city].filter(Boolean).join('・')
+  const hasBanchi = !!l.address && /\d+\s*[-−ー―]\s*\d+|\d+番/.test(l.address)
   const near = nearby(l)
   const mapQ = encodeURIComponent([l.name, l.address].filter(Boolean).join(' '))
 
@@ -133,7 +134,11 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
       </div>
       {l.note ? <p>{l.note}</p> : null}
 
-      {MAP_KEY && l.address ? (
+      {/* **番地まで書かれている住所のときだけ。** 町名までの住所で地図を出すと、
+          町の中心にピンが立って別の場所を指してしまう。
+          addrState は「Places の番地と一致したか」でしかなく、city-only でも
+          サイト側の住所は番地まで揃っていることが多い（2026-09-17） */}
+      {MAP_KEY && hasBanchi ? (
         <>
           <h2>場所</h2>
           <div className="map-wrap">
@@ -142,9 +147,10 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
+              // 社名を混ぜると表記の記号（「|」など）でノイズになる。住所だけで引く
               src={`https://www.google.com/maps/embed/v1/place?key=${MAP_KEY}&q=${encodeURIComponent(
-                `${l.name} ${l.address}`,
-              )}&language=ja&region=JP&zoom=16`}
+                l.address,
+              )}&language=ja&region=JP&zoom=17`}
             />
           </div>
           <p className="muted">
