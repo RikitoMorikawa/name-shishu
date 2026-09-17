@@ -148,8 +148,13 @@ h1 {
   /* **手書きはテーマ色の緑で揃える**（2026-09-17）。濃紺だと見本と違って見えた。
      写真の上に乗るので、地の緑（--accent）より一段濃い --accent-ink を使う */
   color: var(--accent-ink); text-align: left; transform: rotate(-7deg); pointer-events: none;
-  /* **帽子の明るいベージュに乗ると緑が沈む。** 白い光を広めに敷いて浮かせる */
-  text-shadow: 0 0 10px rgba(255,255,255,.98), 0 0 22px rgba(255,255,255,.9), 0 0 40px rgba(255,255,255,.75);
+  /* **写真の濃いところに乗ると緑が沈む。** 悩みカードのイラストと同じ黄（#FCDC4A）の光で
+     縁取り、その外に白を広げて浮かせる。白だけだと暗い服の上で効かない（2026-09-17） */
+  text-shadow:
+    0 0 4px rgba(252,220,74,1),
+    0 0 9px rgba(252,220,74,.95),
+    0 0 18px rgba(255,255,255,.95),
+    0 0 34px rgba(255,255,255,.8);
 }
 .hero-hand span { display: block; }
 .hero-hand span + span { margin-left: 1.15em; }
@@ -346,7 +351,8 @@ p { margin: 12px 0; }
 
 .foot-bottom {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 20px;
-  padding-top: 16px; padding-bottom: 22px; border-top: 1px solid var(--rule);
+  /* **上下は同じ幅で薄く。** 16/22 と不揃いだと、下だけ間延びして見える */
+  padding-top: 13px; padding-bottom: 13px; border-top: 1px solid var(--rule);
   color: var(--ink-3); font-size: 12px;
 }
 .foot-bottom p { margin: 0; }
