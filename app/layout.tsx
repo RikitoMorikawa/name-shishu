@@ -80,22 +80,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </div>
 
+          {/* ── 締めの帯。**フッターの中、いちばん下の表記の上に置く** ―
+              ページの最後を写真で締めつつ、運営表記は帯より下に残す ────── */}
+          <section className="band">
+            <div className="band-strip">
+              {[1, 2, 3, 4].map((i) => (
+                <Photo key={i} src={`/photos/band-${i}.jpg`} alt="" />
+              ))}
+            </div>
+            <p className="hand band-copy">その一着に、名前を込めて。</p>
+          </section>
+
           <div className="wrap foot-bottom">
             <p>最終更新 {updatedAt}</p>
             <p>運営 UMIDAS</p>
           </div>
         </footer>
-
-        {/* ── 締めの帯。**フッターより下に置く** ― ページの最後を写真で締める。
-            main の外にあるので全ページ共通になる ────────────────── */}
-        <section className="band">
-          <div className="band-strip">
-            {[1, 2, 3, 4].map((i) => (
-              <Photo key={i} src={`/photos/band-${i}.jpg`} alt="" />
-            ))}
-          </div>
-          <p className="hand band-copy">その一着に、名前を込めて。</p>
-        </section>
       </body>
     </html>
   )

@@ -303,12 +303,12 @@ p { margin: 12px 0; }
 .toc a:hover { color: var(--accent-ink); }
 /* ── フッター。**問い合わせもここに置く** ― どのページからも戻らずに連絡できるように ── */
 .site-foot { margin-top: 72px; background: var(--surface-2); border-top: 1px solid var(--rule); }
-/* 帯はフッターの**下**に来るので、フッターの上には余白を残す */
-.site-foot + .band { margin-top: 0; }
+/* 帯はフッターの中にある。**区切りは帯そのものが付ける**ので罫線は要らない */
+.site-foot .band { margin-top: 0; }
 
 .foot-grid {
   display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 40px;
-  padding-top: 44px; padding-bottom: 36px; align-items: start;
+  padding-top: 44px; padding-bottom: 40px; align-items: start;
 }
 @media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr; gap: 30px; } }
 
@@ -326,7 +326,7 @@ p { margin: 12px 0; }
 
 .foot-bottom {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 20px;
-  padding-top: 16px; padding-bottom: 26px; border-top: 1px solid var(--rule);
+  padding-top: 16px; padding-bottom: 20px;
   color: var(--ink-3); font-size: 12px;
 }
 .foot-bottom p { margin: 0; }
