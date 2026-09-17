@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Logo } from './Logo'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -20,9 +21,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="site-head">
           <div className="wrap">
             <a className="brand" href="/">
+              <Logo />
               <span className="mark">ネーム刺繍<em>ナビ</em></span>
               <span className="tag-line">持ち込みの刺繍・名入れを地域で探す</span>
             </a>
+            <nav className="head-nav">
+              <a href="/#list">店を探す</a>
+            </nav>
           </div>
         </header>
 

@@ -37,13 +37,21 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <h1>作業着に社名を入れたい。どこに頼めばいいか</h1>
-      <p className="lead">
-        <b>いま持っている服に加工を頼む</b>なら刺繍の加工屋、<b>服ごと名入れで買う</b>なら作業服・ユニフォームの店。
-        全国{listings.length}件（加工屋{kakou}・店{shop}）を地域から探せます。
-      </p>
+      <section className="hero">
+        <h1>作業着に社名を入れたい。<br />どこに頼めばいいか</h1>
+        <p className="lead">
+          <b>いま持っている服に加工を頼む</b>なら刺繍の加工屋、<b>服ごと名入れで買う</b>なら作業服・ユニフォームの店。
+          持ち込みの可否・最小枚数・納期を並べています。
+        </p>
+        <div className="hero-stats">
+          <span><b>{listings.length}</b>件</span>
+          <span><b>{kakou}</b>加工屋</span>
+          <span><b>{shop}</b>作業服の店</span>
+          <span><b>{prefs.length}</b>都道府県</span>
+        </div>
+      </section>
 
-      <div className="layout">
+      <div className="layout" id="list">
         <Filter
           total={listings.length}
           groups={[

@@ -58,19 +58,55 @@ a { color: var(--accent-ink); text-underline-offset: 3px; }
   backdrop-filter: saturate(140%) blur(10px);
   border-bottom: 1px solid var(--rule);
 }
-.site-head .wrap { display: flex; align-items: center; gap: 14px; height: 60px; }
-.site-head a.brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: inherit; }
+.site-head .wrap { display: flex; align-items: center; gap: 14px; height: 64px; }
+.site-head a.brand { display: flex; align-items: center; gap: 9px; text-decoration: none; color: inherit; }
+.logo-mark { color: var(--accent); flex: none; }
 .site-head .mark { font-size: 18px; font-weight: 700; letter-spacing: .01em; }
 .site-head .mark em { font-style: normal; color: var(--accent); }
-.site-head .tag-line { color: var(--ink-3); font-size: 12.5px; }
-@media (max-width: 560px) { .site-head .tag-line { display: none; } }
+.site-head .tag-line { color: var(--ink-3); font-size: 12.5px; align-self: baseline; }
+.head-nav { margin-left: auto; display: flex; gap: 20px; }
+.head-nav a { font-size: 14px; color: var(--ink-2); text-decoration: none; }
+.head-nav a:hover { color: var(--accent-ink); }
+@media (max-width: 700px) { .site-head .tag-line { display: none; } }
+@media (max-width: 520px) { .head-nav a:not(:last-child) { display: none; } }
 
 /* ── 見出し。**大きく、行間は締める** ───────────────────── */
 h1 {
-  font-size: clamp(25px, 3.2vw, 34px); line-height: 1.32; letter-spacing: -.02em;
-  font-weight: 700; margin: 28px 0 10px; max-width: 30ch;
+  font-size: clamp(26px, 3.6vw, 40px); line-height: 1.34; letter-spacing: -.025em;
+  font-weight: 700; margin: 0 0 12px;
 }
-h2 { font-size: clamp(19px, 2.1vw, 23px); line-height: 1.45; letter-spacing: -.01em; margin: 52px 0 12px; }
+
+/* ── ヒーロー。**媒体の顔。** 地に淡い朱を敷いて、数字で規模を見せる ───── */
+.hero {
+  position: relative; margin: 20px 0 4px; padding: 30px 30px 26px;
+  border-radius: 18px; overflow: hidden;
+  background:
+    radial-gradient(120% 120% at 88% 8%, color-mix(in srgb, var(--accent-soft) 88%, transparent), transparent 62%),
+    var(--surface);
+  box-shadow: var(--shadow);
+}
+/* 糸を1本、右上から流す */
+.hero::after {
+  content: ''; position: absolute; right: -40px; top: -30px; width: 240px; height: 240px;
+  border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--accent) 14%, transparent);
+  pointer-events: none;
+}
+.hero .lead { margin-bottom: 16px; }
+.hero-stats { display: flex; flex-wrap: wrap; gap: 10px 26px; }
+.hero-stats span { color: var(--ink-3); font-size: 12.5px; display: flex; align-items: baseline; gap: 5px; }
+.hero-stats b { color: var(--ink); font-size: 24px; font-weight: 700; letter-spacing: -.02em; }
+@media (max-width: 560px) { .hero { padding: 24px 20px 22px; border-radius: 14px; } }
+h2 {
+  font-size: clamp(19px, 2.1vw, 23px); line-height: 1.45; letter-spacing: -.01em; margin: 52px 0 12px;
+  padding-left: 13px; position: relative;
+}
+h2::before {
+  content: ''; position: absolute; left: 0; top: .42em; width: 4px; height: 1em;
+  border-radius: 2px; background: var(--accent);
+}
+/* 市区の見出しと読み物ページは罫を出さない（細かく出ると煩い） */
+.prose h2::before, section[data-group] h2::before { display: none; }
+.prose h2, section[data-group] h2 { padding-left: 0; }
 h3 { font-size: 17.5px; margin: 30px 0 8px; }
 p { margin: 12px 0; }
 .lead { color: var(--ink-2); font-size: 16px; max-width: 64ch; margin-bottom: 4px; }

@@ -51,7 +51,7 @@ export default function About() {
       <table className="facts">
         <tbody>
           <tr><th>運営</th><td>UMIDAS</td></tr>
-          <tr><th>責任者</th><td>森川力人（元・作業服／ユニフォーム商社の営業）</td></tr>
+          <tr><th>責任者</th><td>森川力斗</td></tr>
           <tr><th>連絡先</th><td><a href="mailto:contact@umidas.info">contact@umidas.info</a></td></tr>
         </tbody>
       </table>
