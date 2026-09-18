@@ -119,8 +119,8 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
 
       {l.mochikomi === null ? (
         <div className="callout callout--sm">
-          <b>この店の条件は確認が取れていません。</b>推測では書きません。
-          <a href={l.url} rel="nofollow noopener" target="_blank">公式サイト</a>{l.tel ? 'かお電話' : ''}でご確認ください。
+          <b>この店の条件は確認が取れていません。</b>
+          詳細は <a href={l.url} rel="nofollow noopener" target="_blank">公式サイト</a>{l.tel ? 'かお電話' : ''}でお問い合わせください。
           訂正は <a href="mailto:contact@umidas.info">contact@umidas.info</a> へ。
         </div>
       ) : (
