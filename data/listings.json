@@ -13,11 +13,15 @@
    "tel": "075-382-5618",
    "photo": null,
    "photoCredit": null,
-   "mochikomi": null,
+   "mochikomi": true,
    "minLot": null,
    "lead": null,
    "priceFrom": null,
-   "items": [],
+   "items": [
+    "wear",
+    "towel",
+    "bag"
+   ],
    "note": null
   },
   {
@@ -55,7 +59,9 @@
    "minLot": null,
    "lead": null,
    "priceFrom": null,
-   "items": [],
+   "items": [
+    "flag"
+   ],
    "note": null
   },
   {
@@ -93,7 +99,11 @@
    "minLot": null,
    "lead": null,
    "priceFrom": null,
-   "items": [],
+   "items": [
+    "wear",
+    "cap",
+    "bag"
+   ],
    "note": null
   },
   {
@@ -128,7 +138,7 @@
    "photo": null,
    "photoCredit": null,
    "mochikomi": null,
-   "minLot": null,
+   "minLot": "1枚から",
    "lead": null,
    "priceFrom": null,
    "items": [],
@@ -287,7 +297,7 @@
    "tel": "078-252-3595",
    "photo": null,
    "photoCredit": null,
-   "mochikomi": true,
+   "mochikomi": null,
    "minLot": null,
    "lead": null,
    "priceFrom": null,
@@ -443,7 +453,7 @@
    "photo": null,
    "photoCredit": null,
    "mochikomi": null,
-   "minLot": null,
+   "minLot": "10枚から",
    "lead": null,
    "priceFrom": null,
    "items": [],
@@ -480,11 +490,16 @@
    "tel": null,
    "photo": null,
    "photoCredit": null,
-   "mochikomi": null,
+   "mochikomi": true,
    "minLot": null,
    "lead": null,
    "priceFrom": null,
-   "items": [],
+   "items": [
+    "wear",
+    "cap",
+    "towel",
+    "wappen"
+   ],
    "note": null
   },
   {
@@ -499,11 +514,16 @@
    "tel": "011-883-0026",
    "photo": null,
    "photoCredit": null,
-   "mochikomi": null,
+   "mochikomi": true,
    "minLot": null,
    "lead": null,
    "priceFrom": null,
-   "items": [],
+   "items": [
+    "wear",
+    "towel",
+    "bag",
+    "wappen"
+   ],
    "note": null
   },
   {
@@ -561,7 +581,7 @@
    "tel": "050-3390-2555",
    "photo": null,
    "photoCredit": null,
-   "mochikomi": true,
+   "mochikomi": null,
    "minLot": "1枚から",
    "lead": null,
    "priceFrom": null,
@@ -689,7 +709,7 @@
    "tel": "049-265-6606",
    "photo": null,
    "photoCredit": null,
-   "mochikomi": true,
+   "mochikomi": null,
    "minLot": "1枚から",
    "lead": null,
    "priceFrom": null,
@@ -1193,7 +1213,13 @@
    "minLot": null,
    "lead": null,
    "priceFrom": null,
-   "items": [],
+   "items": [
+    "wear",
+    "cap",
+    "towel",
+    "bag",
+    "wappen"
+   ],
    "note": null
   },
   {
@@ -1395,11 +1421,16 @@
    "tel": "082-222-0155",
    "photo": null,
    "photoCredit": null,
-   "mochikomi": null,
-   "minLot": null,
+   "mochikomi": true,
+   "minLot": "1枚から",
    "lead": null,
    "priceFrom": null,
-   "items": [],
+   "items": [
+    "wear",
+    "towel",
+    "bag",
+    "wappen"
+   ],
    "note": null
   },
   {
@@ -1414,11 +1445,18 @@
    "tel": "082-224-1118",
    "photo": null,
    "photoCredit": null,
-   "mochikomi": null,
+   "mochikomi": false,
    "minLot": null,
-   "lead": null,
+   "lead": "3日",
    "priceFrom": null,
-   "items": [],
+   "items": [
+    "wear",
+    "cap",
+    "towel",
+    "bag",
+    "wappen",
+    "flag"
+   ],
    "note": null
   },
   {
@@ -1434,10 +1472,13 @@
    "photo": null,
    "photoCredit": null,
    "mochikomi": null,
-   "minLot": null,
+   "minLot": "1枚から",
    "lead": null,
    "priceFrom": null,
-   "items": [],
+   "items": [
+    "wear",
+    "wappen"
+   ],
    "note": null
   },
   {
@@ -1456,7 +1497,10 @@
    "minLot": null,
    "lead": null,
    "priceFrom": null,
-   "items": [],
+   "items": [
+    "wear",
+    "wappen"
+   ],
    "note": null
   },
   {
@@ -1600,7 +1644,7 @@
    "tel": "0120-710-129",
    "photo": null,
    "photoCredit": null,
-   "mochikomi": true,
+   "mochikomi": null,
    "minLot": null,
    "lead": null,
    "priceFrom": null,
@@ -1719,7 +1763,7 @@
    "tel": "052-431-6644",
    "photo": null,
    "photoCredit": null,
-   "mochikomi": null,
+   "mochikomi": true,
    "minLot": null,
    "lead": null,
    "priceFrom": null,
@@ -2069,7 +2113,7 @@
    "tel": "03-3889-0683",
    "photo": null,
    "photoCredit": null,
-   "mochikomi": null,
+   "mochikomi": true,
    "minLot": null,
    "lead": null,
    "priceFrom": null,
@@ -2139,7 +2183,7 @@
    "tel": null,
    "photo": null,
    "photoCredit": null,
-   "mochikomi": true,
+   "mochikomi": null,
    "minLot": "1点から",
    "lead": "4営業日",
    "priceFrom": "1文字 25円〜",
@@ -2163,7 +2207,7 @@
    "tel": null,
    "photo": null,
    "photoCredit": null,
-   "mochikomi": null,
+   "mochikomi": true,
    "minLot": "1枚から",
    "lead": null,
    "priceFrom": null,
@@ -2456,7 +2500,7 @@
    "tel": "093-681-6719",
    "photo": null,
    "photoCredit": null,
-   "mochikomi": true,
+   "mochikomi": null,
    "minLot": "1枚から",
    "lead": null,
    "priceFrom": null,
@@ -2545,7 +2589,7 @@
    "tel": "0942-43-6235",
    "photo": null,
    "photoCredit": null,
-   "mochikomi": true,
+   "mochikomi": null,
    "minLot": "1枚から",
    "lead": null,
    "priceFrom": null,
@@ -2591,7 +2635,7 @@
    "tel": "090-6677-5542",
    "photo": null,
    "photoCredit": null,
-   "mochikomi": true,
+   "mochikomi": null,
    "minLot": "1枚から",
    "lead": null,
    "priceFrom": null,
@@ -2963,11 +3007,13 @@
    "tel": null,
    "photo": null,
    "photoCredit": null,
-   "mochikomi": null,
-   "minLot": null,
+   "mochikomi": true,
+   "minLot": "1枚から",
    "lead": null,
    "priceFrom": null,
-   "items": [],
+   "items": [
+    "wear"
+   ],
    "note": null
   },
   {
@@ -2983,10 +3029,15 @@
    "photo": null,
    "photoCredit": null,
    "mochikomi": null,
-   "minLot": null,
+   "minLot": "1枚から",
    "lead": null,
    "priceFrom": null,
-   "items": [],
+   "items": [
+    "wear",
+    "towel",
+    "bag",
+    "wappen"
+   ],
    "note": null
   },
   {
