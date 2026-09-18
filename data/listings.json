@@ -262,7 +262,7 @@
    "mochikomi": null,
    "minLot": "1枚から",
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "1文字 150円〜（1.5cm・税別）",
    "items": [],
    "note": null
   },
@@ -300,7 +300,7 @@
    "mochikomi": null,
    "minLot": null,
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "刺繍代 1枚 750円〜（税抜）",
    "items": [
     "wear",
     "wappen"
@@ -365,7 +365,7 @@
    "photoCredit": null,
    "mochikomi": null,
    "minLot": null,
-   "lead": null,
+   "lead": "約1週間",
    "priceFrom": null,
    "items": [
     "wear",
@@ -492,8 +492,8 @@
    "photoCredit": null,
    "mochikomi": true,
    "minLot": null,
-   "lead": null,
-   "priceFrom": null,
+   "lead": "1週間〜10日",
+   "priceFrom": "ネーム 約1,000円〜",
    "items": [
     "wear",
     "cap",
@@ -517,7 +517,7 @@
    "mochikomi": true,
    "minLot": null,
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "1文字 300円〜",
    "items": [
     "wear",
     "towel",
@@ -541,7 +541,7 @@
    "mochikomi": null,
    "minLot": null,
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "ネーム刺繍 440円〜",
    "items": [],
    "note": null
   },
@@ -645,7 +645,7 @@
    "mochikomi": null,
    "minLot": "1枚から",
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "刺しゅう代 800円〜／点（別途 版代3,000円〜）",
    "items": [
     "cap",
     "wappen"
@@ -666,7 +666,7 @@
    "photoCredit": null,
    "mochikomi": true,
    "minLot": "1枚から",
-   "lead": "即日対応",
+   "lead": "10日以内",
    "priceFrom": null,
    "items": [
     "wear",
@@ -690,7 +690,7 @@
    "mochikomi": true,
    "minLot": "1枚から",
    "lead": "即日対応",
-   "priceFrom": null,
+   "priceFrom": "個人名 600円〜（15mmまで）",
    "items": [
     "wear",
     "wappen"
@@ -711,8 +711,8 @@
    "photoCredit": null,
    "mochikomi": null,
    "minLot": "1枚から",
-   "lead": null,
-   "priceFrom": null,
+   "lead": "最短3日（繁忙期は最大2か月）",
+   "priceFrom": "ネーム刺繍 250円〜",
    "items": [
     "wappen"
    ],
@@ -733,7 +733,7 @@
    "mochikomi": true,
    "minLot": "1枚から",
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "1色5文字まで 500円〜（1〜9枚）",
    "items": [
     "wear",
     "cap",
@@ -757,8 +757,8 @@
    "photoCredit": null,
    "mochikomi": true,
    "minLot": "1枚から",
-   "lead": null,
-   "priceFrom": null,
+   "lead": "最短1週間",
+   "priceFrom": "個人名・社名 500円〜（税別）",
    "items": [
     "wear",
     "cap",
@@ -806,7 +806,7 @@
    "photoCredit": null,
    "mochikomi": null,
    "minLot": "1枚から",
-   "lead": null,
+   "lead": "約1週間",
    "priceFrom": null,
    "items": [],
    "note": null
@@ -826,7 +826,7 @@
    "mochikomi": null,
    "minLot": null,
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "2〜3文字 300円〜",
    "items": [
     "wear",
     "towel"
@@ -995,7 +995,7 @@
    "mochikomi": null,
    "minLot": null,
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "刺繍代 1ポイント 1,100円〜",
    "items": [
     "cap",
     "wappen"
@@ -1017,7 +1017,7 @@
    "mochikomi": null,
    "minLot": "1枚から",
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "イニシャル2字 528円〜（税込）",
    "items": [
     "wear",
     "wappen"
@@ -1062,8 +1062,8 @@
    "photoCredit": null,
    "mochikomi": true,
    "minLot": "1枚から",
-   "lead": "即日対応",
-   "priceFrom": null,
+   "lead": "最低2〜3営業日",
+   "priceFrom": "ネーム刺繍 400円前後〜",
    "items": [
     "wear",
     "cap",
@@ -1129,7 +1129,7 @@
    "mochikomi": true,
    "minLot": "1個から",
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "キャップ刺繍 4,900円〜",
    "items": [
     "wear",
     "cap",
@@ -1237,7 +1237,7 @@
    "mochikomi": null,
    "minLot": null,
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "名入れ 330円〜（税込）",
    "items": [],
    "note": null
   },
@@ -1810,7 +1810,7 @@
    "mochikomi": null,
    "minLot": "1枚から",
    "lead": null,
-   "priceFrom": "8文字 440円〜（税抜）",
+   "priceFrom": "個人名（姓のみ）400円〜（1.5cmまで・税抜）",
    "items": [
     "wear",
     "cap",
@@ -1833,7 +1833,7 @@
    "mochikomi": null,
    "minLot": null,
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "1ネーム 400円〜（8文字まで・税抜）",
    "items": [
     "wappen"
    ],
@@ -1854,7 +1854,7 @@
    "mochikomi": null,
    "minLot": "1個から",
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "刺繍 300円〜（一例）",
    "items": [
     "cap",
     "wappen"
@@ -1897,7 +1897,7 @@
    "mochikomi": true,
    "minLot": "1枚から",
    "lead": "即日対応",
-   "priceFrom": null,
+   "priceFrom": "ネーム刺繍 550円〜（1〜5文字・1.5cmまで）",
    "items": [
     "wear",
     "cap",
@@ -2141,7 +2141,7 @@
    "photoCredit": null,
    "mochikomi": null,
    "minLot": null,
-   "lead": null,
+   "lead": "即日対応（小ロット）",
    "priceFrom": null,
    "items": [
     "towel",
@@ -2163,7 +2163,7 @@
    "photoCredit": null,
    "mochikomi": null,
    "minLot": null,
-   "lead": null,
+   "lead": "約5日",
    "priceFrom": null,
    "items": [
     "wear",
@@ -2209,7 +2209,7 @@
    "photoCredit": null,
    "mochikomi": true,
    "minLot": "1枚から",
-   "lead": null,
+   "lead": "10日〜2週間",
    "priceFrom": null,
    "items": [
     "wear",
@@ -2256,8 +2256,8 @@
    "photoCredit": null,
    "mochikomi": true,
    "minLot": "1枚から",
-   "lead": null,
-   "priceFrom": null,
+   "lead": "即日対応",
+   "priceFrom": "ネーム刺しゅう 150円〜",
    "items": [
     "wear",
     "cap",
@@ -2280,7 +2280,7 @@
    "photoCredit": null,
    "mochikomi": true,
    "minLot": "1個から",
-   "lead": null,
+   "lead": "約2週間",
    "priceFrom": null,
    "items": [
     "wear",
@@ -2343,7 +2343,7 @@
    "photoCredit": null,
    "mochikomi": null,
    "minLot": "1点から",
-   "lead": null,
+   "lead": "約2〜4週間",
    "priceFrom": null,
    "items": [
     "wear",
@@ -2524,7 +2524,7 @@
    "photoCredit": null,
    "mochikomi": null,
    "minLot": null,
-   "lead": null,
+   "lead": "約2週間",
    "priceFrom": null,
    "items": [
     "wear",
@@ -2592,7 +2592,7 @@
    "mochikomi": null,
    "minLot": "1枚から",
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "名前のみ 400円〜（1.5cm・税抜）",
    "items": [
     "wear",
     "towel",
@@ -2637,8 +2637,8 @@
    "photoCredit": null,
    "mochikomi": null,
    "minLot": "1枚から",
-   "lead": null,
-   "priceFrom": null,
+   "lead": "1〜2週間",
+   "priceFrom": "4文字まで 700円〜（15mmまで）",
    "items": [
     "wear",
     "wappen"
@@ -2659,8 +2659,8 @@
    "photoCredit": null,
    "mochikomi": true,
    "minLot": "1個から",
-   "lead": null,
-   "priceFrom": null,
+   "lead": "約1週間",
+   "priceFrom": "キャップ正面 2,200円〜（税込）",
    "items": [
     "wear",
     "cap",
@@ -2685,7 +2685,7 @@
    "mochikomi": null,
    "minLot": "1点から",
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "1文字 150円〜（1cm）",
    "items": [
     "wear"
    ],
@@ -2835,8 +2835,8 @@
    "photoCredit": null,
    "mochikomi": null,
    "minLot": "1枚から",
-   "lead": null,
-   "priceFrom": null,
+   "lead": "10日〜2週間",
+   "priceFrom": "5〜8cmの刺繍 10個で1枚 1,500円〜",
    "items": [
     "cap",
     "wappen"
@@ -2877,7 +2877,7 @@
    "mochikomi": null,
    "minLot": "1枚から",
    "lead": null,
-   "priceFrom": null,
+   "priceFrom": "苗字or名前 450円〜（税別）",
    "items": [
     "wear",
     "cap",
@@ -2923,7 +2923,7 @@
    "photoCredit": null,
    "mochikomi": null,
    "minLot": null,
-   "lead": "3日",
+   "lead": "最短3日（特急対応）",
    "priceFrom": null,
    "items": [
     "wear",
