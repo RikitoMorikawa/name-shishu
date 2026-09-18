@@ -28,9 +28,11 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ja_JP',
     siteName: 'ネーム刺繍ナビ',
-    images: [{ url: '/ogp.svg', width: 1200, height: 630 }],
+    // **OGP画像は PNG。** SVG は X・Facebook・LINE・LinkedIn のどれもカードに出さない。
+    // 正は `public/ogp.svg` で、PNG はそこから起こす（README「OGP画像」）。
+    images: [{ url: '/ogp.png', width: 1200, height: 630, type: 'image/png', alt: 'ネーム刺繍ナビ｜持ち込みで刺繍・名入れを頼める店を、地域から探す' }],
   },
-  twitter: { card: 'summary_large_image', images: ['/ogp.svg'] },
+  twitter: { card: 'summary_large_image', images: ['/ogp.png'] },
   alternates: { canonical: '/' },
 }
 

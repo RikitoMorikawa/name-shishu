@@ -116,6 +116,32 @@ npm run dev     # http://localhost:3000
 | `public/photos/guide-<slug>.jpg` | 読み物のサムネイル（カード・記事の見出し・OGP・構造化データ） | 1200×800 |
 | `public/photos/foot-bg.jpg` | フッターの背景（**CSS から直に参照**。差し替えは同じ名前で） | 1920×770 |
 
+## OGP画像（SNSに貼ったときのカード）
+
+**`public/ogp.png` が配信される本体。SVG は貼っても画像が出ない。**
+X・Facebook・LINE・LinkedIn のどれも `og:image` の SVG を読まない（2026-09-18 に
+LinkedIn でカードが出ないことで判明。UNIX は PNG なので出ていた）。
+
+正は `public/ogp.svg`。**テーマ色や文言を変えたら SVG を直し、PNG を起こし直す。**
+sharp は hp/001 側にあるのでそちらの node_modules を使う。
+
+```bash
+cd ../../hp/001
+NS=../../private/name-shishu node -e "
+const sharp=require('sharp'),fs=require('fs'),ns=process.env.NS;
+sharp(fs.readFileSync(ns+'/public/ogp.svg'),{density:144}).resize(1200,630)
+  .png({compressionLevel:9}).toFile(ns+'/public/ogp.png').then(i=>console.log(i.width+'x'+i.height));
+"
+```
+
+`density:144` で2倍に描いてから 1200x630 へ落としている（文字の縁が荒れないため）。
+
+**貼る前に一度キャッシュを踏ませる。** 各SNSは取得した内容を数日〜1週間持つので、
+差し替えた直後は古いままカードが出る。
+LinkedIn は [Post Inspector](https://www.linkedin.com/post-inspector/)、
+X は [Card Validator](https://cards-dev.twitter.com/validator)、
+Facebook は 共有デバッガー に URL を入れて取り直させる。
+
 ## イラストの出どころ
 
 トップの「こんなお悩みはありませんか？」の人物3点は **ソコスト**（https://soco-st.com/）。
