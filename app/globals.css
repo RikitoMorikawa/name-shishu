@@ -304,6 +304,8 @@ p { margin: 12px 0; }
   margin: 22px 0; color: var(--ink-2); font-size: 15.5px;
 }
 .callout b { color: var(--ink); }
+/* 各社ページの但し書き。**読み物の callout と同じ大きさだと本文に見える**ので小さく出す */
+.callout--sm { font-size: 13.5px; line-height: 1.75; padding: 12px 16px; margin: 18px 0; }
 
 /* ── パンくず・目次・フッタ ─────────────────────────── */
 .crumb { font-size: 13.5px; color: var(--ink-3); margin: 22px 0 0; }

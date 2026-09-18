@@ -118,11 +118,10 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
       </div>
 
       {l.mochikomi === null ? (
-        <div className="callout">
-          <b>この店の持ち込み条件は、当サイトでは確認が取れていません。</b>
-          推測では書かないので空欄のままにしています。
-          実際に頼めるかどうかは <a href={l.url} rel="nofollow noopener" target="_blank">公式サイト</a>{l.tel ? 'かお電話' : ''}で必ずご確認ください。
-          掲載内容の追加・訂正は <a href="mailto:contact@umidas.info">contact@umidas.info</a> までお知らせいただければ反映します。
+        <div className="callout callout--sm">
+          <b>この店の条件は確認が取れていません。</b>推測では書きません。
+          <a href={l.url} rel="nofollow noopener" target="_blank">公式サイト</a>{l.tel ? 'かお電話' : ''}でご確認ください。
+          訂正は <a href="mailto:contact@umidas.info">contact@umidas.info</a> へ。
         </div>
       ) : (
         <p className="muted">
