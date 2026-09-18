@@ -113,6 +113,16 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
             <tr><th>納期</th><td>{orUnknown(l.lead)}</td></tr>
             <tr><th>料金の目安</th><td>{orUnknown(l.priceFrom)}</td></tr>
             <tr><th>対応品目</th><td>{l.items.length ? l.items.map((k) => ITEM_LABEL[k]).join('／') : <span className="unknown">確認中</span>}</td></tr>
+            <tr>
+              <th>郵送で頼めるか</th>
+              <td>
+                {l.shipping === true ? <span className="pill pill-ok">送れます</span>
+                  : l.shipping === false ? '来店が必要です'
+                  : <span className="unknown">確認中</span>}
+              </td>
+            </tr>
+            <tr><th>型代・データ代</th><td>{orUnknown(l.dataFee)}</td></tr>
+            <tr><th>受けられない素材</th><td>{orUnknown(l.ngMaterial)}</td></tr>
           </tbody>
         </table>
       </div>
