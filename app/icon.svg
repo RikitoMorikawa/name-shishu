@@ -1,9 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- ヘッダーのロゴと同じTシャツを白で塗りつぶす。16pxでも形で読めるよう線ではなく面にする -->
   <rect width="64" height="64" rx="14" fill="#0f7a4a"/>
-  <!-- 針 -->
-  <path d="M46 14 24 36" stroke="#fff" stroke-width="5.5" stroke-linecap="round"/>
-  <circle cx="47.5" cy="15.5" r="3" fill="#0f7a4a"/>
-  <!-- 糸 -->
-  <path d="M15 50c5 0 5-6 10-6s5 6 10 6 5-6 10-6"
-        fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" opacity=".72"/>
+  <g transform="translate(32 33) scale(2.15) translate(-16 -15.75)">
+    <path d="M12 5.5 7 7.8v4.4l2.6-.9V26h12.8V11.3l2.6.9V7.8L20 5.5a4 4 0 0 1-8 0Z"
+          fill="#fff" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/>
+    <!-- 胸のネーム刺繍 -->
+    <path d="M12.4 17.2h7.2" stroke="#0f7a4a" stroke-width="3" stroke-linecap="round"/>
+  </g>
 </svg>
