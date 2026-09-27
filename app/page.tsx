@@ -48,6 +48,14 @@ export default function Home() {
 
   const jsonLd = [
     {
+      // 検索結果のドメイン表示（name-shishu.com）をサイト名に替えるための宣言。トップにだけ置く
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'ネーム刺繍ナビ',
+      alternateName: ['ネーム刺繍なび', 'name-shishu.com'],
+      url: 'https://name-shishu.com/',
+    },
+    {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: 'ネーム刺繍ナビ',
