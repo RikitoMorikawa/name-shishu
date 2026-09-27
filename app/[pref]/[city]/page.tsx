@@ -22,8 +22,8 @@ export async function generateMetadata({ params }: { params: Promise<{ pref: str
   if (!c) return {}
   const name = prefLabel(c.pref)
   return {
-    title: `${c.city}（${name}）で刺繍・名入れを持ち込みで頼める店${c.items.length}件`,
-    description: `${name}${c.city}の刺繍・名入れの加工屋${c.items.length}件。持ち込みの可否・最小枚数・納期・料金の目安を並べて比べられます。`,
+    title: `${c.city}（${name}）の刺繍加工業者${c.items.length}件｜持ち込みで刺繍・名入れを頼める店`,
+    description: `${name}${c.city}の刺繍加工・名入れの業者${c.items.length}件。持ち込みの可否・最小枚数・納期・料金の目安を並べて比べられます。`,
     alternates: { canonical: `/${c.prefSlug}/${citySlug(c.city)}/` },
   }
 }
@@ -70,7 +70,7 @@ export default async function CityPage({ params }: { params: Promise<{ pref: str
       </p>
       <h1>{c.city}で刺繍・名入れを頼める店</h1>
       <p className="lead">
-        {name}{c.city}に{c.items.length}件。持ち込みの可否・最小枚数・納期・料金の目安を並べています。
+        {name}{c.city}で刺繍加工・名入れを受けている業者（加工屋）{c.items.length}件。持ち込みの可否・最小枚数・納期・料金の目安を並べています。
       </p>
 
       <Cards items={c.items} />

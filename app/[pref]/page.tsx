@@ -17,8 +17,10 @@ export async function generateMetadata({ params }: { params: Promise<{ pref: str
   // 掲載は刺繍・名入れの加工屋だけ（2026-09-17〜）。作業服・ユニフォーム店は載せていない
   const top = byCity(p.items).map(([c]) => c).filter((c) => c !== '市区を確認中').slice(0, 3)
   return {
-    title: `${name}で刺繍・名入れを持ち込みで頼める店${p.items.length}件`,
-    description: `${name}の刺繍・名入れの加工屋を${top.length ? top.join('・') + 'など' : ''}市区町村ごとに掲載。持ち込みの可否・最小枚数・納期・料金の目安を横に並べて比べられます。`,
+    // **「刺繍加工業者」「刺繍業者」の語を題名に持つ**（2026-09-27）。本文が「加工屋」だけで、
+    // 「埼玉 刺繍業者」では出るのに「埼玉 刺繍加工業者」では上位に来なかった。「持ち込み」は核なので残す
+    title: `${name}の刺繍加工業者${p.items.length}件｜持ち込みで刺繍・名入れを頼める店`,
+    description: `${name}の刺繍加工・名入れの業者を${top.length ? top.join('・') + 'など' : ''}市区町村ごとに掲載。持ち込みの可否・最小枚数・納期・料金の目安を横に並べて比べられます。`,
     alternates: { canonical: `/${p.prefSlug}/` },
   }
 }
@@ -62,7 +64,7 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
       <p className="crumb"><a href="/">ネーム刺繍ナビ</a> ／ {name}</p>
       <h1>{name}で刺繍・名入れを頼める店</h1>
       <p className="lead">
-        {name}に{p.items.length}件。市区町村ごとに並べています。
+        {name}で刺繍加工・名入れを受けている業者（加工屋）{p.items.length}件を、市区町村ごとに並べています。
       </p>
 
       <div className="toc">
