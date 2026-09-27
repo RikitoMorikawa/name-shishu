@@ -9,7 +9,8 @@ export type Listing = {
   city: string | null
   /** **公式サイトで取れた住所だけ。** Places 由来の住所は載せない（規約にキャッシュの例外が無い） */
   address: string | null
-  addrState: 'verified' | 'city-only' | 'unverified' | null
+  /** site-only＝台帳に照合先が無く、公式サイトの住所をそのまま採った（2026-09-27） */
+  addrState: 'verified' | 'city-only' | 'site-only' | 'unverified' | null
   url: string
   tel: string | null
   /** 掲載先から提供してもらった写真だけ。各社サイトからの転載は著作権上できない。 */
@@ -110,6 +111,29 @@ export function byCity(items: Listing[]) {
   return [...map.entries()]
     .map(([city, xs]) => [city, byRichness(xs)] as [string, Listing[]])
     .sort((a, b) => b[1].length - a[1].length)
+}
+
+/**
+ * 市区町村のページを作る最小件数。**「刺繍 足立区」のような検索の受け口**（2026-09-27）。
+ * 1件だけの市区はページにしない ― 店ページと中身が同じで、薄いページとして扱われる。
+ * 1件の市区は店ページの題名（「〇〇（東京都・足立区）の…」）が受ける。
+ */
+export const CITY_PAGE_MIN = 2
+
+/** URL に使う市区名。**日本語のまま**（検索語が URL にも入る。ローマ字の対応表を持たずに済む） */
+export const citySlug = (city: string) => city
+
+/** 市区町村ページを持つ市区の一覧（県の並び → 件数の多い順） */
+export function cityPages() {
+  return byPref().flatMap((p) =>
+    byCity(p.items)
+      .filter(([city, items]) => city !== '市区を確認中' && items.length >= CITY_PAGE_MIN)
+      .map(([city, items]) => ({ pref: p.pref, prefSlug: p.prefSlug, city, items })),
+  )
+}
+
+export function findCity(prefSlug: string, city: string) {
+  return cityPages().find((c) => c.prefSlug === prefSlug && c.city === city) ?? null
 }
 
 /** 刺繍を入れる対象。刺繍屋は服だけでなく帽子・タオル・カバンまで扱う ― そこが軸になる */

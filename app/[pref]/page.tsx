@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Filter } from '../Filter'
 import { Cards } from '../ShopCard'
-import { ITEM_LABEL, ITEM_ORDER, byCity, byPref, cityId, findPref, itemCounts, prefLabel, updatedAt } from '@/lib/listings'
+import { CITY_PAGE_MIN, ITEM_LABEL, ITEM_ORDER, byCity, byPref, cityId, citySlug, findPref, itemCounts, prefLabel, updatedAt } from '@/lib/listings'
 
 export function generateStaticParams() {
   return byPref().map((p) => ({ pref: p.prefSlug }))
@@ -85,7 +85,13 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
         <div>
           {cities.map(([city, items]) => (
             <section key={city} data-group="">
-              <h2 id={cityId(city)}>{city}<span className="muted">　{items.length}件</span></h2>
+              <h2 id={cityId(city)}>
+                {/* 市区ページがある市区は見出しから飛べるようにする（検索の受け口へ内部リンクを通す） */}
+                {city !== '市区を確認中' && items.length >= CITY_PAGE_MIN
+                  ? <a href={`/${p.prefSlug}/${citySlug(city)}/`}>{city}</a>
+                  : city}
+                <span className="muted">　{items.length}件</span>
+              </h2>
               <Cards items={items} />
             </section>
           ))}

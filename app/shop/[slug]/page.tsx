@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Cards } from '../../ShopCard'
-import { ITEM_LABEL, ITEM_ORDER, findListing, listings, nearby, updatedAt, prefLabel } from '@/lib/listings'
+import { ITEM_LABEL, ITEM_ORDER, citySlug, findCity, findListing, listings, nearby, prefLabel, updatedAt } from '@/lib/listings'
 
 export function generateStaticParams() {
   return listings.map((l) => ({ slug: l.slug }))
@@ -75,7 +75,10 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
       <p className="crumb">
         <a href="/">ネーム刺繍ナビ</a>
         {l.prefSlug ? <> ／ <a href={`/${l.prefSlug}/`}>{l.pref ? prefLabel(l.pref) : ''}</a></> : null}
-        {l.city ? ` ／ ${l.city}` : ''}
+        {/* 市区ページがあればそこへ繋ぐ（店ページ → 市区 → 県の順で辿れるように） */}
+        {l.city && l.prefSlug && findCity(l.prefSlug, l.city)
+          ? <> ／ <a href={`/${l.prefSlug}/${citySlug(l.city)}/`}>{l.city}</a></>
+          : l.city ? ` ／ ${l.city}` : ''}
       </p>
 
       <h1>{l.name}</h1>

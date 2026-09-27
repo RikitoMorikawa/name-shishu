@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next'
 // output:'export' では明示が要る（無いとビルドが落ちる）
 export const dynamic = 'force-static'
 import { guides } from '@/data/guides'
-import { byPref, listings, updatedAt } from '@/lib/listings'
+import { byPref, cityPages, citySlug, listings, updatedAt } from '@/lib/listings'
 
 const BASE = 'https://name-shishu.com'
 
@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/terms/`, lastModified, priority: 0.2 },
     { url: `${BASE}/privacy/`, lastModified, priority: 0.2 },
     ...byPref().map((p) => ({ url: `${BASE}/${p.prefSlug}/`, lastModified, priority: 0.8 })),
+    ...cityPages().map((c) => ({ url: `${BASE}/${c.prefSlug}/${encodeURIComponent(citySlug(c.city))}/`, lastModified, priority: 0.7 })),
     ...listings.map((l) => ({ url: `${BASE}/shop/${l.slug}/`, lastModified, priority: 0.6 })),
   ]
 }
