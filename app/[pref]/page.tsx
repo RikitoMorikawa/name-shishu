@@ -13,9 +13,12 @@ export async function generateMetadata({ params }: { params: Promise<{ pref: str
   const p = findPref(pref)
   if (!p) return {}
   const name = prefLabel(p.pref)
+  // 説明文に掲載の多い市区を3つまで入れる（「刺繍 足立区」で検索されたときに説明文でも当たるように）。
+  // 掲載は刺繍・名入れの加工屋だけ（2026-09-17〜）。作業服・ユニフォーム店は載せていない
+  const top = byCity(p.items).map(([c]) => c).filter((c) => c !== '市区を確認中').slice(0, 3)
   return {
     title: `${name}で刺繍・名入れを持ち込みで頼める店${p.items.length}件`,
-    description: `${name}の刺繍加工屋と作業服・ユニフォーム店を市区町村ごとに掲載。持ち込みの可否・最小枚数・納期・料金の目安を横に並べて比べられます。`,
+    description: `${name}の刺繍・名入れの加工屋を${top.length ? top.join('・') + 'など' : ''}市区町村ごとに掲載。持ち込みの可否・最小枚数・納期・料金の目安を横に並べて比べられます。`,
     alternates: { canonical: `/${p.prefSlug}/` },
   }
 }
