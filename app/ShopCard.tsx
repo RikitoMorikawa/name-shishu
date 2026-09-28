@@ -1,4 +1,5 @@
 import { FavButton } from './Fav'
+import { PrPill } from './Pr'
 import { ITEM_LABEL, ITEM_ORDER, prefLabel, type Listing } from '@/lib/listings'
 
 /** 写真が無い間のプレースホルダ。社名の頭文字を大きく置く。 */
@@ -86,6 +87,8 @@ export function ShopCard({ l }: { l: Listing }) {
 
         <h3 className="shop-row-name">
           <a href={`/shop/${l.slug}/`}>{l.name}</a>
+          {/* 有料掲載の店は写真が付くぶん目立つので、一覧でも「PR」と書く（並び順は変えていない） */}
+          {l.pr ? <PrPill /> : null}
           <FavButton slug={l.slug} name={l.name} />
         </h3>
 

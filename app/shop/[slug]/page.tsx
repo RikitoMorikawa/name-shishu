@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Cards } from '../../ShopCard'
+import { PrPill, PrSection } from '../../Pr'
 import { ITEM_LABEL, ITEM_ORDER, citySlug, findCity, findListing, listings, nearby, prefLabel, updatedAt } from '@/lib/listings'
 
 export function generateStaticParams() {
@@ -81,7 +82,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
           : l.city ? ` ／ ${l.city}` : ''}
       </p>
 
-      <h1>{l.name}</h1>
+      <h1>{l.name}{l.pr ? <> <PrPill /></> : null}</h1>
       <p className="lead">
         <span className="pill pill-kakou">刺繍・名入れの加工屋</span>
         {ITEM_ORDER.filter((k) => l.items.includes(k)).map((k) => (
@@ -134,6 +135,9 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
       <div className="callout callout--sm">
         詳細は <a href={l.url} rel="nofollow noopener" target="_blank">公式サイト</a>にお問い合わせください。
       </div>
+
+      {/* 有料掲載の店だけ。写真・紹介文・料金表（掲載店から提供された内容） */}
+      <PrSection l={l} />
 
       <h2>連絡先</h2>
       <div className="panel">

@@ -1061,3 +1061,25 @@ body:has(.guide) main { background: var(--surface-2); padding-top: 22px; }
      プレースホルダは読めれば足りるので、枠の中で折り返さない大きさに落とす */
   .field input::placeholder, .field textarea::placeholder, .search::placeholder { font-size: 13px; }
 }
+
+/* ── 有料掲載（PR）2026-09-28 ──
+   **必ず「PR」と読める形で出す**（ステマ規制）。色はテーマの緑ではなく中立の灰で、
+   無料の店より「偉く」見せない ―― 並び順と同じく、見た目でも掲載料で序列を作らない */
+.pill-pr { background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--rule); letter-spacing: .06em; vertical-align: middle; }
+h1 .pill-pr, h2 .pill-pr { font-size: 12px; }
+.pr-section { margin: 28px 0; }
+.pr-photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin: 14px 0; }
+.pr-photos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); display: block; }
+.pr-intro { white-space: pre-line; font-size: 16px; line-height: 1.9; }
+.pr-caption { text-align: left; font-size: 13px; color: var(--ink-3); padding: 10px 4px 0; caption-side: top; }
+.pr-note { font-size: 13px; }
+.pr-area { border: 1px dashed var(--rule); border-radius: var(--radius); padding: 14px 16px; margin: 18px 0 24px; background: var(--surface); }
+.pr-area-head { margin: 0 0 10px; font-weight: 600; color: var(--ink-2); font-size: 14px; }
+.pr-area-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.pr-card { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; color: inherit; padding: 8px; border-radius: 10px; }
+.pr-card:hover { background: var(--surface-2); }
+.pr-card img { width: 84px; height: 64px; object-fit: cover; border-radius: 8px; flex: none; }
+.pr-card-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pr-card-body b { color: var(--ink); }
+.pr-card-intro { font-size: 13.5px; color: var(--ink-2); line-height: 1.6; }
+.pr-area-note { margin: 10px 0 0; font-size: 12.5px; }

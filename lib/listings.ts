@@ -1,5 +1,8 @@
 import raw from '@/data/listings.json'
 import photosRaw from '@/data/photos.json'
+import plansRaw from '@/data/plans.json'
+import fs from 'node:fs'
+import path from 'node:path'
 
 export type Listing = {
   slug: string
@@ -32,6 +35,23 @@ export type Listing = {
   /** 受けられない素材・品物。**持ち込みを断られる最大の理由**（革・撥水・キャップのツバなど） */
   ngMaterial: string | null
   note: string | null
+  /** **有料掲載の中身。無料の店は null。** data/plans.json から載せる（2026-09-28） */
+  pr: Pr | null
+}
+
+/**
+ * **有料掲載（年9,800円）で載せるもの。** 写真・紹介文・料金表と、市区・県ページの PR 枠。
+ * 線引きは「事実は無料・見せ方は有料」。持ち込み・納期などの事実は無料の側で、ここには入れない。
+ * **掲載の順番には一切効かせない**（利用規約と ABOUT で「順番は料金によって変わらない」と約束している）。
+ */
+export type Pr = {
+  since: string
+  /** 掲載期限（請求した期間の最終日）。過ぎた行はビルド時に外れる */
+  until: string
+  intro: string | null
+  prices: { item: string; price: string }[]
+  photos: { src: string; alt: string }[]
+  credit: string | null
 }
 
 const data = raw as { updatedAt: string; listings: Listing[] }
@@ -47,13 +67,39 @@ export const updatedAt = data.updatedAt
  */
 const cleanCity = (city: string | null) => (city ? city.replace(/^\d{1,2}(?=[^\d])/, '') : city)
 
+// 有料掲載。**期限はビルドした日で判定する**（静的書き出しなので、期限切れを外すには再ビルドが要る）
+const plans = plansRaw as Record<string, unknown>
+const today = new Date().toISOString().slice(0, 10)
+function planOf(slug: string): Pr | null {
+  const p = plans[slug] as Partial<Pr> | undefined
+  if (!p || typeof p !== 'object' || !p.until || p.until < today) return null
+  return {
+    since: p.since ?? '',
+    until: p.until,
+    intro: p.intro ?? null,
+    prices: Array.isArray(p.prices) ? p.prices : [],
+    // **実物が public/ に無い写真は外す**（書き間違いで壊れた画像を出さない）
+    photos: (Array.isArray(p.photos) ? p.photos : []).filter((ph) =>
+      fs.existsSync(path.join(process.cwd(), 'public', String(ph.src).replace(/^\//, ''))),
+    ),
+    credit: p.credit ?? null,
+  }
+}
+
 export const listings: Listing[] = data.listings.map((l) => {
   const p = photos[l.slug]
-  const base = { ...l, city: cleanCity(l.city) }
+  const pr = planOf(l.slug)
+  const base = { ...l, city: cleanCity(l.city), pr }
+  // 写真は有料掲載の1枚目を優先する。photos.json は 9/28 以前の差し替え口として残してある
+  if (pr?.photos[0]) return { ...base, photo: pr.photos[0].src, photoCredit: pr.credit }
   return p && typeof p === 'object' && 'src' in p
     ? { ...base, photo: (p as { src: string }).src, photoCredit: (p as { credit?: string }).credit ?? null }
     : base
 })
+
+/** その地域の有料掲載の店。**一覧とは別の PR 枠に出す**（一覧の順番は変えない） */
+export const prOf = (items: Listing[]) =>
+  items.filter((l) => l.pr).sort((a, b) => a.name.localeCompare(b.name, 'ja'))
 
 /**
  * 表示用の都道府県名。**データは「東京」までしか持っていない**（正は hp/001 の
@@ -193,11 +239,13 @@ export function activeCols(items: Listing[]): Col[] {
 }
 
 /**
- * 行の見え方の順位。**写真 > 地図が出る > 頭文字だけ。**
+ * 行の見え方の順位。**地図が出る > 頭文字だけ。**
  * 空っぽの枠が先頭に並ぶと、一覧全体が用意できていないように見える。
  * 地図は住所が取れている行にだけ出る（ShopCard の判定と揃えてある）。
+ * **写真では並べ替えない**（2026-09-28）。写真は有料掲載の中身なので、写真で上に来ると
+ * 「掲載の順番は料金によって変わらない」という約束が崩れる。住所は無料の事実なので効かせてよい。
  */
-const richness = (l: Listing) => (l.photo ? 2 : l.address ? 1 : 0)
+const richness = (l: Listing) => (l.address ? 1 : 0)
 
 /** 同じ見え方どうしは社名順。**並びが日によって変わらないようにする** */
 export function byRichness(items: Listing[]) {

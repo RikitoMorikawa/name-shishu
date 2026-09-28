@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Filter } from '../Filter'
 import { Cards } from '../ShopCard'
-import { CITY_PAGE_MIN, ITEM_LABEL, ITEM_ORDER, byCity, byPref, cityId, citySlug, findPref, itemCounts, prefLabel, updatedAt } from '@/lib/listings'
+import { PrArea } from '../Pr'
+import { CITY_PAGE_MIN, ITEM_LABEL, ITEM_ORDER, byCity, byPref, cityId, citySlug, findPref, itemCounts, prOf, prefLabel, updatedAt } from '@/lib/listings'
 
 export function generateStaticParams() {
   return byPref().map((p) => ({ pref: p.prefSlug }))
@@ -72,6 +73,9 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
           <a key={city} href={`#${cityId(city)}`}>{city} {items.length}</a>
         ))}
       </div>
+
+      {/* 有料掲載の枠。一覧とは別の箱で、下の一覧の並びは変えない */}
+      <PrArea items={prOf(p.items)} where={name} />
 
       <div className="layout">
         <Filter

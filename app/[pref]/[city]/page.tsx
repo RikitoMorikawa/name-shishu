@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Cards } from '../../ShopCard'
-import { cityPages, citySlug, findCity, prefLabel, updatedAt } from '@/lib/listings'
+import { PrArea } from '../../Pr'
+import { cityPages, citySlug, findCity, prOf, prefLabel, updatedAt } from '@/lib/listings'
 
 // **市区町村のページ。「刺繍 足立区」「名入れ 岡山市」の受け口**（2026-09-27）。
 // 県ページの中の小見出しだけでは、題名に市区名を含むページが1枚も無かった。
@@ -72,6 +73,9 @@ export default async function CityPage({ params }: { params: Promise<{ pref: str
       <p className="lead">
         {name}{c.city}で刺繍加工・名入れを受けている業者（加工屋）{c.items.length}件。持ち込みの可否・最小枚数・納期・料金の目安を並べています。
       </p>
+
+      {/* 有料掲載の枠。一覧とは別の箱で、下の一覧の並びは変えない */}
+      <PrArea items={prOf(c.items)} where={c.city} />
 
       <Cards items={c.items} />
 
