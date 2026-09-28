@@ -3,14 +3,15 @@ import { prefLabel, type Listing } from '@/lib/listings'
 /**
  * **有料掲載（PR）の表示。** 年9,800円で載せる写真・紹介文・料金表と、地域ページの PR 枠（2026-09-28）。
  *
- * - **必ず「PR」と書く。** 掲載先がお金を払って載せた内容なので、ステマ規制で表示が要る
+ * - **必ず「PR」と書く。** 掲載先がお金を払って載せた内容なので、ステマ規制で表示が要る。
+ *   **「有料掲載」という言葉は画面に出さない**（2026-09-28・本人の指定）。表示は「PR」だけで足りる
  * - **一覧の順番には効かせない。** PR 枠は一覧とは別の場所に置き、一覧の並びはそのまま
  *   （利用規約と ABOUT で「掲載の順番は料金によって変わらない」と約束している）
  * - 事実（持ち込み・納期など）は無料の側。ここに出すのは掲載先の言葉と写真だけ
  */
 
 export function PrPill() {
-  return <span className="pill pill-pr" title="有料掲載">PR</span>
+  return <span className="pill pill-pr">PR</span>
 }
 
 /** 店ページの「お店から」欄。無料の店では何も出さない */
@@ -20,7 +21,7 @@ export function PrSection({ l }: { l: Listing }) {
   const hasBody = pr.intro || pr.prices.length || pr.photos.length
   if (!hasBody) return null
   return (
-    <section className="pr-section" aria-label="お店からのご紹介（有料掲載）">
+    <section className="pr-section" aria-label="お店からのご紹介">
       <h2>
         お店から <PrPill />
       </h2>
@@ -52,7 +53,7 @@ export function PrSection({ l }: { l: Listing }) {
       ) : null}
 
       <p className="muted pr-note">
-        この欄は掲載店から提供された内容です（有料掲載）。
+        この欄は掲載店から提供された内容です。
         {pr.credit ? <> {pr.credit}。</> : null}
         料金や条件は変わることがあるため、ご依頼の前にお店へご確認ください。
       </p>
@@ -67,7 +68,7 @@ export function PrSection({ l }: { l: Listing }) {
 export function PrArea({ items, where }: { items: Listing[]; where: string }) {
   if (!items.length) return null
   return (
-    <section className="pr-area" aria-label={`${where}のPR（有料掲載）`}>
+    <section className="pr-area" aria-label={`${where}のPR`}>
       <p className="pr-area-head">
         <PrPill /> {where}の掲載店から
       </p>
@@ -85,9 +86,6 @@ export function PrArea({ items, where }: { items: Listing[]; where: string }) {
           </a>
         ))}
       </div>
-      <p className="muted pr-area-note">
-        この枠は有料掲載です。下の一覧の順番は料金によって変わりません。
-      </p>
     </section>
   )
 }
