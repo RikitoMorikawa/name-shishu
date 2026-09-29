@@ -75,7 +75,15 @@
 ```bash
 node scripts/export.mjs --write   # 掲載 DB → data/listings.json・plans.json・photos.json（**ビルドの前に必ず**）
 npm run build                     # → push で Vercel が本番に出す
+# デプロイが終わってから
+node scripts/indexnow.mjs --send  # 本文が変わったページと新しいページだけ Bing へ知らせる
+git add .indexnow-state.json && git commit -m "IndexNow 送信"   # 送った状態を残す（次の差分の基準）
 ```
+
+**IndexNow（2026-09-29〜）**：Bing（＝ChatGPT・Copilot が引くインデックス）へ URL を知らせる仕組み。
+Google の URL 検査（1日10件）と違って上限が実質無い。**Google は IndexNow を使わない**ので、Google はサイトマップと URL 検査のまま。
+鍵は `public/<32桁>.txt`（秘密ではない。消すと送れなくなる）。**デプロイ前に流すと、Bing が古い版を読む**ので順番を守る。
+毎回全ページを送らない（`--all` は普段使わない）― 変わっていないのに送り続けると信用の低い送り方になる。
 
 ### 店を足す
 
