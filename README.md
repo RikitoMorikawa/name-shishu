@@ -64,22 +64,39 @@
 ## 作り
 
 - Next.js（App Router）の**静的書き出し**（`output: 'export'`）。全ページが素のHTML
-- **DB に繋がない。** `data/listings.json` が正で、`TURSO_AUTH_TOKEN` をこのリポジトリに置かない
-  ― 営業台帳（prospects）へ到達する経路を物理的に作らないため
+- **データの正は掲載 DB（Turso `name-shishu`）。** 2026-09-29 に hp/001 の営業台帳（prospects）から分けた。
+  **公開してよいものだけを入れる DB** で、営業のメモ・メールアドレス・送信履歴は1列も無い
+- **サイトは DB に繋がない。** ビルドは `data/*.json` を読むだけで、Vercel に接続情報を置かない。
+  DB を触るのは手元の `scripts/` と `db/` だけ（接続情報は `.env.local`・`.gitignore` 済み）
 - AIクローラーは JS を実行しないので、一覧も各社ページもサーバー側で描き切る
 
 ## データの更新
 
-hp/001 側で書き出して、ここへコピーしてコミットする。
-
 ```bash
-# hp/001 で
-node scripts/export-listings.mjs --out ../../name-shishu/data/listings.json
+node scripts/export.mjs --write   # 掲載 DB → data/listings.json・plans.json・photos.json（**ビルドの前に必ず**）
+npm run build                     # → push で Vercel が本番に出す
 ```
 
-書き出すのは社名・都道府県・市区・住所・サイト・電話だけ。
-**status / reason / angle / memo / email / contact_form / sns は出さない。**
-列を足すときは `scripts/export-listings.mjs` の注意書きを読むこと。
+### 店を足す
+
+加工屋を探すのは hp/001 側（`places.mjs` で検索 → サイトを読んで精査）。精査が済んだものをここに入れる。
+
+```bash
+node scripts/add.mjs --json <候補.json> --dry-run   # places.mjs の「追記用」＋ place_id
+node scripts/add.mjs --json <候補.json>
+node scripts/verify.mjs --apply                     # 公式サイトで住所と電話を取り直す
+node scripts/scan-terms.mjs --since <時刻> --full   # 4項目を拾う。**根拠を読んでから** --apply
+```
+
+- **営業台帳とは別物。** ここに足しても営業の対象にはならないし、営業で見送りにしても掲載は消えない。
+  2つは `place_id`（Places の規約で無期限に保存してよい唯一の項目）でつながるだけ
+- **Places の住所・電話は `hint_addr` / `hint_tel` に一時的に入る。** 公式サイトの住所と突き合わせるためだけで、
+  書き出さない。裏取りが済んだら `verify.mjs` が消す
+- **`scan-terms.mjs --apply` は空の項目だけ埋める。** 手で直した値は上書きしない（`--overwrite` のときだけ上書き）
+- **誤読を見つけたら、根拠の頭に「【採用しない：理由】」を付けて値を空にする。** 空にしただけだと
+  「まだ調べていない」と区別できず、次の `--apply` で同じ誤読が戻る（2026-09-29 に実際に戻った）
+- **掲載をやめるときは消さずに `status='非掲載'`**（`hide_reason` に理由）。消すと次の検索でまた拾う
+- 列を足すときは「サイトに出してよいか」を先に決める。`scripts/export.mjs` が書き出す列だけが公開される
 
 ## 手元で見る
 
@@ -106,9 +123,9 @@ npm run dev     # http://localhost:3000
 ### 掲載店の写真（一覧・各社ページ）
 
 1. `public/photos/<slug>.jpg` に置く
-2. `data/photos.json` に `"<slug>": { "src": "/photos/<slug>.jpg", "credit": "提供：〇〇" }`
+2. 掲載 DB の `photos` に1行足す（`listing_id`・`src`・`credit`。`plan_id` は空）→ `node scripts/export.mjs --write`
 
-**`listings.json` に直接書かない。** あれは DB から毎回作り直されるので上書きで消える。
+**`data/*.json` に直接書かない。** 掲載 DB から毎回作り直されるので上書きで消える。
 
 ### トップの差し替え口
 
@@ -182,12 +199,13 @@ Vercel（Pro）。ドメインは **Value Domain で取得**し、Vercel へ向�
 
 ## 有料掲載（年9,800円）を1店足す（2026-09-28）
 
-**決済はアプリに入れない。請求書を個別に送り、入金を確かめてから載せる。** 中身は `data/plans.json` に1行。
+**決済はアプリに入れない。請求書を個別に送り、入金を確かめてから載せる。** 中身は掲載 DB の `plans` に1行
+（金額・入金日・請求書番号も同じ行に持つ。`memo` は書き出さない）。
 
 1. 掲載先から **紹介文・料金表・写真（提供されたものだけ）** を受け取る
 2. 写真を `public/photos/<slug>-1.jpg` のように置く（**実物が無い写真はビルド時に自動で外れる**）
-3. `data/plans.json` に slug をキーにして1行足す（書き方は同ファイルの `_readme`）。`until` は請求した期間の最終日
-4. `npm run build` → push（Vercel が本番に出す）
+3. 掲載 DB の `plans` に1行足す。`until` は請求した期間の最終日。写真は `photos` に `plan_id` を付けて足す
+4. `node scripts/export.mjs --write` → `npm run build` → push（Vercel が本番に出す）
 
 出るもの：店ページの「お店から」欄（写真・紹介文・料金表）と社名横の「PR」／市区・県ページの一覧の上の **PR 枠**／一覧のカードの「PR」。
 
@@ -196,5 +214,5 @@ Vercel（Pro）。ドメインは **Value Domain で取得**し、Vercel へ向�
 - **「PR」を消さない。** 掲載料をもらった内容なのでステマ規制で表示が要る。色も中立の灰にして、無料の店より偉く見せない
 - **「有料掲載」という言葉は画面に出さない**（本人の指定）。表示は「PR」だけで足りる
 - **期限切れは再ビルドで外れる**（静的書き出しなので、ビルドした日で判定する）。更新しないなら月に1回は再ビルドする
-- `listings.json`（hp/001 が作り直す）には書かない。消えるので
+- `data/plans.json` には書かない。`export.mjs` が作り直すので消える
 - **お金を受け取る前に Vercel を Pro に上げる**（Hobby は商用利用不可。2026-09-28 時点で未対応）

@@ -62,8 +62,8 @@ const photos = photosRaw as Record<string, { src: string; credit: string } | unk
 
 export const updatedAt = data.updatedAt
 /**
- * 市区名の頭に県コードが残っている行がある（「11さいたま市」）。**正は hp/001 側の
- * export-listings.mjs** だが、書き出し直すまで画面に出てしまうのでここでも落とす。
+ * 市区名の頭に県コードが残っている行がある（「11さいたま市」）。**正は scripts/export.mjs
+ * （掲載 DB から書き出す）** だが、書き出し直すまで画面に出てしまうのでここでも落とす。
  */
 const cleanCity = (city: string | null) => (city ? city.replace(/^\d{1,2}(?=[^\d])/, '') : city)
 
@@ -102,8 +102,8 @@ export const prOf = (items: Listing[]) =>
   items.filter((l) => l.pr).sort((a, b) => a.name.localeCompare(b.name, 'ja'))
 
 /**
- * 表示用の都道府県名。**データは「東京」までしか持っていない**（正は hp/001 の
- * export-listings.mjs 側）。検索は「東京都 刺繍」の形で来るので、画面には正式名で出す。
+ * 表示用の都道府県名。**データは「東京」までしか持っていない**（正は掲載 DB と
+ * scripts/export.mjs 側）。検索は「東京都 刺繍」の形で来るので、画面には正式名で出す。
  * **slug は変えない** ― 配布済みの URL が変わる。
  */
 export function prefLabel(pref: string) {
