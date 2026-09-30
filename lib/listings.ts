@@ -92,7 +92,16 @@ function planOf(slug: string): Pr | null {
   }
 }
 
-export const listings: Listing[] = data.listings.map((l) => {
+/**
+ * **依頼で載せた店（基本掲載の履歴がある店）は、有料の期限が切れたら出さない**（2026-09-30）。
+ * 無料で残すと更新する理由が無くなる。こちらが自主的に載せた店は plans に basic の行が無いので対象外
+ */
+const lapsed = (slug: string) => {
+  const p = plans[slug] as { paidOnly?: boolean } | undefined
+  return !!p?.paidOnly && !planOf(slug)
+}
+
+export const listings: Listing[] = data.listings.filter((l) => !lapsed(l.slug)).map((l) => {
   const p = photos[l.slug]
   const pr = planOf(l.slug)
   const base = { ...l, city: cleanCity(l.city), pr }

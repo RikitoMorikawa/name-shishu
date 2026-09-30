@@ -78,6 +78,13 @@ for (const p of planRows) {
     credit: str(p.credit),
   }
 }
+// **基本掲載の行が1つでもある店は「依頼で載せた店」。** 有料の期限が切れたら無料で残さず非掲載に戻す
+// （2026-09-30・本人決定。残すと更新する理由が無くなる）。後から充実掲載に上げた店も同じ扱い。
+// 判定はビルドした日（lib/listings.ts）。静的書き出しなので、外すには再ビルドが要る
+for (const p of planRows) {
+  const slug = slugById[Number(p.listing_id)]
+  if (slug && p.kind === 'basic' && plans[slug]) plans[slug].paidOnly = true
+}
 const photos = { _readme: plans._readme }
 for (const f of photoRows) {
   const slug = slugById[Number(f.listing_id)]
