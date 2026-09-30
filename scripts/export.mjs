@@ -69,6 +69,7 @@ for (const p of planRows) {
   const slug = slugById[Number(p.listing_id)]
   if (!slug) continue
   plans[slug] = {
+    kind: p.kind === 'basic' ? 'basic' : 'full',
     since: String(p.since),
     until: String(p.until),
     intro: str(p.intro),

@@ -40,11 +40,16 @@ export type Listing = {
 }
 
 /**
- * **有料掲載（年9,800円）で載せるもの。** 写真・紹介文・料金表と、市区・県ページの PR 枠。
+ * **有料掲載で載せるもの。** 2プラン（2026-09-30）：
+ *   basic＝基本掲載 年6,000円。**掲載のご依頼を受けて載せた店**。中身は基本情報だけで、社名横と一覧に「PR」が付く
+ *   full ＝充実掲載 年9,800円。写真・紹介文・料金表と、市区・県ページの PR 枠
+ * **こちらが自主的に載せた店は無料**（plans に行が無い）。
  * 線引きは「事実は無料・見せ方は有料」。持ち込み・納期などの事実は無料の側で、ここには入れない。
  * **掲載の順番には一切効かせない**（利用規約と ABOUT で「順番は料金によって変わらない」と約束している）。
  */
 export type Pr = {
+  /** basic＝基本掲載 年6,000円（依頼を受けて載せた店・基本情報だけ）／full＝充実掲載 年9,800円（2026-09-30） */
+  kind: 'basic' | 'full'
   since: string
   /** 掲載期限（請求した期間の最終日）。過ぎた行はビルド時に外れる */
   until: string
@@ -74,6 +79,7 @@ function planOf(slug: string): Pr | null {
   const p = plans[slug] as Partial<Pr> | undefined
   if (!p || typeof p !== 'object' || !p.until || p.until < today) return null
   return {
+    kind: p.kind === 'basic' ? 'basic' : 'full',
     since: p.since ?? '',
     until: p.until,
     intro: p.intro ?? null,
@@ -97,9 +103,9 @@ export const listings: Listing[] = data.listings.map((l) => {
     : base
 })
 
-/** その地域の有料掲載の店。**一覧とは別の PR 枠に出す**（一覧の順番は変えない） */
+/** その地域の充実掲載の店。**一覧とは別の PR 枠に出す**（一覧の順番は変えない）。基本掲載は枠に出さない */
 export const prOf = (items: Listing[]) =>
-  items.filter((l) => l.pr).sort((a, b) => a.name.localeCompare(b.name, 'ja'))
+  items.filter((l) => l.pr?.kind === 'full').sort((a, b) => a.name.localeCompare(b.name, 'ja'))
 
 /**
  * 表示用の都道府県名。**データは「東京」までしか持っていない**（正は掲載 DB と
