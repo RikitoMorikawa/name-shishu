@@ -203,7 +203,7 @@ Facebook は 共有デバッガー に URL を入れて取り直させる。
 
 ## ファビコン
 
-地図ピンと、足元の縫い目（黄色の破線3本）。背景なし（2026-10-01）。
+地図ピンと、足元の縫い目（黄色の破線3本）。背景なし（2026-10-01）。**ヘッダー・フッターのロゴ（`app/Logo.tsx`）も同じ形**にしてある。変えるときは両方を揃える。
 **`app/icon.svg` だけを直し、`node scripts/icons.mjs` で `favicon.ico`（16・32・48）と `apple-icon.png`（180・白地）を作り直す。**
 - 暗いタブではピンを明るい緑に切り替える（SVG の中の `prefers-color-scheme`。Chrome・Firefox は効く、Safari は効かない）
 - apple-icon は白地に敷く。iOS は透過部分を黒で塗る
