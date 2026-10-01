@@ -104,11 +104,10 @@ export function PrEmpty({ l }: { l: Listing }) {
           </div>
         ))}
       </div>
-      <p className="pr-empty-note">この店はまだ、写真・紹介文を載せていません。</p>
-      <div className="pr-empty-cta">
-        <span>この店の方へ ― {l.kind === 'shop' ? '名入れの条件' : '持ち込みの条件'}の記入や、★の項目を掲載できます。</span>
-        <a className="btn btn-ghost" href="/listing/">掲載のご案内を見る</a>
-      </div>
+      {/* 店の方への案内はこの1行のリンクだけ（2026-10-01。緑の帯とボタンは目立ちすぎたので外した） */}
+      <p className="pr-empty-note">
+        この店はまだ、写真・紹介文を載せていません。<a className="pr-empty-link" href="/listing/">掲載のご案内を見る</a>
+      </p>
     </section>
   )
 }
