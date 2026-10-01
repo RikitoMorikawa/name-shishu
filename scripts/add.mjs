@@ -4,7 +4,8 @@
 //   node scripts/add.mjs --json <path> --dry-run   # 足す行と、既にある行を見るだけ
 //   node scripts/add.mjs --json <path>             # 足す
 //
-// 1行の形：{ name, area, site_url, tel, place_id? }（places.mjs の出力に place_id を足したもの）
+// 1行の形：{ name, area, site_url, tel, place_id?, kind? }（places.mjs の出力に place_id を足したもの）
+// kind は 'kakou'（刺繍の加工屋・既定）か 'shop'（名入れの販売店）。2026-10-01 に足した
 //
 // **精査を済ませてから渡す。** Places の結果には手芸店・教室・チェーンが混ざる。
 // 刺繍・名入れを請ける加工屋かどうかは、サイトを読んで人が決める（hp/001 の .claude/docs/sales.md）。
@@ -52,18 +53,19 @@ for (const x of input) {
   const slug = makeSlug(x.name, pref)
   if (haveSlug.has(slug)) { skip.push(`${x.name}（slug ${slug} が衝突。slug.mjs の桁を伸ばす）`); continue }
   haveSlug.add(slug); haveName.add(norm(x.name)); if (x.place_id) havePid.add(x.place_id)
-  add.push({ slug, place_id: x.place_id ?? null, name: x.name, pref, url: x.site_url.replace(/\?utm_[^#]*$/, ''), hint_addr: x.area ?? null, hint_tel: x.tel ?? null })
+  const kind = x.kind === 'shop' ? 'shop' : 'kakou'
+  add.push({ slug, kind, place_id: x.place_id ?? null, name: x.name, pref, url: x.site_url.replace(/\?utm_[^#]*$/, ''), hint_addr: x.area ?? null, hint_tel: x.tel ?? null })
 }
 
 console.log(`${opts['dry-run'] ? '[dry-run] ' : ''}足す ${add.length}件 / 足さない ${skip.length}件`)
-for (const a of add) console.log(`  + ${a.slug}  ${a.name}`)
+for (const a of add) console.log(`  + ${a.slug}  ${a.kind === 'shop' ? '［販売店］' : ''}${a.name}`)
 for (const s of skip) console.log(`  - ${s}`)
 
 if (!opts['dry-run'] && add.length) {
   await client.batch(
     add.map((a) => ({
-      sql: `INSERT INTO listings (slug, place_id, name, pref, url, hint_addr, hint_tel) VALUES (?,?,?,?,?,?,?)`,
-      args: [a.slug, a.place_id, a.name, a.pref, a.url, a.hint_addr, a.hint_tel],
+      sql: `INSERT INTO listings (slug, kind, place_id, name, pref, url, hint_addr, hint_tel) VALUES (?,?,?,?,?,?,?,?)`,
+      args: [a.slug, a.kind, a.place_id, a.name, a.pref, a.url, a.hint_addr, a.hint_tel],
     })),
     'write',
   )
