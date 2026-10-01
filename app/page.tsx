@@ -8,7 +8,7 @@ import {
   IconMap, IconTee, IconTowel, IconWappen,
 } from './Icons'
 import {
-  ITEM_LABEL, ITEM_ORDER, byPref, itemCounts, listings, listingsByPrefSize,
+  ITEM_LABEL, ITEM_ORDER, kindFacet, byPref, itemCounts, listings, listingsByPrefSize,
   prefLabel, prefOptions, updatedAt, type ItemKey,
 } from '@/lib/listings'
 
@@ -200,6 +200,7 @@ export default function Home() {
           <Filter
             total={listings.length}
             groups={[
+                kindFacet(listings),
               {
                 key: 'items', label: '刺繍を入れる対象',
                 options: ITEM_ORDER.map((k) => ({ value: k, label: ITEM_LABEL[k], count: counts[k] })),

@@ -3,6 +3,7 @@
  "listings": [
   {
    "slug": "mie-ad80",
+   "kind": "kakou",
    "name": "M.E.綿弥",
    "pref": "三重",
    "prefSlug": "mie",
@@ -25,6 +26,7 @@
   },
   {
    "slug": "mie-5011",
+   "kind": "kakou",
    "name": "クンエー有限会社",
    "pref": "三重",
    "prefSlug": "mie",
@@ -53,6 +55,7 @@
   },
   {
    "slug": "mie-1a52",
+   "kind": "kakou",
    "name": "中野商店(刺繍)",
    "pref": "三重",
    "prefSlug": "mie",
@@ -75,6 +78,7 @@
   },
   {
    "slug": "mie-dea7",
+   "kind": "kakou",
    "name": "有限会社エムプランニング",
    "pref": "三重",
    "prefSlug": "mie",
@@ -102,6 +106,7 @@
   },
   {
    "slug": "mie-1b38",
+   "kind": "kakou",
    "name": "Ｋ’ｓ刺繍",
    "pref": "三重",
    "prefSlug": "mie",
@@ -127,6 +132,7 @@
   },
   {
    "slug": "kyoto-59f7",
+   "kind": "kakou",
    "name": "おりじなるししゅう&ぷりんとはうす ピンクのぶた",
    "pref": "京都",
    "prefSlug": "kyoto",
@@ -153,12 +159,13 @@
   },
   {
    "slug": "kyoto-048b",
+   "kind": "kakou",
    "name": "中村刺繍店",
    "pref": "京都",
    "prefSlug": "kyoto",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "京都市",
+   "address": "京都府京都市上京区上立売通堀川東入堀之上町5",
+   "addrState": "verified",
    "url": "http://www.nakamurashisyu.com/",
    "tel": "075-431-1426",
    "photo": null,
@@ -175,6 +182,7 @@
   },
   {
    "slug": "kyoto-0385",
+   "kind": "kakou",
    "name": "京美刺繍工芸",
    "pref": "京都",
    "prefSlug": "kyoto",
@@ -199,6 +207,7 @@
   },
   {
    "slug": "kyoto-53a9",
+   "kind": "kakou",
    "name": "京都の刺繍三京",
    "pref": "京都",
    "prefSlug": "kyoto",
@@ -221,6 +230,7 @@
   },
   {
    "slug": "kyoto-5b1c",
+   "kind": "kakou",
    "name": "刺繍プリントショップAｓ・Ａ・ｂｅ（アズ・ア・ビー株式会社）",
    "pref": "京都",
    "prefSlug": "kyoto",
@@ -247,12 +257,13 @@
   },
   {
    "slug": "kyoto-2cd6",
+   "kind": "kakou",
    "name": "村山刺繍店",
    "pref": "京都",
    "prefSlug": "kyoto",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "京都市",
+   "address": "京都府京都市北区紫野東御所田町5-1",
+   "addrState": "verified",
    "url": "http://www.murayama-sisyu.jp/",
    "tel": "075-451-2378",
    "photo": null,
@@ -269,6 +280,7 @@
   },
   {
    "slug": "kyoto-838e",
+   "kind": "kakou",
    "name": "花園刺繍工芸",
    "pref": "京都",
    "prefSlug": "kyoto",
@@ -291,6 +303,7 @@
   },
   {
    "slug": "saga-bcf2",
+   "kind": "kakou",
    "name": "TOWA-R（トワール）",
    "pref": "佐賀",
    "prefSlug": "saga",
@@ -318,12 +331,13 @@
   },
   {
    "slug": "saga-f6bc",
+   "kind": "kakou",
    "name": "グッズランドマーク",
    "pref": "佐賀",
    "prefSlug": "saga",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "佐賀市",
+   "address": "佐賀県佐賀市久保田町大字久富3550-6",
+   "addrState": "verified",
    "url": "https://goods-land.com/",
    "tel": "0952-68-5255",
    "photo": null,
@@ -342,6 +356,7 @@
   },
   {
    "slug": "saga-316b",
+   "kind": "shop",
    "name": "マルゼンユニフォームセンター",
    "pref": "佐賀",
    "prefSlug": "saga",
@@ -366,6 +381,7 @@
   },
   {
    "slug": "saga-71c5",
+   "kind": "shop",
    "name": "ユニフォーム ビッグ",
    "pref": "佐賀",
    "prefSlug": "saga",
@@ -390,6 +406,7 @@
   },
   {
    "slug": "saga-5ea6",
+   "kind": "kakou",
    "name": "太一工房",
    "pref": "佐賀",
    "prefSlug": "saga",
@@ -418,6 +435,7 @@
   },
   {
    "slug": "saga-71b4",
+   "kind": "shop",
    "name": "株式会社九州ワーク 佐賀本社",
    "pref": "佐賀",
    "prefSlug": "saga",
@@ -442,6 +460,7 @@
   },
   {
    "slug": "hyogo-d42b",
+   "kind": "kakou",
    "name": "ナイスマーク",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -468,6 +487,7 @@
   },
   {
    "slug": "hyogo-d709",
+   "kind": "kakou",
    "name": "三栄刺繍",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -494,6 +514,7 @@
   },
   {
    "slug": "hyogo-8aac",
+   "kind": "kakou",
    "name": "丸山刺繍（株）",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -516,6 +537,7 @@
   },
   {
    "slug": "hyogo-f829",
+   "kind": "kakou",
    "name": "刺繍とプリント エレヴァール",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -538,6 +560,7 @@
   },
   {
    "slug": "hyogo-b742",
+   "kind": "kakou",
    "name": "刺繍店 TAKAHASHI",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -560,6 +583,7 @@
   },
   {
    "slug": "hyogo-4237",
+   "kind": "kakou",
    "name": "岸本 刺しゅう",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -582,6 +606,7 @@
   },
   {
    "slug": "hyogo-a957",
+   "kind": "kakou",
    "name": "戸塚刺しゅう",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -604,6 +629,7 @@
   },
   {
    "slug": "hyogo-e64a",
+   "kind": "kakou",
    "name": "株式会社クリエイティブ17",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -629,6 +655,7 @@
   },
   {
    "slug": "hyogo-3929",
+   "kind": "kakou",
    "name": "紀繍乃や",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -653,6 +680,7 @@
   },
   {
    "slug": "hyogo-039d",
+   "kind": "kakou",
    "name": "金川刺繍（株）（神戸長田）",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -679,6 +707,7 @@
   },
   {
    "slug": "hyogo-e3c1",
+   "kind": "kakou",
    "name": "（有）ソーイングイノウエ",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -707,6 +736,7 @@
   },
   {
    "slug": "hyogo-68d9",
+   "kind": "kakou",
    "name": "（有）上野刺繍",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -733,6 +763,7 @@
   },
   {
    "slug": "hyogo-6883",
+   "kind": "kakou",
    "name": "（株）田中刺繍",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -755,6 +786,7 @@
   },
   {
    "slug": "hyogo-4d1e",
+   "kind": "kakou",
    "name": "（株）金川刺繍（西脇）",
    "pref": "兵庫",
    "prefSlug": "hyogo",
@@ -780,6 +812,7 @@
   },
   {
    "slug": "hokkaido-4288",
+   "kind": "shop",
    "name": "プリントモンキー",
    "pref": "北海道",
    "prefSlug": "hokkaido",
@@ -807,6 +840,7 @@
   },
   {
    "slug": "hokkaido-21d2",
+   "kind": "kakou",
    "name": "㈲エルム刺繍",
    "pref": "北海道",
    "prefSlug": "hokkaido",
@@ -829,6 +863,7 @@
   },
   {
    "slug": "hokkaido-d742",
+   "kind": "kakou",
    "name": "㈲梅澤刺繍店",
    "pref": "北海道",
    "prefSlug": "hokkaido",
@@ -851,12 +886,13 @@
   },
   {
    "slug": "hokkaido-1e44",
+   "kind": "kakou",
    "name": "刺繍屋マックイーン（ＭｃＱｕｅｅｎ）",
    "pref": "北海道",
    "prefSlug": "hokkaido",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "札幌市",
+   "address": "北海道札幌市白石区東札幌2条5丁目9番28号",
+   "addrState": "verified",
    "url": "https://mcqsp.jp/",
    "tel": null,
    "photo": null,
@@ -878,6 +914,7 @@
   },
   {
    "slug": "hokkaido-b848",
+   "kind": "kakou",
    "name": "富士商事株式会社",
    "pref": "北海道",
    "prefSlug": "hokkaido",
@@ -905,6 +942,7 @@
   },
   {
    "slug": "hokkaido-29d7",
+   "kind": "kakou",
    "name": "有限会社ホンママーク",
    "pref": "北海道",
    "prefSlug": "hokkaido",
@@ -932,6 +970,7 @@
   },
   {
    "slug": "hokkaido-9e07",
+   "kind": "kakou",
    "name": "札幌ヨシダネーム",
    "pref": "北海道",
    "prefSlug": "hokkaido",
@@ -959,6 +998,7 @@
   },
   {
    "slug": "chiba-dcc4",
+   "kind": "kakou",
    "name": "おりーぶK",
    "pref": "千葉",
    "prefSlug": "chiba",
@@ -981,6 +1021,7 @@
   },
   {
    "slug": "chiba-da6d",
+   "kind": "shop",
    "name": "オリジナル工房",
    "pref": "千葉",
    "prefSlug": "chiba",
@@ -1008,6 +1049,7 @@
   },
   {
    "slug": "chiba-495b",
+   "kind": "kakou",
    "name": "刺繍 縫 -nui-",
    "pref": "千葉",
    "prefSlug": "chiba",
@@ -1030,6 +1072,7 @@
   },
   {
    "slug": "chiba-3844",
+   "kind": "kakou",
    "name": "刺繍プリント加工専門店 GOLD SNOW",
    "pref": "千葉",
    "prefSlug": "chiba",
@@ -1056,6 +1099,7 @@
   },
   {
    "slug": "chiba-858e",
+   "kind": "kakou",
    "name": "手刺繍工房ラジュー株式会社 アトリエ",
    "pref": "千葉",
    "prefSlug": "chiba",
@@ -1078,6 +1122,7 @@
   },
   {
    "slug": "wakayama-ace6",
+   "kind": "shop",
    "name": "PRINT SHOP WOODYS 和歌山本店",
    "pref": "和歌山",
    "prefSlug": "wakayama",
@@ -1105,6 +1150,7 @@
   },
   {
    "slug": "wakayama-7ddd",
+   "kind": "shop",
    "name": "TAIYO&Co.",
    "pref": "和歌山",
    "prefSlug": "wakayama",
@@ -1130,6 +1176,7 @@
   },
   {
    "slug": "wakayama-c2cc",
+   "kind": "shop",
    "name": "デザインウェアプロジェクト",
    "pref": "和歌山",
    "prefSlug": "wakayama",
@@ -1158,6 +1205,7 @@
   },
   {
    "slug": "wakayama-7efc",
+   "kind": "shop",
    "name": "ワークショップ三和",
    "pref": "和歌山",
    "prefSlug": "wakayama",
@@ -1182,6 +1230,7 @@
   },
   {
    "slug": "wakayama-3668",
+   "kind": "kakou",
    "name": "有限会社曽和刺繍",
    "pref": "和歌山",
    "prefSlug": "wakayama",
@@ -1207,6 +1256,7 @@
   },
   {
    "slug": "wakayama-f1b5",
+   "kind": "shop",
    "name": "株式会社ウチハタ",
    "pref": "和歌山",
    "prefSlug": "wakayama",
@@ -1231,6 +1281,7 @@
   },
   {
    "slug": "saitama-f734",
+   "kind": "kakou",
    "name": "(有)はんなネーム",
    "pref": "埼玉",
    "prefSlug": "saitama",
@@ -1253,6 +1304,7 @@
   },
   {
    "slug": "saitama-cde9",
+   "kind": "kakou",
    "name": "(株)KEI刺繍興望",
    "pref": "埼玉",
    "prefSlug": "saitama",
@@ -1278,6 +1330,7 @@
   },
   {
    "slug": "saitama-99a2",
+   "kind": "kakou",
    "name": "S../ Design",
    "pref": "埼玉",
    "prefSlug": "saitama",
@@ -1304,6 +1357,7 @@
   },
   {
    "slug": "saitama-2b57",
+   "kind": "kakou",
    "name": "ししゅうのお店NOW",
    "pref": "埼玉",
    "prefSlug": "saitama",
@@ -1329,6 +1383,7 @@
   },
   {
    "slug": "saitama-0b1e",
+   "kind": "kakou",
    "name": "サニープレイス",
    "pref": "埼玉",
    "prefSlug": "saitama",
@@ -1353,6 +1408,7 @@
   },
   {
    "slug": "saitama-d097",
+   "kind": "kakou",
    "name": "ビーテック",
    "pref": "埼玉",
    "prefSlug": "saitama",
@@ -1381,6 +1437,7 @@
   },
   {
    "slug": "saitama-1aa2",
+   "kind": "kakou",
    "name": "ホサカ",
    "pref": "埼玉",
    "prefSlug": "saitama",
@@ -1410,6 +1467,7 @@
   },
   {
    "slug": "saitama-912d",
+   "kind": "kakou",
    "name": "伊藤刺しゅう店",
    "pref": "埼玉",
    "prefSlug": "saitama",
@@ -1436,6 +1494,7 @@
   },
   {
    "slug": "saitama-a10a",
+   "kind": "kakou",
    "name": "増田刺繍店",
    "pref": "埼玉",
    "prefSlug": "saitama",
@@ -1458,6 +1517,7 @@
   },
   {
    "slug": "saitama-94c8",
+   "kind": "kakou",
    "name": "岡本洋品店",
    "pref": "埼玉",
    "prefSlug": "saitama",
@@ -1483,6 +1543,7 @@
   },
   {
    "slug": "saitama-e01d",
+   "kind": "kakou",
    "name": "株式会社クラリティ",
    "pref": "埼玉",
    "prefSlug": "saitama",
@@ -1508,6 +1569,7 @@
   },
   {
    "slug": "oita-cbb3",
+   "kind": "kakou",
    "name": "服飾刺繍いろは",
    "pref": "大分",
    "prefSlug": "oita",
@@ -1535,6 +1597,7 @@
   },
   {
    "slug": "oita-96ba",
+   "kind": "kakou",
    "name": "株式会社イトダネーム",
    "pref": "大分",
    "prefSlug": "oita",
@@ -1559,6 +1622,7 @@
   },
   {
    "slug": "oita-b0e4",
+   "kind": "shop",
    "name": "株式会社ファッションプランニング都",
    "pref": "大分",
    "prefSlug": "oita",
@@ -1586,6 +1650,7 @@
   },
   {
    "slug": "oita-bf01",
+   "kind": "kakou",
    "name": "株式会社ヨコブリシ",
    "pref": "大分",
    "prefSlug": "oita",
@@ -1608,6 +1673,7 @@
   },
   {
    "slug": "osaka-7477",
+   "kind": "kakou",
    "name": "(株)大阪被服団地刺繍センター",
    "pref": "大阪",
    "prefSlug": "osaka",
@@ -1630,6 +1696,7 @@
   },
   {
    "slug": "osaka-524d",
+   "kind": "kakou",
    "name": "Move On 刺繍工房",
    "pref": "大阪",
    "prefSlug": "osaka",
@@ -1652,12 +1719,13 @@
   },
   {
    "slug": "osaka-9ba0",
+   "kind": "kakou",
    "name": "すぎえ刺しゅう",
    "pref": "大阪",
    "prefSlug": "osaka",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "大阪市",
+   "address": "大阪府大阪市東住吉区駒川１丁目8-17",
+   "addrState": "site-only",
    "url": "http://sugieshishuu.ko-co.jp/",
    "tel": "06-6718-7270",
    "photo": null,
@@ -1674,6 +1742,7 @@
   },
   {
    "slug": "osaka-2bbf",
+   "kind": "kakou",
    "name": "アートししゅう",
    "pref": "大阪",
    "prefSlug": "osaka",
@@ -1703,6 +1772,7 @@
   },
   {
    "slug": "osaka-64cb",
+   "kind": "kakou",
    "name": "タケダマーク（刺繍専門店）",
    "pref": "大阪",
    "prefSlug": "osaka",
@@ -1725,6 +1795,7 @@
   },
   {
    "slug": "osaka-6692",
+   "kind": "kakou",
    "name": "刺繍屋TANDS(有限会社 林ネーム刺繍店)",
    "pref": "大阪",
    "prefSlug": "osaka",
@@ -1751,6 +1822,7 @@
   },
   {
    "slug": "osaka-ee4d",
+   "kind": "kakou",
    "name": "刺繍屋定春",
    "pref": "大阪",
    "prefSlug": "osaka",
@@ -1776,6 +1848,7 @@
   },
   {
    "slug": "osaka-03ec",
+   "kind": "kakou",
    "name": "定金ネーム刺繍寝屋川店",
    "pref": "大阪",
    "prefSlug": "osaka",
@@ -1801,12 +1874,13 @@
   },
   {
    "slug": "osaka-703a",
+   "kind": "kakou",
    "name": "有限会社ビートテック ／ ShiiShu",
    "pref": "大阪",
    "prefSlug": "osaka",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "大阪市",
+   "address": "大阪府大阪市城東区諏訪4-20-25",
+   "addrState": "site-only",
    "url": "https://www.beat-tec.jp/",
    "tel": null,
    "photo": null,
@@ -1828,6 +1902,7 @@
   },
   {
    "slug": "osaka-00a6",
+   "kind": "kakou",
    "name": "有限会社新谷刺繍",
    "pref": "大阪",
    "prefSlug": "osaka",
@@ -1857,6 +1932,7 @@
   },
   {
    "slug": "osaka-952b",
+   "kind": "kakou",
    "name": "有限会社香川刺繍店",
    "pref": "大阪",
    "prefSlug": "osaka",
@@ -1879,12 +1955,13 @@
   },
   {
    "slug": "osaka-ef73",
+   "kind": "kakou",
    "name": "株式会社山神",
    "pref": "大阪",
    "prefSlug": "osaka",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "大阪市",
+   "address": "大阪府大阪市城東区永田3-10-2",
+   "addrState": "site-only",
    "url": "https://sanshin-emb.com/",
    "tel": "06-6969-3734",
    "photo": null,
@@ -1901,12 +1978,13 @@
   },
   {
    "slug": "osaka-e507",
+   "kind": "kakou",
    "name": "猫島刺繍（株）",
    "pref": "大阪",
    "prefSlug": "osaka",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "大阪市",
+   "address": "大阪府大阪市福島区吉野4-6-3",
+   "addrState": "site-only",
    "url": "http://www.nekoshima.co.jp/",
    "tel": "06-6461-1382",
    "photo": null,
@@ -1925,6 +2003,7 @@
   },
   {
    "slug": "osaka-48f0",
+   "kind": "kakou",
    "name": "藤原刺繍",
    "pref": "大阪",
    "prefSlug": "osaka",
@@ -1952,12 +2031,13 @@
   },
   {
    "slug": "osaka-956e",
+   "kind": "kakou",
    "name": "鈴木刺繍株式会社",
    "pref": "大阪",
    "prefSlug": "osaka",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "門真市",
+   "address": "大阪府門真市三ツ島1丁目34番11号",
+   "addrState": "site-only",
    "url": "https://szk-emb.com/#",
    "tel": "072-884-1650",
    "photo": null,
@@ -1974,6 +2054,7 @@
   },
   {
    "slug": "osaka-8d2e",
+   "kind": "kakou",
    "name": "（有）東田刺繍",
    "pref": "大阪",
    "prefSlug": "osaka",
@@ -1998,12 +2079,13 @@
   },
   {
    "slug": "osaka-d541",
+   "kind": "kakou",
    "name": "（株）キング刺繍 本店",
    "pref": "大阪",
    "prefSlug": "osaka",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "大阪市",
+   "address": "大阪府大阪市城東区関目6丁目13-18",
+   "addrState": "site-only",
    "url": "http://www.mouko.jp/",
    "tel": "06-6939-5309",
    "photo": null,
@@ -2020,12 +2102,13 @@
   },
   {
    "slug": "nara-bef1",
+   "kind": "kakou",
    "name": "Kit-r工房",
    "pref": "奈良",
    "prefSlug": "nara",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "奈良市",
+   "address": "奈良県奈良市神殿町476",
+   "addrState": "verified",
    "url": "https://kitr-koubou.com/",
    "tel": "0742-94-6011",
    "photo": null,
@@ -2048,6 +2131,7 @@
   },
   {
    "slug": "nara-2b3f",
+   "kind": "kakou",
    "name": "スプリード",
    "pref": "奈良",
    "prefSlug": "nara",
@@ -2072,12 +2156,13 @@
   },
   {
    "slug": "nara-4028",
+   "kind": "shop",
    "name": "ダイドウ商会",
    "pref": "奈良",
    "prefSlug": "nara",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "奈良市",
+   "address": "奈良県奈良市神殿町476",
+   "addrState": "verified",
    "url": "https://daidoushop.com/",
    "tel": "0742-94-5133",
    "photo": null,
@@ -2097,6 +2182,7 @@
   },
   {
    "slug": "nara-9e21",
+   "kind": "kakou",
    "name": "忍刺繍所",
    "pref": "奈良",
    "prefSlug": "nara",
@@ -2122,6 +2208,7 @@
   },
   {
    "slug": "nara-edf8",
+   "kind": "kakou",
    "name": "手づくり工房吉田",
    "pref": "奈良",
    "prefSlug": "nara",
@@ -2146,6 +2233,7 @@
   },
   {
    "slug": "nara-5233",
+   "kind": "kakou",
    "name": "有限会社原田刺繍",
    "pref": "奈良",
    "prefSlug": "nara",
@@ -2170,6 +2258,7 @@
   },
   {
    "slug": "nara-5154",
+   "kind": "kakou",
    "name": "株式会社エース・エンブ",
    "pref": "奈良",
    "prefSlug": "nara",
@@ -2195,6 +2284,7 @@
   },
   {
    "slug": "nara-7aa3",
+   "kind": "kakou",
    "name": "株式会社松田刺繍",
    "pref": "奈良",
    "prefSlug": "nara",
@@ -2219,6 +2309,7 @@
   },
   {
    "slug": "miyagi-37a1",
+   "kind": "kakou",
    "name": "オイカワプロダクツ",
    "pref": "宮城",
    "prefSlug": "miyagi",
@@ -2245,6 +2336,7 @@
   },
   {
    "slug": "miyagi-2796",
+   "kind": "kakou",
    "name": "㈱尾崎ネーム",
    "pref": "宮城",
    "prefSlug": "miyagi",
@@ -2273,6 +2365,7 @@
   },
   {
    "slug": "miyagi-30be",
+   "kind": "kakou",
    "name": "刺繍ギフト工房G&G",
    "pref": "宮城",
    "prefSlug": "miyagi",
@@ -2299,6 +2392,7 @@
   },
   {
    "slug": "miyagi-747d",
+   "kind": "kakou",
    "name": "刺繍屋 はんちゃん工房",
    "pref": "宮城",
    "prefSlug": "miyagi",
@@ -2321,6 +2415,7 @@
   },
   {
    "slug": "miyagi-718a",
+   "kind": "kakou",
    "name": "山下刺繍店",
    "pref": "宮城",
    "prefSlug": "miyagi",
@@ -2343,6 +2438,7 @@
   },
   {
    "slug": "miyagi-1cf5",
+   "kind": "kakou",
    "name": "玉屋DESIGNS",
    "pref": "宮城",
    "prefSlug": "miyagi",
@@ -2367,6 +2463,7 @@
   },
   {
    "slug": "miyagi-812d",
+   "kind": "kakou",
    "name": "鈴木ネーム店",
    "pref": "宮城",
    "prefSlug": "miyagi",
@@ -2394,6 +2491,7 @@
   },
   {
    "slug": "miyazaki-214e",
+   "kind": "shop",
    "name": "iink",
    "pref": "宮崎",
    "prefSlug": "miyazaki",
@@ -2419,6 +2517,7 @@
   },
   {
    "slug": "miyazaki-747b",
+   "kind": "shop",
    "name": "スタンス! 宮崎店",
    "pref": "宮崎",
    "prefSlug": "miyazaki",
@@ -2443,6 +2542,7 @@
   },
   {
    "slug": "miyazaki-a350",
+   "kind": "kakou",
    "name": "刺繍工房 いこま屋",
    "pref": "宮崎",
    "prefSlug": "miyazaki",
@@ -2467,6 +2567,7 @@
   },
   {
    "slug": "miyazaki-4f9d",
+   "kind": "kakou",
    "name": "刺繍工房ilo",
    "pref": "宮崎",
    "prefSlug": "miyazaki",
@@ -2491,6 +2592,7 @@
   },
   {
    "slug": "miyazaki-219a",
+   "kind": "shop",
    "name": "山田商事 ワーカーズ",
    "pref": "宮崎",
    "prefSlug": "miyazaki",
@@ -2516,6 +2618,7 @@
   },
   {
    "slug": "miyazaki-76da",
+   "kind": "kakou",
    "name": "松屋ネーム延岡店",
    "pref": "宮崎",
    "prefSlug": "miyazaki",
@@ -2538,6 +2641,7 @@
   },
   {
    "slug": "miyazaki-b2e9",
+   "kind": "shop",
    "name": "株式会社タイコー",
    "pref": "宮崎",
    "prefSlug": "miyazaki",
@@ -2564,6 +2668,7 @@
   },
   {
    "slug": "miyazaki-6793",
+   "kind": "kakou",
    "name": "西村刺繍店",
    "pref": "宮崎",
    "prefSlug": "miyazaki",
@@ -2588,6 +2693,7 @@
   },
   {
    "slug": "toyama-d7a7",
+   "kind": "kakou",
    "name": "シバタシシュウ工芸",
    "pref": "富山",
    "prefSlug": "toyama",
@@ -2612,6 +2718,7 @@
   },
   {
    "slug": "toyama-2901",
+   "kind": "kakou",
    "name": "有限会社大橋刺しゅう",
    "pref": "富山",
    "prefSlug": "toyama",
@@ -2634,6 +2741,7 @@
   },
   {
    "slug": "toyama-b43f",
+   "kind": "kakou",
    "name": "有限会社新港刺繍",
    "pref": "富山",
    "prefSlug": "toyama",
@@ -2660,6 +2768,7 @@
   },
   {
    "slug": "toyama-b27a",
+   "kind": "kakou",
    "name": "有限会社木村刺しゅう",
    "pref": "富山",
    "prefSlug": "toyama",
@@ -2686,6 +2795,7 @@
   },
   {
    "slug": "toyama-8043",
+   "kind": "kakou",
    "name": "株式会社ベスト・スリー",
    "pref": "富山",
    "prefSlug": "toyama",
@@ -2711,6 +2821,7 @@
   },
   {
    "slug": "toyama-7725",
+   "kind": "kakou",
    "name": "株式会社本田ししゅう",
    "pref": "富山",
    "prefSlug": "toyama",
@@ -2737,6 +2848,7 @@
   },
   {
    "slug": "yamaguchi-263e",
+   "kind": "shop",
    "name": "ORDER UNIFORM COMPANY（OUC）",
    "pref": "山口",
    "prefSlug": "yamaguchi",
@@ -2762,6 +2874,7 @@
   },
   {
    "slug": "yamaguchi-0810",
+   "kind": "kakou",
    "name": "まるもや刺繍",
    "pref": "山口",
    "prefSlug": "yamaguchi",
@@ -2786,6 +2899,7 @@
   },
   {
    "slug": "yamaguchi-9df1",
+   "kind": "kakou",
    "name": "フジネーム",
    "pref": "山口",
    "prefSlug": "yamaguchi",
@@ -2811,6 +2925,7 @@
   },
   {
    "slug": "yamagata-0628",
+   "kind": "kakou",
    "name": "BOBIN sewing works（ボビン）",
    "pref": "山形",
    "prefSlug": "yamagata",
@@ -2833,6 +2948,7 @@
   },
   {
    "slug": "yamagata-5d1d",
+   "kind": "shop",
    "name": "Work Box（有限会社北綿山形）",
    "pref": "山形",
    "prefSlug": "yamagata",
@@ -2857,6 +2973,7 @@
   },
   {
    "slug": "yamagata-a1de",
+   "kind": "kakou",
    "name": "刺繍工房 蔵",
    "pref": "山形",
    "prefSlug": "yamagata",
@@ -2885,6 +3002,7 @@
   },
   {
    "slug": "yamagata-d7a0",
+   "kind": "kakou",
    "name": "有限会社田中刺繍",
    "pref": "山形",
    "prefSlug": "yamagata",
@@ -2907,6 +3025,7 @@
   },
   {
    "slug": "yamagata-ac00",
+   "kind": "kakou",
    "name": "東北シルク株式会社",
    "pref": "山形",
    "prefSlug": "yamagata",
@@ -2932,6 +3051,7 @@
   },
   {
    "slug": "yamagata-0d7b",
+   "kind": "kakou",
    "name": "浅岡刺繍",
    "pref": "山形",
    "prefSlug": "yamagata",
@@ -2960,6 +3080,7 @@
   },
   {
    "slug": "yamanashi-ff41",
+   "kind": "shop",
    "name": "EMIMORE（株式会社メイクス）",
    "pref": "山梨",
    "prefSlug": "yamanashi",
@@ -2987,6 +3108,7 @@
   },
   {
    "slug": "yamanashi-fe2a",
+   "kind": "kakou",
    "name": "STEELO FACTORY",
    "pref": "山梨",
    "prefSlug": "yamanashi",
@@ -3012,6 +3134,7 @@
   },
   {
    "slug": "yamanashi-1410",
+   "kind": "kakou",
    "name": "カムリードワークス（合同会社カムリード）",
    "pref": "山梨",
    "prefSlug": "yamanashi",
@@ -3034,6 +3157,7 @@
   },
   {
    "slug": "yamanashi-68b2",
+   "kind": "kakou",
    "name": "刺繍・マークＥｌｅｖｅｎ",
    "pref": "山梨",
    "prefSlug": "yamanashi",
@@ -3059,6 +3183,7 @@
   },
   {
    "slug": "yamanashi-54fb",
+   "kind": "shop",
    "name": "山梨ユニフォーム株式会社",
    "pref": "山梨",
    "prefSlug": "yamanashi",
@@ -3084,6 +3209,7 @@
   },
   {
    "slug": "yamanashi-799f",
+   "kind": "shop",
    "name": "株式会社大黒屋",
    "pref": "山梨",
    "prefSlug": "yamanashi",
@@ -3106,6 +3232,7 @@
   },
   {
    "slug": "yamanashi-e7ea",
+   "kind": "shop",
    "name": "水口屋洋品店",
    "pref": "山梨",
    "prefSlug": "yamanashi",
@@ -3132,6 +3259,7 @@
   },
   {
    "slug": "gifu-8e2a",
+   "kind": "kakou",
    "name": "(有)丸大ネーム刺繍 真砂町店",
    "pref": "岐阜",
    "prefSlug": "gifu",
@@ -3139,7 +3267,7 @@
    "address": null,
    "addrState": "unverified",
    "url": "https://ameblo.jp/marudai-masagocho/",
-   "tel": null,
+   "tel": "058-251-0330",
    "photo": null,
    "photoCredit": null,
    "mochikomi": null,
@@ -3157,6 +3285,7 @@
   },
   {
    "slug": "gifu-10dc",
+   "kind": "kakou",
    "name": "アトリエ刺繡マルニシ",
    "pref": "岐阜",
    "prefSlug": "gifu",
@@ -3185,6 +3314,7 @@
   },
   {
    "slug": "gifu-1cd9",
+   "kind": "kakou",
    "name": "ハヤザキ刺繍",
    "pref": "岐阜",
    "prefSlug": "gifu",
@@ -3207,6 +3337,7 @@
   },
   {
    "slug": "gifu-f807",
+   "kind": "kakou",
    "name": "田頭刺繍",
    "pref": "岐阜",
    "prefSlug": "gifu",
@@ -3231,6 +3362,7 @@
   },
   {
    "slug": "gifu-4e8b",
+   "kind": "kakou",
    "name": "（株）カノウ刺しゅう企画",
    "pref": "岐阜",
    "prefSlug": "gifu",
@@ -3255,6 +3387,7 @@
   },
   {
    "slug": "gifu-8e87",
+   "kind": "kakou",
    "name": "（株）タカオ",
    "pref": "岐阜",
    "prefSlug": "gifu",
@@ -3262,7 +3395,7 @@
    "address": null,
    "addrState": "unverified",
    "url": "http://www.takao71.com/",
-   "tel": null,
+   "tel": "058-274-7121",
    "photo": null,
    "photoCredit": null,
    "mochikomi": null,
@@ -3277,6 +3410,7 @@
   },
   {
    "slug": "gifu-39d8",
+   "kind": "kakou",
    "name": "（株）中央企画",
    "pref": "岐阜",
    "prefSlug": "gifu",
@@ -3302,6 +3436,7 @@
   },
   {
    "slug": "okayama-0b2a",
+   "kind": "kakou",
    "name": "(有)エンブロイダリーフジワラ",
    "pref": "岡山",
    "prefSlug": "okayama",
@@ -3324,6 +3459,7 @@
   },
   {
    "slug": "okayama-789a",
+   "kind": "kakou",
    "name": "(有)岡田ネーム",
    "pref": "岡山",
    "prefSlug": "okayama",
@@ -3346,6 +3482,7 @@
   },
   {
    "slug": "okayama-188c",
+   "kind": "kakou",
    "name": "エンブレムファクトリー",
    "pref": "岡山",
    "prefSlug": "okayama",
@@ -3368,6 +3505,7 @@
   },
   {
    "slug": "okayama-d7ee",
+   "kind": "kakou",
    "name": "刺繍工房 ハーモニー",
    "pref": "岡山",
    "prefSlug": "okayama",
@@ -3390,6 +3528,7 @@
   },
   {
    "slug": "okayama-184e",
+   "kind": "kakou",
    "name": "（有）ベストシシュー",
    "pref": "岡山",
    "prefSlug": "okayama",
@@ -3412,6 +3551,7 @@
   },
   {
    "slug": "iwate-d9f6",
+   "kind": "kakou",
    "name": "ハルヤ刺繍店",
    "pref": "岩手",
    "prefSlug": "iwate",
@@ -3436,6 +3576,7 @@
   },
   {
    "slug": "iwate-a33a",
+   "kind": "kakou",
    "name": "フジ刺繍",
    "pref": "岩手",
    "prefSlug": "iwate",
@@ -3458,6 +3599,7 @@
   },
   {
    "slug": "iwate-8b32",
+   "kind": "shop",
    "name": "プリントショップ創博堂",
    "pref": "岩手",
    "prefSlug": "iwate",
@@ -3485,6 +3627,7 @@
   },
   {
    "slug": "iwate-62e7",
+   "kind": "kakou",
    "name": "有限会社会津ネーム",
    "pref": "岩手",
    "prefSlug": "iwate",
@@ -3513,6 +3656,7 @@
   },
   {
    "slug": "iwate-e4c7",
+   "kind": "kakou",
    "name": "盛岡菜園刺繍",
    "pref": "岩手",
    "prefSlug": "iwate",
@@ -3540,6 +3684,7 @@
   },
   {
    "slug": "iwate-0a6c",
+   "kind": "kakou",
    "name": "花巻刺繍屋",
    "pref": "岩手",
    "prefSlug": "iwate",
@@ -3564,6 +3709,7 @@
   },
   {
    "slug": "shimane-6d16",
+   "kind": "kakou",
    "name": "トータルブランド本店",
    "pref": "島根",
    "prefSlug": "shimane",
@@ -3588,6 +3734,7 @@
   },
   {
    "slug": "shimane-c1a2",
+   "kind": "kakou",
    "name": "刺繍倶楽部",
    "pref": "島根",
    "prefSlug": "shimane",
@@ -3612,6 +3759,7 @@
   },
   {
    "slug": "shimane-b107",
+   "kind": "shop",
    "name": "有限会社カタイ",
    "pref": "島根",
    "prefSlug": "shimane",
@@ -3638,6 +3786,7 @@
   },
   {
    "slug": "shimane-2f76",
+   "kind": "shop",
    "name": "東洋ユニフォームセンター 本社・松江店",
    "pref": "島根",
    "prefSlug": "shimane",
@@ -3664,6 +3813,7 @@
   },
   {
    "slug": "shimane-f60b",
+   "kind": "kakou",
    "name": "株式会社光栄刺シュウ",
    "pref": "島根",
    "prefSlug": "shimane",
@@ -3688,6 +3838,7 @@
   },
   {
    "slug": "hiroshima-f31f",
+   "kind": "kakou",
    "name": "ますだ 刺しゅう店",
    "pref": "広島",
    "prefSlug": "hiroshima",
@@ -3715,6 +3866,7 @@
   },
   {
    "slug": "hiroshima-38c7",
+   "kind": "kakou",
    "name": "オリジナル刺繍・プリント専門店【ココスタイル (エンブモップ)】",
    "pref": "広島",
    "prefSlug": "hiroshima",
@@ -3744,6 +3896,7 @@
   },
   {
    "slug": "hiroshima-c4b1",
+   "kind": "kakou",
    "name": "畝 刺繍店",
    "pref": "広島",
    "prefSlug": "hiroshima",
@@ -3769,6 +3922,7 @@
   },
   {
    "slug": "hiroshima-71c6",
+   "kind": "kakou",
    "name": "（有）ししゅうプリントハウス本庄",
    "pref": "広島",
    "prefSlug": "hiroshima",
@@ -3794,6 +3948,7 @@
   },
   {
    "slug": "hiroshima-bfd9",
+   "kind": "kakou",
    "name": "（有）マスダ・ネーム",
    "pref": "広島",
    "prefSlug": "hiroshima",
@@ -3816,6 +3971,7 @@
   },
   {
    "slug": "tokushima-fdb7",
+   "kind": "shop",
    "name": "pucca DESIGN FACTORY",
    "pref": "徳島",
    "prefSlug": "tokushima",
@@ -3840,6 +3996,7 @@
   },
   {
    "slug": "tokushima-0d1e",
+   "kind": "kakou",
    "name": "中川刺繍",
    "pref": "徳島",
    "prefSlug": "tokushima",
@@ -3862,6 +4019,7 @@
   },
   {
    "slug": "tokushima-5628",
+   "kind": "kakou",
    "name": "刺繍Factory",
    "pref": "徳島",
    "prefSlug": "tokushima",
@@ -3886,6 +4044,7 @@
   },
   {
    "slug": "tokushima-97eb",
+   "kind": "shop",
    "name": "株式会社柿原スポーツ",
    "pref": "徳島",
    "prefSlug": "tokushima",
@@ -3913,6 +4072,7 @@
   },
   {
    "slug": "ehime-e246",
+   "kind": "kakou",
    "name": "SHU遊KAN",
    "pref": "愛媛",
    "prefSlug": "ehime",
@@ -3938,6 +4098,7 @@
   },
   {
    "slug": "ehime-a70a",
+   "kind": "kakou",
    "name": "オリジナルワッペン制作工房",
    "pref": "愛媛",
    "prefSlug": "ehime",
@@ -3962,6 +4123,7 @@
   },
   {
    "slug": "ehime-930b",
+   "kind": "kakou",
    "name": "刺繍の前川",
    "pref": "愛媛",
    "prefSlug": "ehime",
@@ -3989,6 +4151,7 @@
   },
   {
    "slug": "ehime-b345",
+   "kind": "kakou",
    "name": "刺繍工房イナイ",
    "pref": "愛媛",
    "prefSlug": "ehime",
@@ -4011,6 +4174,7 @@
   },
   {
    "slug": "ehime-a3f4",
+   "kind": "kakou",
    "name": "株式会社金鱗",
    "pref": "愛媛",
    "prefSlug": "ehime",
@@ -4035,6 +4199,7 @@
   },
   {
    "slug": "aichi-19ea",
+   "kind": "kakou",
    "name": "GOTODA2",
    "pref": "愛知",
    "prefSlug": "aichi",
@@ -4064,6 +4229,7 @@
   },
   {
    "slug": "aichi-13f5",
+   "kind": "kakou",
    "name": "ししゅう屋さん",
    "pref": "愛知",
    "prefSlug": "aichi",
@@ -4086,6 +4252,7 @@
   },
   {
    "slug": "aichi-129b",
+   "kind": "kakou",
    "name": "はとやネーム",
    "pref": "愛知",
    "prefSlug": "aichi",
@@ -4113,6 +4280,7 @@
   },
   {
    "slug": "aichi-a543",
+   "kind": "kakou",
    "name": "ひかりネーム",
    "pref": "愛知",
    "prefSlug": "aichi",
@@ -4138,6 +4306,7 @@
   },
   {
    "slug": "aichi-1230",
+   "kind": "kakou",
    "name": "ネーム刺繍工房立志会",
    "pref": "愛知",
    "prefSlug": "aichi",
@@ -4160,6 +4329,7 @@
   },
   {
    "slug": "aichi-96a9",
+   "kind": "kakou",
    "name": "フェリーチェ山手",
    "pref": "愛知",
    "prefSlug": "aichi",
@@ -4189,6 +4359,7 @@
   },
   {
    "slug": "aichi-c974",
+   "kind": "kakou",
    "name": "㈱ワンリーエボリューション",
    "pref": "愛知",
    "prefSlug": "aichi",
@@ -4216,6 +4387,7 @@
   },
   {
    "slug": "aichi-9c14",
+   "kind": "kakou",
    "name": "㈱中部パンチング工芸",
    "pref": "愛知",
    "prefSlug": "aichi",
@@ -4244,6 +4416,7 @@
   },
   {
    "slug": "aichi-a1ed",
+   "kind": "kakou",
    "name": "㈱真野ししゅう",
    "pref": "愛知",
    "prefSlug": "aichi",
@@ -4270,6 +4443,7 @@
   },
   {
    "slug": "aichi-a4be",
+   "kind": "kakou",
    "name": "刺しゅう屋p-Co",
    "pref": "愛知",
    "prefSlug": "aichi",
@@ -4294,6 +4468,7 @@
   },
   {
    "slug": "aichi-e2ea",
+   "kind": "kakou",
    "name": "愛知シシュウ㈱",
    "pref": "愛知",
    "prefSlug": "aichi",
@@ -4322,6 +4497,7 @@
   },
   {
    "slug": "aichi-badd",
+   "kind": "kakou",
    "name": "有限会社 創ing",
    "pref": "愛知",
    "prefSlug": "aichi",
@@ -4344,6 +4520,7 @@
   },
   {
    "slug": "aichi-9d3c",
+   "kind": "kakou",
    "name": "株式会社東ネーム刺しゅう店",
    "pref": "愛知",
    "prefSlug": "aichi",
@@ -4370,6 +4547,7 @@
   },
   {
    "slug": "niigata-e153",
+   "kind": "kakou",
    "name": "(有)新潟刺繍",
    "pref": "新潟",
    "prefSlug": "niigata",
@@ -4392,6 +4570,7 @@
   },
   {
    "slug": "niigata-f761",
+   "kind": "kakou",
    "name": "(有)野島刺繍",
    "pref": "新潟",
    "prefSlug": "niigata",
@@ -4414,6 +4593,7 @@
   },
   {
    "slug": "niigata-36ab",
+   "kind": "kakou",
    "name": "ししゅうスター",
    "pref": "新潟",
    "prefSlug": "niigata",
@@ -4436,6 +4616,7 @@
   },
   {
    "slug": "niigata-c7ab",
+   "kind": "kakou",
    "name": "まるみ刺繍店",
    "pref": "新潟",
    "prefSlug": "niigata",
@@ -4458,6 +4639,7 @@
   },
   {
    "slug": "niigata-e8f0",
+   "kind": "kakou",
    "name": "ネット刺繍工場",
    "pref": "新潟",
    "prefSlug": "niigata",
@@ -4480,6 +4662,7 @@
   },
   {
    "slug": "niigata-7f8c",
+   "kind": "kakou",
    "name": "世界一の刺しゅう館",
    "pref": "新潟",
    "prefSlug": "niigata",
@@ -4502,6 +4685,7 @@
   },
   {
    "slug": "niigata-97d0",
+   "kind": "kakou",
    "name": "前山刺繍",
    "pref": "新潟",
    "prefSlug": "niigata",
@@ -4524,6 +4708,7 @@
   },
   {
    "slug": "niigata-19dc",
+   "kind": "kakou",
    "name": "塚野刺繍(株)",
    "pref": "新潟",
    "prefSlug": "niigata",
@@ -4546,6 +4731,7 @@
   },
   {
    "slug": "niigata-5bbe",
+   "kind": "kakou",
    "name": "岸波ネーム刺繍",
    "pref": "新潟",
    "prefSlug": "niigata",
@@ -4568,6 +4754,7 @@
   },
   {
    "slug": "niigata-3448",
+   "kind": "kakou",
    "name": "（株）おだネーム店",
    "pref": "新潟",
    "prefSlug": "niigata",
@@ -4590,6 +4777,7 @@
   },
   {
    "slug": "tokyo-337f",
+   "kind": "kakou",
    "name": "(有)さくら刺繍",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4614,6 +4802,7 @@
   },
   {
    "slug": "tokyo-9270",
+   "kind": "kakou",
    "name": "CAP ORIGINAL | キャップオリジナル",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4639,6 +4828,7 @@
   },
   {
    "slug": "tokyo-15df",
+   "kind": "kakou",
    "name": "CULTURE SUPPLY",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4663,6 +4853,7 @@
   },
   {
    "slug": "tokyo-161d",
+   "kind": "kakou",
    "name": "Threadworks スレッドワークス",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4685,6 +4876,7 @@
   },
   {
    "slug": "tokyo-2484",
+   "kind": "kakou",
    "name": "Torch Project トーチプロジェクト【刺繍とプリントのお店】",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4712,6 +4904,7 @@
   },
   {
    "slug": "tokyo-0c5f",
+   "kind": "kakou",
    "name": "mimi刺繍",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4734,6 +4927,7 @@
   },
   {
    "slug": "tokyo-3853",
+   "kind": "kakou",
    "name": "アオキ刺繍",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4756,6 +4950,7 @@
   },
   {
    "slug": "tokyo-429b",
+   "kind": "kakou",
    "name": "アパレルスタジオ／Factory ant（ファクトリーアント）",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4782,6 +4977,7 @@
   },
   {
    "slug": "tokyo-7b85",
+   "kind": "kakou",
    "name": "グッドスミス",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4804,6 +5000,7 @@
   },
   {
    "slug": "tokyo-6476",
+   "kind": "kakou",
    "name": "シスターユニフォーム",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4826,6 +5023,7 @@
   },
   {
    "slug": "tokyo-1c0a",
+   "kind": "kakou",
    "name": "パリス刺繍㈱",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4848,6 +5046,7 @@
   },
   {
    "slug": "tokyo-bb49",
+   "kind": "kakou",
    "name": "㈱小鮒ネーム刺繍店",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4870,6 +5069,7 @@
   },
   {
    "slug": "tokyo-95b7",
+   "kind": "kakou",
    "name": "㈱小鮒ネーム刺繍店 本店",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4892,6 +5092,7 @@
   },
   {
    "slug": "tokyo-7293",
+   "kind": "kakou",
    "name": "㈱小鮒ネーム刺繍店 赤羽店",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4914,6 +5115,7 @@
   },
   {
    "slug": "tokyo-5700",
+   "kind": "kakou",
    "name": "丸全社",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4936,6 +5138,7 @@
   },
   {
    "slug": "tokyo-3070",
+   "kind": "kakou",
    "name": "刺繍の関源",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4958,6 +5161,7 @@
   },
   {
    "slug": "tokyo-3501",
+   "kind": "kakou",
    "name": "刺繍屋",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -4980,6 +5184,7 @@
   },
   {
    "slug": "tokyo-1676",
+   "kind": "kakou",
    "name": "刺繍屋 OWNONESHOP",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5002,6 +5207,7 @@
   },
   {
    "slug": "tokyo-d344",
+   "kind": "kakou",
    "name": "刺繍屋 福田商店",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5028,6 +5234,7 @@
   },
   {
    "slug": "tokyo-bed7",
+   "kind": "kakou",
    "name": "刺繍屋 阿部",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5050,6 +5257,7 @@
   },
   {
    "slug": "tokyo-c1a7",
+   "kind": "kakou",
    "name": "刺繍工房 J Factory",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5072,6 +5280,7 @@
   },
   {
    "slug": "tokyo-bccd",
+   "kind": "kakou",
    "name": "刺繍館",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5097,6 +5306,7 @@
   },
   {
    "slug": "tokyo-aad3",
+   "kind": "kakou",
    "name": "星川商店",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5119,6 +5329,7 @@
   },
   {
    "slug": "tokyo-fd05",
+   "kind": "kakou",
    "name": "有限会社 橋上",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5144,6 +5355,7 @@
   },
   {
    "slug": "tokyo-f0f9",
+   "kind": "kakou",
    "name": "有限会社アクセル",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5170,6 +5382,7 @@
   },
   {
    "slug": "tokyo-bda8",
+   "kind": "kakou",
    "name": "有限会社中島ネーム研究所",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5192,6 +5405,7 @@
   },
   {
    "slug": "tokyo-4100",
+   "kind": "kakou",
    "name": "有限会社成田ネーム",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5214,6 +5428,7 @@
   },
   {
    "slug": "tokyo-0785",
+   "kind": "kakou",
    "name": "東京刺繍屋株式会社",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5236,6 +5451,7 @@
   },
   {
    "slug": "tokyo-6a31",
+   "kind": "kakou",
    "name": "東京刺繍屋株式会社[TOKYO448]",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5258,6 +5474,7 @@
   },
   {
    "slug": "tokyo-84e8",
+   "kind": "kakou",
    "name": "株式会社ユーエス",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5282,6 +5499,7 @@
   },
   {
    "slug": "tokyo-8c80",
+   "kind": "kakou",
    "name": "株式会社野村ネーム刺繍",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5304,6 +5522,7 @@
   },
   {
    "slug": "tokyo-dcee",
+   "kind": "kakou",
    "name": "株式会社黒澤刺繍",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5326,6 +5545,7 @@
   },
   {
    "slug": "tokyo-ceb7",
+   "kind": "kakou",
    "name": "植竹刺繍所",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5348,6 +5568,7 @@
   },
   {
    "slug": "tokyo-5ef4",
+   "kind": "kakou",
    "name": "深澤刺繍",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5370,6 +5591,7 @@
   },
   {
    "slug": "tokyo-b4b2",
+   "kind": "kakou",
    "name": "片柳刺繍",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5396,6 +5618,7 @@
   },
   {
    "slug": "tokyo-8bc7",
+   "kind": "kakou",
    "name": "磯部刺繍店",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5418,6 +5641,7 @@
   },
   {
    "slug": "tokyo-38c1",
+   "kind": "kakou",
    "name": "高橋刺繍店",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5440,6 +5664,7 @@
   },
   {
    "slug": "tokyo-418a",
+   "kind": "kakou",
    "name": "（有）たむら",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5469,6 +5694,7 @@
   },
   {
    "slug": "tokyo-4a24",
+   "kind": "kakou",
    "name": "（有）オオクボ縫製",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5494,6 +5720,7 @@
   },
   {
    "slug": "tokyo-6cfe",
+   "kind": "kakou",
    "name": "（有）丸喜工芸",
    "pref": "東京",
    "prefSlug": "tokyo",
@@ -5516,6 +5743,7 @@
   },
   {
    "slug": "tochigi-084e",
+   "kind": "kakou",
    "name": "+Stitch プラス・ステッチ",
    "pref": "栃木",
    "prefSlug": "tochigi",
@@ -5538,6 +5766,7 @@
   },
   {
    "slug": "tochigi-6e34",
+   "kind": "kakou",
    "name": "オレンジエース",
    "pref": "栃木",
    "prefSlug": "tochigi",
@@ -5560,6 +5789,7 @@
   },
   {
    "slug": "tochigi-db9c",
+   "kind": "kakou",
    "name": "シシュウブギウギ",
    "pref": "栃木",
    "prefSlug": "tochigi",
@@ -5585,6 +5815,7 @@
   },
   {
    "slug": "tochigi-c89e",
+   "kind": "shop",
    "name": "フットワーク",
    "pref": "栃木",
    "prefSlug": "tochigi",
@@ -5609,6 +5840,7 @@
   },
   {
    "slug": "tochigi-a87f",
+   "kind": "shop",
    "name": "有限会社ルフェステ",
    "pref": "栃木",
    "prefSlug": "tochigi",
@@ -5634,6 +5866,7 @@
   },
   {
    "slug": "tochigi-e83a",
+   "kind": "shop",
    "name": "株式会社タカヤ商事",
    "pref": "栃木",
    "prefSlug": "tochigi",
@@ -5661,6 +5894,7 @@
   },
   {
    "slug": "okinawa-5d94",
+   "kind": "kakou",
    "name": "RE:COOL エンブロイダリーカスタムズ",
    "pref": "沖縄",
    "prefSlug": "okinawa",
@@ -5687,6 +5921,7 @@
   },
   {
    "slug": "okinawa-21fc",
+   "kind": "kakou",
    "name": "U.WORKS（ユーワークス刺繍店）",
    "pref": "沖縄",
    "prefSlug": "okinawa",
@@ -5715,6 +5950,7 @@
   },
   {
    "slug": "okinawa-7a31",
+   "kind": "kakou",
    "name": "かわばた刺繍",
    "pref": "沖縄",
    "prefSlug": "okinawa",
@@ -5737,6 +5973,7 @@
   },
   {
    "slug": "okinawa-796f",
+   "kind": "kakou",
    "name": "ゆめ刺繍工房",
    "pref": "沖縄",
    "prefSlug": "okinawa",
@@ -5761,6 +5998,7 @@
   },
   {
    "slug": "okinawa-5592",
+   "kind": "kakou",
    "name": "刺しゅうの店 クレージーストアー",
    "pref": "沖縄",
    "prefSlug": "okinawa",
@@ -5783,6 +6021,7 @@
   },
   {
    "slug": "okinawa-5626",
+   "kind": "kakou",
    "name": "刺繍店Embro",
    "pref": "沖縄",
    "prefSlug": "okinawa",
@@ -5805,6 +6044,7 @@
   },
   {
    "slug": "okinawa-bd90",
+   "kind": "kakou",
    "name": "有限会社フタバ",
    "pref": "沖縄",
    "prefSlug": "okinawa",
@@ -5832,6 +6072,7 @@
   },
   {
    "slug": "shiga-bed3",
+   "kind": "shop",
    "name": "つなぎ服専門店ユニジャック",
    "pref": "滋賀",
    "prefSlug": "shiga",
@@ -5857,6 +6098,7 @@
   },
   {
    "slug": "shiga-25b9",
+   "kind": "shop",
    "name": "マルキヨワークショップ",
    "pref": "滋賀",
    "prefSlug": "shiga",
@@ -5881,6 +6123,7 @@
   },
   {
    "slug": "shiga-832f",
+   "kind": "shop",
    "name": "ワークショップ光",
    "pref": "滋賀",
    "prefSlug": "shiga",
@@ -5905,6 +6148,7 @@
   },
   {
    "slug": "shiga-0402",
+   "kind": "kakou",
    "name": "和苑繍",
    "pref": "滋賀",
    "prefSlug": "shiga",
@@ -5929,6 +6173,7 @@
   },
   {
    "slug": "shiga-cc64",
+   "kind": "kakou",
    "name": "有限会社ツーティー",
    "pref": "滋賀",
    "prefSlug": "shiga",
@@ -5951,6 +6196,7 @@
   },
   {
    "slug": "shiga-425d",
+   "kind": "kakou",
    "name": "有限会社丸菱刺繍",
    "pref": "滋賀",
    "prefSlug": "shiga",
@@ -5975,6 +6221,7 @@
   },
   {
    "slug": "shiga-7eb0",
+   "kind": "shop",
    "name": "有限会社長浜ユニフォーム",
    "pref": "滋賀",
    "prefSlug": "shiga",
@@ -5997,6 +6244,7 @@
   },
   {
    "slug": "shiga-4214",
+   "kind": "shop",
    "name": "株式会社エイワ・ユニフォーム",
    "pref": "滋賀",
    "prefSlug": "shiga",
@@ -6021,6 +6269,7 @@
   },
   {
    "slug": "shiga-d248",
+   "kind": "kakou",
    "name": "Ｅー刺繍工房",
    "pref": "滋賀",
    "prefSlug": "shiga",
@@ -6043,6 +6292,7 @@
   },
   {
    "slug": "kumamoto-9367",
+   "kind": "kakou",
    "name": "CAN MARK STATION",
    "pref": "熊本",
    "prefSlug": "kumamoto",
@@ -6069,6 +6319,7 @@
   },
   {
    "slug": "kumamoto-ea4c",
+   "kind": "kakou",
    "name": "のうらや帽子店",
    "pref": "熊本",
    "prefSlug": "kumamoto",
@@ -6094,6 +6345,7 @@
   },
   {
    "slug": "kumamoto-7dad",
+   "kind": "shop",
    "name": "アミッグセカンド",
    "pref": "熊本",
    "prefSlug": "kumamoto",
@@ -6120,6 +6372,7 @@
   },
   {
    "slug": "kumamoto-360e",
+   "kind": "shop",
    "name": "プリントシング",
    "pref": "熊本",
    "prefSlug": "kumamoto",
@@ -6146,6 +6399,7 @@
   },
   {
    "slug": "kumamoto-8bd6",
+   "kind": "kakou",
    "name": "マークランド",
    "pref": "熊本",
    "prefSlug": "kumamoto",
@@ -6174,6 +6428,7 @@
   },
   {
    "slug": "kumamoto-6f02",
+   "kind": "kakou",
    "name": "三英マーク有限会社",
    "pref": "熊本",
    "prefSlug": "kumamoto",
@@ -6199,6 +6454,7 @@
   },
   {
    "slug": "kumamoto-51f3",
+   "kind": "shop",
    "name": "有限会社ユニックス",
    "pref": "熊本",
    "prefSlug": "kumamoto",
@@ -6223,6 +6479,7 @@
   },
   {
    "slug": "kumamoto-eb85",
+   "kind": "kakou",
    "name": "有限会社長田補正",
    "pref": "熊本",
    "prefSlug": "kumamoto",
@@ -6249,6 +6506,7 @@
   },
   {
    "slug": "ishikawa-ee5b",
+   "kind": "shop",
    "name": "丸福栄株式会社",
    "pref": "石川",
    "prefSlug": "ishikawa",
@@ -6277,6 +6535,7 @@
   },
   {
    "slug": "ishikawa-ea14",
+   "kind": "kakou",
    "name": "協和ネーム",
    "pref": "石川",
    "prefSlug": "ishikawa",
@@ -6304,6 +6563,7 @@
   },
   {
    "slug": "ishikawa-dc1b",
+   "kind": "kakou",
    "name": "有限会社シミズ刺繍",
    "pref": "石川",
    "prefSlug": "ishikawa",
@@ -6326,6 +6586,7 @@
   },
   {
    "slug": "ishikawa-dcd0",
+   "kind": "kakou",
    "name": "有限会社南川刺繍工芸",
    "pref": "石川",
    "prefSlug": "ishikawa",
@@ -6350,6 +6611,7 @@
   },
   {
    "slug": "ishikawa-a430",
+   "kind": "shop",
    "name": "株式会社はしむら",
    "pref": "石川",
    "prefSlug": "ishikawa",
@@ -6375,6 +6637,7 @@
   },
   {
    "slug": "kanagawa-1d0d",
+   "kind": "kakou",
    "name": "BROOKSTAR stitch",
    "pref": "神奈川",
    "prefSlug": "kanagawa",
@@ -6402,6 +6665,7 @@
   },
   {
    "slug": "kanagawa-747d",
+   "kind": "kakou",
    "name": "My Stitch ( マイステッチ )",
    "pref": "神奈川",
    "prefSlug": "kanagawa",
@@ -6430,6 +6694,7 @@
   },
   {
    "slug": "kanagawa-0576",
+   "kind": "kakou",
    "name": "OUTLINE Design Lab 刺繍工房",
    "pref": "神奈川",
    "prefSlug": "kanagawa",
@@ -6455,6 +6720,7 @@
   },
   {
    "slug": "kanagawa-1102",
+   "kind": "kakou",
    "name": "はねざわや",
    "pref": "神奈川",
    "prefSlug": "kanagawa",
@@ -6482,6 +6748,7 @@
   },
   {
    "slug": "kanagawa-5ecf",
+   "kind": "kakou",
    "name": "キャップ＆オリジナル刺繍ショップ フリーダムファクトリー 湘南モールフィル1F",
    "pref": "神奈川",
    "prefSlug": "kanagawa",
@@ -6510,6 +6777,7 @@
   },
   {
    "slug": "kanagawa-9b59",
+   "kind": "kakou",
    "name": "ホープネーム",
    "pref": "神奈川",
    "prefSlug": "kanagawa",
@@ -6532,12 +6800,13 @@
   },
   {
    "slug": "kanagawa-01bf",
+   "kind": "kakou",
    "name": "丹生刺繍店",
    "pref": "神奈川",
    "prefSlug": "kanagawa",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "藤沢市",
+   "address": "神奈川県藤沢市辻堂元町4-2-20",
+   "addrState": "verified",
    "url": "https://www.ricamo20.com/",
    "tel": "0466-33-3413",
    "photo": null,
@@ -6554,6 +6823,7 @@
   },
   {
    "slug": "kanagawa-33c4",
+   "kind": "kakou",
    "name": "横浜 ウン刺繍工房",
    "pref": "神奈川",
    "prefSlug": "kanagawa",
@@ -6582,6 +6852,7 @@
   },
   {
    "slug": "kanagawa-f553",
+   "kind": "kakou",
    "name": "横浜刺繍工房 雅",
    "pref": "神奈川",
    "prefSlug": "kanagawa",
@@ -6607,6 +6878,7 @@
   },
   {
    "slug": "kanagawa-ba50",
+   "kind": "kakou",
    "name": "菊池ネーム刺繍店",
    "pref": "神奈川",
    "prefSlug": "kanagawa",
@@ -6634,6 +6906,7 @@
   },
   {
    "slug": "kanagawa-a345",
+   "kind": "kakou",
    "name": "飯田服飾工業",
    "pref": "神奈川",
    "prefSlug": "kanagawa",
@@ -6658,6 +6931,7 @@
   },
   {
    "slug": "fukui-aed8",
+   "kind": "kakou",
    "name": "タムラ刺繍",
    "pref": "福井",
    "prefSlug": "fukui",
@@ -6680,6 +6954,7 @@
   },
   {
    "slug": "fukui-b2a0",
+   "kind": "kakou",
    "name": "ネット刺繍工房NSK",
    "pref": "福井",
    "prefSlug": "fukui",
@@ -6706,6 +6981,7 @@
   },
   {
    "slug": "fukui-b2df",
+   "kind": "kakou",
    "name": "株式会社アートエンブ",
    "pref": "福井",
    "prefSlug": "fukui",
@@ -6730,6 +7006,7 @@
   },
   {
    "slug": "fukui-20fa",
+   "kind": "kakou",
    "name": "渡辺産業株式会社",
    "pref": "福井",
    "prefSlug": "fukui",
@@ -6756,6 +7033,7 @@
   },
   {
    "slug": "fukui-423a",
+   "kind": "kakou",
    "name": "西野マーク 株式会社",
    "pref": "福井",
    "prefSlug": "fukui",
@@ -6780,6 +7058,7 @@
   },
   {
    "slug": "fukuoka-7b41",
+   "kind": "kakou",
    "name": "(有)錦ネーム",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -6804,6 +7083,7 @@
   },
   {
    "slug": "fukuoka-32e3",
+   "kind": "kakou",
    "name": "アートシャツファクトリー",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -6826,6 +7106,7 @@
   },
   {
    "slug": "fukuoka-d638",
+   "kind": "kakou",
    "name": "ウィング刺繍",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -6853,6 +7134,7 @@
   },
   {
    "slug": "fukuoka-7090",
+   "kind": "kakou",
    "name": "ミズノ刺繍（株）",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -6878,6 +7160,7 @@
   },
   {
    "slug": "fukuoka-dae2",
+   "kind": "kakou",
    "name": "丸忠ネーム刺繍 穴生店",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -6900,6 +7183,7 @@
   },
   {
    "slug": "fukuoka-e693",
+   "kind": "kakou",
    "name": "丸忠ネーム刺繡",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -6925,6 +7209,7 @@
   },
   {
    "slug": "fukuoka-4d03",
+   "kind": "kakou",
    "name": "刺繍とプリントの工房 マルカ",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -6952,12 +7237,13 @@
   },
   {
    "slug": "fukuoka-d743",
+   "kind": "kakou",
    "name": "刺繍ドットコム十九",
    "pref": "福岡",
    "prefSlug": "fukuoka",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "福岡市",
+   "address": "福岡県福岡市博多区吉塚7丁目７－１４",
+   "addrState": "city-only",
    "url": "https://www.sisyu.com/",
    "tel": "092-624-0068",
    "photo": null,
@@ -6977,6 +7263,7 @@
   },
   {
    "slug": "fukuoka-c663",
+   "kind": "kakou",
    "name": "刺繍工房だるま屋",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -7001,6 +7288,7 @@
   },
   {
    "slug": "fukuoka-35d2",
+   "kind": "kakou",
    "name": "原山ネーム刺繍店",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -7029,6 +7317,7 @@
   },
   {
    "slug": "fukuoka-1104",
+   "kind": "kakou",
    "name": "有限会社藤原ネーム店",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -7053,6 +7342,7 @@
   },
   {
    "slug": "fukuoka-6ef8",
+   "kind": "kakou",
    "name": "東福岡刺しゅう",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -7078,12 +7368,13 @@
   },
   {
    "slug": "fukuoka-6447",
+   "kind": "kakou",
    "name": "松田ネーム刺繍店",
    "pref": "福岡",
    "prefSlug": "fukuoka",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "福岡市",
+   "address": "福岡県福岡市博多区上川端町10-261",
+   "addrState": "city-only",
    "url": "https://matsuda-name.hp.peraichi.com/",
    "tel": "092-291-5889",
    "photo": null,
@@ -7106,6 +7397,7 @@
   },
   {
    "slug": "fukuoka-38cc",
+   "kind": "kakou",
    "name": "糸島刺繍",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -7130,6 +7422,7 @@
   },
   {
    "slug": "fukuoka-8b52",
+   "kind": "kakou",
    "name": "重松刺しゅう店",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -7152,6 +7445,7 @@
   },
   {
    "slug": "fukuoka-d45b",
+   "kind": "kakou",
    "name": "高田ネーム刺繍店",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -7174,6 +7468,7 @@
   },
   {
    "slug": "fukuoka-9c3d",
+   "kind": "kakou",
    "name": "（有）吉田刺繍",
    "pref": "福岡",
    "prefSlug": "fukuoka",
@@ -7203,6 +7498,7 @@
   },
   {
    "slug": "fukushima-af9d",
+   "kind": "kakou",
    "name": "GOODTIMES",
    "pref": "福島",
    "prefSlug": "fukushima",
@@ -7230,6 +7526,7 @@
   },
   {
    "slug": "fukushima-66a0",
+   "kind": "kakou",
    "name": "プランニングとうざわ",
    "pref": "福島",
    "prefSlug": "fukushima",
@@ -7252,6 +7549,7 @@
   },
   {
    "slug": "fukushima-5ab3",
+   "kind": "kakou",
    "name": "山田ネーム店",
    "pref": "福島",
    "prefSlug": "fukushima",
@@ -7274,6 +7572,7 @@
   },
   {
    "slug": "fukushima-63d1",
+   "kind": "kakou",
    "name": "株式会社 宝栄マーク",
    "pref": "福島",
    "prefSlug": "fukushima",
@@ -7298,6 +7597,7 @@
   },
   {
    "slug": "fukushima-a2f2",
+   "kind": "kakou",
    "name": "株式会社トップエンブレム",
    "pref": "福島",
    "prefSlug": "fukushima",
@@ -7323,6 +7623,7 @@
   },
   {
    "slug": "fukushima-687c",
+   "kind": "kakou",
    "name": "磐井屋",
    "pref": "福島",
    "prefSlug": "fukushima",
@@ -7345,6 +7646,7 @@
   },
   {
    "slug": "akita-f173",
+   "kind": "kakou",
    "name": "MARBLE",
    "pref": "秋田",
    "prefSlug": "akita",
@@ -7372,6 +7674,7 @@
   },
   {
    "slug": "akita-7a3f",
+   "kind": "kakou",
    "name": "みさとマーク株式会社",
    "pref": "秋田",
    "prefSlug": "akita",
@@ -7397,6 +7700,7 @@
   },
   {
    "slug": "akita-de58",
+   "kind": "kakou",
    "name": "アート洋裁工場HOUON",
    "pref": "秋田",
    "prefSlug": "akita",
@@ -7423,6 +7727,7 @@
   },
   {
    "slug": "akita-4087",
+   "kind": "kakou",
    "name": "ウエスギエンブシステム",
    "pref": "秋田",
    "prefSlug": "akita",
@@ -7445,6 +7750,7 @@
   },
   {
    "slug": "akita-e0d1",
+   "kind": "kakou",
    "name": "ササキエンブテクノ",
    "pref": "秋田",
    "prefSlug": "akita",
@@ -7470,6 +7776,7 @@
   },
   {
    "slug": "akita-8ba1",
+   "kind": "kakou",
    "name": "東海林刺しゅう",
    "pref": "秋田",
    "prefSlug": "akita",
@@ -7494,6 +7801,7 @@
   },
   {
    "slug": "akita-0dfb",
+   "kind": "kakou",
    "name": "株式会社タカミ",
    "pref": "秋田",
    "prefSlug": "akita",
@@ -7516,6 +7824,7 @@
   },
   {
    "slug": "akita-d959",
+   "kind": "kakou",
    "name": "祭彩屋",
    "pref": "秋田",
    "prefSlug": "akita",
@@ -7543,6 +7852,7 @@
   },
   {
    "slug": "gunma-6329",
+   "kind": "kakou",
    "name": "CHOUETTE株式会社",
    "pref": "群馬",
    "prefSlug": "gunma",
@@ -7565,6 +7875,7 @@
   },
   {
    "slug": "gunma-0f58",
+   "kind": "kakou",
    "name": "HANDLER Inc.",
    "pref": "群馬",
    "prefSlug": "gunma",
@@ -7590,6 +7901,7 @@
   },
   {
    "slug": "gunma-322f",
+   "kind": "kakou",
    "name": "エンプリ",
    "pref": "群馬",
    "prefSlug": "gunma",
@@ -7616,6 +7928,7 @@
   },
   {
    "slug": "gunma-4794",
+   "kind": "kakou",
    "name": "ネームランドまんぼう",
    "pref": "群馬",
    "prefSlug": "gunma",
@@ -7640,6 +7953,7 @@
   },
   {
    "slug": "gunma-2ef6",
+   "kind": "kakou",
    "name": "刺繍屋ドットコム",
    "pref": "群馬",
    "prefSlug": "gunma",
@@ -7665,6 +7979,7 @@
   },
   {
    "slug": "gunma-db4a",
+   "kind": "kakou",
    "name": "十坊",
    "pref": "群馬",
    "prefSlug": "gunma",
@@ -7687,6 +8002,7 @@
   },
   {
    "slug": "gunma-9e14",
+   "kind": "kakou",
    "name": "有限会社ヤマグチ刺繍",
    "pref": "群馬",
    "prefSlug": "gunma",
@@ -7715,6 +8031,7 @@
   },
   {
    "slug": "gunma-bcbf",
+   "kind": "kakou",
    "name": "村田刺繍所",
    "pref": "群馬",
    "prefSlug": "gunma",
@@ -7740,6 +8057,7 @@
   },
   {
    "slug": "gunma-91eb",
+   "kind": "kakou",
    "name": "株式会社ユニマーク",
    "pref": "群馬",
    "prefSlug": "gunma",
@@ -7768,6 +8086,7 @@
   },
   {
    "slug": "gunma-9aec",
+   "kind": "kakou",
    "name": "株式会社岩文",
    "pref": "群馬",
    "prefSlug": "gunma",
@@ -7790,6 +8109,7 @@
   },
   {
    "slug": "gunma-ac26",
+   "kind": "kakou",
    "name": "良い刺繍.com",
    "pref": "群馬",
    "prefSlug": "gunma",
@@ -7814,6 +8134,7 @@
   },
   {
    "slug": "gunma-a2b3",
+   "kind": "kakou",
    "name": "ＦＵＮ工房ＵＮＩＴＥ９",
    "pref": "群馬",
    "prefSlug": "gunma",
@@ -7838,6 +8159,7 @@
   },
   {
    "slug": "ibaraki-83a8",
+   "kind": "kakou",
    "name": "タグチ刺繍ネーム（有）",
    "pref": "茨城",
    "prefSlug": "ibaraki",
@@ -7860,6 +8182,7 @@
   },
   {
    "slug": "ibaraki-e9a3",
+   "kind": "kakou",
    "name": "マニアックなオーダー刺繍屋なごみ",
    "pref": "茨城",
    "prefSlug": "ibaraki",
@@ -7882,6 +8205,7 @@
   },
   {
    "slug": "ibaraki-6da2",
+   "kind": "kakou",
    "name": "マルエス刺繍",
    "pref": "茨城",
    "prefSlug": "ibaraki",
@@ -7904,6 +8228,7 @@
   },
   {
    "slug": "ibaraki-b8d7",
+   "kind": "kakou",
    "name": "三代目 刺繍工房さくら屋",
    "pref": "茨城",
    "prefSlug": "ibaraki",
@@ -7926,6 +8251,7 @@
   },
   {
    "slug": "ibaraki-afb0",
+   "kind": "kakou",
    "name": "刺繍スタジオうるる",
    "pref": "茨城",
    "prefSlug": "ibaraki",
@@ -7948,6 +8274,7 @@
   },
   {
    "slug": "ibaraki-882c",
+   "kind": "kakou",
    "name": "相澤ネーム店",
    "pref": "茨城",
    "prefSlug": "ibaraki",
@@ -7970,6 +8297,7 @@
   },
   {
    "slug": "ibaraki-4930",
+   "kind": "kakou",
    "name": "（有）丸田ししゅう",
    "pref": "茨城",
    "prefSlug": "ibaraki",
@@ -7992,6 +8320,7 @@
   },
   {
    "slug": "ibaraki-2667",
+   "kind": "kakou",
    "name": "（有）小川ししゅう店",
    "pref": "茨城",
    "prefSlug": "ibaraki",
@@ -8014,6 +8343,7 @@
   },
   {
    "slug": "ibaraki-53a9",
+   "kind": "kakou",
    "name": "（株）シンワテック shisyu工房",
    "pref": "茨城",
    "prefSlug": "ibaraki",
@@ -8036,6 +8366,7 @@
   },
   {
    "slug": "nagasaki-375b",
+   "kind": "kakou",
    "name": "Manto",
    "pref": "長崎",
    "prefSlug": "nagasaki",
@@ -8062,6 +8393,7 @@
   },
   {
    "slug": "nagasaki-0db9",
+   "kind": "kakou",
    "name": "あさひネーム店",
    "pref": "長崎",
    "prefSlug": "nagasaki",
@@ -8087,6 +8419,7 @@
   },
   {
    "slug": "nagasaki-02b3",
+   "kind": "kakou",
    "name": "中村刺しゅう株式会社",
    "pref": "長崎",
    "prefSlug": "nagasaki",
@@ -8111,6 +8444,7 @@
   },
   {
    "slug": "nagasaki-c176",
+   "kind": "kakou",
    "name": "山﨑マーク",
    "pref": "長崎",
    "prefSlug": "nagasaki",
@@ -8135,12 +8469,13 @@
   },
   {
    "slug": "nagasaki-2d0f",
+   "kind": "kakou",
    "name": "有限会社バックス",
    "pref": "長崎",
    "prefSlug": "nagasaki",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "長崎市",
+   "address": "長崎県長崎市古賀町137-1",
+   "addrState": "verified",
    "url": "http://backs-design.com/",
    "tel": "095-838-5995",
    "photo": null,
@@ -8162,6 +8497,7 @@
   },
   {
    "slug": "nagasaki-a731",
+   "kind": "kakou",
    "name": "糸山ネーム店",
    "pref": "長崎",
    "prefSlug": "nagasaki",
@@ -8186,6 +8522,7 @@
   },
   {
    "slug": "nagano-6863",
+   "kind": "kakou",
    "name": "エンブレム美匠",
    "pref": "長野",
    "prefSlug": "nagano",
@@ -8208,6 +8545,7 @@
   },
   {
    "slug": "nagano-38c3",
+   "kind": "kakou",
    "name": "ネーム工房 ハヤシ",
    "pref": "長野",
    "prefSlug": "nagano",
@@ -8230,6 +8568,7 @@
   },
   {
    "slug": "nagano-19a3",
+   "kind": "kakou",
    "name": "伊藤ネーム丸子店",
    "pref": "長野",
    "prefSlug": "nagano",
@@ -8252,6 +8591,7 @@
   },
   {
    "slug": "nagano-326c",
+   "kind": "kakou",
    "name": "倉井ネーム店",
    "pref": "長野",
    "prefSlug": "nagano",
@@ -8274,6 +8614,7 @@
   },
   {
    "slug": "nagano-e722",
+   "kind": "kakou",
    "name": "凸凹刺繍店",
    "pref": "長野",
    "prefSlug": "nagano",
@@ -8296,6 +8637,7 @@
   },
   {
    "slug": "nagano-ec4f",
+   "kind": "kakou",
    "name": "刺子屋わらべすく",
    "pref": "長野",
    "prefSlug": "nagano",
@@ -8318,6 +8660,7 @@
   },
   {
    "slug": "nagano-068b",
+   "kind": "kakou",
    "name": "刺繍&ぷりんと 絵布乃工房",
    "pref": "長野",
    "prefSlug": "nagano",
@@ -8340,6 +8683,7 @@
   },
   {
    "slug": "nagano-74e9",
+   "kind": "kakou",
    "name": "刺繍屋 Hedgehog",
    "pref": "長野",
    "prefSlug": "nagano",
@@ -8362,6 +8706,7 @@
   },
   {
    "slug": "nagano-0820",
+   "kind": "kakou",
    "name": "吉岡刺しゅう",
    "pref": "長野",
    "prefSlug": "nagano",
@@ -8384,6 +8729,7 @@
   },
   {
    "slug": "nagano-5378",
+   "kind": "kakou",
    "name": "長野マーキングセンター",
    "pref": "長野",
    "prefSlug": "nagano",
@@ -8406,6 +8752,7 @@
   },
   {
    "slug": "aomori-2aef",
+   "kind": "kakou",
    "name": "刺繍屋GroFeLure",
    "pref": "青森",
    "prefSlug": "aomori",
@@ -8428,6 +8775,7 @@
   },
   {
    "slug": "aomori-5402",
+   "kind": "kakou",
    "name": "北斗ネーム工房",
    "pref": "青森",
    "prefSlug": "aomori",
@@ -8452,6 +8800,7 @@
   },
   {
    "slug": "aomori-9275",
+   "kind": "kakou",
    "name": "有限会社サンブラザー刺繍",
    "pref": "青森",
    "prefSlug": "aomori",
@@ -8476,6 +8825,7 @@
   },
   {
    "slug": "shizuoka-1cc3",
+   "kind": "kakou",
    "name": "NARUSE.itm",
    "pref": "静岡",
    "prefSlug": "shizuoka",
@@ -8500,6 +8850,7 @@
   },
   {
    "slug": "shizuoka-fdeb",
+   "kind": "shop",
    "name": "Su&Kuu",
    "pref": "静岡",
    "prefSlug": "shizuoka",
@@ -8526,6 +8877,7 @@
   },
   {
    "slug": "shizuoka-6403",
+   "kind": "shop",
    "name": "UNIFORM HOUSE（有限会社静岡通商）",
    "pref": "静岡",
    "prefSlug": "shizuoka",
@@ -8554,6 +8906,7 @@
   },
   {
    "slug": "shizuoka-4ff0",
+   "kind": "kakou",
    "name": "いわた刺繍",
    "pref": "静岡",
    "prefSlug": "shizuoka",
@@ -8579,6 +8932,7 @@
   },
   {
    "slug": "shizuoka-4957",
+   "kind": "kakou",
    "name": "タシロ刺繍",
    "pref": "静岡",
    "prefSlug": "shizuoka",
@@ -8603,6 +8957,7 @@
   },
   {
    "slug": "shizuoka-ee74",
+   "kind": "kakou",
    "name": "マークファクトリー",
    "pref": "静岡",
    "prefSlug": "shizuoka",
@@ -8628,6 +8983,7 @@
   },
   {
    "slug": "shizuoka-0bdb",
+   "kind": "shop",
    "name": "ユニフォームのツバメヤ",
    "pref": "静岡",
    "prefSlug": "shizuoka",
@@ -8654,6 +9010,7 @@
   },
   {
    "slug": "shizuoka-5a3e",
+   "kind": "shop",
    "name": "ユー・デザイン",
    "pref": "静岡",
    "prefSlug": "shizuoka",
@@ -8680,6 +9037,7 @@
   },
   {
    "slug": "shizuoka-ade7",
+   "kind": "kakou",
    "name": "小島ネーム刺しゅう",
    "pref": "静岡",
    "prefSlug": "shizuoka",
@@ -8707,6 +9065,7 @@
   },
   {
    "slug": "shizuoka-ade0",
+   "kind": "shop",
    "name": "株式会社ヤマナシ",
    "pref": "静岡",
    "prefSlug": "shizuoka",
@@ -8731,6 +9090,7 @@
   },
   {
    "slug": "shizuoka-85c6",
+   "kind": "kakou",
    "name": "清水ししゅう",
    "pref": "静岡",
    "prefSlug": "shizuoka",
@@ -8753,6 +9113,7 @@
   },
   {
    "slug": "shizuoka-7d12",
+   "kind": "shop",
    "name": "玉川産業",
    "pref": "静岡",
    "prefSlug": "shizuoka",
@@ -8777,6 +9138,7 @@
   },
   {
    "slug": "kagawa-fdd8",
+   "kind": "kakou",
    "name": "タナベ刺繍",
    "pref": "香川",
    "prefSlug": "kagawa",
@@ -8804,6 +9166,7 @@
   },
   {
    "slug": "kagawa-2bc8",
+   "kind": "kakou",
    "name": "有限会社マークショップ伊賀",
    "pref": "香川",
    "prefSlug": "kagawa",
@@ -8830,6 +9193,7 @@
   },
   {
    "slug": "kagawa-bf46",
+   "kind": "kakou",
    "name": "有限会社細川刺繍",
    "pref": "香川",
    "prefSlug": "kagawa",
@@ -8852,6 +9216,7 @@
   },
   {
    "slug": "kagawa-d151",
+   "kind": "kakou",
    "name": "株式会社オーキッド",
    "pref": "香川",
    "prefSlug": "kagawa",
@@ -8880,6 +9245,7 @@
   },
   {
    "slug": "kagawa-0010",
+   "kind": "kakou",
    "name": "株式会社ザイナス",
    "pref": "香川",
    "prefSlug": "kagawa",
@@ -8905,6 +9271,7 @@
   },
   {
    "slug": "kochi-fe5e",
+   "kind": "shop",
    "name": "ウエアプリントショップ ぷりん太",
    "pref": "高知",
    "prefSlug": "kochi",
@@ -8930,6 +9297,7 @@
   },
   {
    "slug": "kochi-4efe",
+   "kind": "kakou",
    "name": "森田ネーム",
    "pref": "高知",
    "prefSlug": "kochi",
@@ -8952,6 +9320,7 @@
   },
   {
    "slug": "kochi-d39d",
+   "kind": "shop",
    "name": "高知ユニフォームセンター",
    "pref": "高知",
    "prefSlug": "kochi",
@@ -8976,6 +9345,7 @@
   },
   {
    "slug": "tottori-822b",
+   "kind": "shop",
    "name": "ワークショップダルマヤ",
    "pref": "鳥取",
    "prefSlug": "tottori",
@@ -9000,6 +9370,7 @@
   },
   {
    "slug": "tottori-c673",
+   "kind": "kakou",
    "name": "三洋アパレル有限会社",
    "pref": "鳥取",
    "prefSlug": "tottori",
@@ -9026,6 +9397,7 @@
   },
   {
    "slug": "tottori-e2c4",
+   "kind": "shop",
    "name": "東洋ユニフォームセンター 米子店",
    "pref": "鳥取",
    "prefSlug": "tottori",
@@ -9052,6 +9424,7 @@
   },
   {
    "slug": "tottori-b429",
+   "kind": "shop",
    "name": "株式会社キリンクラフト",
    "pref": "鳥取",
    "prefSlug": "tottori",
@@ -9078,6 +9451,7 @@
   },
   {
    "slug": "kagoshima-5acb",
+   "kind": "kakou",
    "name": "OHネーム刺繍",
    "pref": "鹿児島",
    "prefSlug": "kagoshima",
@@ -9100,6 +9474,7 @@
   },
   {
    "slug": "kagoshima-e413",
+   "kind": "kakou",
    "name": "アート刺繍/マーキング(刺繍・ワッペン)",
    "pref": "鹿児島",
    "prefSlug": "kagoshima",
@@ -9122,6 +9497,7 @@
   },
   {
    "slug": "kagoshima-52d7",
+   "kind": "kakou",
    "name": "ネーム馬場",
    "pref": "鹿児島",
    "prefSlug": "kagoshima",
@@ -9144,12 +9520,13 @@
   },
   {
    "slug": "kagoshima-26dc",
+   "kind": "kakou",
    "name": "プリントショップマーキング",
    "pref": "鹿児島",
    "prefSlug": "kagoshima",
-   "city": null,
-   "address": null,
-   "addrState": "unverified",
+   "city": "鹿児島市",
+   "address": "鹿児島県鹿児島市永吉1-35-7",
+   "addrState": "city-only",
    "url": "http://ma-king-print.com/",
    "tel": "099-255-5552",
    "photo": null,
@@ -9166,6 +9543,7 @@
   },
   {
    "slug": "kagoshima-5ff8",
+   "kind": "kakou",
    "name": "斎藤ネーム",
    "pref": "鹿児島",
    "prefSlug": "kagoshima",
@@ -9188,6 +9566,7 @@
   },
   {
    "slug": "kagoshima-d2f0",
+   "kind": "kakou",
    "name": "株式会社井上刺繍",
    "pref": "鹿児島",
    "prefSlug": "kagoshima",
@@ -9210,6 +9589,7 @@
   },
   {
    "slug": "kagoshima-6efc",
+   "kind": "kakou",
    "name": "橋元ネーム刺繍店",
    "pref": "鹿児島",
    "prefSlug": "kagoshima",
@@ -9232,6 +9612,7 @@
   },
   {
    "slug": "kagoshima-14f6",
+   "kind": "kakou",
    "name": "（有）奥村ネーム刺繍",
    "pref": "鹿児島",
    "prefSlug": "kagoshima",
@@ -9254,6 +9635,7 @@
   },
   {
    "slug": "kagoshima-8676",
+   "kind": "kakou",
    "name": "（有）溝口ネーム",
    "pref": "鹿児島",
    "prefSlug": "kagoshima",

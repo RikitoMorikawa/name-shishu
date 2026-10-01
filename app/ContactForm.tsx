@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { IconArrow, IconCheck, IconGuide, IconShop } from './Icons'
 
 const TO = 'contact@umidas.info'
@@ -29,7 +29,7 @@ const KINDS = [
     icon: IconShop,
     subject: '【掲載・訂正のご依頼】',
     fields: true,
-    hint: '掲載店の方・掲載を希望される方へ。内容の訂正・削除も承ります。',
+    hint: '掲載店の方・掲載を希望される方へ。情報の追加・写真や紹介文の掲載、内容の訂正・削除も承ります。',
     placeholder: '例）持ち込みは1枚から受けています。納期の記載を「3営業日」に直してください。',
   },
 ] as const
@@ -44,6 +44,17 @@ export function ContactForm() {
   const [body, setBody] = useState('')
   const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
   const k = KINDS.find((x) => x.key === kind)!
+
+  // **#contact-listing で来たら「掲載・訂正のご依頼」を選んでおく。**
+  // 掲載のご案内（/listing/）のボタンと、店ページの「この店の方へ」から飛んでくる
+  useEffect(() => {
+    const pick = () => {
+      if (location.hash === '#contact-listing') setKind('listing')
+    }
+    pick()
+    window.addEventListener('hashchange', pick)
+    return () => window.removeEventListener('hashchange', pick)
+  }, [])
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -82,7 +93,7 @@ export function ContactForm() {
   }
 
   return (
-    <form className="contact-box" onSubmit={submit}>
+    <form id="contact-listing" className="contact-box" onSubmit={submit}>
       <fieldset className="contact-kind">
         <legend className="sr-only">お問い合わせの種類</legend>
         {KINDS.map((x) => (

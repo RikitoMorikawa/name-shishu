@@ -23,12 +23,14 @@ const str = (v) => (v ? String(v) : null)
 
 const client = db()
 const { rows } = await client.execute(`
-  SELECT id, slug, name, pref, url, address, addr_state, tel, mochikomi, min_lot, lead_time, price_from,
+  SELECT id, slug, kind, name, pref, url, address, addr_state, tel, mochikomi, min_lot, lead_time, price_from,
          items, shipping, data_fee, ng_material, note
   FROM listings WHERE status = '掲載' ORDER BY pref, name`)
 
 const listings = rows.map((r) => ({
   slug: String(r.slug),
+  // 加工屋（服を持ち込んで刺繍だけ頼む先）／販売店（服ごと名入れ込みで買う先）。2026-10-01
+  kind: r.kind === 'shop' ? 'shop' : 'kakou',
   name: String(r.name),
   pref: String(r.pref),
   prefSlug: PREF_ROMAJI[r.pref] ?? null,

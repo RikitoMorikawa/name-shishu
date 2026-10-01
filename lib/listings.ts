@@ -6,6 +6,8 @@ import path from 'node:path'
 
 export type Listing = {
   slug: string
+  /** **加工屋か販売店か**（2026-10-01）。読む人は1種類だが出口が2つある ― 服を持っている→加工屋／服から買う→販売店 */
+  kind: Kind
   name: string
   pref: string | null
   prefSlug: string | null
@@ -42,7 +44,7 @@ export type Listing = {
 /**
  * **有料掲載で載せるもの。** 2プラン（2026-09-30）：
  *   basic＝基本掲載 年6,000円。**掲載のご依頼を受けて載せた店**。中身は基本情報だけで、社名横と一覧に「PR」が付く
- *   full ＝充実掲載 年9,800円。写真・紹介文・料金表と、市区・県ページの PR 枠
+ *   full ＝充実掲載 年9,800円。写真・紹介文と、市区・県ページの PR 枠（料金表は 2026-10-01 に外した。prices は残すが画面に出さない）
  * **こちらが自主的に載せた店は無料**（plans に行が無い）。
  * 線引きは「事実は無料・見せ方は有料」。持ち込み・納期などの事実は無料の側で、ここには入れない。
  * **掲載の順番には一切効かせない**（利用規約と ABOUT で「順番は料金によって変わらない」と約束している）。
@@ -58,6 +60,28 @@ export type Pr = {
   photos: { src: string; alt: string }[]
   credit: string | null
 }
+
+export type Kind = 'kakou' | 'shop'
+/** 種別の呼び名。一覧の印・各社ページ・絞り込みで同じ語を使う */
+export const KIND_LABEL: Record<Kind, string> = { kakou: '刺繍の加工屋', shop: '名入れの販売店' }
+/** 種別の言い換え。**読む人の状況で書く**（業者の分類語では自分がどちらか分からない） */
+export const KIND_HINT: Record<Kind, string> = {
+  kakou: '服を持ち込んで、刺繍・名入れだけ頼む',
+  shop: '服を選んで、名入れ・刺繍まで込みで注文する',
+}
+
+/**
+ * 絞り込みの「探し方」。**加工屋／販売店の語ではなく、読む人の手元の状態で選ばせる。**
+ * サイドバーの先頭に置く（ここで行く先が2つに分かれるので、品目より先に決める）
+ */
+export const kindFacet = (items: { kind: Kind }[]) => ({
+  key: 'kind',
+  label: '探し方',
+  options: [
+    { value: 'kakou', label: '服を持っている → 刺繍の加工屋', count: items.filter((l) => l.kind === 'kakou').length },
+    { value: 'shop', label: '服から買う → 名入れの販売店', count: items.filter((l) => l.kind === 'shop').length },
+  ],
+})
 
 const data = raw as { updatedAt: string; listings: Listing[] }
 
@@ -104,7 +128,7 @@ const lapsed = (slug: string) => {
 export const listings: Listing[] = data.listings.filter((l) => !lapsed(l.slug)).map((l) => {
   const p = photos[l.slug]
   const pr = planOf(l.slug)
-  const base = { ...l, city: cleanCity(l.city), pr }
+  const base = { ...l, kind: (l.kind === 'shop' ? 'shop' : 'kakou') as Kind, city: cleanCity(l.city), pr }
   // 写真は有料掲載の1枚目を優先する。photos.json は 9/28 以前の差し替え口として残してある
   if (pr?.photos[0]) return { ...base, photo: pr.photos[0].src, photoCredit: pr.credit }
   return p && typeof p === 'object' && 'src' in p
@@ -161,17 +185,24 @@ export function findListing(slug: string) {
   return listings.find((l) => l.slug === slug) ?? null
 }
 
-/** 市区町村ごとにまとめる。市区が取れない行は「その他」に寄せる。 */
+/**
+ * 市区が取れない行のまとまり。**「その他」ではなく、公式サイトで住所を確かめられていない店。**
+ * 市区は確認できた住所からしか取らない（Places の住所は載せられない）ので、住所が無ければ市区も無い。
+ * 「市区を確認中」だと市区という区分があるように読めた（2026-10-01）
+ */
+export const NO_CITY = '住所を確認中'
+
+/** 市区町村ごとにまとめる。**住所を確認中の店は件数に関わらず最後**（大阪では10件で先頭に来ていた） */
 export function byCity(items: Listing[]) {
   const map = new Map<string, Listing[]>()
   for (const l of items) {
-    const key = l.city ?? '市区を確認中'
+    const key = l.city ?? NO_CITY
     map.set(key, [...(map.get(key) ?? []), l])
   }
   // 市区の中も「写真 > 地図 > 頭文字」で揃える（byRichness は下で定義している）
   return [...map.entries()]
     .map(([city, xs]) => [city, byRichness(xs)] as [string, Listing[]])
-    .sort((a, b) => b[1].length - a[1].length)
+    .sort((a, b) => Number(a[0] === NO_CITY) - Number(b[0] === NO_CITY) || b[1].length - a[1].length)
 }
 
 /**
@@ -188,7 +219,7 @@ export const citySlug = (city: string) => city
 export function cityPages() {
   return byPref().flatMap((p) =>
     byCity(p.items)
-      .filter(([city, items]) => city !== '市区を確認中' && items.length >= CITY_PAGE_MIN)
+      .filter(([city, items]) => city !== NO_CITY && items.length >= CITY_PAGE_MIN)
       .map(([city, items]) => ({ pref: p.pref, prefSlug: p.prefSlug, city, items })),
   )
 }
@@ -289,7 +320,7 @@ export function prefOptions() {
     slug: p.prefSlug,
     label: prefLabel(p.pref),
     count: p.items.length,
-    cities: byCity(p.items).map(([c]) => c).filter((c) => c !== '市区を確認中'),
+    cities: byCity(p.items).map(([c]) => c).filter((c) => c !== NO_CITY),
   }))
 }
 

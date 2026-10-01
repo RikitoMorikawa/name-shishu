@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { Filter } from '../Filter'
 import { Cards } from '../ShopCard'
 import { PrArea } from '../Pr'
-import { CITY_PAGE_MIN, ITEM_LABEL, ITEM_ORDER, byCity, byPref, cityId, citySlug, findPref, itemCounts, prOf, prefLabel, updatedAt } from '@/lib/listings'
+import { CITY_PAGE_MIN, NO_CITY, ITEM_LABEL, ITEM_ORDER, kindFacet, byCity, byPref, cityId, citySlug, findPref, itemCounts, prOf, prefLabel, updatedAt } from '@/lib/listings'
 
 export function generateStaticParams() {
   return byPref().map((p) => ({ pref: p.prefSlug }))
@@ -15,8 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{ pref: str
   if (!p) return {}
   const name = prefLabel(p.pref)
   // 説明文に掲載の多い市区を3つまで入れる（「刺繍 足立区」で検索されたときに説明文でも当たるように）。
-  // 掲載は刺繍・名入れの加工屋だけ（2026-09-17〜）。作業服・ユニフォーム店は載せていない
-  const top = byCity(p.items).map(([c]) => c).filter((c) => c !== '市区を確認中').slice(0, 3)
+  // 掲載は加工屋と販売店の2種類（2026-10-01〜。9/17〜9/30 は加工屋だけだった）。題名の「刺繍加工業者」は検索語なので残す
+  const top = byCity(p.items).map(([c]) => c).filter((c) => c !== NO_CITY).slice(0, 3)
   return {
     // **「刺繍加工業者」「刺繍業者」の語を題名に持つ**（2026-09-27）。本文が「加工屋」だけで、
     // 「埼玉 刺繍業者」では出るのに「埼玉 刺繍加工業者」では上位に来なかった。「持ち込み」は核なので残す
@@ -65,7 +65,9 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
       <p className="crumb"><a href="/">ネーム刺繍ナビ</a> ／ {name}</p>
       <h1>{name}で刺繍・名入れを頼める店</h1>
       <p className="lead">
-        {name}で刺繍加工・名入れを受けている業者（加工屋）{p.items.length}件を、市区町村ごとに並べています。
+        {name}で刺繍・名入れを受けている{p.items.length}件を、市区町村ごとに並べています。
+        服を持ち込むなら<b>刺繍の加工屋</b>（{p.items.filter((l) => l.kind === 'kakou').length}件）、
+        服から選ぶなら<b>名入れの販売店</b>（{p.items.filter((l) => l.kind === 'shop').length}件）が行き先です。
       </p>
 
       <div className="toc">
@@ -81,6 +83,7 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
         <Filter
           total={p.items.length}
           groups={[
+              kindFacet(p.items),
             {
               key: 'items', label: '刺繍を入れる対象',
               options: ITEM_ORDER.map((k) => ({ value: k, label: ITEM_LABEL[k], count: counts[k] })),
@@ -96,7 +99,7 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
             <section key={city} data-group="">
               <h2 id={cityId(city)}>
                 {/* 市区ページがある市区は見出しから飛べるようにする（検索の受け口へ内部リンクを通す） */}
-                {city !== '市区を確認中' && items.length >= CITY_PAGE_MIN
+                {city !== NO_CITY && items.length >= CITY_PAGE_MIN
                   ? <a href={`/${p.prefSlug}/${citySlug(city)}/`}>{city}</a>
                   : city}
                 <span className="muted">　{items.length}件</span>

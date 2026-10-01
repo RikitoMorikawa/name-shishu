@@ -3,7 +3,8 @@ import { prefLabel, type Listing } from '@/lib/listings'
 /**
  * **有料掲載（PR）の表示。** 2プラン（2026-09-30）：
  *   基本掲載 年6,000円 … 依頼を受けて載せた店。社名横と一覧の「PR」だけ（お店から欄・PR 枠は出ない）
- *   充実掲載 年9,800円 … 写真・紹介文・料金表と、地域ページの PR 枠
+ *   充実掲載 年9,800円 … 写真・紹介文と、地域ページの PR 枠
+ * **料金表は出さない（2026-10-01）。** 商品や内容で値段が変わり、表に収まらない。plans.prices の列は残すが画面には出さない
  * **お金をもらって載せた店は、中身が基本情報だけでも「PR」を付ける**（ステマ規制）。
  *
  * - **必ず「PR」と書く。** 掲載先がお金を払って載せた内容なので、ステマ規制で表示が要る。
@@ -21,7 +22,7 @@ export function PrPill() {
 export function PrSection({ l }: { l: Listing }) {
   const pr = l.pr
   if (!pr) return null
-  const hasBody = pr.intro || pr.prices.length || pr.photos.length
+  const hasBody = pr.intro || pr.photos.length
   if (!hasBody) return null
   return (
     <section className="pr-section" aria-label="お店からのご紹介">
@@ -39,26 +40,11 @@ export function PrSection({ l }: { l: Listing }) {
 
       {pr.intro ? <p className="pr-intro">{pr.intro}</p> : null}
 
-      {pr.prices.length ? (
-        <div className="panel">
-          <table className="facts">
-            <caption className="pr-caption">料金表（お店の掲載内容）</caption>
-            <tbody>
-              {pr.prices.map((r) => (
-                <tr key={r.item}>
-                  <th>{r.item}</th>
-                  <td>{r.price}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : null}
 
       <p className="muted pr-note">
         この欄は掲載店から提供された内容です。
         {pr.credit ? <> {pr.credit}。</> : null}
-        料金や条件は変わることがあるため、ご依頼の前にお店へご確認ください。
+        条件は変わることがあるため、ご依頼の前にお店へご確認ください。
       </p>
     </section>
   )
@@ -94,3 +80,35 @@ export function PrArea({ items, where }: { items: Listing[]; where: string }) {
 }
 
 const clip = (s: string, n: number) => ([...s].length > n ? [...s].slice(0, n).join('') + '…' : s)
+
+/**
+ * **充実掲載でない店の「お店から」欄。** 写真・紹介文の空き枠を★付きで見せ、掲載のご案内へ送る。
+ * 2026-10-01 本人決定：目立たせたほうが店が載せたくなる。最初は1行だけにしていたのを、空き枠を出す形に変えた。
+ * - **「有料」「無料」とは書かない**（9/28・9/30 の決めごと）。「まだ載せていません」とだけ言う
+ * - 店を探す人が読んでも困らないよう、枠は灰色の点線で控えめにし、店の方への案内は末尾の1か所にまとめる
+ */
+export function PrEmpty({ l }: { l: Listing }) {
+  if (l.pr?.kind === 'full') return null
+  const slots = [
+    { label: '★ お店の写真', hint: '作業場・仕上がりの見本' },
+    { label: '★ 紹介文', hint: '得意なこと・こだわり' },
+  ]
+  return (
+    <section className="pr-empty" aria-label="お店からのご紹介">
+      <h2>お店から</h2>
+      <div className="pr-empty-slots">
+        {slots.map((x) => (
+          <div key={x.label} className="pr-empty-slot">
+            <b>{x.label}</b>
+            <span>{x.hint}</span>
+          </div>
+        ))}
+      </div>
+      <p className="pr-empty-note">この店はまだ、写真・紹介文を載せていません。</p>
+      <div className="pr-empty-cta">
+        <span>この店の方へ ― {l.kind === 'shop' ? '名入れの条件' : '持ち込みの条件'}の記入や、★の項目を掲載できます。</span>
+        <a className="btn btn-ghost" href="/listing/">掲載のご案内を見る</a>
+      </div>
+    </section>
+  )
+}

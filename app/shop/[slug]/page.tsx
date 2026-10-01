@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Cards } from '../../ShopCard'
-import { PrPill, PrSection } from '../../Pr'
-import { ITEM_LABEL, ITEM_ORDER, citySlug, findCity, findListing, listings, nearby, prefLabel, updatedAt } from '@/lib/listings'
+import { PrEmpty, PrPill, PrSection } from '../../Pr'
+import { ITEM_LABEL, ITEM_ORDER, KIND_HINT, KIND_LABEL, citySlug, findCity, findListing, listings, nearby, prefLabel, updatedAt } from '@/lib/listings'
 
 export function generateStaticParams() {
   return listings.map((l) => ({ slug: l.slug }))
@@ -15,8 +15,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   // 地域が取れない行は括弧を出さない（「（）」になる。2026-09-16）
   const where = [l.pref ? prefLabel(l.pref) : null, l.city].filter(Boolean).join('・')
   return {
-    title: where ? `${l.name}（${where}）の持ち込み刺繍・名入れ` : `${l.name}の持ち込み刺繍・名入れ`,
-    description: `${where ? where + 'の' : ''}刺繍・名入れの加工屋「${l.name}」。持ち込みの可否・最小枚数・納期・料金の目安をまとめています。`,
+    // **販売店は「持ち込み」を題名に使わない**（服ごと売る先で、持ち込みで探す人の行き先ではない。2026-10-01）
+    title: l.kind === 'shop'
+      ? (where ? `${l.name}（${where}）の名入れ・刺繍の注文` : `${l.name}の名入れ・刺繍の注文`)
+      : (where ? `${l.name}（${where}）の持ち込み刺繍・名入れ` : `${l.name}の持ち込み刺繍・名入れ`),
+    description: l.kind === 'shop'
+      ? `${where ? where + 'の' : ''}名入れの販売店「${l.name}」。服を選んで刺繍・名入れまで込みで注文できます。最小枚数・納期・料金の目安をまとめています。`
+      : `${where ? where + 'の' : ''}刺繍・名入れの加工屋「${l.name}」。持ち込みの可否・最小枚数・納期・料金の目安をまとめています。`,
     alternates: { canonical: `/shop/${l.slug}/` },
   }
 }
@@ -84,7 +89,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
 
       <h1>{l.name}{l.pr ? <> <PrPill /></> : null}</h1>
       <p className="lead">
-        <span className="pill pill-kakou">刺繍・名入れの加工屋</span>
+        <span className={`pill pill-${l.kind}`} title={KIND_HINT[l.kind]}>{KIND_LABEL[l.kind]}</span>
         {ITEM_ORDER.filter((k) => l.items.includes(k)).map((k) => (
           <span className="pill pill-item" key={k}>{ITEM_LABEL[k]}</span>
         ))}
@@ -101,18 +106,21 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
         ) : null}
       </div>
 
-      <h2>持ち込みで頼めるか</h2>
+      {/* **販売店には「持ち込み」を出さない**（一覧のカード・題名と揃える）。服ごと売る先なので比べる軸にならない */}
+      <h2>{l.kind === 'shop' ? '名入れの条件' : '持ち込みで頼めるか'}</h2>
       <div className="panel">
         <table className="facts">
           <tbody>
-            <tr>
-              <th>持ち込み</th>
-              <td>
-                {l.mochikomi === true ? <span className="pill pill-ok">受けています</span>
-                  : l.mochikomi === false ? '受けていません'
-                  : <span className="unknown">確認中</span>}
-              </td>
-            </tr>
+            {l.kind === 'shop' ? null : (
+              <tr>
+                <th>持ち込み</th>
+                <td>
+                  {l.mochikomi === true ? <span className="pill pill-ok">受けています</span>
+                    : l.mochikomi === false ? '受けていません'
+                    : <span className="unknown">確認中</span>}
+                </td>
+              </tr>
+            )}
             <tr><th>最小枚数</th><td>{orUnknown(l.minLot)}</td></tr>
             <tr><th>納期</th><td>{orUnknown(l.lead)}</td></tr>
             <tr><th>料金の目安</th><td>{orUnknown(l.priceFrom)}</td></tr>
@@ -136,8 +144,11 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
         詳細は <a href={l.url} rel="nofollow noopener" target="_blank">公式サイト</a>にお問い合わせください。
       </div>
 
-      {/* 有料掲載の店だけ。写真・紹介文・料金表（掲載店から提供された内容） */}
+      {/* 有料掲載の店だけ。写真・紹介文（掲載店から提供された内容） */}
       <PrSection l={l} />
+
+      {/* 充実掲載でない店は★の空き枠を出し、掲載のご案内へ送る（2026-10-01） */}
+      <PrEmpty l={l} />
 
       <h2>連絡先</h2>
       <div className="panel">

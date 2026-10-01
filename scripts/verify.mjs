@@ -6,6 +6,11 @@
 //   node scripts/verify.mjs --only 刺繍館  # 社名で絞る
 //   node scripts/verify.mjs --apply        # 確認できた値を DB に書き戻す
 //   node scripts/verify.mjs --full         # 途中で切らずに全件出す（Places の住所と並べて目で確かめる）
+//   node scripts/verify.mjs --browser      # ブラウザで描いてから読む（JS で描くサイト。Wix・STUDIO・Jimdo など）
+//
+// **--browser は取れなかった先の2周目に使う。** 素の HTML に器しか無いサイトは、fetch では住所が1文字も出てこない。
+// 手元の Chromium（~/Library/Caches/ms-playwright/chromium-*）を playwright-core で動かす（ブラウザは同梱しない）。
+// **Instagram・Facebook は読まない**（ログインの壁で住所は出ない）。2026-10-01 に足した
 //
 // **なぜ要るか。** 新しい店の住所と電話は Google Places API から取っている（hint_addr / hint_tel）。
 // Maps Platform の規約は place_id の無期限保存だけを認めていて、
@@ -27,6 +32,7 @@ const { values: opts } = parseArgs({
     apply: { type: 'boolean', default: false },
     limit: { type: 'string' },
     full: { type: 'boolean', default: false },
+    browser: { type: 'boolean', default: false },
   },
 })
 
@@ -52,6 +58,9 @@ const toText = (h) =>
     .replace(/&([a-z]+);/gi, (m, n) => ENTITY[n.toLowerCase()] ?? m)
     .replace(/[​-‍⁠﻿]/g, '')
     .replace(/[\s　]+/g, ' ')
+/** 掲載 DB の都道府県（「大阪」「北海道」）→ 正式名（「大阪府」） */
+const PREF_FULL = Object.fromEntries(PREFS.split('|').map((p) => [p === '北海道' ? p : p.replace(/[都府県]$/, ''), p]))
+
 const zen2han = (s) =>
   s.replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
    .replace(/[−–—ー―]/g, '-')
@@ -59,7 +68,40 @@ const zen2han = (s) =>
 /** 住所から数字だけを並べた鍵を作る。表記揺れ（丁目/-、全角/半角）を吸収して突き合わせる */
 const numKey = (s) => (zen2han(s).match(/\d+/g) ?? []).join('-')
 
+// ── ブラウザで描いてから読む（--browser）。起動は1回だけで、ページを使い回さずに毎回開いて閉じる
+let browserP = null
+async function browser() {
+  if (!browserP) {
+    browserP = (async () => {
+      const { chromium } = await import('playwright-core')
+      const { readdirSync, existsSync } = await import('node:fs')
+      const { homedir } = await import('node:os')
+      const root = `${homedir()}/Library/Caches/ms-playwright`
+      const dir = readdirSync(root).filter((d) => /^chromium-\d+$/.test(d)).sort().pop()
+      const exe = [
+        `${root}/${dir}/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`,
+        `${root}/${dir}/chrome-mac/Chromium.app/Contents/MacOS/Chromium`,
+      ].find((p) => existsSync(p))
+      if (!exe) throw new Error(`Chromium が見つからない（${root}）。npx playwright install chromium`)
+      return chromium.launch({ executablePath: exe })
+    })()
+  }
+  return browserP
+}
+async function renderText(url) {
+  if (/instagram\.com|facebook\.com/i.test(url)) throw new Error('SNS は読まない')
+  const b = await browser()
+  const page = await b.newPage({ userAgent: UA_BROWSER })
+  try {
+    await page.goto(url, { waitUntil: 'networkidle', timeout: TIMEOUT * 2 }).catch(() => {})
+    return { html: await page.content(), finalUrl: page.url() }
+  } finally {
+    await page.close()
+  }
+}
+
 async function fetchText(url, ua = UA) {
+  if (opts.browser) return renderText(url)
   const res = await fetch(url, {
     headers: { 'User-Agent': ua },
     redirect: 'follow',
@@ -101,8 +143,9 @@ function pickLinks(html, base) {
   return [...new Set(out)]
 }
 
-/** ページから住所と電話の候補を拾う。JSON-LD があればそれを最優先する */
-function extract(html) {
+/** ページから住所と電話の候補を拾う。JSON-LD があればそれを最優先する。
+ *  prefFull は掲載先の都道府県（「大阪府」）。**郵便番号の後ろに市区から書くサイト**の住所に頭から付ける */
+function extract(html, prefFull = null) {
   const addrs = [], tels = []
 
   for (const m of html.matchAll(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi)) {
@@ -129,6 +172,17 @@ function extract(html) {
   }
   for (const m of text.matchAll(new RegExp(`((?:${PREFS})[^ 　]{4,40})`, 'g'))) {
     if (/\d/.test(m[1])) addrs.push({ v: m[1], src: 'text' })
+  }
+  // **〒の直後が市区町村で始まる住所**（「〒571-0015 門真市三ツ島1丁目…」）。小さな店のサイトに多く、
+  // 都道府県から書く形しか拾っていなかったので、JS で描くサイトをブラウザで読んでも1件も取れなかった（2026-10-01）。
+  // 都道府県は掲載先のものを付ける。**別の県の住所を拾う恐れがあるので、書き戻す前に必ず目で見る**
+  if (prefFull) {
+    for (const m of text.matchAll(/〒\s*\d{3}\s*[-−ー–]\s*\d{4}\s*([^ 　]{4,40})/g)) {
+      const v = m[1]
+      if (prefOf(v) || !/\d/.test(v)) continue
+      if (!/^[^\d\s]{1,10}?[市区町村郡]/.test(v)) continue
+      addrs.push({ v: prefFull + v, src: 'zip-nopref' })
+    }
   }
   // tel: リンクと本文の電話番号
   for (const m of html.matchAll(/href=["']tel:([+\d\-()\s]{9,20})["']/gi)) {
@@ -173,7 +227,7 @@ async function verify(row) {
     let html
     let finalUrl = url
     try { ({ html, finalUrl } = await fetchText(url)) } catch (e) { out.note ||= String(e.message).slice(0, 40); continue }
-    const got = extract(html)
+    const got = extract(html, PREF_FULL[row.pref] ?? null)
     found.addrs.push(...got.addrs)
     found.tels.push(...got.tels)
     // リンクは転送後の URL を起点に解決する（http→https・www の付け外し）
@@ -184,7 +238,7 @@ async function verify(row) {
   // 住所：Places の番地と数字が一致するものを最優先。無ければ市区が一致するもの
   // **都道府県から始まる住所だけを使う。** JSON-LD に「中央区11丁目」のような欠けた住所が入っている先がある。
   // 後ろに電話番号や「(地図)」が続く先があるので、区切りで切る
-  const rank = { zip: 0, jsonld: 1, text: 2 }
+  const rank = { zip: 0, jsonld: 1, text: 2, 'zip-nopref': 3 }
   const sorted = found.addrs
     .map((a) => ({ ...a, v: a.v.split(/[，,、(（]|TEL|Tel|電話/)[0] }))
     .filter((a) => prefOf(a.v) && a.v.startsWith(prefOf(a.v)))
@@ -261,3 +315,5 @@ if (opts.apply) {
 } else {
   console.log('\n--apply を付けると DB に書き戻します。')
 }
+
+if (browserP) await (await browserP).close()

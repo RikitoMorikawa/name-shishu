@@ -84,6 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </p>
               <nav className="foot-links">
                 <a href="/about/">この媒体について</a>
+                <a href="/listing/">掲載のご案内</a>
                 <a href="/terms/">利用規約</a>
                 <a href="/privacy/">プライバシーポリシー</a>
                 <a href="/#list">掲載店を探す</a>

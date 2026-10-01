@@ -1,6 +1,6 @@
 import { FavButton } from './Fav'
 import { PrPill } from './Pr'
-import { ITEM_LABEL, ITEM_ORDER, prefLabel, type Listing } from '@/lib/listings'
+import { ITEM_LABEL, ITEM_ORDER, KIND_LABEL, prefLabel, type Listing } from '@/lib/listings'
 
 /** 写真が無い間のプレースホルダ。社名の頭文字を大きく置く。 */
 function initial(name: string) {
@@ -40,8 +40,10 @@ const TEL = 'M5.6 2.5 7 5.2 5.7 6.6a8 8 0 0 0 3.7 3.7l1.4-1.3 2.7 1.4v2.2c0 .6-.
 
 export function ShopCard({ l }: { l: Listing }) {
   // **確認できた条件だけ並べる。**「確認中」を4つ並べても比較にならない
+  // **販売店には「持ち込み」を出さない。** 服ごと売る先なので、持ち込みの可否は比べる軸にならない
+  const shop = l.kind === 'shop'
   const terms = [
-    l.mochikomi === true ? { k: '持ち込み', v: '可' } : l.mochikomi === false ? { k: '持ち込み', v: '不可' } : null,
+    shop ? null : l.mochikomi === true ? { k: '持ち込み', v: '可' } : l.mochikomi === false ? { k: '持ち込み', v: '不可' } : null,
     l.minLot ? { k: '最小', v: l.minLot } : null,
     l.lead ? { k: '納期', v: l.lead } : null,
     l.priceFrom ? { k: '料金', v: l.priceFrom } : null,
@@ -49,14 +51,15 @@ export function ShopCard({ l }: { l: Listing }) {
 
   return (
     <article
-      className="shop-row"
+      className={`shop-row shop-row-${l.kind}`}
       data-row=""
+      data-kind={l.kind}
       data-items={l.items.join(' ')}
       data-pref={l.prefSlug ?? ''}
       data-mochikomi={l.mochikomi === true ? '1' : '0'}
       data-search={[l.name, l.pref, l.city, l.address].filter(Boolean).join(' ')}
     >
-      <div className="thumb thumb-kakou">
+      <div className={`thumb thumb-${l.kind}`}>
         {l.photo ? (
           <img src={l.photo} alt={`${l.name}の外観`} loading="lazy" />
         ) : MAP_KEY && l.address ? (
@@ -78,6 +81,8 @@ export function ShopCard({ l }: { l: Listing }) {
 
       <div className="shop-row-body">
         <div className="shop-row-head">
+          {/* **種別を先頭に。** 服を持っている人と服から買う人で、行く先が違う */}
+          <span className={`pill pill-${l.kind}`}>{KIND_LABEL[l.kind]}</span>
           <span className="pill pill-area">{[l.pref ? prefLabel(l.pref) : null, l.city].filter(Boolean).join('・') || '地域を確認中'}</span>
           {/* **刺繍を入れる対象。** 服だけでなく帽子・タオル・カバンまで扱うのが刺繍屋の幅 */}
           {ITEM_ORDER.filter((k) => l.items.includes(k)).map((k) => (
@@ -102,7 +107,7 @@ export function ShopCard({ l }: { l: Listing }) {
             ))}
           </dl>
         ) : (
-          <p className="terms-empty">持ち込みの条件は確認中です</p>
+          <p className="terms-empty">{shop ? '名入れの条件は確認中です' : '持ち込みの条件は確認中です'}</p>
         )}
 
         <div className="shop-row-contact">

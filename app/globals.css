@@ -22,6 +22,11 @@
   --call: #8a5a00;
   --call-line: #d79a12;
   --call-soft: #fff8e6;
+  /* **販売店の色はオレンジ。** 加工屋（テーマ色の緑）と並べて、どちらの店か縁の色で分かるようにする（2026-10-01）。
+     青は緑と見分けにくかった。**黄に寄せない**（電話の --call が黄土色で、押す先と取り違える）。--shop は縁にだけ使い、文字は --shop-ink（印の地で 5.2:1）。縁は明るめ（2026-10-01 に暗いと言われて上げた）*/
+  --shop: #f28c28;
+  --shop-ink: #a84a04;
+  --shop-soft: #fff1e2;
   /* 読み物カードの地。**写真が無いので、色面で見分ける** */
   --tone-a: #e9f4ee;
   --tone-b: #eef3f0;
@@ -43,6 +48,7 @@
     --ink: #eef3f0; --ink-2: #b4c0b8; --ink-3: #8d9a92; --rule: #2f3a34;
     --accent: #5fbf8e; --accent-ink: #7fd0a5; --accent-soft: #15291f; --accent-deep: #bfe8d3;
     --call: #f0d67a; --call-line: #c9a227; --call-soft: #2a2317;
+    --shop: #f29a5b; --shop-ink: #f7b98a; --shop-soft: #2c1d12;
     --ok: #7fbd9c; --ok-soft: #15291f;
     --tone-a: #15291f; --tone-b: #1a241e; --tone-c: #1c2529;
     --tone-a-ink: #5fbf8e; --tone-b-ink: #9dbaa9; --tone-c-ink: #9db2bd;
@@ -55,6 +61,7 @@
   --ink: #eef3f0; --ink-2: #b4c0b8; --ink-3: #8d9a92; --rule: #2f3a34;
   --accent: #5fbf8e; --accent-ink: #7fd0a5; --accent-soft: #15291f; --accent-deep: #bfe8d3;
     --call: #f0d67a; --call-line: #c9a227; --call-soft: #2a2317;
+  --shop: #f29a5b; --shop-ink: #f7b98a; --shop-soft: #2c1d12;
   --ok: #7fbd9c; --ok-soft: #15291f;
 }
 
@@ -272,7 +279,7 @@ p { margin: 12px 0; }
 /* ── 印 ───────────────────────────────────────── */
 .pill { display: inline-block; font-size: 11.5px; line-height: 1.7; padding: 1px 9px; border-radius: 999px; font-weight: 600; }
 .pill-kakou { background: var(--accent-soft); color: var(--accent-ink); }
-.pill-shop { background: var(--surface-2); color: var(--ink-2); }
+.pill-shop { background: var(--shop-soft); color: var(--shop-ink); }
 /* 刺繍を入れる対象 */
 .pill-item { background: var(--surface-2); color: var(--ink-2); font-weight: 600; }
 .pill-ok { background: var(--ok-soft); color: var(--ok); }
@@ -381,7 +388,8 @@ main > .wrap:last-child, main > .prose:last-child { padding-bottom: 64px; }
 /* **main は .wrap を持たない。** 各ページと各セクションが自分で内側を止める */
 
 /* ── 2カラム。**左に絞り込み、右にカード。** ───────────────── */
-.layout { display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 32px; margin-top: 16px; align-items: start; }
+/* 左の絞り込みは 336px。「服から買う → 名入れの販売店」が1行に収まる幅（268px では2行に折れた。2026-10-01） */
+.layout { display: grid; grid-template-columns: 336px minmax(0, 1fr); gap: 32px; margin-top: 16px; align-items: start; }
 @media (max-width: 1000px) { .layout { grid-template-columns: 1fr; gap: 14px; } }
 
 .sidebar { position: sticky; top: 76px; }
@@ -447,6 +455,14 @@ main > .wrap:last-child, main > .prose:last-child { padding-bottom: 64px; }
   color: color-mix(in srgb, var(--ink-3) 78%, transparent); }
 .thumb-kakou { background: linear-gradient(145deg, var(--accent-soft), color-mix(in srgb, var(--accent-soft) 52%, var(--ground))); }
 .thumb-kakou .thumb-initial { color: color-mix(in srgb, var(--accent) 64%, transparent); }
+.thumb-shop { background: linear-gradient(145deg, var(--shop-soft), color-mix(in srgb, var(--shop-soft) 52%, var(--ground))); }
+.thumb-shop .thumb-initial { color: color-mix(in srgb, var(--shop) 64%, transparent); }
+/* **種別は左の縁の色で分ける。** 加工屋＝緑、販売店＝オレンジ。印（pill）と同じ色にして、読まなくても見分けられるように */
+/* 色は左の縁だけ（2026-10-01。4辺とも塗る案も試したが、左だけに戻した）。ほかの3辺は通常の罫 */
+.shop-row-kakou { border-left: 5px solid var(--accent); }
+.shop-row-shop { border-left: 5px solid var(--shop); }
+.shop-row-kakou:hover { border-left-color: var(--accent); }
+.shop-row-shop:hover { border-color: color-mix(in srgb, var(--shop) 55%, var(--rule)); border-left-color: var(--shop); }
 
 .shop-row-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .shop-row-head { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -1083,3 +1099,38 @@ h1 .pill-pr, h2 .pill-pr { font-size: 12px; }
 .pr-card-body b { color: var(--ink); }
 .pr-card-intro { font-size: 13.5px; color: var(--ink-2); line-height: 1.6; }
 .pr-area-note { margin: 10px 0 0; font-size: 12.5px; }
+
+/* ── 掲載のご案内（/listing/）。★の行は充実掲載だけの項目 ── */
+.plan-wrap { overflow-x: auto; }
+.plan-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.plan-table th, .plan-table td { padding: 12px 8px; border-bottom: 1px solid var(--rule); vertical-align: middle; }
+.plan-table tbody tr:last-child th, .plan-table tbody tr:last-child td { border-bottom: 0; }
+.plan-table thead th { font-size: 14px; color: var(--ink); text-align: center; white-space: nowrap; }
+.plan-table tbody th { text-align: left; font-weight: 600; color: var(--ink); }
+.plan-table td { text-align: center; width: 5.5em; }
+.plan-table .plan-full { background: var(--accent-soft); }
+.plan-table thead .plan-full { color: var(--accent-ink); }
+.plan-note { display: block; margin-top: 2px; font-size: 12.5px; font-weight: 400; color: var(--ink-3); }
+.plan-table .plan-star th { color: var(--accent-ink); }
+.plan-yes { color: var(--accent); font-size: 14px; }
+.plan-no { color: var(--ink-3); }
+.plan-cta { margin: 24px 0; }
+.pr-empty { margin: 28px 0; }
+.pr-empty-slots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 14px 0 10px; }
+.pr-empty-slot {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  min-height: 120px; border: 1.5px dashed var(--rule); border-radius: var(--radius);
+  background: var(--surface-2); text-align: center; padding: 10px;
+}
+.pr-empty-slot b { color: var(--accent-ink); font-size: 15px; }
+.pr-empty-slot span { color: var(--ink-3); font-size: 12.5px; }
+.pr-empty-note { color: var(--ink-3); font-size: 13.5px; margin: 0 0 14px; }
+.pr-empty-cta {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  padding: 14px 18px; border-radius: var(--radius); background: var(--accent-soft);
+  font-size: 14.5px; color: var(--ink);
+}
+@media (max-width: 560px) {
+  .pr-empty-slots { grid-template-columns: 1fr; }
+  .pr-empty-slot { min-height: 0; padding: 16px 10px; }
+}
