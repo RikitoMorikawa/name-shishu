@@ -1,10 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- ヘッダーのロゴと同じTシャツを白で塗りつぶす。16pxでも形で読めるよう線ではなく面にする -->
-  <rect width="64" height="64" rx="14" fill="#0f7a4a"/>
-  <g transform="translate(32 33) scale(2.15) translate(-16 -15.75)">
-    <path d="M12 5.5 7 7.8v4.4l2.6-.9V26h12.8V11.3l2.6.9V7.8L20 5.5a4 4 0 0 1-8 0Z"
-          fill="#fff" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/>
-    <!-- 胸のネーム刺繍 -->
-    <path d="M12.4 17.2h7.2" stroke="#0f7a4a" stroke-width="3" stroke-linecap="round"/>
-  </g>
-</svg>
+  <!-- 地図ピンと縫い目（太め3本）・背景なし（2026-10-01）。favicon.ico と apple-icon.png は scripts/icons.mjs でここから作る -->
+  <!-- 暗いタブでは緑が沈むので、ダークモードのときだけピンを明るい緑にする（Chrome・Firefox は効く。Safari は効かない） -->
+  <style>.n{fill:#0f7a4a}.s{stroke:#0f7a4a}@media (prefers-color-scheme:dark){.n{fill:#5fbf8e}.s{stroke:#5fbf8e}}</style><path class="n" fill-rule="evenodd" d="M32 4c-10 0-17 7.2-17 16.6C15 32.6 32 50 32 50s17-17.4 17-29.4C49 11.2 42 4 32 4ZM32 13.5a7 7 0 1 0 0 14 7 7 0 0 0 0-14Z"/><path d="M12 58h40" stroke="#f2b84b" stroke-width="6" stroke-linecap="round" stroke-dasharray="8 8"/></svg>
