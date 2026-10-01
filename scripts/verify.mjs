@@ -43,8 +43,15 @@ const WANTED_JA = /会社概要|会社案内|企業情報|店舗|アクセス|�
 
 
 const dropNoise = (h) => h.replace(/<(script|style|noscript)[\s\S]*?<\/\1>/gi, ' ')
+// 実体参照とゼロ幅文字を戻してから空白を詰める。残すと「14&minus;6」「本町​2-10」のまま掲載される（2026-10-01）
+const ENTITY = { nbsp: ' ', minus: '-', amp: '&', ndash: '-', mdash: '-', hyphen: '-', quot: '"', apos: "'", lt: '<', gt: '>' }
 const toText = (h) =>
-  dropNoise(h).replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/[\s　]+/g, ' ')
+  dropNoise(h).replace(/<[^>]+>/g, ' ')
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&([a-z]+);/gi, (m, n) => ENTITY[n.toLowerCase()] ?? m)
+    .replace(/[​-‍⁠﻿]/g, '')
+    .replace(/[\s　]+/g, ' ')
 const zen2han = (s) =>
   s.replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
    .replace(/[−–—ー―]/g, '-')
