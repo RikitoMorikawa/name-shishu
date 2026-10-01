@@ -290,7 +290,8 @@ p { margin: 12px 0; }
 .facts th, .facts td { text-align: left; padding: 13px 4px; border-bottom: 1px solid var(--rule); vertical-align: top; }
 .facts th { width: 8.5em; color: var(--ink-3); font-weight: 600; font-size: 14px; }
 .facts tr:last-child th, .facts tr:last-child td { border-bottom: 0; }
-.panel { background: var(--surface); border: var(--edge); border-radius: var(--radius); padding: 6px 22px; box-shadow: var(--shadow); margin: 16px 0; }
+/* 表の枠は 2px・緑を混ぜて濃く（2026-10-01。1.5px の --rule では白地に溶けて見えなかった） */
+.panel { background: var(--surface); border: 2px solid color-mix(in srgb, var(--accent) 30%, var(--rule)); border-radius: var(--radius); padding: 6px 22px; box-shadow: var(--shadow); margin: 16px 0; }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 8px; }
 .btn {
   display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
