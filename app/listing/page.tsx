@@ -4,7 +4,7 @@ import { updatedAt } from '@/lib/listings'
 export const metadata: Metadata = {
   title: '掲載のご案内',
   description:
-    'ネーム刺繍ナビへの掲載をご希望の店の方へ。持ち込みの条件などの基本情報をお店から載せられる「基本掲載」と、写真・紹介文まで載せられる「充実掲載」があります。',
+    'ネーム刺繍ナビへの掲載をご希望の店の方へ。持ち込みの条件などの基本情報をお店から載せられる「基本掲載」と、写真・紹介文まで載せられる「充実掲載」、地域ページの一覧の上に表示する「PR 枠」があります。',
   alternates: { canonical: '/listing/' },
 }
 
@@ -16,6 +16,9 @@ export const metadata: Metadata = {
  * - **料金は出さない（同日）。** 問い合わせを受けてから個別に案内する
  * - **「有料掲載」という言葉は使わない**（2026-09-28）。プラン名と「PR」で足りる
  * - ★は充実掲載だけの項目。基本掲載との差がひと目で分かるようにする
+ * - **PR 枠はプランの表から外し、広告オプションとして別の段にした（2026-10-02・本人決定）。**
+ *   11月からは掲載プランと別料金（市区ページ・都道府県ページ）。料金はここにも出さない。
+ *   10月に充実掲載を申し込んだ店は、契約期間中は PR 枠込みのまま
  */
 const ROWS: { label: string; note?: string; basic: boolean; full: boolean }[] = [
   { label: '持ち込みの条件をお店から記入', note: '持ち込み・最小枚数・納期・料金の目安・対応品目・郵送・型代・受けられない素材', basic: true, full: true },
@@ -23,7 +26,6 @@ const ROWS: { label: string; note?: string; basic: boolean; full: boolean }[] = 
   { label: '社名の横と一覧に「PR」の表示', basic: true, full: true },
   { label: '★ お店の写真', note: '作業場・仕上がりの見本など', basic: false, full: true },
   { label: '★ 紹介文', note: 'お店の言葉で、得意なこと・こだわりを', basic: false, full: true },
-  { label: '★ 市区・県ページの PR 枠', note: '地域の一覧の上に、写真と紹介文つきで', basic: false, full: true },
 ]
 
 export default function Listing() {
@@ -63,6 +65,17 @@ export default function Listing() {
         </table>
       </div>
       <p className="muted">★は充実掲載だけで載せられる項目です。料金・掲載期間は、お問い合わせいただいた方に個別にご案内します。</p>
+
+      <h2>PR 枠（広告オプション）</h2>
+      <p>
+        市区ページ・都道府県ページの<b>店の一覧の上に、写真と紹介文つきで表示する枠</b>です。
+        その地域で依頼先を探している方の目に最初に入ります。掲載プランとは別にお申し込みいただけます。
+      </p>
+      <ul>
+        <li><b>市区ページ</b>と<b>都道府県ページ</b>の2種類があります</li>
+        <li>1ページに表示できる店の数には限りがあります</li>
+        <li>枠には「PR」と表示します。<b>下の一覧の並び順は変わりません</b></li>
+      </ul>
 
       <h2>お約束していること</h2>
       <ul>
