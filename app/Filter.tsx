@@ -2,11 +2,14 @@
 
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { FIRST } from '@/lib/labels'
+import type { Listing } from '@/lib/listings'
+import { ShopCard } from './ShopCard'
 
 export type FacetGroup = { key: string; label: string; options: { value: string; label: string; count: number }[] }
 
 /** 一度に出す件数。**「もっと見る」で増える** */
-const PAGE = 20
+const PAGE = FIRST
 
 /**
  * 左サイドバーの絞り込みと、一覧の件数制限。DOM を直接触って `hidden` を付け外しする。
@@ -15,8 +18,12 @@ const PAGE = 20
  *
  * **「もっと見る」もここが持つ。** 表示する行を決める場所を2か所に分けると、
  * 絞り込みと件数制限が互いを打ち消す。ボタンは一覧の下の `#more-slot` へ portal で出す。
+ *
+ * **`rest` を渡されたページは、HTML に先頭の数件しか無い**（トップ。全件だと 2.7MB あった）。
+ * 「もっと見る」か絞り込みを触った時点で残りを `rest` の URL から取り、`#rest-rows` へ描き足す。
+ * 描き足した後は他のページと同じく DOM の `hidden` で絞る。
  */
-export function Filter({ total, groups }: { total: number; groups: FacetGroup[] }) {
+export function Filter({ total, groups, rest: restUrl }: { total: number; groups: FacetGroup[]; rest?: string }) {
   const [q, setQ] = useState('')
   const [sel, setSel] = useState<Record<string, Set<string>>>({})
   const [shown, setShown] = useState(total)
@@ -25,6 +32,9 @@ export function Filter({ total, groups }: { total: number; groups: FacetGroup[] 
   // ボタンの出し先。**マウントしてからでないと掴めない**（静的HTMLには出ない）
   const [slot, setSlot] = useState<Element | null>(null)
   useEffect(() => { setSlot(document.getElementById('more-slot')) }, [])
+  // 後から取る残りの行。null＝まだ取っていない（または取らないページ）
+  const [extra, setExtra] = useState<Listing[] | null>(null)
+  const [restSlot, setRestSlot] = useState<Element | null>(null)
 
   const toggle = (g: string, v: string) =>
     setSel((s) => {
@@ -37,6 +47,22 @@ export function Filter({ total, groups }: { total: number; groups: FacetGroup[] 
 
   // 条件を変えたら件数制限は最初に戻す。前の「もっと見る」が残ると件数が合わない
   useEffect(() => { setLimit(PAGE) }, [q, stamp])
+
+  // **触られるまで取らない。** 開いただけの人には先頭の数件で足りる
+  const need = !!restUrl && (limit > PAGE || !!q.trim() || stamp !== '[]')
+  useEffect(() => {
+    if (!need || extra) return
+    let gone = false
+    fetch(restUrl!)
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((rows: Listing[]) => {
+        if (gone) return
+        setRestSlot(document.getElementById('rest-rows'))
+        setExtra(rows)
+      })
+      .catch(() => { /* 取れなければ先頭の数件のまま。各県のページには全件がある */ })
+    return () => { gone = true }
+  }, [need, extra, restUrl])
 
   useEffect(() => {
     const needle = q.trim().toLowerCase()
@@ -66,8 +92,9 @@ export function Filter({ total, groups }: { total: number; groups: FacetGroup[] 
     document.querySelectorAll<HTMLElement>('[data-group]').forEach((g) => {
       g.hidden = !g.querySelector('[data-row]:not([hidden])')
     })
-    setShown(n)
-  }, [q, stamp, sel, limit])
+    // 残りをまだ取っていない間は、DOM にある行しか数えられない。条件なしなら全件で答える
+    setShown(restUrl && !extra && !needle && stamp === '[]' ? total : n)
+  }, [q, stamp, sel, limit, extra, restSlot, restUrl, total])
 
   // 品目の帯（トップ上部）から飛んできたら、その品目だけに絞る。
   // **帯とサイドバーで同じ状態を持たない** ― 絞り込みの正はここ1つ
@@ -89,6 +116,9 @@ export function Filter({ total, groups }: { total: number; groups: FacetGroup[] 
 
   return (
     <>
+    {restSlot && extra
+      ? createPortal(extra.map((l) => <ShopCard key={l.slug} l={l} />), restSlot)
+      : null}
     {slot && rest > 0
       ? createPortal(
           <button type="button" className="more-btn" onClick={() => setLimit((v) => v + PAGE)}>

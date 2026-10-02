@@ -1,4 +1,5 @@
-import { prefLabel, type Listing } from '@/lib/listings'
+import { prefLabel } from '@/lib/labels'
+import type { Listing } from '@/lib/listings'
 
 /**
  * **有料掲載（PR）の表示。** 2プラン（2026-09-30）：

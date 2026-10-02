@@ -61,9 +61,10 @@ export type Pr = {
   credit: string | null
 }
 
-export type Kind = 'kakou' | 'shop'
-/** 種別の呼び名。一覧の印・各社ページ・絞り込みで同じ語を使う */
-export const KIND_LABEL: Record<Kind, string> = { kakou: '刺繍の加工屋', shop: '名入れの販売店' }
+// 表示用の定数は lib/labels.ts（ブラウザ側からも読むので、fs を持つここから分けた）
+import { ITEM_ORDER, prefLabel, type ItemKey, type Kind } from './labels'
+export { ITEM_LABEL, ITEM_ORDER, KIND_LABEL, prefLabel, type ItemKey, type Kind } from './labels'
+
 /** 種別の言い換え。**読む人の状況で書く**（業者の分類語では自分がどちらか分からない） */
 export const KIND_HINT: Record<Kind, string> = {
   kakou: '服を持ち込んで、刺繍・名入れだけ頼む',
@@ -141,18 +142,6 @@ export const prOf = (items: Listing[]) =>
   items.filter((l) => l.pr?.kind === 'full').sort((a, b) => a.name.localeCompare(b.name, 'ja'))
 
 /**
- * 表示用の都道府県名。**データは「東京」までしか持っていない**（正は掲載 DB と
- * scripts/export.mjs 側）。検索は「東京都 刺繍」の形で来るので、画面には正式名で出す。
- * **slug は変えない** ― 配布済みの URL が変わる。
- */
-export function prefLabel(pref: string) {
-  if (pref === '北海道') return pref
-  if (pref === '東京') return '東京都'
-  if (pref === '大阪' || pref === '京都') return pref + '府'
-  return pref + '県'
-}
-
-/**
  * 都道府県の並び。**東京を先頭に、あとは掲載件数の多い順。**
  * 件数だけで並べると大阪が先に来るが、刺繍・名入れを探す人がいちばん多いのは東京。
  * ヒーローの選択肢・エリアのタイル・一覧の並びが、すべてこの順に従う。
@@ -227,19 +216,6 @@ export function cityPages() {
 export function findCity(prefSlug: string, city: string) {
   return cityPages().find((c) => c.prefSlug === prefSlug && c.city === city) ?? null
 }
-
-/** 刺繍を入れる対象。刺繍屋は服だけでなく帽子・タオル・カバンまで扱う ― そこが軸になる */
-export type ItemKey = 'wear' | 'cap' | 'towel' | 'bag' | 'wappen' | 'flag'
-
-export const ITEM_LABEL: Record<ItemKey, string> = {
-  wear: '服',
-  cap: '帽子',
-  towel: 'タオル',
-  bag: 'バッグ',
-  wappen: 'ワッペン',
-  flag: 'のれん・旗',
-}
-export const ITEM_ORDER: ItemKey[] = ['wear', 'cap', 'towel', 'bag', 'wappen', 'flag']
 
 /** 品目ごとの件数 */
 export function itemCounts(items: Listing[]) {
