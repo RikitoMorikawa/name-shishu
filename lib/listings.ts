@@ -50,7 +50,7 @@ export type Listing = {
  * **掲載の順番には一切効かせない**（利用規約と ABOUT で「順番は料金によって変わらない」と約束している）。
  */
 export type Pr = {
-  /** basic＝基本掲載 年6,000円（依頼を受けて載せた店・基本情報だけ）／full＝充実掲載 年9,800円（2026-09-30） */
+  /** basic＝基本掲載 年12,000円（依頼を受けて載せた店・基本情報だけ）／full＝充実掲載 年19,000円（写真・紹介文）。2026-10-02 改定 */
   kind: 'basic' | 'full'
   since: string
   /** 掲載期限（請求した期間の最終日）。過ぎた行はビルド時に外れる */
@@ -59,6 +59,9 @@ export type Pr = {
   prices: { item: string; price: string }[]
   photos: { src: string; alt: string }[]
   credit: string | null
+  /** PR 枠（広告オプション・2026-10-02）。市区ページ 年20,000円／都道府県ページ 年50,000円。**プランとは別に付ける** */
+  prCity: boolean
+  prPref: boolean
 }
 
 export type Kind = 'kakou' | 'shop'
@@ -113,6 +116,8 @@ function planOf(slug: string): Pr | null {
       fs.existsSync(path.join(process.cwd(), 'public', String(ph.src).replace(/^\//, ''))),
     ),
     credit: p.credit ?? null,
+    prCity: p.prCity === true,
+    prPref: p.prPref === true,
   }
 }
 
@@ -136,9 +141,13 @@ export const listings: Listing[] = data.listings.filter((l) => !lapsed(l.slug)).
     : base
 })
 
-/** その地域の充実掲載の店。**一覧とは別の PR 枠に出す**（一覧の順番は変えない）。基本掲載は枠に出さない */
-export const prOf = (items: Listing[]) =>
-  items.filter((l) => l.pr?.kind === 'full').sort((a, b) => a.name.localeCompare(b.name, 'ja'))
+/**
+ * その地域で **PR 枠を付けた店**。一覧とは別の PR 枠に出す（一覧の順番は変えない）。
+ * 2026-10-02 から PR 枠は広告オプション：市区ページは prCity、都道府県ページは prPref を見る。
+ * 充実掲載だけでは出ない（旧条件で案内した8社は、申し込んだら契約に両方付ける）
+ */
+export const prOf = (items: Listing[], scope: 'city' | 'pref') =>
+  items.filter((l) => (scope === 'city' ? l.pr?.prCity : l.pr?.prPref)).sort((a, b) => a.name.localeCompare(b.name, 'ja'))
 
 /**
  * 表示用の都道府県名。**データは「東京」までしか持っていない**（正は掲載 DB と

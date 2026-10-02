@@ -1,9 +1,11 @@
+import { PrGallery } from './PrGallery'
 import { prefLabel, type Listing } from '@/lib/listings'
 
 /**
- * **有料掲載（PR）の表示。** 2プラン（2026-09-30）：
- *   基本掲載 年6,000円 … 依頼を受けて載せた店。社名横と一覧の「PR」だけ（お店から欄・PR 枠は出ない）
- *   充実掲載 年9,800円 … 写真・紹介文と、地域ページの PR 枠
+ * **有料掲載（PR）の表示。** 2プラン＋PR 枠（2026-10-02 改定・税込・年払い）：
+ *   基本掲載 年12,000円 … 依頼を受けて載せた店。社名横と一覧の「PR」だけ（お店から欄は出ない）
+ *   充実掲載 年19,000円 … 写真・紹介文（店ページの「お店から」欄）
+ *   PR 枠（広告オプション）… 市区ページ 年20,000円／都道府県ページ 年50,000円。地域ページの一覧の上
  * **料金表は出さない（2026-10-01）。** 商品や内容で値段が変わり、表に収まらない。plans.prices の列は残すが画面には出さない
  * **お金をもらって載せた店は、中身が基本情報だけでも「PR」を付ける**（ステマ規制）。
  *
@@ -18,34 +20,41 @@ export function PrPill() {
   return <span className="pill pill-pr">PR</span>
 }
 
-/** 店ページの「お店から」欄。無料の店では何も出さない */
+/**
+ * 店ページの「お店から」欄。無料の店では何も出さない。
+ * - **店ページの先頭（ボタンの直下）に置く**（2026-10-02 本人決定）。お金を払って載せた写真と言葉なので、条件の表より先に見せる
+ * - PC は写真（左）と紹介文（右・枠つき）を横に並べる。1枚目を大きく、右のサムネイルを押すと切り替わる（PrGallery）
+ * - 紹介文は**店の人の言葉だと分かる枠**に入れる（引用の見た目）。本文の説明文と混ざらないように
+ */
 export function PrSection({ l }: { l: Listing }) {
   const pr = l.pr
   if (!pr) return null
   const hasBody = pr.intro || pr.photos.length
   if (!hasBody) return null
+  const main = pr.photos[0]
   return (
     <section className="pr-section" aria-label="お店からのご紹介">
       <h2>
         お店から <PrPill />
       </h2>
 
-      {pr.photos.length ? (
-        <div className="pr-photos">
-          {pr.photos.map((p) => (
-            <img key={p.src} src={p.src} alt={p.alt || `${l.name}の写真`} loading="lazy" decoding="async" />
-          ))}
-        </div>
-      ) : null}
+      <div className={`pr-body${main && pr.intro ? ' pr-body--two' : ''}`}>
+        {main ? <PrGallery photos={pr.photos} name={l.name} /> : null}
 
-      {pr.intro ? <p className="pr-intro">{pr.intro}</p> : null}
+        {pr.intro ? (
+          <figure className="pr-voice">
+            <figcaption className="pr-voice-head">
+              <span className="pr-voice-mark" aria-hidden>“</span>
+              {l.name}より
+            </figcaption>
+            <blockquote className="pr-intro">{pr.intro}</blockquote>
+          </figure>
+        ) : null}
+      </div>
 
-
-      <p className="muted pr-note">
-        この欄は掲載店から提供された内容です。
-        {pr.credit ? <> {pr.credit}。</> : null}
-        条件は変わることがあるため、ご依頼の前にお店へご確認ください。
-      </p>
+      {/* 注記の文は外した（2026-10-02 本人。見出しの「PR」と、連絡先の下の「詳細は公式サイトに」で足りる）。
+          写真のクレジットだけは要るので、あるときだけ出す */}
+      {pr.credit ? <p className="muted pr-note">{pr.credit}</p> : null}
     </section>
   )
 }

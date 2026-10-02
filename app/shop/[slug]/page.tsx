@@ -106,6 +106,11 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
         ) : null}
       </div>
 
+      {/* 有料掲載の店だけ。写真・紹介文（掲載店から提供された内容）。**条件の表より先に置く**（2026-10-02） */}
+      <PrSection l={l} />
+      {/* 充実掲載でない店は★の空き枠を出し、掲載のご案内へ送る（2026-10-01）。**同じ位置（先頭）に置く**（2026-10-02 本人） */}
+      <PrEmpty l={l} />
+
       {/* **販売店には「持ち込み」を出さない**（一覧のカード・題名と揃える）。服ごと売る先なので比べる軸にならない */}
       <h2>{l.kind === 'shop' ? '名入れの条件' : '持ち込みで頼めるか'}</h2>
       <div className="panel">
@@ -139,17 +144,6 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
         </table>
       </div>
 
-      {/* **条件が埋まっていてもいなくても同じ文にする。** 読者がやることは変わらない */}
-      <div className="callout callout--sm">
-        詳細は <a href={l.url} rel="nofollow noopener" target="_blank">公式サイト</a>にお問い合わせください。
-      </div>
-
-      {/* 有料掲載の店だけ。写真・紹介文（掲載店から提供された内容） */}
-      <PrSection l={l} />
-
-      {/* 充実掲載でない店は★の空き枠を出し、掲載のご案内へ送る（2026-10-01） */}
-      <PrEmpty l={l} />
-
       <h2>連絡先</h2>
       <div className="panel">
         <table className="facts">
@@ -170,6 +164,11 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
         </table>
       </div>
       {l.note ? <p>{l.note}</p> : null}
+      {/* **条件が埋まっていてもいなくても同じ文にする。** 読者がやることは変わらない。
+          連絡先の直後に置く（2026-10-02。条件の表の下だと「お店から」の注記と二重になっていた） */}
+      <p className="muted">
+        詳細は <a href={l.url} rel="nofollow noopener" target="_blank">公式サイト</a>にお問い合わせください。
+      </p>
 
       {/* 「地図で見る」ボタンと条件を揃える。住所があれば出す。
           番地まであれば寄る（zoom 17）、町名までなら引く（zoom 15） */}

@@ -77,7 +77,7 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
       </div>
 
       {/* 有料掲載の枠。一覧とは別の箱で、下の一覧の並びは変えない */}
-      <PrArea items={prOf(p.items)} where={name} />
+      <PrArea items={prOf(p.items, 'pref')} where={name} />
 
       <div className="layout">
         <Filter

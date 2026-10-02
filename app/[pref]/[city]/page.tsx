@@ -75,7 +75,7 @@ export default async function CityPage({ params }: { params: Promise<{ pref: str
       </p>
 
       {/* 有料掲載の枠。一覧とは別の箱で、下の一覧の並びは変えない */}
-      <PrArea items={prOf(c.items)} where={c.city} />
+      <PrArea items={prOf(c.items, 'city')} where={c.city} />
 
       <Cards items={c.items} />
 

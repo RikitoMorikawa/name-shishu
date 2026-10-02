@@ -78,6 +78,9 @@ for (const p of planRows) {
     prices: p.prices ? JSON.parse(String(p.prices)) : [],
     photos: photoRows.filter((f) => Number(f.plan_id) === Number(p.id)).map((f) => ({ src: String(f.src), alt: String(f.alt ?? '') })),
     credit: str(p.credit),
+    // PR 枠（広告オプション・2026-10-02）。**充実掲載でも付けていなければ枠に出ない**
+    prCity: Number(p.pr_city ?? 0) === 1,
+    prPref: Number(p.pr_pref ?? 0) === 1,
   }
 }
 // **基本掲載の行が1つでもある店は「依頼で載せた店」。** 有料の期限が切れたら無料で残さず非掲載に戻す
