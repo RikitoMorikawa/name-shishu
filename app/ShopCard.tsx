@@ -1,7 +1,6 @@
 import { FavButton } from './Fav'
 import { PrPill } from './Pr'
-import { ITEM_LABEL, ITEM_ORDER, KIND_LABEL, prefLabel } from '@/lib/labels'
-import type { Listing } from '@/lib/listings'
+import { ITEM_LABEL, ITEM_ORDER, KIND_LABEL, prefLabel, type Listing } from '@/lib/listings'
 
 /** 写真が無い間のプレースホルダ。社名の頭文字を大きく置く。 */
 function initial(name: string) {
@@ -127,10 +126,9 @@ export function ShopCard({ l }: { l: Listing }) {
   )
 }
 
-/** `id` を付けると、Filter が後から取った行をこの中の末尾へ描き足す（トップ） */
-export function Cards({ items, id }: { items: Listing[]; id?: string }) {
+export function Cards({ items }: { items: Listing[] }) {
   return (
-    <div className="shop-rows" id={id}>
+    <div className="shop-rows">
       {items.map((l) => <ShopCard key={l.slug} l={l} />)}
     </div>
   )

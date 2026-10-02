@@ -11,7 +11,6 @@ import {
   ITEM_LABEL, ITEM_ORDER, kindFacet, byPref, itemCounts, listings, listingsByPrefSize,
   prefLabel, prefOptions, updatedAt, type ItemKey,
 } from '@/lib/listings'
-import { FIRST } from '@/lib/labels'
 
 /** 品目の帯。**データの軸そのもの** ― 押すと下の一覧がその品目に絞られる */
 const ITEM_ICON: Record<ItemKey, (p: { size?: number }) => React.ReactElement> = {
@@ -200,7 +199,6 @@ export default function Home() {
         <div className="layout">
           <Filter
             total={listings.length}
-            rest="/rows.json"
             groups={[
                 kindFacet(listings),
               {
@@ -218,11 +216,9 @@ export default function Home() {
             ]}
           />
           <div>
-            {/* **HTML に入れるのは先頭 FIRST 件だけ**（2026-10-02）。全件だとトップが 2.7MB になり
-                スマホで遅かった。残りは「もっと見る」・絞り込みを押したとき Filter が /rows.json から
-                この末尾に描き足す。**クローラーには都道府県ページが全件を見せている** */}
-            <Cards items={listingsByPrefSize().slice(0, FIRST)} id="rest-rows" />
-            {/* 「もっと見る」の置き場。**中身は Filter が portal で描く**（状態を1か所に持つため） */}
+            <Cards items={listingsByPrefSize()} />
+            {/* 「もっと見る」の置き場。**中身は Filter が portal で描く**（状態を1か所に持つため）。
+                静的HTMLでは空のまま ― JS を実行しないクローラーには全件がそのまま見える */}
             <div id="more-slot" />
           </div>
         </div>
