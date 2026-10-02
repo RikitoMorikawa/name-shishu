@@ -8,3 +8,6 @@
 /.vercel
 /.env*
 .vercel
+
+# 掲載 DB の丸ごとのバックアップ（scripts/backup.mjs）。Places 由来の列を含むので追跡しない
+/backups/

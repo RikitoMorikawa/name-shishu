@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 // 掲載 DB（Turso `name-shishu`）の**全テーブルを丸ごと** JSON で書き出す。
 //
-//   node scripts/backup.mjs                 # ../backups/name-shishu/<日時>/ に書く
+//   node scripts/backup.mjs                 # backups/<日時>/ に書く
 //   node scripts/backup.mjs --out <dir>     # 書き先を指定
 //
 // export.mjs（サイト用・掲載中の行と出してよい列だけ）とは別物。こちらは全行・全列。
-// **書き先はリポジトリの外。** hint_addr / hint_tel（Places 由来）も入るので、Git にも配信にも乗せない。
+// **backups/ は .gitignore 済み（未追跡）。** hint_addr / hint_tel（Places 由来）も入るので、Git にも配信にも乗せない。
+// Vercel CLI は .vercelignore が無いと .gitignore を使うので、CLI からのデプロイでも上がらない。
 // 戻すときは schema.sql の CREATE を流してから <table>.json の rows を INSERT する。
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
@@ -15,7 +16,7 @@ import { db, ROOT_DIR } from '../db/client.mjs'
 const { values: opts } = parseArgs({ options: { out: { type: 'string' } } })
 
 const stamp = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 16).replace(/[-:]/g, '').replace('T', '-')
-const out = opts.out ?? join(ROOT_DIR, '..', 'backups', 'name-shishu', stamp)
+const out = opts.out ?? join(ROOT_DIR, 'backups', stamp)
 mkdirSync(out, { recursive: true })
 
 const client = db()
