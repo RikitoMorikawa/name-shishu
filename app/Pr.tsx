@@ -54,6 +54,7 @@ export function PrSection({ l }: { l: Listing }) {
 /**
  * 市区・県ページの PR 枠。**一覧の上に、一覧とは別の箱として置く。**
  * 無料の店の並び順は変えない。PR の店は下の一覧にもいつもどおりの位置で出る。
+ * - **件数の上限は無し。カードは小さめで PC は1段5件、段の余りは空白のまま**（2026-10-02 本人決定）。点線の空き枠カードも試したが出さない
  */
 export function PrArea({ items, where }: { items: Listing[]; where: string }) {
   if (!items.length) return null
