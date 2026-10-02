@@ -50,7 +50,7 @@ export type Listing = {
  * **掲載の順番には一切効かせない**（利用規約と ABOUT で「順番は料金によって変わらない」と約束している）。
  */
 export type Pr = {
-  /** basic＝基本掲載 年12,000円（依頼を受けて載せた店・基本情報だけ）／full＝充実掲載 年19,000円（写真・紹介文）。2026-10-02 改定 */
+  /** basic＝基本掲載 年12,000円（依頼を受けて載せた店・基本情報だけ）／full＝充実掲載 年24,000円（写真・紹介文）。2026-10-02 改定・10/03 に充実を 19,000→24,000 */
   kind: 'basic' | 'full'
   since: string
   /** 掲載期限（請求した期間の最終日）。過ぎた行はビルド時に外れる */
@@ -59,7 +59,7 @@ export type Pr = {
   prices: { item: string; price: string }[]
   photos: { src: string; alt: string }[]
   credit: string | null
-  /** PR 枠（広告オプション・2026-10-02）。市区ページ 年20,000円／都道府県ページ 年50,000円。**プランとは別に付ける** */
+  /** PR 枠（広告オプション・2026-10-02）。料金はエリアで2段（2026-10-03・app/listing/page.tsx の PR_PRICES）。**プランとは別に付ける** */
   prCity: boolean
   prPref: boolean
 }

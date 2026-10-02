@@ -21,7 +21,17 @@ export const metadata: Metadata = {
  * - **PR 枠は掲載プランの表の中に「オプション」の行として置く（2026-10-02・本人決定）。** 別の段にしていたのをやめた。
  *   写真と紹介文で出す枠なので、付けられるのは充実掲載だけ
  *   10/2 以降の案内から新料金。**10/2 までに旧条件（充実掲載に PR 枠込み）で案内した8社**は、申し込めば契約期間中その条件を守る
+ * - **2026-10-03 本人決定：充実掲載 年24,000円（月2,000円）、PR 枠はエリアで2段。** すべて月1,000円単位
+ *   県ページ＝大都市8都府県 年48,000／その他 年24,000、市区ページ＝政令指定都市・東京23区 年24,000／その他 年12,000。
+ *   **掲載店が3件未満の市区ページでは PR 枠を売らない**（並ぶ店がいない一覧の上に出しても意味が無い）
  */
+// PR 枠の料金。大都市＝掲載数と検索の大半がここに集まる8都府県（2026-10-03 時点で掲載469件中215件）
+const PR_PRICES: { page: string; area: string; price: string; month: string }[] = [
+  { page: '都道府県ページ', area: '東京・大阪・神奈川・愛知・福岡・埼玉・兵庫・千葉', price: '年48,000円', month: '月あたり4,000円' },
+  { page: '都道府県ページ', area: '上記以外の道府県', price: '年24,000円', month: '月あたり2,000円' },
+  { page: '市区ページ', area: '政令指定都市・東京23区', price: '年24,000円', month: '月あたり2,000円' },
+  { page: '市区ページ', area: '上記以外の市区町村', price: '年12,000円', month: '月あたり1,000円' },
+]
 type Cell = boolean | string
 const ROWS: { label: string; note?: string; basic: Cell; full: Cell; opt?: boolean }[] = [
   { label: '持ち込みの条件をお店から記入', note: '持ち込み・最小枚数・納期・料金の目安・対応品目・郵送・型代・受けられない素材', basic: true, full: true },
@@ -29,8 +39,8 @@ const ROWS: { label: string; note?: string; basic: Cell; full: Cell; opt?: boole
   { label: '社名の横と一覧に「PR」の表示', basic: true, full: true },
   { label: '★ お店の写真', note: '作業場・仕上がりの見本など', basic: false, full: true },
   { label: '★ 紹介文', note: 'お店の言葉で、得意なこと・こだわりを', basic: false, full: true },
-  { label: '★ オプション：市区ページの PR 枠', note: '地域の店の一覧の上に、写真と紹介文つきで表示', basic: false, full: '＋年20,000円', opt: true },
-  { label: '★ オプション：都道府県ページの PR 枠', note: '県全体の店の一覧の上に、写真と紹介文つきで表示', basic: false, full: '＋年50,000円', opt: true },
+  { label: '★ オプション：市区ページの PR 枠', note: '地域の店の一覧の上に、写真と紹介文つきで表示', basic: false, full: '＋年12,000円〜', opt: true },
+  { label: '★ オプション：都道府県ページの PR 枠', note: '県全体の店の一覧の上に、写真と紹介文つきで表示', basic: false, full: '＋年24,000円〜', opt: true },
 ]
 
 const cell = (v: Cell) =>
@@ -63,7 +73,7 @@ export default function Listing() {
             <tr className="plan-price">
               <th scope="row">料金（税込・1年分）</th>
               <td><b>年12,000円</b><span className="plan-note">月あたり1,000円</span></td>
-              <td className="plan-full"><b>年19,000円</b><span className="plan-note">月あたり約1,580円</span></td>
+              <td className="plan-full"><b>年24,000円</b><span className="plan-note">月あたり2,000円</span></td>
             </tr>
           </tfoot>
           <tbody>
@@ -83,6 +93,31 @@ export default function Listing() {
       <p className="muted">
         ★は充実掲載だけで載せられる項目です。PR 枠は充実掲載に付けられるオプション（別料金）で、1ページに表示できる店の数には限りがあります。
         料金はすべて税込・1年分の前払い（年払い）で、掲載期間は公開日から1年間です。
+      </p>
+
+      <h3>PR 枠の料金（充実掲載のオプション）</h3>
+      <div className="panel plan-wrap">
+        <table className="plan-table">
+          <thead>
+            <tr>
+              <th scope="col">表示するページ</th>
+              <th scope="col">地域</th>
+              <th scope="col">料金（税込・1年分）</th>
+            </tr>
+          </thead>
+          <tbody>
+            {PR_PRICES.map((p) => (
+              <tr key={p.page + p.area}>
+                <th scope="row">{p.page}</th>
+                <td>{p.area}</td>
+                <td><b>＋{p.price}</b><span className="plan-note">{p.month}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="muted">
+        PR 枠は、掲載店が3件以上ある市区ページと、すべての都道府県ページで承ります。枠が埋まっているページはお待ちいただく場合があります。
       </p>
 
       <figure className="listing-fig">
