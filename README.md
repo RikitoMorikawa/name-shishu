@@ -73,6 +73,7 @@
 ## データの更新
 
 ```bash
+node scripts/backup.mjs           # 掲載 DB を丸ごと backups/<日時>/ へ（**掲載店・契約・写真を足したり直したら毎回**。2026-10-02 本人の指定）
 node scripts/export.mjs --write   # 掲載 DB → data/listings.json・plans.json・photos.json（**ビルドの前に必ず**）
 npm run build                     # → push で Vercel が本番に出す
 # デプロイが終わってから
@@ -245,7 +246,7 @@ Vercel（Pro）。ドメインは **Value Domain で取得**し、Vercel へ向�
 1. 掲載先から **紹介文・写真（提供されたものだけ）** を受け取る
 2. 写真を `public/photos/<slug>-1.jpg` のように置く（**実物が無い写真はビルド時に自動で外れる**）
 3. 掲載 DB の `plans` に1行足す（`kind` は basic か full）。`until` は請求した期間の最終日。写真は `photos` に `plan_id` を付けて足す
-4. `node scripts/export.mjs --write` → `npm run build` → push（Vercel が本番に出す）
+4. `node scripts/backup.mjs`（契約を足したら毎回）→ `node scripts/export.mjs --write` → `npm run build` → push（Vercel が本番に出す）
 
 出るもの：店ページの「お店から」欄（写真・紹介文）と社名横の「PR」／市区・県ページの一覧の上の **PR 枠**／一覧のカードの「PR」。
 
