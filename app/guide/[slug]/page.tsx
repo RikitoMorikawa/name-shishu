@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { findGuide, guides, type Block } from '@/data/guides'
-import { fillStats } from '@/lib/listings'
+import { fillStats, byPref } from '@/lib/listings'
 import { hasPhoto } from '../../Photo'
 
 const SITE = 'https://name-shishu.com'
@@ -173,6 +173,23 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             ) : null}
             {b.point ? <p className="point" dangerouslySetInnerHTML={{ __html: fill(b.point) }} /> : null}
             {b.note ? <div className="callout" dangerouslySetInnerHTML={{ __html: fill(b.note) }} /> : null}
+            {/* 都道府県から探す。記事から一覧へそのまま送る。件数は掲載データから数える */}
+            {b.prefs ? (
+              <div className="guide-prefs">
+                {byPref().map((p) => {
+                  const k = p.items.filter((l) => l.kind === 'kakou').length
+                  const s = p.items.filter((l) => l.kind === 'shop').length
+                  const n = b.prefs === 'kakou' ? k : b.prefs === 'shop' ? s : k + s
+                  if (!n) return null
+                  const sub = b.prefs === 'both' ? `加工屋${k}・販売店${s}` : `${n}件`
+                  return (
+                    <a key={p.prefSlug} href={`/${p.prefSlug}/`}>
+                      <b>{p.pref}</b><span>{sub}</span>
+                    </a>
+                  )
+                })}
+              </div>
+            ) : null}
           </div>
         ))}
         </section>

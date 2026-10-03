@@ -347,6 +347,9 @@ export function guideStats() {
   const counts = itemCounts(listings)
   return {
     total: listings.length,
+    // 加工屋と販売店（2026-10-03 に記事で使うため足した）
+    kakou: n((l) => l.kind === 'kakou'),
+    shop: n((l) => l.kind === 'shop'),
     prefs: byPref().length,
     mochikomiYes: n((l) => l.mochikomi === true),
     mochikomiNo: n((l) => l.mochikomi === false),

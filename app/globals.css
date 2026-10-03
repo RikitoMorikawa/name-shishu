@@ -1168,3 +1168,10 @@ h1 .pill-pr, h2 .pill-pr { font-size: 12px; }
   .pr-empty-slots { grid-template-columns: 1fr; }
   .pr-empty-slot { min-height: 0; padding: 16px 10px; }
 }
+
+/* 記事の「都道府県から探す」。県名と件数のタイル（2026-10-03） */
+.guide-prefs { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 8px; margin: 16px 0 6px; }
+.guide-prefs a { display: flex; flex-direction: column; gap: 2px; padding: 9px 12px; border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); text-decoration: none; color: var(--ink); }
+.guide-prefs a:hover { border-color: var(--accent); }
+.guide-prefs b { font-size: 14.5px; }
+.guide-prefs span { font-size: 11.5px; color: var(--ink-3); white-space: nowrap; }
