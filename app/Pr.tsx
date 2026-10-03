@@ -74,7 +74,7 @@ export function PrArea({ items, where }: { items: Listing[]; where: string }) {
       </p>
       <div className="pr-area-list">
         {items.map((l) => (
-          <a key={l.slug} className="pr-card" href={`/shop/${l.slug}/`}>
+          <a key={l.slug} className="pr-card" href={`/shop/${l.slug}/`} data-ev="pr" data-shop={l.slug}>
             {l.pr?.photos[0] ? (
               <img src={l.pr.photos[0].src} alt={l.pr.photos[0].alt || `${l.name}の写真`} loading="lazy" decoding="async" />
             ) : null}

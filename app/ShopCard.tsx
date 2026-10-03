@@ -113,13 +113,13 @@ export function ShopCard({ l }: { l: Listing }) {
         <div className="shop-row-contact">
           <span className="meta"><Icon d={PIN} />{l.address ?? <span className="unknown">住所は確認中</span>}</span>
           {l.tel ? (
-            <span className="meta"><Icon d={TEL} /><a href={`tel:${l.tel.replace(/[^0-9+]/g, '')}`}>{l.tel}</a></span>
+            <span className="meta"><Icon d={TEL} /><a href={`tel:${l.tel.replace(/[^0-9+]/g, '')}`} data-ev="tel" data-shop={l.slug}>{l.tel}</a></span>
           ) : null}
         </div>
 
         <div className="shop-row-actions">
           <a className="btn btn-sm" href={`/shop/${l.slug}/`}>この店の詳細</a>
-          <a className="btn btn-sm btn-ghost" href={l.url} rel="nofollow noopener" target="_blank">公式サイト</a>
+          <a className="btn btn-sm btn-ghost" href={l.url} rel="nofollow noopener" target="_blank" data-ev="official" data-shop={l.slug}>公式サイト</a>
         </div>
       </div>
     </article>

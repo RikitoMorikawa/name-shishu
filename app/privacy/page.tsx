@@ -33,6 +33,11 @@ export default function Privacy() {
         <a href="https://vercel.com/docs/analytics/privacy-policy" rel="nofollow noopener" target="_blank">Vercel のプライバシーポリシー</a>
         をご覧ください。
       </p>
+      <p>
+        また、掲載店の公式サイト・電話・地図のリンクや、お気に入りのボタンが押された回数を、店ごとに数えています。
+        記録するのは<b>どの店の・どのボタンが・どのページで押されたか</b>と、スマートフォンかパソコンかの別だけで、
+        Cookie・IPアドレスなど<b>利用者を見分けられる情報は記録しません。</b>
+      </p>
 
       <h2>3. お気に入りの保存について</h2>
       <p>

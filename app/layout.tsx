@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
+import { ClickTracker } from './ClickTracker'
 import { Caveat, Klee_One } from 'next/font/google'
 import { ContactForm } from './ContactForm'
 import { Photo } from './Photo'
@@ -111,6 +112,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* **mode を明示する。** output:'export' だと環境を自動で見分けられず、
             開発扱いになって計測のスクリプトが読み込まれない（2026-09-17） */}
         <Analytics mode="production" />
+        {/* 店に向けたクリック（公式サイト・電話・地図・PR）を管理画面へ送る。app/track.ts */}
+        <ClickTracker />
       </body>
     </html>
   )

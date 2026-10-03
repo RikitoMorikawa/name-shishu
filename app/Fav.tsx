@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { IconHeart } from './Icons'
+import { track } from './track'
 
 /**
  * お気に入り。**この端末のブラウザにだけ残る**（DB に繋がない媒体なので、
@@ -59,6 +60,7 @@ export function FavButton({ slug, name }: { slug: string; name: string }) {
         e.preventDefault()
         const cur = read()
         write(on ? cur.filter((s) => s !== slug) : [...cur, slug])
+        if (!on) track('fav', slug) // 入れた回だけ数える
       }}
     >
       <IconHeart size={19} filled={on} />

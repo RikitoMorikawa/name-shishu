@@ -97,10 +97,10 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
       </p>
 
       <div className="actions">
-        <a className="btn" href={l.url} rel="nofollow noopener" target="_blank">公式サイトを見る</a>
-        {l.tel ? <a className="btn btn-call" href={`tel:${l.tel.replace(/[^0-9+]/g, '')}`}>{l.tel} に電話</a> : null}
+        <a className="btn" href={l.url} rel="nofollow noopener" target="_blank" data-ev="official" data-shop={l.slug}>公式サイトを見る</a>
+        {l.tel ? <a className="btn btn-call" href={`tel:${l.tel.replace(/[^0-9+]/g, '')}`} data-ev="tel" data-shop={l.slug}>{l.tel} に電話</a> : null}
         {l.address ? (
-          <a className="btn btn-ghost" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`} rel="noopener" target="_blank">
+          <a className="btn btn-ghost" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`} rel="noopener" target="_blank" data-ev="map" data-shop={l.slug}>
             地図で見る
           </a>
         ) : null}
@@ -148,14 +148,14 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
       <div className="panel">
         <table className="facts">
           <tbody>
-            <tr><th>サイト</th><td><a href={l.url} rel="nofollow noopener" target="_blank">{l.url}</a></td></tr>
-            <tr><th>電話</th><td>{l.tel ? <a href={`tel:${l.tel.replace(/[^0-9+]/g, '')}`}>{l.tel}</a> : <span className="unknown">確認中</span>}</td></tr>
+            <tr><th>サイト</th><td><a href={l.url} rel="nofollow noopener" target="_blank" data-ev="official" data-shop={l.slug}>{l.url}</a></td></tr>
+            <tr><th>電話</th><td>{l.tel ? <a href={`tel:${l.tel.replace(/[^0-9+]/g, '')}`} data-ev="tel" data-shop={l.slug}>{l.tel}</a> : <span className="unknown">確認中</span>}</td></tr>
             <tr>
               <th>所在地</th>
               <td>
                 {l.address ?? (
                   <span className="unknown">
-                    確認中 ― <a href={l.url} rel="nofollow noopener" target="_blank">公式サイト</a>でご確認ください
+                    確認中 ― <a href={l.url} rel="nofollow noopener" target="_blank" data-ev="official" data-shop={l.slug}>公式サイト</a>でご確認ください
                   </span>
                 )}
               </td>
@@ -167,7 +167,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
       {/* **条件が埋まっていてもいなくても同じ文にする。** 読者がやることは変わらない。
           連絡先の直後に置く（2026-10-02。条件の表の下だと「お店から」の注記と二重になっていた） */}
       <p className="muted">
-        詳細は <a href={l.url} rel="nofollow noopener" target="_blank">公式サイト</a>にお問い合わせください。
+        詳細は <a href={l.url} rel="nofollow noopener" target="_blank" data-ev="official" data-shop={l.slug}>公式サイト</a>にお問い合わせください。
       </p>
 
       {/* 「地図で見る」ボタンと条件を揃える。住所があれば出す。
