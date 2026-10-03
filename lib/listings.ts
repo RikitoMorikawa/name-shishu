@@ -66,7 +66,8 @@ export type Pr = {
 
 export type Kind = 'kakou' | 'shop'
 /** 種別の呼び名。一覧の印・各社ページ・絞り込みで同じ語を使う */
-export const KIND_LABEL: Record<Kind, string> = { kakou: '刺繍の加工屋', shop: '名入れの販売店' }
+// 販売店の呼び方は 2026-10-03 に「名入れの販売店」から変えた（本人）。何を売る店か伝わらず、名入れだけでなくロゴ・ワッペンもあるため
+export const KIND_LABEL: Record<Kind, string> = { kakou: '刺繍の加工屋', shop: '服＋刺繍加工の販売店' }
 /** 種別の言い換え。**読む人の状況で書く**（業者の分類語では自分がどちらか分からない） */
 export const KIND_HINT: Record<Kind, string> = {
   kakou: '服を持ち込んで、刺繍・名入れだけ頼む',
@@ -82,7 +83,7 @@ export const kindFacet = (items: { kind: Kind }[]) => ({
   label: '探し方',
   options: [
     { value: 'kakou', label: '服を持っている → 刺繍の加工屋', count: items.filter((l) => l.kind === 'kakou').length },
-    { value: 'shop', label: '服から買う → 名入れの販売店', count: items.filter((l) => l.kind === 'shop').length },
+    { value: 'shop', label: '服から買う → 服＋刺繍加工の販売店', count: items.filter((l) => l.kind === 'shop').length },
   ],
 })
 

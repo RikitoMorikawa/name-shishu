@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       ? (where ? `${l.name}（${where}）の名入れ・刺繍の注文` : `${l.name}の名入れ・刺繍の注文`)
       : (where ? `${l.name}（${where}）の持ち込み刺繍・名入れ` : `${l.name}の持ち込み刺繍・名入れ`),
     description: l.kind === 'shop'
-      ? `${where ? where + 'の' : ''}名入れの販売店「${l.name}」。服を選んで刺繍・名入れまで込みで注文できます。最小枚数・納期・料金の目安をまとめています。`
+      ? `${where ? where + 'の' : ''}服＋刺繍加工の販売店「${l.name}」。服を選んで、名入れ・ロゴ・ワッペンの刺繍まで込みで注文できます。最小枚数・納期・料金の目安をまとめています。`
       : `${where ? where + 'の' : ''}刺繍・名入れの加工屋「${l.name}」。持ち込みの可否・最小枚数・納期・料金の目安をまとめています。`,
     alternates: { canonical: `/shop/${l.slug}/` },
   }

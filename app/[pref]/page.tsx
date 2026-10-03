@@ -67,7 +67,7 @@ export default async function PrefPage({ params }: { params: Promise<{ pref: str
       <p className="lead">
         {name}で刺繍・名入れを受けている{p.items.length}件を、市区町村ごとに並べています。
         服を持ち込むなら<b>刺繍の加工屋</b>（{p.items.filter((l) => l.kind === 'kakou').length}件）、
-        服から選ぶなら<b>名入れの販売店</b>（{p.items.filter((l) => l.kind === 'shop').length}件）が行き先です。
+        服から選ぶなら<b>服＋刺繍加工の販売店</b>（{p.items.filter((l) => l.kind === 'shop').length}件）が行き先です。
       </p>
 
       <div className="toc">

@@ -389,7 +389,7 @@ main > .wrap:last-child, main > .prose:last-child { padding-bottom: 64px; }
 /* **main は .wrap を持たない。** 各ページと各セクションが自分で内側を止める */
 
 /* ── 2カラム。**左に絞り込み、右にカード。** ───────────────── */
-/* 左の絞り込みは 336px。「服から買う → 名入れの販売店」が1行に収まる幅（268px では2行に折れた。2026-10-01） */
+/* 左の絞り込みは 336px。「服から買う → 服＋刺繍加工の販売店」が1行に収まる幅（268px では2行に折れた。2026-10-01。10/3 に呼び方を変えても1行に収まるのを確認） */
 .layout { display: grid; grid-template-columns: 336px minmax(0, 1fr); gap: 32px; margin-top: 16px; align-items: start; }
 @media (max-width: 1000px) { .layout { grid-template-columns: 1fr; gap: 14px; } }
 
